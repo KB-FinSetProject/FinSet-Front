@@ -11,6 +11,7 @@ import Fund from '@/pages/fund/Fund.vue';
 import Installment from '@/pages/installment/Installment.vue';
 import Stock from '@/pages/stock/Stock.vue';
 import Wish from '@/pages/wish/Wish.vue';
+import Search from "@/pages/Search/Search.vue";
 
 
 const router = createRouter({
@@ -26,6 +27,7 @@ const router = createRouter({
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/installment', name: "Installment", component: Installment },
         { path: '/stock', name: "Stock", component: Stock },
+        { path: '/search', name: "Search", component: Search },
         { path: '/wish', name: "Wish", component: Wish },
     ]
 });

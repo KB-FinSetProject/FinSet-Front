@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>Header</h3>
+
         <router-link to="/">
             Home
         </router-link>
