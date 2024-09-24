@@ -49,7 +49,6 @@
 </template>
 
 <script setup>
-import NavBar from 'na';
 // 여기에 필요한 로직을 추가할 수 있습니다
 </script>
 
