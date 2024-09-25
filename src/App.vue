@@ -1,13 +1,18 @@
 <template>
   <div>
-
+    <!-- <Header/> -->
+     <HeaderHome />
     <router-view></router-view>
     <Footer />
   </div>
 </template>
 
 <script setup>
-import Header from '@/components/common/Header.vue'
+import HeaderHome from './components/common/HeaderHome.vue';
+import HeaderReg from './components/common/HeaderReg.vue';
+import HeaderMyPage from './components/common/HeaderMyPage.vue';
+import Header from '@/components/common/HeaderNormal.vue'
+import HeaderSearch from './components/common/HeaderSearch.vue';
 import Footer from '@/components/common/Footer.vue'
 
 </script>
