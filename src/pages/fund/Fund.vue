@@ -6,6 +6,7 @@
         <div class="yield-divider"></div> <!-- 수익률 바 -->
       </div>
       <div class="title-with-divider">
+
         <h2 class="best-yield-title sales">판매액</h2>
         <div class="sales-divider"></div> <!-- 판매액 바 -->
       </div>
