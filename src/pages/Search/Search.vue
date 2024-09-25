@@ -69,7 +69,7 @@ export default {
   top: 50%; /* 세로 중앙 정렬 */
   transform: translateY(-92%); /* 세로 중앙 정렬 */
   color: #000000; /* 아이콘 색상 */
-  font-size: 22px; /* 아이콘 크기 조정 */
+  font-size: 21px; /* 아이콘 크기 조정 */
 }
 
 .example-text {
