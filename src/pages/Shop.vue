@@ -1,6 +1,8 @@
 <template>
-    <div class="hidden-placeholder">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
-    
+
+    <HeaderNormal navbarTitle="금융상품" />
+
+    <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
     <div class="container">
         <div class="d-grid gap-2 p-3">
             <router-link to="/deposit" class="btn brown-button" type="button">
@@ -70,13 +72,13 @@
     gap: 10px; 
 }
 
-.hidden-placeholder {
-    visibility: hidden; 
-    height: 20px; 
-}
-
 .container {
     margin-bottom: 150px; /* 원하는 크기로 조정 */
 }
 
 </style>
+
+
+<script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+</script>

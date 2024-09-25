@@ -215,6 +215,7 @@ export default {
 }
 
 .container {
+    margin-top: 50px;
     margin-bottom: 200px;
 }
 
