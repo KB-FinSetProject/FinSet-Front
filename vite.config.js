@@ -19,7 +19,8 @@ export default defineConfig({
       },
     },
   },
+  // outDir 위치 바꾸기
   build: {
-    outDir: '../Board_Backend/src/main/webapp/resources',
+    outDir: '../../back/FinSet-Backend/src/main/webapp/resources',
   },
 });
