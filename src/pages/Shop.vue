@@ -1,7 +1,7 @@
 <template>
     <div class="hidden-placeholder">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
     
-    <div class="my-5">
+    <div class="container">
         <div class="d-grid gap-2 p-3">
             <router-link to="/deposit" class="btn brown-button" type="button">
                 <div class="d-flex justify-content-center align-items-center">
@@ -74,4 +74,9 @@
     visibility: hidden; 
     height: 20px; 
 }
+
+.container {
+    margin-bottom: 150px; /* 원하는 크기로 조정 */
+}
+
 </style>
