@@ -19,6 +19,8 @@ import Investment4 from "@/pages/investment/Investment4.vue";
 import Investment5 from "@/pages/investment/Investment5.vue";
 import Investment6 from "@/pages/investment/Investment6.vue";
 import Investment7 from "@/pages/investment/Investment7.vue";
+import SignIn from '@/pages/login/SignIn.vue';
+import SignUp from '@/pages/login/SignUp.vue';
 import InvestmentResult from "@/pages/investment/InvestmentResult.vue";
 
 
@@ -44,7 +46,9 @@ const router = createRouter({
         { path: '/investment5',name:"Investment5", component: Investment5},
         { path: '/investment6',name:"Investment6", component: Investment6},
         { path: '/investment7',name:"Investment7", component: Investment7},
-        {path:'/investment/result',name:"InvestmentResult",component:InvestmentResult}
+        { path:'/investment/result',name:"InvestmentResult",component:InvestmentResult},
+        { path:'/signin',name:"SignIn",component:SignIn},
+        { path:'/signup',name:"SignUp",component:SignUp}
     ]
 });
 

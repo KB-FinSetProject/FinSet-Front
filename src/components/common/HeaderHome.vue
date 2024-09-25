@@ -5,8 +5,8 @@
           <div class="container-fluid d-flex justify-content-between align-items-center">
             <!-- 왼쪽: 로그인/회원가입 -->
             <div class="auth-links d-flex align-items-center">
-              <a href="#" class="text-muted ms-3 me-2">로그인</a> |
-              <a href="#" class="text-muted ms-2">회원가입</a>
+              <router-link to="/signin" class="text-muted ms-3 me-2">로그인</router-link> |
+              <router-link to="/signup" class="text-muted ms-2">회원가입</router-link>
             </div>
   
             <!-- 중앙: FINDY 로고 -->
