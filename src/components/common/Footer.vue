@@ -39,14 +39,13 @@
 </template>
 
 <style scoped>
-/* 푸터를 화면 전체로 확장 */
+
 .footer {
-  width: 100vw; /* 화면 전체의 가로 너비를 100%로 설정 */
-  background-color: #f8f9fa; /* 배경색 설정 */
-  padding: 20px 0; /* 적절한 여백을 추가 */
+  width: 100vw; 
+  background-color: #f8f9fa; 
+  padding: 20px 0; 
 }
 
-/* 기본적인 body와 html의 margin과 padding을 제거 */
 html, body {
   margin: 0;
   padding: 0;
@@ -55,15 +54,15 @@ html, body {
   overflow-x: hidden;
 }
 
-/* 각 아이템 간의 간격 균등하게 설정 */
+
 .nav {
   display: flex;
   justify-content: space-between;
-  width: 100%; /* ul의 너비를 100%로 설정 */
-  max-width: 1200px; /* 필요시 최대 너비 설정 */
-  margin: 0 auto; /* 중앙 정렬 */
-  padding-left: 15px; /* 왼쪽 공백 */
-  padding-right: 15px; /* 오른쪽 공백 */
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding-left: 15px; 
+  padding-right: 15px; 
 }
 
 .border-bottom {
@@ -71,6 +70,6 @@ html, body {
 }
 
 .icon-large {
-  font-size: 1.5rem; /* 원하는 크기로 조정 */
+  font-size: 1.5rem;
 }
 </style>
