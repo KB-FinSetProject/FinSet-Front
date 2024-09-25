@@ -1,6 +1,8 @@
 <template>
   <div>
+
     <footer class="footer py-3 fixed-bottom">
+
       <hr>
       <ul class="nav justify-content-between pb-3 mb-1">
         <li class="nav-item">
