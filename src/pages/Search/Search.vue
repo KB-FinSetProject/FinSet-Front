@@ -1,11 +1,13 @@
 <template>
   <div class="stock-container">
-    <h1>상품검색</h1>
-    <input
-        v-model="searchTerm"
-        placeholder="검색어를 입력하세요"
-        class="search-input"
-    />
+    <div class="search-container">
+      <input
+          v-model="searchTerm"
+          placeholder="검색어를 입력하세요"
+          class="search-input"
+      />
+      <i class="fas fa-magnifying-glass search-icon"></i> <!-- 검색 아이콘 -->
+    </div>
     <p class="example-text">ex) 500000원에 맞는 주식을 찾아줘</p>
     <p class="example-text">ex) 3000000, 3년, 펀드</p>
 
@@ -47,6 +49,10 @@ export default {
   padding: 16px;
 }
 
+.search-container {
+  position: relative; /* 아이콘 위치 조정을 위한 relative 설정 */
+}
+
 .search-input {
   width: 100%;
   padding: 10px;
@@ -55,6 +61,15 @@ export default {
   border-radius: 7px;
   background-color: #ffffff; /* 배경색 */
   color: #d1d1d1; /* 글씨색 */
+}
+
+.search-icon {
+  position: absolute; /* 아이콘 위치를 절대적으로 설정 */
+  right: 10px; /* 오른쪽 여백 */
+  top: 50%; /* 세로 중앙 정렬 */
+  transform: translateY(-92%); /* 세로 중앙 정렬 */
+  color: #000000; /* 아이콘 색상 */
+  font-size: 22px; /* 아이콘 크기 조정 */
 }
 
 .example-text {
