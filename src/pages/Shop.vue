@@ -20,7 +20,7 @@
                         <span class="button-text">펀드</span>
                     </div>
                 </router-link>
-            </div>
+              </div>
             <div class="d-flex justify-content-between">
                 <router-link to="/stock" class="btn brown-button flex-fill mx-1" type="button">
                     <div class="d-flex flex-column align-items-center">

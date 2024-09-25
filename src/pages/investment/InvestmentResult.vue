@@ -1,10 +1,10 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
-import {useRouter} from "vue-router";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 
-const router=useRouter();
 // 점수 계산
 const page1Score = parseFloat(localStorage.getItem('page1Score')) || 0;
 const page2Score = parseFloat(localStorage.getItem('page2Score')) || 0;
@@ -16,6 +16,13 @@ const page7Score = parseFloat(localStorage.getItem('page7Score')) || 0;
 
 const totalScore = computed(() => {
   return page1Score + page2Score + page3Score + page4Score + page5Score + page6Score + page7Score;
+});
+
+// Redirect if total score is 0
+onMounted(() => {
+  if (totalScore.value === 0) {
+    router.push('/investment1');
+  }
 });
 
 // 투자 성향 항목 정의
@@ -52,19 +59,28 @@ const submitScore = () => {
         console.error('DB 저장 실패:', error);
         alert('저장에 실패했습니다.');
       });
+  router.push('/profile');
 };
 
-// 저장하지 않음을 처리하는 함수
+// Confirmation Dialog
+const showConfirmDialog = ref(false);
+
+const confirmRedirect = () => {
+  showConfirmDialog.value = false; // Close the dialog
+  router.push('/investment1'); // Redirect to investment page
+};
+
 const cancelSubmit = () => {
-  router.push('/investment')
+  showConfirmDialog.value = true; // Show confirmation dialog
 };
 </script>
+
 
 <template>
   <div class="result-container">
     <p>당신의 투자 성향과 점수입니다!</p>
     <hr>
-    <p>당신의 총점수는 : {{totalScore}}</p>
+    <p>당신의 총점수는 : {{ totalScore }}</p>
 
     <div class="investment-levels">
       <div :class="{ active: isLevel1Active }" class="investment-level">
@@ -89,15 +105,24 @@ const cancelSubmit = () => {
       </div>
     </div>
 
-    <!-- 저장 및 저장하지 않음 버튼 -->
+    <!-- 저장 및 저장하지 않음을 처리하는 버튼 -->
     <div class="buttons">
       <button @click="submitScore">저장</button>
       <button @click="cancelSubmit">다시하기</button>
     </div>
+
+    <!-- Confirmation Dialog -->
+    <div v-if="showConfirmDialog" class="confirm-dialog">
+      <p>설문을 다시 하시겠습니까?</p>
+      <button @click="confirmRedirect">확인</button>
+      <button @click="showConfirmDialog = false">취소</button>
+    </div>
   </div>
 </template>
 
+
 <style scoped>
+/* Existing styles remain unchanged */
 .result-container {
   padding: 20px;
   text-align: center;
@@ -154,5 +179,32 @@ button:last-of-type {
 
 button:last-of-type:hover {
   background-color: #c43458;
+}
+.confirm-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's above other elements */
+  text-align: center; /* Center the text in the dialog */
+}
+
+.confirm-dialog button {
+  margin: 10px; /* Add some margin between buttons */
+  padding: 10px 15px;
+  background-color: #4a90e2; /* Consistent button style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-dialog button:hover {
+  background-color: #357ab7; /* Darker shade on hover */
 }
 </style>
