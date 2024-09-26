@@ -8,7 +8,6 @@
     </div>
     <h1>{{stock.price}}</h1>
   </div>
-
   <div class="stock-container">
     <div class="titles-container">
       <div class="title-with-divider">
