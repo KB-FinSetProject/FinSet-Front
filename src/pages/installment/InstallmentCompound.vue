@@ -1,39 +1,42 @@
 <template>
-  <HeaderNormal navbarTitle="적금 상품" />
+  <HeaderNormal navbarTitle="예금상품" />
   <div class="fund-container">
     <div class="titles-container">
       <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
         <h2 class="best-yield-title">전체</h2>
         <div class="divider" :class="{ active: activeTab === 'all' }"></div>
       </router-link>
-      <router-link to="/installment/simple" class="title-with-divider" @click.native="setActiveTab('simple')">
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('simple')">
         <h2 class="best-yield-title">단리</h2>
         <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
       </router-link>
-      <router-link to="/installment/compound" class="title-with-divider" @click.native="setActiveTab('compound')">
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('compound')">
         <h2 class="best-yield-title">복리</h2>
         <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
       </router-link>
     </div>
+
     <div class="fund-list">
       <div v-for="fund in filteredFunds" :key="fund.id" class="fund-item">
         <div class="fund-header">
-          <div class="fund-icon">
-            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
-          </div>
-          <div class="fund-info">
-            <p class="fund-name">{{ fund.name }}</p>
-            <p class="fund-details">{{ fund.details }}</p>
-            <div class="risk-info">
-              <span class="high-rating">높은 위험</span>
-              <span class="foreign-fund">해외주식형</span>
+          <div class="fund-info d-flex align-items-center">
+            <div class="bank-logo" :style="{ backgroundColor: fund.logoColor }">
+              <span class="bank-icon">{{ fund.logo }}</span>
+            </div>
+            <div>
+              <p class="fund-name">{{ fund.name }}</p>
+              <p class="fund-bank">{{ fund.bank }}</p>
             </div>
           </div>
-          <div class="fund-yield">
+          <div class="fund-yield d-flex flex-column align-items-end">
             <span class="period">{{ fund.period }}</span>
             <span class="yield"><span class="red">{{ fund.yield }}</span></span>
           </div>
+          <div class="fund-icon">
+            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
+          </div>
         </div>
+        <div class="mini-bar"></div> <!-- 미니바 추가 -->
       </div>
     </div>
   </div>
@@ -43,46 +46,57 @@
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 
 export default {
-  components: {HeaderNormal},
+  components: { HeaderNormal },
   data() {
     return {
       activeTab: 'all', // 기본값을 전체로 설정
       funds: [
-        // 전체 펀드 데이터
         {
           id: 1,
           name: '펀드 1 (단리)',
+          bank: 'NH 농협은행',
           details: '투자신탁 1(주식) 종류 A',
           yield: '14.76%',
           period: '3개월',
           favorite: true,
-          type: 'simple',
+          logo: 'NH',
+          logoColor: '#005EB8',
+          type: 'simple', // 단리 타입 추가
         },
         {
           id: 2,
           name: '펀드 2 (복리)',
+          bank: 'NH 농협은행',
           details: '투자신탁 1(주식) 종류 A',
           yield: '15.20%',
           period: '3개월',
           favorite: false,
-          type: 'compound',
+          logo: 'NH',
+          logoColor: '#A2D7E0',
+          type: 'compound', // 복리 타입 추가
         },
         {
           id: 3,
           name: '펀드 3 (단리)',
+          bank: 'NH 농협은행',
           details: '투자신탁 1(주식) 종류 B',
           yield: '12.30%',
           period: '3개월',
           favorite: true,
+          logo: 'NH',
+          logoColor: '#005EB8',
           type: 'simple',
         },
         {
           id: 4,
           name: '펀드 4 (복리)',
+          bank: 'NH 농협은행',
           details: '투자신탁 1(주식) 종류 B',
           yield: '13.50%',
           period: '3개월',
           favorite: false,
+          logo: 'NH',
+          logoColor: '#A2D7E0',
           type: 'compound',
         },
       ],
@@ -106,15 +120,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .fund-container {
   padding: 16px;
   max-width: 390px;
+  margin-top: -50px;
 }
 
 .titles-container {
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 16px;
 }
 
@@ -122,7 +137,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 16px;
+  flex: 1;
   cursor: pointer;
   background: none;
   border: none;
@@ -134,18 +149,13 @@ export default {
   font-weight: bold;
   margin-bottom: 8px;
   color: #000000;
+  text-align: center;
 }
 
 .divider {
   height: 4px;
   width: 100%;
-  max-width: 150px;
-  margin: 0 auto;
   background-color: #aeaeae;
-}
-
-.divider.active {
-  background-color: #000;
 }
 
 .fund-list {
@@ -155,41 +165,47 @@ export default {
 }
 
 .fund-item {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+  background-color: transparent;
+  border: none;
 }
 
 .fund-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.fund-icon {
-  font-size: 24px;
-  color: #888;
+  width: 100%;
 }
 
 .fund-info {
-  flex: 1;
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.bank-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
 }
 
 .fund-name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 2px;
-  margin-top: 15px;
-  margin-left: 8px;
+  margin-bottom: 4px;
 }
 
-.fund-details {
+.fund-bank {
   font-size: 14px;
-  font-weight: bold;
-  margin-top: 0;
-  margin-left: 8px;
+  color: #7e7e7e;
 }
 
 .fund-yield {
@@ -199,10 +215,16 @@ export default {
   align-items: flex-end;
 }
 
-.yield {
-  font-size: 15px;
-  font-weight: bold;
-  color: #000000;
+.fund-icon {
+  font-size: 24px;
+  color: #888;
+}
+
+.mini-bar {
+  height: 4px;
+  width: 100%;
+  background-color: #FFD700;
+  margin-top: 5px;
 }
 
 .red {
@@ -215,16 +237,6 @@ export default {
   font-size: 12px;
   color: #7e7e7e;
   margin-bottom: 0;
-  margin-right: 21px;
-  margin-top: 10px;
-}
-
-.high-rating {
-  background-color: #FDEBEA;
-  color: #FF6767;
-  padding: 4px 6px;
-  border-radius: 5px;
-  font-size: 8px;
 }
 
 </style>
