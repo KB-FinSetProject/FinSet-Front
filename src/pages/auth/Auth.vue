@@ -26,7 +26,7 @@
         <i class="fa-solid fa-file-contract icon"></i><span>투자성향설문</span>
       </router-link>
       <hr><br>
-      <router-link to="/board" class="list-item">
+      <router-link to="/myboard" class="list-item">
         <i class="fa-solid fa-pen-to-square icon"></i><span>내가쓴글</span>
       </router-link>
       <hr><br>
