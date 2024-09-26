@@ -1,10 +1,10 @@
 <template>
   <div class="fund-container">
     <div class="titles-container">
-      <router-link to="/fund" class="title-with-divider" @click.native="setActiveTab('yield')">
-        <h2 class="best-yield-title yield">수익률 베스트</h2>
+      <div class ="title-with-divider">     <h2 class="best-yield-title yield">수익률 베스트</h2>
         <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
-      </router-link>
+      </div>
+
       <router-link to="/fund-sales-best" class="title-with-divider" @click.native="setActiveTab('sales')">
         <h2 class="best-yield-title sales">판매액 베스트</h2>
         <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>

@@ -9,10 +9,11 @@
         <h2 class="best-yield-title sales">판매액 베스트</h2>
         <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
       </router-link>
-      <router-link to="/fund-saving-best" class="title-with-divider" @click.native="setActiveTab('savings')">
-        <h2 class="best-yield-title savings">적립액 베스트</h2>
-        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-      </router-link>
+<div class="title-with-divider">
+  <h2 class="best-yield-title savings">적립액 베스트</h2>
+  <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
+</div>
+
     </div>
 
     <div class="yellow-box" v-if="activeTab === 'savings'">
@@ -136,6 +137,7 @@ export default {
   cursor: pointer;
   background: none;
   border: none;
+
 }
 
 .best-yield-title {

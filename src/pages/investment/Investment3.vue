@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
 
 const selectedDurations = ref([]); // 선택된 항목을 저장할 배열
 const router = useRouter();
@@ -57,8 +58,9 @@ const goBack = () => {
 </script>
 
 <template>
+  <HeaderNormal navbarTitle="투자성향 설문 페이지" />
   <div class="survey-container">
-    <button @click="goBack" class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+
 
     <h2 class="question">3. 다음 중 투자경험과 가장 가까운 것은 어느것인가요?(중복 가능)</h2>
 
@@ -77,6 +79,7 @@ const goBack = () => {
             :class="{ checked: selectedDurations.includes(duration.id) }"
         ></div>
       </div>
+      <h4 class="text-md-center">3/7</h4>
     </div>
 
     <div class="navigation">
@@ -170,5 +173,9 @@ const goBack = () => {
 
 .nav-button:hover {
   background-color: #1c64c8;
+}
+.text-md-center{
+  font-size:15px;
+  margin-top:20px;
 }
 </style>
