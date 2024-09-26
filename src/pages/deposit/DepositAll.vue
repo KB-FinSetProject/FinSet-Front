@@ -171,7 +171,7 @@ export default {
 }
 
 .fund-info {
-  flex: 1; /* 정보를 차지하는 공간을 유동적으로 설정 */
+  flex: 1; 햣
 
 }
 
