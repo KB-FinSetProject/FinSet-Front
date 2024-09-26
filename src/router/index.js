@@ -3,7 +3,9 @@ import Home from '@/pages/Home.vue';
 import Shop from '@/pages/Shop.vue';
 import Auth from '@/pages/auth/Auth.vue';
 import Board from '@/pages/board/Board.vue';
-import Deposit from '@/pages/deposit/Deposit.vue';
+import DepositAll from '@/pages/deposit/DepositAll.vue';
+import DepositCompound from '@/pages/deposit/DepositCompound.vue';
+import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import Dict from '@/pages/dict/Dict.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
 import Fund from '@/pages/fund/Fund.vue';
@@ -23,13 +25,15 @@ import Investment7 from "@/pages/investment/Investment7.vue";
 import InvestmentResult from "@/pages/investment/InvestmentResult.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(), // History 모드 사용
     routes: [
         { path: '/', name: "Home", component: Home },
         { path: '/shop', name: "Shop", component: Shop },
         { path: '/auth', name: "Auth", component: Auth },
         { path: '/board', name: "Board", component: Board },
-        { path: '/deposit', name: "Deposit", component: Deposit },
+        { path: '/deposit', name: "DepositAll", component: DepositAll }, // 전체 예금 페이지
+        { path: '/deposit/compound', name: "DepositCompound", component: DepositCompound }, // 복리 예금 페이지
+        { path: '/deposit/simple', name: "DepositSimple", component: DepositSimple }, // 단리 예금 페이지
         { path: '/dict', name: "Dict", component: Dict },
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/fund', name: "Fund", component: Fund },
