@@ -178,7 +178,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%; /* 전체 너비를 차지하게 설정 */
+  width: 100%;
 }
 
 .fund-details {
