@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
 const router = useRouter();
 
 // 점수 계산
@@ -77,6 +77,7 @@ const cancelSubmit = () => {
 
 
 <template>
+  <HeaderNormal navbarTitle="투자성향 결과" />
   <div class="result-container">
     <p>당신의 투자 성향과 점수입니다!</p>
     <hr>

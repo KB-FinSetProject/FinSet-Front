@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
 const selectedDuration = ref(null)
 const router = useRouter();
 const investmentDurations = [
@@ -39,8 +40,9 @@ const goBack = () => {
 </script>
 
 <template>
+  <HeaderNormal navbarTitle="투자성향 설문 페이지" />
   <div class="survey-container">
-    <button @click="goBack" class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+
 
     <h2 class="question">4. 금융상품 투자에 대한 본인의 지식수준은 어느 정도라고 생각하십니까?</h2>
 
@@ -59,6 +61,7 @@ const goBack = () => {
             :class="{ checked: selectedDuration === duration.id }"
         ></div>
       </div>
+      <h4 class="text-md-center">4/7</h4>
     </div>
 
     <div class="navigation">
@@ -153,5 +156,9 @@ const goBack = () => {
 
 .nav-button:hover {
   background-color: #1c64c8;
+}
+.text-md-center{
+  font-size:15px;
+  margin-top:20px;
 }
 </style>

@@ -201,8 +201,8 @@ export default {
 .mini-bar {
   height: 4px; /* 미니바의 높이 */
   width: 100%; /* 미니바의 너비 */
-  background-color: #FFD700; /* 미니바 색상 */
-  margin-top: 5px; /* 상단 여백 */
+  background-color: #FFD700;
+  margin-top: 5px;
 }
 
 .yield {

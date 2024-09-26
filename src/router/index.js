@@ -7,6 +7,7 @@ import DepositAll from '@/pages/deposit/DepositAll.vue';
 import DepositCompound from '@/pages/deposit/DepositCompound.vue';
 import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import Dict from '@/pages/dict/Dict.vue';
+import DictMemo from '@/pages/dict/DictMemo.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
 import Fund from '@/pages/fund/Fund.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
@@ -35,6 +36,7 @@ const router = createRouter({
         { path: '/deposit/compound', name: "DepositCompound", component: DepositCompound }, // 복리 예금 페이지
         { path: '/deposit/simple', name: "DepositSimple", component: DepositSimple }, // 단리 예금 페이지
         { path: '/dict', name: "Dict", component: Dict },
+        { path: '/dictmemo', name: "DictMemo", component: DictMemo },
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },

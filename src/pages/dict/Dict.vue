@@ -15,6 +15,7 @@
 
     <section class="info">
         <h2>미수령주식 · 배당금</h2>
+
           <i class="fa-solid fa-star" style="color: #ffffff;"></i>
       <hr>
       <p>
@@ -66,11 +67,38 @@
       </ul>
     </section>
   </div>
+
 </template>
 
 <script setup>
 
+  import {ref} from 'vue'; // Vue에서 반응형 상태를 관리하는 ref를 불러옵니다.
+
+  // 검색어와 검색 결과 개수를 관리하는 상태
+  const searchQuery = ref('');
+  const resultsCount = ref(0);
+
+  // 아코디언 항목에 대한 데이터 및 열림 상태 관리
+  const accordionItems = ref([
+  {title: '주식', content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다.', open: false},
+  {title: '주식 시장', content: '주식 시장이란 주식을 사고팔 수 있는 장소 또는 시스템입니다.', open: false},
+  {title: '하행', content: '주가가 하락하는 상황을 뜻합니다.', open: false}
+  ]);
+
+  // 검색 기능
+  function performSearch() {
+  // 검색어에 맞춰 검색 결과를 필터링하고 결과 수를 업데이트
+  resultsCount.value = dictionary.value.filter(word => word.includes(searchQuery.value)).length;
+}
+
+  // 아코디언 토글 함수
+  function toggleAccordion(index) {
+  // 열림/닫힘 상태 토글
+  accordionItems.value[index].open = !accordionItems.value[index].open;
+}
 </script>
+
+
 
 <style scoped>
 .container {
@@ -80,6 +108,7 @@
   padding: 20px;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  margin-bottom: 150px;
 }
 
 /* Header */
@@ -140,7 +169,6 @@
 .info h2 {
   margin: 0;
   font-size: 18px;
-
 }
 
 .info p {
