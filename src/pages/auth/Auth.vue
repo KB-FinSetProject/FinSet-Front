@@ -30,7 +30,7 @@
         <i class="fa-solid fa-pen-to-square icon"></i><span>내가쓴글</span>
       </router-link>
       <hr><br>
-      <router-link to="/vocabulary" class="list-item">
+      <router-link to="/dictmemo" class="list-item">
         <i class="fa-solid fa-book icon"></i><span>단어장</span>
       </router-link>
     </div>
