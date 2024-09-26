@@ -1,304 +1,210 @@
 <template>
-    <HeaderNormal navbarTitle="관심목록" />
-  
-    <div class="wish">
-      <div class="container">
-        <h3>예적금</h3>
-        <hr>
-        <div v-for="(item, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="wish-item d-flex align-items-center mt-2">
-          <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-          <div>
-            <p class="mb-0">{{ item.title }}</p>
-            <p class="mb-0 text-muted">{{ item.bank }}</p>
-          </div>
-          <i class="fa-solid fa-heart icon"></i>
-        </div>
+  <HeaderNormal navbarTitle="예금상품" />
+  <div class="fund-container">
+    <div class="titles-container">
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
+        <h2 class="best-yield-title">전체</h2>
+        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
+      </router-link>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('simple')">
+        <h2 class="best-yield-title">단리</h2>
+        <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
+      </router-link>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('compound')">
+        <h2 class="best-yield-title">복리</h2>
+        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
+      </router-link>
+    </div>
 
-        <div class="text-center">
-            <i @click="toggleVisibility('deposit')" class="fa-solid fa-caret-down"></i>
+    <div class="fund-list">
+      <div v-for="fund in filteredFunds" :key="fund.id" class="fund-item d-flex align-items-center mt-2">
+        <div class="bank-logo" :style="{ backgroundColor: fund.logoColor }">
+          <span class="bank-icon">{{ fund.logo }}</span>
         </div>
-
-        <div v-show="isMoreItemsVisible.deposit" class="mt-2">
-          <div v-for="(item, index) in depositItems.slice(visibleItemsCount.deposit)" :key="'extra-' + index" class="wish-item d-flex align-items-center mt-2">
-            <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <p class="mb-0">{{ item.title }}</p>
-              <p class="mb-0 text-muted">{{ item.bank }}</p>
-            </div>
-            <i class="fa-solid fa-heart icon"></i>
+        <div class="fund-info d-flex align-items-center flex-grow-1">
+          <div class="fund-details d-flex flex-column">
+            <p class="fund-name">{{ fund.name }}</p>
+            <p class="fund-details">{{ fund.details }}</p>
           </div>
-        </div>
-  
-        <br>
-  
-        <h2>펀드</h2>
-        <hr>
-        <div v-for="(item, index) in fundItems.slice(0, visibleItemsCount.fund)" :key="index" class="wish-item d-flex align-items-center mt-2">
-          <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-          <div>
-            <p class="mb-0">{{ item.title }}</p>
-            <p class="mb-0 text-muted">{{ item.description }}</p>
-            <p class="mb-0 text-muted">{{ item.risk }}</p>
+          <div class="fund-yield d-flex flex-column align-items-end">
+            <span class="period">{{ fund.period }}</span>
+            <span class="yield"><span class="red">{{ fund.yield }}</span></span>
           </div>
-          <i class="fa-solid fa-heart icon"></i>
-        </div>
-
-        <div class="text-center">
-            <i @click="toggleVisibility('fund')" class="fa-solid fa-caret-down"></i>
-        </div>
-  
-        <div v-show="isMoreItemsVisible.fund" class="mt-2">
-          <div v-for="(item, index) in fundItems.slice(visibleItemsCount.fund)" :key="'extra-fund-' + index" class="wish-item d-flex align-items-center mt-2">
-            <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <p class="mb-0">{{ item.title }}</p>
-              <p class="mb-0 text-muted">{{ item.description }}</p>
-              <p class="mb-0 text-muted">{{ item.risk }}</p>
-            </div>
-            <i class="fa-solid fa-heart icon"></i>
-          </div>
-        </div>
-  
-        <br>
-  
-        <h2>주식</h2>
-        <hr>
-        <div v-for="(item, index) in stockItems.slice(0, visibleItemsCount.stock)" :key="index" class="wish-item d-flex align-items-center mt-2">
-          <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-          <div>
-            <p class="mb-0">{{ item.title }}</p>
-            <p class="mb-0 text-muted">{{ item.price }} ~{{ item.rate }}%</p>
-          </div>
-          <i class="fa-solid fa-heart icon"></i>
-        </div>
-
-        <div class="text-center">
-            <i @click="toggleVisibility('stock')" class="fa-solid fa-caret-down"></i>
-        </div>
-  
-        <div v-show="isMoreItemsVisible.stock" class="mt-2">
-          <div v-for="(item, index) in stockItems.slice(visibleItemsCount.stock)" :key="'extra-stock-' + index" class="wish-item d-flex align-items-center mt-2">
-            <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <p class="mb-0">{{ item.title }}</p>
-              <p class="mb-0 text-muted">{{ item.price }} ~{{ item.rate }}%</p>
-            </div>
-            <i class="fa-solid fa-heart icon"></i>
-          </div>
-        </div>
-  
-        <br>
-  
-        <h2>외환</h2>
-        <hr>
-        <div v-for="(item, index) in forexItems.slice(0, visibleItemsCount.forex)" :key="index" class="wish-item d-flex align-items-center mt-2">
-          <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-          <div>
-            <p class="mb-0">{{ item.title }}</p>
-            <p class="mb-0 text-muted">{{ item.value }}</p>
-          </div>
-          <i class="fa-solid fa-heart icon"></i>
-        </div>
-
-        <div class="text-center">
-            <i @click="toggleVisibility('forex')" class="fa-solid fa-caret-down"></i>
-        </div>
-  
-        <div v-show="isMoreItemsVisible.forex" class="mt-2">
-          <div v-for="(item, index) in forexItems.slice(visibleItemsCount.forex)" :key="'extra-forex-' + index" class="wish-item d-flex align-items-center mt-2">
-            <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-                <p class="mb-0">{{ item.title }}</p>
-                <p class="mb-0 text-muted">{{ item.value }}</p>
-            </div>
-            <i class="fa-solid fa-heart icon"></i>
+          <div class="fund-icon">
+            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import HeaderNormal from '@/components/common/HeaderNormal.vue';
+  </div>
+</template>
 
-  export default {
-    data() {
-      return {
-        isMoreItemsVisible: {
-          deposit: false,
-          fund: false,
-          stock: false,
-          forex: false,
+<script>
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
+
+export default {
+  components: { HeaderNormal },
+  data() {
+    return {
+      activeTab: 'all',
+      funds: [
+        {
+          id: 1,
+          name: '펀드 1 (단리)',
+          details: '투자신탁 1(주식) 종류 A',
+          yield: '14.76%',
+          period: '3개월',
+          favorite: true,
+          type: 'simple',
         },
-        visibleItemsCount: {
-          deposit: 3,
-          fund: 3,
-          stock: 3,
-          forex: 3,
+        {
+          id: 2,
+          name: '펀드 2 (복리)',
+          details: '투자신탁 1(주식) 종류 A',
+          yield: '15.20%',
+          period: '3개월',
+          favorite: false,
+          type: 'compound',
         },
-        depositItems: [
-          {
-            title: 'NH 고향사랑 기부 예금',
-            bank: 'NH 농협은행',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: 'NH 고향사랑 기부 예금',
-            bank: 'NH 농협은행',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: 'NH 고향사랑 기부 예금',
-            bank: 'NH 농협은행',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: 'NH 고향사랑 기부 예금',
-            bank: 'NH 농협은행',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: 'NH 고향사랑 기부 예금',
-            bank: 'NH 농협은행',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          }
-          // Add more items...
-        ],
-        fundItems: [
-          {
-            title: '미래에셋인도중소형포커스증권자',
-            description: '투자신탁1(주식)종류C-e',
-            risk: '높은위험 해외주식형',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미래에셋인도중소형포커스증권자',
-            description: '투자신탁1(주식)종류C-e',
-            risk: '높은위험 해외주식형',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미래에셋인도중소형포커스증권자',
-            description: '투자신탁1(주식)종류C-e',
-            risk: '높은위험 해외주식형',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미래에셋인도중소형포커스증권자',
-            description: '투자신탁1(주식)종류C-e',
-            risk: '높은위험 해외주식형',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미래에셋인도중소형포커스증권자',
-            description: '투자신탁1(주식)종류C-e',
-            risk: '높은위험 해외주식형',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          }
-          // Add more items...
-        ],
-        stockItems: [
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '삼성전자',
-            price: '67,500원',
-            rate: '2.0',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          }
-          // Add more items...
-        ],
-        forexItems: [
-          {
-            title: '미국달러(USD)',
-            value: '1,344.50',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미국달러(USD)',
-            value: '1,344.50',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미국달러(USD)',
-            value: '1,344.50',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미국달러(USD)',
-            value: '1,344.50',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          },
-          {
-            title: '미국달러(USD)',
-            value: '1,344.50',
-            image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          }
-          // Add more items...
-        ],
-      };
+        {
+          id: 3,
+          name: '펀드 3 (단리)',
+          details: '투자신탁 1(주식) 종류 B',
+          yield: '12.30%',
+          period: '3개월',
+          favorite: true,
+          type: 'simple',
+        },
+        {
+          id: 4,
+          name: '펀드 4 (복리)',
+          details: '투자신탁 1(주식) 종류 B',
+          yield: '13.50%',
+          period: '3개월',
+          favorite: false,
+          type: 'compound',
+        },
+      ],
+    };
+  },
+  computed: {
+    filteredFunds() {
+      if (this.activeTab === 'simple') {
+        return this.funds.filter(fund => fund.type === 'simple');
+      } else if (this.activeTab === 'compound') {
+        return this.funds.filter(fund => fund.type === 'compound');
+      }
+      return this.funds;
     },
-    methods: {
-      toggleVisibility(category) {
-        this.isMoreItemsVisible[category] = !this.isMoreItemsVisible[category];
-      },
+  },
+  methods: {
+    setActiveTab(tab) {
+      this.activeTab = tab;
     },
-  };
-  </script>
-  
-  <style scoped>
-  .wish-item {
-    
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding around items */
-    background-color: #f9f9f9; /* Light background */
-  }
-  .fa-caret-down {
-    cursor: pointer;
-    margin: 10px 0;
-  }
+  },
+};
+</script>
 
-  .wish{
-    margin-top: 100px;
-    margin-bottom: 150px;
-  }
-
-  .icon {
-    color: #FFBF0A;
-    font-size: 1.5rem;
-    margin-left: 3.5rem;
+<style scoped>
+.fund-container {
+  padding: 16px;
+  max-width: 390px;
 }
-  </style>
-  
 
-  <script setup>
-  import HeaderNormal from '@/components/common/HeaderNormal.vue';
-  </script>
+.titles-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title-with-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: none;
+}
+
+.best-yield-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #000000;
+  text-align: center;
+}
+
+.divider {
+  height: 4px;
+  width: 100%;
+  background-color: #aeaeae;
+}
+
+.fund-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fund-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.bank-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.fund-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fund-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.fund-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.fund-yield {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.period {
+  font-size: 12px;
+  color: #7e7e7e;
+}
+
+.red {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+.fund-icon {
+  font-size: 24px;
+  color: #888;
+}
+</style>

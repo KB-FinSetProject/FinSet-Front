@@ -1,17 +1,18 @@
 <template>
+  <HeaderNormal navbarTitle="적금 상품" />
   <div class="fund-container">
     <div class="titles-container">
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('all')">
-        <h2 class="best-yield-title">전체 예금</h2>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
+        <h2 class="best-yield-title">전체</h2>
         <div class="divider" :class="{ active: activeTab === 'all' }"></div>
       </router-link>
-      <router-link to="/deposit/compound" class="title-with-divider" @click.native="setActiveTab('compound')">
-        <h2 class="best-yield-title">복리 예금</h2>
-        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
-      </router-link>
-      <router-link to="/deposit/simple" class="title-with-divider" @click.native="setActiveTab('simple')">
-        <h2 class="best-yield-title">단리 예금</h2>
+      <router-link to="/installment/simple" class="title-with-divider" @click.native="setActiveTab('simple')">
+        <h2 class="best-yield-title">단리</h2>
         <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
+      </router-link>
+      <router-link to="/installment/compound" class="title-with-divider" @click.native="setActiveTab('compound')">
+        <h2 class="best-yield-title">복리</h2>
+        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
       </router-link>
     </div>
 
@@ -47,7 +48,10 @@
 
 
 <script>
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
+
 export default {
+  components: {HeaderNormal},
   data() {
     return {
       activeTab: 'all', // 기본값을 전체로 설정

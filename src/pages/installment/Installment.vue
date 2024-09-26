@@ -203,7 +203,7 @@
   text-align: center;
   cursor: pointer;
   position: relative; /* 선의 위치 조정을 위해 relative로 설정 */
-  font-size: 1.5em; /* 글자 크기 증가 */
+  font-size: 1.5em;
 }
 
 hr {
