@@ -172,7 +172,6 @@ export default {
 
 .fund-info {
   flex: 1;
-
 }
 
 .fund-name {
