@@ -29,6 +29,7 @@ import StockDropSuddenly from "@/pages/stock/StockDropSuddenly.vue";
 import StockDetailPage from "@/pages/stock/StockDetailPage.vue";
 import StockChartPage from "@/pages/stock/StockChartPage.vue";
 import StockCommunityPage from "@/pages/stock/StockCommunityPage.vue";
+import MyBoard from "@/pages/board/MyBoard.vue";
 
 const router = createRouter({
     history: createWebHistory(), // History 모드 사용
@@ -63,6 +64,7 @@ const router = createRouter({
         { path:  '/stock-detail',name:"StockDetailPage",component:StockDetailPage},
         { path:  '/stock-chart',name:"StockChartPage",component:StockChartPage},
         { path:  '/stock-community',name:"StockCommunity",component:StockCommunityPage},
+        { path:  '/myboard',name:"MyBoard",component:MyBoard},
     ]
 });
 
