@@ -78,6 +78,7 @@ const confirmRedirect = () => {
   padding: 2rem;
   background-color: #eef2f3; /* 페이지 배경색 */
   min-height: 100vh;
+  margin-bottom: 150px;
 }
 
 .container {
@@ -168,7 +169,7 @@ const confirmRedirect = () => {
 .logoutButton {
   width: 48%;
   padding: 0.75rem;
-  background-color: #e57373; /* 버튼 배경색 변경 */
+  background-color: #816843; /* 버튼 배경색 변경 */
   color: white;
   border: none;
   border-radius: 5px;
