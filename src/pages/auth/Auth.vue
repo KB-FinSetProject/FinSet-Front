@@ -1,18 +1,16 @@
 <template>
   <HeaderMyPage />
 
-  
   <div class="container">
     <div class="info">
       <hr style="border-color: white;">
-      <br>
 
       <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
 
       <h1>홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i></h1>
       <br>
       <div class="email">
-        hongildiong@kb.com
+        hongildong@kb.com
       </div>
     </div>
 
@@ -61,12 +59,15 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 }
 
 .email {
-  background-color: rgba(254, 232, 182, 0.7); /* 더 연한 배경색 설정 */
-  color: white; /* 글씨색 흰색 */
-  padding-left: 30px; /* 패딩 추가 */
-  padding-right: 30px; /* 패딩 추가 */
+  background-color: rgba(255, 218, 131, 0.7); /* 더 연한 배경색 설정 */
+  color: white; /* 글씨색을 검정색으로 변경 (white가 배경색과 비슷해 잘 보이지 않을 수 있음) */
+  padding: 5px; /* 패딩을 좌우로 추가하여 여백 조정 */
+  padding-left: 15px;
+  padding-right: 15px;
   border-radius: 10px; /* 모서리 둥글게 */
+  display: inline-block; /* 텍스트 크기에 맞게 배경이 조정되도록 설정 */
 }
+
 
 .icon {
   color: #816843;

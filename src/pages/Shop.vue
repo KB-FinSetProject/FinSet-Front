@@ -1,5 +1,4 @@
 <template>
-
     <HeaderNormal navbarTitle="금융상품" />
 
     <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
@@ -14,26 +13,26 @@
 
             <div class="button-grid">
                 <router-link to="/installment" class="btn brown-button" type="button">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fa-solid fa-piggy-bank icon"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
+                        <i class="fa-solid fa-piggy-bank icon" style="margin-left: 20px;"></i>
                         <span class="button-text">적금</span>
                     </div>
                 </router-link>
                 <router-link to="/fund" class="btn brown-button" type="button">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fa-solid fa-chart-simple icon"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
+                        <i class="fa-solid fa-chart-simple icon" style="margin-left: 20px;"></i>
                         <span class="button-text">펀드</span>
                     </div>
                 </router-link>
                 <router-link to="/stock" class="btn brown-button" type="button">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fa-solid fa-chart-line icon"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
+                        <i class="fa-solid fa-chart-line icon" style="margin-left: 20px;"></i>
                         <span class="button-text">주식</span>
                     </div>
                 </router-link>
                 <router-link to="/exchange" class="btn brown-button" type="button">
-                    <div class="d-flex flex-column align-items-center">
-                        <i class="fa-solid fa-money-bill-trend-up icon"></i>
+                    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
+                        <i class="fa-solid fa-money-bill-trend-up icon" style="margin-left: 20px;"></i>
                         <span class="button-text">외환</span>
                     </div>
                 </router-link>
@@ -46,11 +45,10 @@
 .brown-button {
     color: #ffff; 
     background-color: #816843;
-    height: 200px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 200px; /* 버튼 높이 설정 */
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
     transition: background-color 0.3s ease; 
 }
 
@@ -60,6 +58,7 @@
 
 .icon {
     font-size: 40px;
+    color: white;
 }
 
 .button-text {
@@ -73,11 +72,9 @@
 }
 
 .container {
-    margin-bottom: 150px; /* 원하는 크기로 조정 */
+    margin-bottom: 150px; 
 }
-
 </style>
-
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
