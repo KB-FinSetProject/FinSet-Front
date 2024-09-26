@@ -5,6 +5,7 @@ import Auth from '@/pages/auth/Auth.vue';
 import Board from '@/pages/board/Board.vue';
 import Deposit from '@/pages/deposit/Deposit.vue';
 import Dict from '@/pages/dict/Dict.vue';
+import DictMemo from '@/pages/dict/DictMemo.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
 import Fund from '@/pages/fund/Fund.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
@@ -31,6 +32,7 @@ const router = createRouter({
         { path: '/board', name: "Board", component: Board },
         { path: '/deposit', name: "Deposit", component: Deposit },
         { path: '/dict', name: "Dict", component: Dict },
+        { path: '/dictmemo', name: "DictMemo", component: DictMemo },
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
