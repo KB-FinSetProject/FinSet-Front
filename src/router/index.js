@@ -12,7 +12,9 @@ import Exchange from '@/pages/exchange/Exchange.vue';
 import Fund from '@/pages/fund/Fund.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
 import FundSavingBest from '@/pages/fund/FundSavingBest.vue';
-import Installment from '@/pages/installment/Installment.vue';
+import InstallmentAll from '@/pages/installment/InstallmentAll.vue';
+import InstallmentCompound from '@/pages/installment/InstallmentCompound.vue';
+import InstallmentSimple from '@/pages/installment/InstallmentSimple.vue';
 import Stock from '@/pages/stock/Stock.vue';
 import Wish from '@/pages/wish/Wish.vue';
 import Search from "@/pages/Search/Search.vue";
@@ -32,7 +34,7 @@ import StockCommunityPage from "@/pages/stock/StockCommunityPage.vue";
 import MyBoard from "@/pages/board/MyBoard.vue";
 
 const router = createRouter({
-    history: createWebHistory(), // History 모드 사용
+    history: createWebHistory(),
     routes: [
         { path: '/', name: "Home", component: Home },
         { path: '/shop', name: "Shop", component: Shop },
@@ -46,8 +48,10 @@ const router = createRouter({
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
-        { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 추가
-        { path: '/installment', name: "Installment", component: Installment },
+        { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
+        { path: '/installment', name: "Inst6allmentAll", component: InstallmentAll }, // 전체 할부 페이지
+        { path: '/installment/compound', name: "InstallmentCompound", component: InstallmentCompound }, // 복리 할부 페이지
+        { path: '/installment/simple', name: "InstallmentSimple", component: InstallmentSimple }, // 단리 할부 페이지
         { path: '/stock', name: "Stock", component: Stock },
         { path: '/search', name: "Search", component: Search },
         { path: '/wish', name: "Wish", component: Wish },
