@@ -2,6 +2,7 @@
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
 const selectedDuration = ref(null)
 const router = useRouter();
 const investmentDurations = [
@@ -41,9 +42,8 @@ const goBack = () => {
 </script>
 
 <template>
+  <HeaderNormal navbarTitle="투자성향 설문 페이지" />
   <div class="survey-container">
-    <button @click="goBack" class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
-
     <h2 class="question">7. 만약 투자원금에 손실이 발생할 경우 다음 중 감수할 수 있는 손실 수준은 어느 것입니까?</h2>
 
     <div class="options">
@@ -61,6 +61,7 @@ const goBack = () => {
             :class="{ checked: selectedDuration === duration.id }"
         ></div>
       </div>
+      <h4 class="text-md-center">7/7</h4>
     </div>
 
     <div class="navigation">
@@ -68,6 +69,7 @@ const goBack = () => {
       <button @click="goToNext" class="nav-button">다음</button>
     </div>
   </div>
+  <h3>7/7</h3>
 </template>
 
 <style scoped>
@@ -155,5 +157,9 @@ const goBack = () => {
 
 .nav-button:hover {
   background-color: #1c64c8;
+}
+.text-md-center{
+  font-size:15px;
+  margin-top:20px;
 }
 </style>

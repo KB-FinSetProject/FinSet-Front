@@ -5,10 +5,12 @@
         <h2 class="best-yield-title yield">수익률 베스트</h2>
         <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
       </router-link>
-      <router-link to="/fund-sales-best" class="title-with-divider" @click.native="setActiveTab('sales')">
+      <div class="title-with-divider">
         <h2 class="best-yield-title sales">판매액 베스트</h2>
-        <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
-      </router-link>
+        <div class="sales-divider" :class="{ active: activeTab === 'sales' }">
+        </div>
+      </div>
+
       <router-link to="/fund-saving-best" class="title-with-divider" @click.native="setActiveTab('saving')">
         <h2 class="best-yield-title savings">적립액 베스트</h2>
         <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>

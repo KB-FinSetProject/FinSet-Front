@@ -1,4 +1,5 @@
 <template>
+<HeaderNormal/>
   <div class="myPage">
     <div class="container">
       <div class="userInfo">
@@ -44,8 +45,11 @@
 </template>
 
 <script setup>
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
 
 const router = useRouter();
 

@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 
 const selectedDuration = ref(null);
 const router = useRouter();
-
+import HeaderNormal from '@/components/common/HeaderNormal.vue'
 const investmentDurations = [
   { id: 1, label: '19세 이하', score: 12.5 },
   { id: 2, label: '20세~40세', score: 12.5 },
@@ -45,9 +45,8 @@ const goBack = () => {
 </script>
 
 <template>
+  <HeaderNormal navbarTitle="투자성향 설문 페이지" />
   <div class="survey-container">
-    <button @click="goBack" class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
-
     <h2 class="question">귀하의 나이는 어떻게 되시나요?</h2>
 
     <div class="options">
@@ -59,7 +58,9 @@ const goBack = () => {
       >
         <span class="option-label">{{ duration.id }}. {{ duration.label }}</span>
         <div class="checkbox" :class="{ checked: selectedDuration === duration.id }"></div>
+
       </div>
+      <h4 class="text-md-center">1/7</h4>
     </div>
 
     <div class="navigation">
@@ -67,6 +68,7 @@ const goBack = () => {
       <button @click="goToNext" class="nav-button">다음</button>
     </div>
   </div>
+
 </template>
 
 <style scoped>
@@ -153,5 +155,9 @@ const goBack = () => {
 
 .nav-button:hover {
   background-color: #1c64c8;
+}
+.text-md-center{
+  font-size:15px;
+  margin-top:20px;
 }
 </style>
