@@ -24,6 +24,11 @@ import Investment5 from "@/pages/investment/Investment5.vue";
 import Investment6 from "@/pages/investment/Investment6.vue";
 import Investment7 from "@/pages/investment/Investment7.vue";
 import InvestmentResult from "@/pages/investment/InvestmentResult.vue";
+import StockHighSuddenly from "@/pages/stock/StockHighSuddenly.vue";
+import StockDropSuddenly from "@/pages/stock/StockDropSuddenly.vue";
+import StockDetailPage from "@/pages/stock/StockDetailPage.vue";
+import StockChartPage from "@/pages/stock/StockChartPage.vue";
+import StockCommunityPage from "@/pages/stock/StockCommunityPage.vue";
 
 const router = createRouter({
     history: createWebHistory(), // History 모드 사용
@@ -52,7 +57,12 @@ const router = createRouter({
         { path: '/investment5', name: "Investment5", component: Investment5 },
         { path: '/investment6', name: "Investment6", component: Investment6 },
         { path: '/investment7', name: "Investment7", component: Investment7 },
-        { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult }
+        { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
+        { path:  '/stock-high',name:"StockHighSuddenly",component:StockHighSuddenly},
+        { path:  '/stock-drop',name:"StockDropHighSuddenly",component:StockDropSuddenly},
+        { path:  '/stock-detail',name:"StockDetailPage",component:StockDetailPage},
+        { path:  '/stock-chart',name:"StockChartPage",component:StockChartPage},
+        { path:  '/stock-community',name:"StockCommunity",component:StockCommunityPage},
     ]
 });
 
