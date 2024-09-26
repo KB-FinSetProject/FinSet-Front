@@ -1,22 +1,13 @@
 <template>
-
   <HeaderNormal navbarTitle="단어장" />
 
   <div class="container">
     <div class="card-container">
-      <div
-        v-for="(item, index) in items"
-        :key="item.title"
-        class="card"
-      >
+      <div v-for="(item, index) in items" :key="item.title" class="card">
         <div class="card-header" @click="toggleDescription(index)">
           <i class="fa-solid fa-star icon"></i>
           <span class="title">{{ item.title }}</span>
-          <i
-            class="fa-solid fa-caret-up fa-flip-vertical"
-            :class="{ active: isActive(index) }"
-            style="margin-left: 10px;"
-          ></i>
+          <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }"></i>
         </div>
         <!-- description 및 memo 부분을 active 상태에 따라 함께 보여줌 -->
         <div v-if="isActive(index)">
@@ -33,7 +24,6 @@
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-
 import { ref } from 'vue';
 
 // 아코디언 데이터 설정
@@ -66,14 +56,20 @@ const items = ref([
 ]);
 
 // 아코디언 상태 관리
-const activeIndex = ref(null);
+const activeIndices = ref([]); // active 상태를 저장하는 배열
 
 // 특정 인덱스가 active 상태인지 확인
-const isActive = (index) => activeIndex.value === index;
+const isActive = (index) => activeIndices.value.includes(index);
 
 // 아코디언 토글 함수
 const toggleDescription = (index) => {
-  activeIndex.value = isActive(index) ? null : index; // 클릭한 인덱스의 상태를 토글
+  if (isActive(index)) {
+    // 이미 열려있으면 닫기
+    activeIndices.value = activeIndices.value.filter(i => i !== index);
+  } else {
+    // 열려있지 않으면 추가
+    activeIndices.value.push(index);
+  }
 };
 </script>
 
@@ -90,7 +86,7 @@ const toggleDescription = (index) => {
 }
 
 .card {
-  width: 300px;
+  width: 350px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 15px;
@@ -127,5 +123,11 @@ textarea {
 
 .icon {
   color: #ffbf0a; /* 아이콘 색상 설정 */
+}
+
+.arrow{
+  margin-left: 10px;
+  position: absolute;
+  transform: translateX(3100%);
 }
 </style>

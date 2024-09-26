@@ -110,7 +110,9 @@
                 <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
                 <div>
                     <p class="mb-0">삼성전자</p>
-                    <p class="mb-0 text-muted">67,500원 ~2.0%</p>
+                    <p class="mb-0 text-muted">
+                        67,500원 <span style="color: #547BC1;">~2.0%</span>
+                    </p>                    
                 </div>
             </div>
         </div>
@@ -126,7 +128,6 @@
         
 
 
-        
     </div>
 </template>
 
@@ -182,6 +183,10 @@ export default {
 
 
 <style scoped>
+.container {
+    width: 60%;
+}
+
 .card-slider {
     overflow: hidden;
 }
@@ -212,11 +217,6 @@ export default {
 
 .card {
     flex: 0 0 calc(50% - 10px);
-}
-
-.container {
-    margin-top: 50px;
-    margin-bottom: 200px;
 }
 
 .icon {

@@ -3,11 +3,7 @@
   
     <div class="container">
       <div class="card-container">
-        <div
-          v-for="(item, index) in items"
-          :key="item.name + item.date"
-          class="card"
-        >
+        <div v-for="(item, index) in items" :key="item.name + item.date" class="card">
           <div class="card-header">
             <span class="name">{{ item.name }}</span>
             <div class="buttons">
@@ -20,6 +16,7 @@
         </div>
       </div>
     </div>
+
   </template>
   
   <script setup>
@@ -83,10 +80,9 @@
   }
   
   .card {
-    width: 300px;
+    width: 370px;
     border: 1px solid #ccc;
     border-radius: 8px;
-
     color: black; /* 카드 내부 텍스트 색상 */
   }
   

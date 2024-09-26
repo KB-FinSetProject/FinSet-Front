@@ -3,7 +3,7 @@
   
     <div class="wish">
       <div class="container">
-        <h3>예적금</h3>
+        <h3 style="width:300px">예적금</h3>
         <hr>
         <div v-for="(item, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="wish-item d-flex align-items-center mt-2">
           <img :src="item.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
@@ -294,7 +294,8 @@
   .icon {
     color: #FFBF0A;
     font-size: 1.5rem;
-    margin-left: 3.5rem;
+    position: absolute; 
+    transform: translateX(1100%);
 }
   </style>
   
