@@ -15,6 +15,7 @@
 
     <section class="info">
         <h2>미수령주식 · 배당금</h2>
+
           <i class="fa-solid fa-star" style="color: #ffffff;"></i>
       <hr>
       <p>
@@ -66,6 +67,7 @@
       </ul>
     </section>
   </div>
+
 </template>
 
 <script setup>
