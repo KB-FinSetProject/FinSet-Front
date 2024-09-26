@@ -171,7 +171,7 @@ export default {
 }
 
 .fund-info {
-  flex: 1; 햣
+  flex: 1;
 
 }
 

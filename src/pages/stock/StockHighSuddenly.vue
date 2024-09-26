@@ -8,7 +8,7 @@
     </div>
 
     <div class="titles-container">
-      <router-link to="/stock-high" class="title-with-divider" @click.native="setActiveTab('sales')">
+      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('sales')">
         <h2 class="best-yield-title yield">거래량</h2>
         <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
       </router-link>

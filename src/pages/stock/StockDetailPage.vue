@@ -1,22 +1,22 @@
 <template>
   <HeaderNormal navbarTitle="주식 리스트"/>
-  <div v-for="stock in stocks" :key="stock.id" class="stock-top">
-    <h2 class="stocks" key="stock.id">{{ stock.name }}</h2>
-    <h1>{{stock.price}}</h1>
+
+  <div :key="stocks[0].id" class="stock-top">
+    <h2 class="stocks">{{ stocks[0].name }}</h2>
+    <h1>{{ stocks[0].price }}</h1>
   </div>
 
   <div class="stock-container">
-
     <div class="titles-container">
-      <router-link to="/stock-chart" class="title-with-divider" >
-          <h2 class="best-yield-title yield">차트</h2>
+      <router-link to="/stock-chart" class="title-with-divider">
+        <h2 class="best-yield-title yield">차트</h2>
         <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
       </router-link>
-      </div>
 
-    <div class ="title-with-divider">
-    <h2 class="best-yield-title sales">종목정보</h2>
+      <div class="title-with-divider">
+        <h2 class="best-yield-title sales">종목정보</h2>
         <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
+      </div>
 
       <router-link to="/stock-community" class="title-with-divider" @click.native="setActiveTab('saving')">
         <h2 class="best-yield-title savings">커뮤니티</h2>
@@ -24,24 +24,62 @@
       </router-link>
     </div>
 
-
     <div class="stock-list">
       <div v-for="stock in stocks" :key="stock.id" class="stock-item">
         <div class="stock-header">
-
           <div class="stock-info">
-
             <p class="stock-name">{{ stock.name }}</p>
-            <p class="stock-details">{{ stock.details }}</p>
+            <p class="stock-price">{{ stock.price }}</p>
             <div class="risk-info">
-              <span class="high-rating">{{stock.price}} </span>
+              <span class="high-rating">{{ stock.price }}</span>
               <span class="foreign-stock">{{ stock.change }}</span>
             </div>
-
           </div>
-          <div class="stock-header">
+          <div class="stock-favorite">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 새로 추가된 시세 정보 섹션 -->
+    <div class="stock-details">
+      <h3>시세</h3>
+      <div class="price-range">
+        <span>1일 최저가</span>
+        <input type="range" v-model="currentPrice" :min="minPrice" :max="maxPrice" disabled>
+        <span>1일 최고가</span>
+      </div>
+      <div class="price-info">
+        <span>{{ minPrice }}원</span>
+        <span>{{ maxPrice }}원</span>
+      </div>
+      <div class="stock-info-grid">
+        <div>
+          <p>시가</p>
+          <p>{{ openPrice }}원</p>
+        </div>
+        <div>
+          <p>종가</p>
+          <p>{{ closePrice }}원</p>
+        </div>
+        <div>
+          <p>거래대금</p>
+          <p>{{ tradingVolume }}주</p>
+        </div>
+      </div>
+      <div class="additional-info">
+        <div>
+          <p>매출</p>
+          <p>{{ revenue }}조원</p>
+        </div>
+        <div>
+          <p>영업이익</p>
+          <p>{{ operatingProfit }}조원</p>
+        </div>
+        <div>
+          <p>순수익</p>
+          <p>{{ netProfit }}조원</p>
         </div>
       </div>
     </div>
@@ -50,186 +88,81 @@
 
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import axios from 'axios';
+
 export default {
   components: {HeaderNormal},
   data() {
     return {
       activeTab: 'yield',
       stocks: [
-        { id: 1, name: '삼성전자', price: '67,500원', change: '-2.0%', favorite: true },
-        // { id: 2, name: 'DVXX', price: '3,155원', change: '+25.6%', favorite: false },
-        // { id: 3, name: '유한양행', price: '119,900원', change: '-4.5%', favorite: false },
-        // { id: 4, name: '셀루메드', price: '3,285원', change: '+1.0%', favorite: false },
-        // { id: 5, name: '실리콘투', price: '43,400원', change: '+10.1%', favorite: false },
+        {id: 1, name: '삼성전자', price: '67,500원', change: '-2.0%', favorite: true},
+        // 추가적인 주식 데이터
       ],
+      minPrice: 3000,
+      maxPrice: 6000,
+      currentPrice: 67000,
+      openPrice: 67000,
+      closePrice: 68000,
+      tradingVolume: 30,
+      revenue: 74,
+      operatingProfit: 10,
+      netProfit: 9.8
     };
   },
-
-
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
     },
   },
   mounted() {
-    // 컴포넌트가 마운트될 때 기본값을 수익률로 설정
     this.setActiveTab('yield');
   },
 };
 </script>
 
-<style>
-.stock-top{
-    marigin:100px;
-}
-.stock-container {
-  padding: 16px;
-  max-width: 390px;
+<style scoped>
+/* 기존 스타일은 그대로 유지 */
+
+.stock-details {
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-.yellow-box {
-  background-color: #FAB809;
-  padding: 10px;
-  margin-bottom: 16px;
+.price-range {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price-range input[type="range"] {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.stock-info-grid, .additional-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   text-align: center;
 }
 
-.white-text {
-  color: #fff;
-}
-
-.description {
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.titles-container {
-  display: flex;
-  align-items: flex-start;
-
-}
-
-.title-with-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 16px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  text-decoration: none;
-}
-
-.best-yield-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #000000;
-}
-
-.yield-divider,
-.sales-divider,
-.savings-divider {
-  height: 4px;
-  width: 100%;
-  max-width: 150px;
-  margin: 0 auto;
-  background-color: #aeaeae;
-}
-
-.yield-divider.active,
-.sales-divider.active,
-.savings-divider.active {
-  background-color: #000;
-}
-
-.mini-bar {
-  height: 4px;
-  width: 100%;
+.stock-info-grid div, .additional-info div {
   background-color: #fff;
-  margin: 10px auto 0;
-}
-.stock-list {
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.stock-item {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   padding: 10px;
-}
-
-.stock-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.fund-icon {
-  font-size: 24px;
-  color: #888;
-}
-
-.stock-info {
-  width:390px;
-  height:50px;
-
-  flex: 1;
-  margin-left: 10px;
-}
-
-.stock-name {
-  font-size: 12px;
-  font-weight: bold;
-
-}
-
-.stock-details {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 0;
-  margin-left: 8px;
-}
-
-.fund-yield {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.yield {
-  font-size: 15px;
-  font-weight: bold;
-  color: #000000;
-}
-
-.red {
-  font-size: 22px;
-  font-weight: bold;
-  color: #ff0000;
-}
-
-.period {
-  font-size: 12px;
-  color: #7e7e7e;
-  margin-bottom: 0;
-  margin-right: 21px;
-  margin-top: 10px;
-}
-
-
-
-.foreign-stock {
-
-
-  padding: 4px 6px;
   border-radius: 5px;
-  font-size: 8px;
+}
+
+.stock-info-grid p:first-child, .additional-info p:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 </style>
