@@ -7,7 +7,7 @@
             <div class="card-slider">
                 <div class="d-flex flex-row card-wrapper" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
                     <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
                         <div class="card-body">
                             <p class="card-text">content1</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
                         <div class="card-body">
                             <p class="card-text">content2</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
                         <div class="card-body">
                             <p class="card-text">content3</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" >
                         <div class="card-body">
                             <p class="card-text">content4</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
                         <div class="card-body">
                             <p class="card-text">content5</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="card shadow-sm" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" style="width: 100%; height: 225px; object-fit: cover;">
+                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" >
                         <div class="card-body">
                             <p class="card-text">content6</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -234,5 +234,11 @@ export default {
     position: relative;
     width: 100%;
     height: 400px; /* 차트 높이를 설정 */
+}
+
+.card-img-top {
+    width: 100%;
+    height: 150px; /* 원하는 높이로 조정 */
+    object-fit: cover;
 }
 </style>
