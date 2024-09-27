@@ -193,7 +193,7 @@ const toggleFavorite = (item) => {
 
 <style scoped>
 .container {
-  margin-top: -60px; /* 위로 올리기 위해 margin 조정 */
+  margin-top: -60px;
   width: 60%;
 }
 

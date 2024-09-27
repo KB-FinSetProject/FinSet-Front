@@ -1,3 +1,39 @@
+<template>
+  <HeaderNormal navbarTitle="투자성향 결과" />
+
+  <div class="result-container">
+
+    <h5>홍길동 님의 투자 성향 점수: <span class="score">{{ totalScore }}</span> 점</h5>
+ <br>
+    <div class="investment-levels">
+      <div 
+        v-for="(level, index) in investmentLevels" 
+        :key="index"
+        :class="{ active: totalScore <= level.maxScore }" 
+        class="option-item">
+        <h3>{{ level.level }}</h3>
+        <p>{{ level.maxScore === Infinity ? '80점 초과' : level.maxScore + '점 이하' }}</p>
+      </div>
+    </div>
+
+    <!-- 저장 및 저장하지 않음을 처리하는 버튼 -->
+    <div class="button-group">
+      <button @click="submitScore" class="back-button">저장</button>
+      <button @click="cancelSubmit" class="next-button">다시하기</button>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div v-if="showConfirmDialog" class="confirm-dialog">
+      <br>
+      <p>설문을 다시 하시겠습니까?</p>
+      <div class="dialog-button-group">
+        <button @click="confirmRedirect" class="confirm-button">확인</button>
+        <button @click="showConfirmDialog = false" class="cancel-button">취소</button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
@@ -34,21 +70,10 @@ const investmentLevels = [
   { level: 'Level 5. 공격투자형', maxScore: Infinity }
 ];
 
-// 현재 점수에 해당하는 레벨 찾기
-const currentLevel = computed(() => {
-  return investmentLevels.find(level => totalScore.value <= level.maxScore);
-});
-
-// 해당 레벨 활성화 여부 계산
-const isLevel1Active = computed(() => totalScore.value <= 20);
-const isLevel2Active = computed(() => totalScore.value > 20 && totalScore.value <= 40);
-const isLevel3Active = computed(() => totalScore.value > 40 && totalScore.value <= 60);
-const isLevel4Active = computed(() => totalScore.value > 60 && totalScore.value <= 80);
-const isLevel5Active = computed(() => totalScore.value > 80);
-
 // 투자 성향을 서버로 전송하는 함수
 const submitScore = () => {
-  const payload = { investmentLevel: currentLevel.value.level };
+  const currentLevel = investmentLevels.find(level => totalScore.value <= level.maxScore);
+  const payload = { investmentLevel: currentLevel.level };
   console.log('투자 성향:', payload);
   axios.post('/members/{uno}/type', payload)
       .then(response => {
@@ -75,137 +100,118 @@ const cancelSubmit = () => {
 };
 </script>
 
-
-<template>
-  <HeaderNormal navbarTitle="투자성향 결과" />
-  <div class="result-container">
-    <p>당신의 투자 성향과 점수입니다!</p>
-    <hr>
-    <p>당신의 총점수는 : {{ totalScore }}</p>
-
-    <div class="investment-levels">
-      <div :class="{ active: isLevel1Active }" class="investment-level">
-        <h3>Level 1. 안정형</h3>
-        <p>20점 이하</p>
-      </div>
-      <div :class="{ active: isLevel2Active }" class="investment-level">
-        <h3>Level 2. 안정추구형</h3>
-        <p>20점 초과 ~ 40점 이하</p>
-      </div>
-      <div :class="{ active: isLevel3Active }" class="investment-level">
-        <h3>Level 3. 위험 중립형</h3>
-        <p>40점 초과 ~ 60점 이하</p>
-      </div>
-      <div :class="{ active: isLevel4Active }" class="investment-level">
-        <h3>Level 4. 적극 투자형</h3>
-        <p>60점 초과 ~ 80점 이하</p>
-      </div>
-      <div :class="{ active: isLevel5Active }" class="investment-level">
-        <h3>Level 5. 공격투자형</h3>
-        <p>80점 초과</p>
-      </div>
-    </div>
-
-    <!-- 저장 및 저장하지 않음을 처리하는 버튼 -->
-    <div class="buttons">
-      <button @click="submitScore">저장</button>
-      <button @click="cancelSubmit">다시하기</button>
-    </div>
-
-    <!-- Confirmation Dialog -->
-    <div v-if="showConfirmDialog" class="confirm-dialog">
-      <p>설문을 다시 하시겠습니까?</p>
-      <button @click="confirmRedirect">확인</button>
-      <button @click="showConfirmDialog = false">취소</button>
-    </div>
-  </div>
-</template>
-
-
 <style scoped>
-/* Existing styles remain unchanged */
 .result-container {
-  padding: 20px;
+  width: 300px;
+  font-family: Arial, sans-serif;
+  margin-top: -30px;
+  margin-bottom: 150px;
+}
+
+.back-button {
+  background-color: #ffffff; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #60584C; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
   text-align: center;
+  margin-bottom: 15px;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 130px;
+}
+
+.next-button {
+  background-color: #816843; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #ffff; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 130px;
 }
 
 .investment-levels {
-  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.investment-level {
-  margin: 10px 0;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.investment-level.active {
-  background-color: #f0f0f0;
-  border-color: #4a90e2;
-}
-
-h3 {
-  margin: 0;
-}
-
-p {
-  margin: 5px 0 0;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #4a90e2;
-  color: white;
-  border-radius: 5px;
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #60584C;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #357ab7;
+.option-item.active {
+  background-color: #FFCC00; /* 활성화된 항목 색상 */
 }
 
-button:last-of-type {
-  background-color: #e94e77;
+.option-item:hover {
+  background-color: #f0f0f0; /* 호버 시 색상 */
 }
 
-button:last-of-type:hover {
-  background-color: #c43458;
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px; /* 버튼들과 간격 추가 */
 }
+
+.score {
+  color: #FFBB00; /* 점수 색상 설정 */
+}
+
 .confirm-dialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #60584C;
   background-color: white;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* Ensure it's above other elements */
-  text-align: center; /* Center the text in the dialog */
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
 }
 
-.confirm-dialog button {
-  margin: 10px; /* Add some margin between buttons */
-  padding: 10px 15px;
-  background-color: #4a90e2; /* Consistent button style */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.dialog-button-group {
+  display: flex; /* Flexbox를 사용하여 버튼들을 나란히 배치 */
+  justify-content: space-between; /* 버튼들 간의 간격을 균등하게 배치 */
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.confirm-dialog button:hover {
-  background-color: #357ab7; /* Darker shade on hover */
+.confirm-button{
+  background-color: #ffffff; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #60584C; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 100px;
+  margin-top: 10px; /* 버튼 간 간격 추가 */
+}
+
+.cancel-button {
+  background-color: #816843; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #ffff; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 100px;
+  margin-top: 10px; /* 버튼 간 간격 추가 */
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  background-color: #f0f0f0; /* 호버 시 색상 */
 }
 </style>
