@@ -36,8 +36,9 @@
             <span class="period">{{ fund.period }}</span>
             <span class="yield"><span class="red">{{ fund.yield }}</span></span>
           </div>
-          <div class="fund-icon">
-            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
+          <div class="fund-icon" @click="toggleFavorite(fund)">
+            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'"
+               :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
         <div class="mini-bar"></div> <!-- 미니바 추가 -->
@@ -109,12 +110,15 @@ export default {
       } else if (this.activeTab === 'compound') {
         return this.funds.filter(fund => fund.type === 'compound');
       }
-      return this.funds;
+      return this.funds; // 전체 적금을 보여줌
     },
   },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
+    },
+    toggleFavorite(fund) {
+      fund.favorite = !fund.favorite; // favorite 상태 토글
     },
   },
 };
@@ -125,7 +129,7 @@ export default {
   padding: 16px;
   max-width: 390px;
   position: relative;
-  bottom:110px;
+  bottom: 110px;
 }
 
 .titles-container {
@@ -205,7 +209,11 @@ export default {
 .fund-name {
   font-size: 16px;
   font-weight: bold;
-  margin: 0px;
+  margin-bottom: 4px;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  right: 6px;
 }
 
 .fund-details {
