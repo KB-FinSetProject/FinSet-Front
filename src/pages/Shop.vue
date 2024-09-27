@@ -42,6 +42,7 @@
 </template>
 
 <style scoped>
+
 .brown-button {
   color: #ffff;
   background-color: #816843;
@@ -81,7 +82,7 @@
 }
 
 .container {
-  margin-bottom: 150px; /* 원하는 크기로 조정 */
+  margin-top: -55px; /* 원하는 크기로 조정 */
 }
 </style>
 
