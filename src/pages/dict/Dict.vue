@@ -52,7 +52,7 @@
         <router-link :to="{ path: '/dictmemo' }" class="item-text">
           <span class="item-text">{{ item }}</span>
         </router-link>
-        <i class="fa-solid fa-star icon"></i>
+        <i class="fa-solid fa-star icon2"></i>
       </div>
 
     </div>
@@ -164,6 +164,8 @@ const performSearch = () => {
 
 .icon {
   color: #ffbf0a; /* 아이콘 색상 설정 */
+  position: absolute;
+  transform: translateX(1100%);
 }
 
 .arrow{
@@ -249,5 +251,11 @@ input[type="text"] {
   font-size: 1em; /* 텍스트 크기 조정 */
   color: black;
   text-decoration: none;
+}
+
+.icon2 {
+  color: #ffbf0a; /* 아이콘 색상 설정 */
+  position: absolute;
+  transform: translateX(2100%);
 }
 </style>
