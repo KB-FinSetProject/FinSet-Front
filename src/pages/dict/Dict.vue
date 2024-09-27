@@ -19,6 +19,7 @@
           <span class="title">미수령주식 · 배당금</span>
           <i class="fa-solid fa-star icon"></i>
         </div>
+        <br>
         <p class="description">무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금</p>
       </div>
 
@@ -32,6 +33,7 @@
           <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }"></i>
         </div>
         <div v-if="isActive(index)">
+          <br>
           <p class="description">{{ item.content }}</p>
         </div>
       </div>
@@ -40,7 +42,6 @@
       <button v-if="!showAll" @click="showAllItems" class="load-more-button">+ 더보기</button>
 
       <hr>
-      <br>
 
       <div class="icon-title-container">
         <i class="fa-solid fa-book-bookmark icon-large"></i>
@@ -133,6 +134,7 @@ const performSearch = () => {
 <style scoped>
 .container {
   margin-bottom: 150px;
+  margin-top: -80px;
 }
 
 .card-container {
@@ -155,6 +157,7 @@ const performSearch = () => {
   display: flex;
   align-items: center;
   cursor: pointer; /* 클릭 가능하도록 커서 변경 */
+  padding-bottom: 20px;
 }
 
 .title {
@@ -165,7 +168,7 @@ const performSearch = () => {
 .icon {
   color: #ffbf0a; /* 아이콘 색상 설정 */
   position: absolute;
-  transform: translateX(1100%);
+  transform: translateX(1750%);
 }
 
 .arrow{
@@ -175,7 +178,7 @@ const performSearch = () => {
 }
 
 .cardelse{
-  background-color: #E0E0E0;
+  background-color: rgba(110, 96, 83, 0.17);
   color: black;
 }
 
@@ -244,7 +247,7 @@ input[type="text"] {
   display: flex; /* Flexbox 사용 */
   justify-content: space-between; /* 양쪽 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  margin: 10px 0; /* 아이템 간격 조정 */
+  margin: 10px ; /* 아이템 간격 조정 */
 }
 
 .item-text {
@@ -256,6 +259,6 @@ input[type="text"] {
 .icon2 {
   color: #ffbf0a; /* 아이콘 색상 설정 */
   position: absolute;
-  transform: translateX(2100%);
+  transform: translateX(2000%);
 }
 </style>

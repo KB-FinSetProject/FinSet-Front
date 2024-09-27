@@ -76,6 +76,7 @@ const toggleDescription = (index) => {
 <style scoped>
 .container {
   margin-bottom: 150px;
+  margin-top: -90px;
 }
 
 .card-container {

@@ -5,20 +5,16 @@ import Auth from '@/pages/auth/Auth.vue';
 import Board from '@/pages/board/Board.vue';
 import DepositAll from '@/pages/deposit/DepositAll.vue';
 import DepositDetail from '@/pages/deposit/DepositDetail.vue';
-import DepositCompound from '@/pages/deposit/DepositCompound.vue';
-import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import Dict from '@/pages/dict/Dict.vue';
 import DictMemo from '@/pages/dict/DictMemo.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
-import ExchangeDetailPage from "@/pages/exchange/ExchangeDetailPage.vue";
+import ExchangeDetail from "@/pages/exchange/ExchangeDetail.vue";
 import Fund from '@/pages/fund/Fund.vue';
 import FundDetail from '@/pages/fund/FundDetail.vue';
-import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
-import FundSavingBest from '@/pages/fund/FundSavingBest.vue';
+import FundSales from '@/pages/fund/FundSales.vue';
+import FundSavings from '@/pages/fund/FundSavings.vue';
 import InstallmentAll from '@/pages/installment/InstallmentAll.vue';
 import InstallmentDetail from '@/pages/installment/InstallmentDetail.vue';
-import InstallmentCompound from '@/pages/installment/InstallmentCompound.vue';
-import InstallmentSimple from '@/pages/installment/InstallmentSimple.vue';
 import Stock from '@/pages/stock/Stock.vue';
 import Wish from '@/pages/wish/Wish.vue';
 import Search from "@/pages/Search/Search.vue";
@@ -48,20 +44,16 @@ const router = createRouter({
         { path: '/board', name: "Board", component: Board },
         { path: '/deposit', name: "DepositAll", component: DepositAll }, // 전체 예금 페이지
         { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail }, // 전체 할부 페이지
-        { path: '/deposit/compound', name: "DepositCompound", component: DepositCompound }, // 복리 예금 페이지
-        { path: '/deposit/simple', name: "DepositSimple", component: DepositSimple }, // 단리 예금 페이지
         { path: '/dict', name: "Dict", component: Dict },
         { path: '/dictmemo', name: "DictMemo", component: DictMemo },
         { path: '/exchange', name: "Exchange", component: Exchange },
-        { path: '/exchangedetailpage', name: "ExchangeDetailPage", component: ExchangeDetailPage },
+        { path: '/exchangedetail', name: "ExchangeDetail", component: ExchangeDetail },
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund/detail', name: "FundDetail", component: FundDetail },
-        { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
-        { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
+        { path: '/fundsales', name: "FundSales", component: FundSales },
+        { path: '/fundsavings', name: "FundSavings", component: FundSavings }, // 적립액 베스트 페이지
         { path: '/installment', name: "InstallmentAll", component: InstallmentAll }, // 전체 할부 페이지
         { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail }, // 전체 할부 페이지
-        { path: '/installment/compound', name: "InstallmentCompound", component: InstallmentCompound }, // 복리 할부 페이지
-        { path: '/installment/simple', name: "InstallmentSimple", component: InstallmentSimple }, // 단리 할부 페이지
         { path: '/stock', name: "Stock", component: Stock },
         { path: '/search', name: "Search", component: Search },
         { path: '/wish', name: "Wish", component: Wish },

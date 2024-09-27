@@ -70,8 +70,8 @@ const goToNext = () => {
   width: 300px;
   font-family: Arial, sans-serif;
   margin-top: -30px;
-  margin-bottom: 150px;
 }
+
 
 .back-button {
   background-color: #ffffff; /* 배경을 흰색으로 설정 */
@@ -149,6 +149,7 @@ const goToNext = () => {
   margin-top: 85px;
 }
 
+
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -157,7 +158,7 @@ const goToNext = () => {
 
 .text-md-center{
   font-size:15px;
-  margin-top:20px;
+  margin-top:180px;
   text-align: center;
 }
 

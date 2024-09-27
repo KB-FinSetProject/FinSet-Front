@@ -11,7 +11,12 @@
       <div class="currency-header">
         <div class="currency-info">
           <img :src="currency.flagUrl" :alt="currency.name" />
-          <h7>{{ currency.name }}</h7>
+          <!-- <router-link :to="`/exchangedetail/${currency.id}`" class="no-underline">
+            <h7>{{ currency.name }}</h7>
+          </router-link>                  -->
+          <router-link :to="`/exchangedetail`" class="no-underline">
+            <h7>{{ currency.name }}</h7>
+          </router-link>                 
         </div>
         <div class="favorite" @click="toggleFavorite(currency)">
           <span :class="{'active': currency.isFavorite}">
@@ -102,7 +107,7 @@ body {
   max-width: 400px;
   box-sizing: border-box;
   margin-bottom: 150px;
-  margin-top: -50px;
+  margin-top: -70px;
 }
 
 .currency-card {
@@ -169,4 +174,10 @@ body {
   color: #FFBB00;
   margin-left: 160px;
 }
+
+.no-underline {
+  text-decoration: none; /* 밑줄 제거 */
+  color: #595959;
+}
+
 </style>

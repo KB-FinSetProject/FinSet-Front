@@ -40,9 +40,8 @@
     </div>
 
     <div class="centered-info">
-      <br>
       <h5>상품 안내</h5>
-      <hr>
+      <hr style="height: 4px;">
     </div>
     
     <div class="fixed-info">
@@ -90,6 +89,7 @@ const who = '개인';
 .container{
   position: relative;
   bottom: 85px;
+  margin-top: -30px;
 }
 
 .details {
@@ -198,7 +198,7 @@ h7{
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
   text-decoration: none;
   position: relative;
-  top:120px;
+  top:150px;
 }
 
 hr{

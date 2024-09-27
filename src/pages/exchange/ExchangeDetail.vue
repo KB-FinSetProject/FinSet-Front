@@ -1,5 +1,5 @@
 <template>
-  <HeaderNormal navbarTitle="외환" />
+  <HeaderNormal navbarTitle="외환 상세" />
 
   <h3>환전정보</h3>
   <br>

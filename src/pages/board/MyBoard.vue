@@ -71,6 +71,7 @@
   <style scoped>
   .container {
     margin-bottom: 150px;
+    margin-top: -100px;
   }
   
   .card-container {

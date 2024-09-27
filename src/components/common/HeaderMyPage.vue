@@ -1,5 +1,4 @@
 <template>
-    <div class="container">
       <header class="header">
         <nav class="navbar fixed-top bg-body-tertiary border-bottom">
           <div class="navbar-custom container-fluid d-flex align-items-center justify-content-between">
@@ -11,11 +10,8 @@
           </div>
         </nav>
       </header>
-    </div>
   </template>
-  
-  <script setup>
-  </script>
+
   
   <style scoped>
 *{
@@ -49,7 +45,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 56px; /* 높이를 명확히 지정하여 정렬 이슈 해결 */
+    height: 50px; /* 높이를 명확히 지정하여 정렬 이슈 해결 */
   }
   </style>
   

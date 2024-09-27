@@ -2,10 +2,11 @@
   <HeaderMyPage />
 
   <div class="container">
+    <br><br><br>
     <div class="info">
       <hr style="border-color: white;">
 
-      <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
+      <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
 
       <h1>홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i></h1>
       <br>
@@ -33,7 +34,7 @@
       </router-link>
     </div>
 
-    <br><br><br><br><br>
+    <br><br><br><br>
     <div class="bottomButtons">
       <button class="withdrawButton">탈퇴하기</button>
       <button class="logoutButton">로그아웃</button>
@@ -46,10 +47,18 @@
 import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 </script>
 
-<style>
+<style scoped>
 .container {
-  margin-bottom: 150px;
+  margin-top: 100px; /* 상단 마진 */
+  padding-top: 20px; /* 내부 여백 추가 */
+  padding-bottom: 20px; /* 하단 패딩 추가 */
 }
+
+.container {
+  margin-top: 60px; /* 헤더 높이보다 약간 더 크게 설정 */
+  padding: 20px; /* 패딩 추가 */
+}
+
 
 .info {
   background-color: #FFBB00; /* 배경색 설정 */

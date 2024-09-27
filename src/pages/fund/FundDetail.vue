@@ -5,7 +5,7 @@
     <span class="high-risk">높은 위험</span>
     <span class="foreign-stock">해외주식형</span>
     <br /><br />
-    <h5>{{ name }}</h5>
+    <h4 style="font-weight: bold;">{{ name }}</h4>
     <span>수수료미징구-온라인</span>
     <br /><br />
 
@@ -17,7 +17,7 @@
 
     <div class="base-display">
       <p>기준가</p>
-      <h3>{{ base }}원</h3>
+      <h3 style="font-weight: bold;">{{ base }}원</h3>
       <p style="color: #547BC1;">{{ change }}</p>
       <hr />
     </div>
@@ -137,8 +137,9 @@ export default {
 
 <style scoped>
 .container {
-  margin-bottom: 300px;
+  margin-bottom: 100px;
   width: 100%;
+  margin-top: -30px;
 }
 
 .data-display {
@@ -207,8 +208,8 @@ export default {
   color: white; /* 글씨 색상 */
   border: none; /* 기본 테두리 제거 */
   border-radius: 5px; /* 모서리 둥글게 */
-  padding: 3px 30px; /* 버튼 내부 여백 */
-  font-size: 20px; /* 글씨 크기 */
+  padding: 5px 50px; /* 버튼 내부 여백 */
+  font-size: 15px; /* 글씨 크기 */
   cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
   text-decoration: none;
