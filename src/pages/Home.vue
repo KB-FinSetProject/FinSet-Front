@@ -235,17 +235,16 @@ export default {
     width: 100%;
     height: 400px; /* 차트 높이를 설정 */
 }
-<<<<<<< HEAD
-.title{
+.title {
   font-weight: bold;
   position: relative;
   bottom: 4px;
-=======
+}
 
 .card-img-top {
     width: 100%;
     height: 150px; /* 원하는 높이로 조정 */
     object-fit: cover;
->>>>>>> 2266df8cd9f8741341f429a80b21496e415a6a05
 }
+
 </style>
