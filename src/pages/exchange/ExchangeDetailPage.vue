@@ -1,23 +1,23 @@
 <template>
-  <div class="exchange-container">
-    <header>
-    <button class="back-button" @click="goBack"><i class="fa-solid fa-arrow-left"></i></button>
-    <h1>외환</h1>
-    </header>
-    <hr>
-  </div>
+  <HeaderNormal navbarTitle="외환" />
 
+  <h3>환전정보</h3>
+  <br>
   <div v-for="currency in filteredCurrencies" :key="currency.code" class="currency-card">
   <section class="exchange-info">
     <div class="currency-info">
-      <h2>미국 달러(USD)</h2>
-      <span>적용 환율: {{ baseRate }}</span>
+      <div class="currency-details">
+      <h2>{{ currency.name }} ({{ currency.code }})</h2>
+      <span class="exchange-rate">적용 환율: {{ baseRate }}</span>
+      </div>
     </div>
-    <button @click="refreshRate" class="refresh-btn">환율 새로고침</button>
+    <button @click="refreshRate" class="refresh-btn">환율 새로고침<i class="fa-solid fa-repeat"></i></button>
   </section>
   </div>
+  <br>
   <section class="exchange-rate">
     <h3>실시간 환율</h3>
+    <div class="rate-container">
     <p class="current-rate">{{ currentRate }}원</p>
     <p class="rate-change">
       전일대비 {{ rateChange }}원
@@ -25,43 +25,57 @@
           {{ rateChange > 0 ? '▲' : '▼' }}
         </span>
     </p>
+    </div>
   </section>
 
   <div class="chart-container">
-    <canvas ref="stockChart"></canvas>
+    <canvas ref="chartRef"></canvas>
     <div class="chart-info">
       <span class="chart-high">최고 {{ highestPrice }}원</span>
       <span class="chart-low">최저 {{ lowestPrice }}원</span>
     </div>
-  </div>>
+  </div>
 
   <section class="chart">
-    <h3>{{ selectedPeriod }}</h3>
-    <canvas id="exchangeChart"></canvas>
     <div class="period-selector">
-      <button @click="setPeriod('1일')">1일</button>
-      <button @click="setPeriod('1주')">1주</button>
-      <button @click="setPeriod('1달')">1달</button>
-      <button @click="setPeriod('1년')">1년</button>
+      <button @click="setPeriod('1일')" :class="{active: selectedPeriod === '1일'}">1일</button>
+      <button @click="setPeriod('1주')" :class="{active: selectedPeriod === '1주'}">1주</button>
+      <button @click="setPeriod('1달')" :class="{active: selectedPeriod === '1달'}">1달</button>
+      <button @click="setPeriod('1년')" :class="{active: selectedPeriod === '1년'}">1년</button>
     </div>
   </section>
 
-  <section class="profit-info">
-    <p>1일 전에 샀었다면 수익: <strong>{{ profit }}원</strong></p>
-    <p>(300만원 기준)</p>
+
+  <section class="profit-info" >
+    <div style="display: flex">
+    <i class="fa-solid fa-chart-line"></i>
+   <p>1일 전에 샀었다면 수익</p>
+    </div>
+    <div style="display: flex">
+    <strong>{{ profit }}원</strong><p>(300만원 기준)</p></div>
   </section>
+
 </template>
 
 <script setup>
   import { ref, onMounted, nextTick } from 'vue';
-  import Chart from 'chart.js/auto';
+  import HeaderNormal from "@/components/common/HeaderNormal.vue";
+  import {Chart, registerables} from 'chart.js';
+
+  Chart.register(...registerables);
+
+
+  const filteredCurrencies = ref([
+    { name: '미국 달러', code: 'USD' }]);
 
   // 데이터 정의
   const baseRate = ref(1344.80);  // 기본 환율
   const currentRate = ref(1340.06);  // 실시간 환율
   const rateChange = ref(3.02);  // 전일대비 변화
-  const profit = ref(6777);  // 수익
-  const selectedPeriod = ref('1일');  // 선택된 기간
+  const profit = ref(6777);
+  const selectedPeriod = ref('1일');
+  const highestPrice = ref(1344.77);  // 차트의 최고 환율
+  const lowestPrice = ref(1334.77);
 
   // 캔버스 참조
   const chartRef = ref(null);  // Chart.js가 그려질 캔버스 엘리먼트
@@ -123,11 +137,6 @@
 }
 });
 
-// 백버튼 기능 (뒤로가기)
-const goBack = () => {
-  window.history.back();  // 브라우저의 뒤로가기 기능을 호출
-};
-
 </script>
 
 <style scoped>
@@ -138,7 +147,10 @@ const goBack = () => {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
-
+h3{
+  font-weight: 700;
+margin-bottom: 0px;
+}
 /* 헤더 스타일 */
 header {
   display: flex;
@@ -175,6 +187,7 @@ h1 {
 }
 .currency-card{
   background-color: #f0f0f0;
+  height: 120px;
 }
 
 .currency-info h2 {
@@ -204,8 +217,13 @@ h1 {
 
 /* 실시간 환율 섹션 */
 .exchange-rate h3{
-  margin-bottom: 20px;
   font-size: 12px;
+}
+
+.rate-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .current-rate {
@@ -239,38 +257,56 @@ canvas {
 /* 기간 선택 버튼 */
 .period-selector {
   margin-top: 10px;
+  margin-left: 30px;
 }
 
 .period-selector button {
-  background-color: #f0f0f0;
+  background-color: #888;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 25px;
   margin-right: 10px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  color: #f0f0f0;
 }
 
-.period-selector button:hover {
-  background-color: #007bff;
-  color: white;
+.period-selector button.active {
+  background-color: white; /* 선택된 버튼의 배경색 */
+  color: black; /* 선택된 버튼의 글자 색 */
 }
 
 /* 수익 정보 */
 .profit-info {
+  height: 200px;
   font-size: 16px;
   color: #333;
+  margin-bottom: 1rem;
+}
+.profit-info p{
+  margin-bottom: 0;
+  margin-left: 25px;
+}
+
+.profit-info strong{
+  margin-left: 25px;
 }
 
 .profit-info strong {
   font-weight: bold;
   color: #28a745;
 }
+.fa-chart-line{
+  color:dodgerblue;
+}
 .chart-container {
   height: 200px;
   margin-bottom: 20px;
 }
 
+p {
+  margin-top: -8px;
+}
 .chart-info {
   display: flex;
   justify-content: space-between;
