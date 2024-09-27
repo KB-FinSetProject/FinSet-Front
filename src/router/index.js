@@ -64,7 +64,7 @@ const router = createRouter({
         { path: '/investment7', name: "Investment7", component: Investment7 },
         { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
         { path:  '/stock-high',name:"StockHighSuddenly",component:StockHighSuddenly},
-        { path:  '/stock-drop',name:"StockDropHighSuddenly",component:StockDropSuddenly},
+        { path:  '/stock-drop',name:"StockDropSuddenly",component:StockDropSuddenly},
         { path:  '/stock-detail',name:"StockDetailPage",component:StockDetailPage},
         { path:  '/stock-chart',name:"StockChartPage",component:StockChartPage},
         { path:  '/stock-community',name:"StockCommunity",component:StockCommunityPage},

@@ -1,108 +1,63 @@
 <template>
-  <div class="fund-container">
-    <div class="titles-container">
-      <router-link to="/fund" class="title-with-divider" @click.native="setActiveTab('yield')">
-        <h2 class="best-yield-title yield">수익률 베스트</h2>
-        <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
-      </router-link>
-      <div class="title-with-divider">
-        <h2 class="best-yield-title sales">판매액 베스트</h2>
-        <div class="sales-divider" :class="{ active: activeTab === 'sales' }">
+  <HeaderNormal navbarTitle="펀드 리스트" />
+
+  <div class="container">
+    <div class="options">
+      <div class="option" @click="selectOption('수익률베스트')" :class="{ active: selected === '수익률베스트' }">
+        수익률베스트
+        <hr :class="{ active: selected === '수익률베스트' }" />
+      </div>
+      <div class="option" @click="selectOption('판매액 베스트')" :class="{ active: selected === '판매액 베스트' }">
+        판매액 베스트
+        <hr :class="{ active: selected === '판매액 베스트' }" />
+      </div>
+      <div class="option" @click="selectOption('적립액 베스트')" :class="{ active: selected === '적립액 베스트' }">
+        적립액 베스트
+        <hr :class="{ active: selected === '적립액 베스트' }" />
+      </div>
+    </div>
+
+    <div v-if="selected === '적립액 베스트'" class="product-list">
+      <div v-for="(item, index) in savingProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} %</h5>
+          <p6>기본 {{ item.normal }} %</p6>
         </div>
       </div>
-
-      <router-link to="/fund-saving-best" class="title-with-divider" @click.native="setActiveTab('saving')">
-        <h2 class="best-yield-title savings">적립액 베스트</h2>
-        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-      </router-link>
-    </div>
-
-    <div class="yellow-box" v-if="activeTab === 'sales'">
-      <h2 class="best-yield-title">판매액 베스트</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
-    </div>
-
-    <div class="yellow-box" v-if="activeTab === 'yield'">
-      <h2 class="best-yield-title">수익률 베스트</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
-    </div>
-
-    <div class="fund-list">
-      <div v-for="fund in funds" :key="fund.id" class="fund-item">
-        <div class="fund-header">
-          <div class="fund-icon">
-            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
-          </div>
-          <div class="fund-info">
-            <p class="fund-name">{{ fund.name }}</p>
-            <p class="fund-details">{{ fund.details }}</p>
-            <div class="risk-info">
-              <span class="high-rating">높은 위험</span>
-              <span class="foreign-fund">해외주식형</span>
-            </div>
-          </div>
-          <div class="fund-yield">
-            <span class="period">{{ fund.period }}</span>
-            <span class="yield"><span class="red">{{ fund.yield }}</span></span>
-          </div>
-        </div>
-      </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;" />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeTab: null, // 기본값을 null로 설정
-      funds: [
-        {
-          id: 1,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: true,
-        },
-        {
-          id: 2,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-        {
-          id: 3,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-        {
-          id: 4,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-      ],
-    };
+<script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import { ref } from 'vue';
+
+const selected = ref('적립액 베스트');
+
+const savingProducts = ref([
+  {
+    title: '적립액 베스트 상품 1',
+    bank: '은행 1',
+    max: '4.10',
+    normal: '3.60',
   },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
+  {
+    title: '적립액 베스트 상품 2',
+    bank: '은행 2',
+    max: '4.05',
+    normal: '3.55',
   },
-  mounted() {
-    // 컴포넌트가 마운트될 때 기본값을 수익률로 설정
-    this.setActiveTab('yield');
-  },
+  // 추가 상품 목록
+]);
+
+const selectOption = (option) => {
+  selected.value = option;
 };
 </script>
 
