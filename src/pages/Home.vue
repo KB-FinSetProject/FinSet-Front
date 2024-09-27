@@ -185,6 +185,7 @@ export default {
 <style scoped>
 .container {
     width: 60%;
+  margin-top:-90px
 }
 
 .card-slider {

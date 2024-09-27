@@ -22,12 +22,6 @@
       </router-link>
     </div>
 
-    <div class="yellow-box" v-if="activeTab === 'yield'">
-      <h2 class="best-yield-title"> 거래량 많은 순</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">금일 거래량이 많은 것부터 나열한거에요!</p>
-    </div>
-
     <div class="stock-list">
       <div v-for="stock in stocks" :key="stock.id" class="stock-item">
         <div class="stock-header">
@@ -131,11 +125,9 @@ export default {
 .yield-divider,
 .sales-divider,
 .savings-divider {
-  height: 4px;
-  width: 100%;
-  max-width: 150px;
-  margin: 0 auto;
-  background-color: #aeaeae;
+  height: 3px;
+  width: 120px;
+  background-color: #d6d6d6;
 }
 
 .yield-divider.active,
@@ -226,10 +218,9 @@ height:50px;
 
 
 .foreign-stock {
-
-
   padding: 4px 6px;
   border-radius: 5px;
   font-size: 8px;
 }
+
 </style>
