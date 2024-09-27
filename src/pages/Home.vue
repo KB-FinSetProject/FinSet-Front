@@ -235,6 +235,7 @@ export default {
     width: 100%;
     height: 400px; /* 차트 높이를 설정 */
 }
+
 .title {
   font-weight: bold;
   position: relative;

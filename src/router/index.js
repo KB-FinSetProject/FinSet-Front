@@ -12,6 +12,7 @@ import DictMemo from '@/pages/dict/DictMemo.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
 import ExchangeDetailPage from "@/pages/exchange/ExchangeDetailPage.vue";
 import Fund from '@/pages/fund/Fund.vue';
+import FundDetail from '@/pages/fund/FundDetail.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
 import FundSavingBest from '@/pages/fund/FundSavingBest.vue';
 import InstallmentAll from '@/pages/installment/InstallmentAll.vue';
@@ -54,6 +55,7 @@ const router = createRouter({
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/exchangedetailpage', name: "ExchangeDetailPage", component: ExchangeDetailPage },
         { path: '/fund', name: "Fund", component: Fund },
+        { path: '/fund/detail', name: "FundDetail", component: FundDetail },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
         { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
         { path: '/installment', name: "InstallmentAll", component: InstallmentAll }, // 전체 할부 페이지
