@@ -23,7 +23,8 @@
         </div>
         <div class="fund-info d-flex align-items-center justify-content-between w-100">
           <div class="fund-details">
-            <p class="fund-name">적금 상품</p>
+            <!-- <router-link :to="`/installment/detail/${fund.id}`" class="fund-name">{{ fund.name }}</router-link> -->
+            <router-link :to="`/installment/detail`" class="fund-name">{{ fund.name }}</router-link>
             <p class="fund-bank">NH 농협은행</p>
           </div>
           <div class="fund-yield-info text-right">
@@ -51,6 +52,7 @@ export default {
       funds: [
         {
           id: 1,
+          name:"적금 상품",
           logo: 'NH',
           logoColor: '#005EB8',
           favorite: true,
@@ -61,6 +63,7 @@ export default {
         {
           id: 2,
           logo: 'NH',
+          name:"적금 상품",
           logoColor: '#A2D7E0',
           favorite: false,
           type: 'compound', // 복리
@@ -70,6 +73,7 @@ export default {
         {
           id: 3,
           logo: 'NH',
+          name:"적금 상품",
           logoColor: '#005EB8',
           favorite: true,
           type: 'simple', // 단리
@@ -79,6 +83,7 @@ export default {
         {
           id: 4,
           logo: 'NH',
+          name:"적금 상품",
           logoColor: '#A2D7E0',
           favorite: false,
           type: 'compound', // 복리
@@ -190,6 +195,8 @@ export default {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 4px;
+  text-decoration: none;
+  color: black;
 }
 
 .fund-bank {
