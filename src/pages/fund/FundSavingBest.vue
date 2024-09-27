@@ -9,27 +9,26 @@
         <h2 class="best-yield-title sales">판매액 베스트</h2>
         <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
       </router-link>
-<div class="title-with-divider">
-  <h2 class="best-yield-title savings">적립액 베스트</h2>
-  <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-</div>
-
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('savings')">
+        <h2 class="best-yield-title savings">적립액 베스트</h2>
+        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
+      </router-link>
     </div>
 
     <div class="yellow-box" v-if="activeTab === 'savings'">
       <h2 class="best-yield-title">적립액 베스트</h2>
       <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
+      <p class="description white-text">최근 3개월 동안 적립액이 가장 높은 펀드예요!</p>
     </div>
 
     <div class="yellow-box" v-if="activeTab === 'yield'">
       <h2 class="best-yield-title">수익률 베스트</h2>
       <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
+      <p class="description white-text">최근 3개월 동안 수익률이 가장 높은 펀드예요!</p>
     </div>
 
     <div class="fund-list">
-      <div v-for="fund in funds" :key="fund.id" class="fund-item">
+      <div v-for="fund in filteredFunds" :key="fund.id" class="fund-item">
         <div class="fund-header">
           <div class="fund-icon">
             <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
@@ -93,6 +92,19 @@ export default {
       ],
     };
   },
+  computed: {
+    filteredFunds() {
+      if (this.activeTab === 'sales') {
+        // 판매액에 맞는 펀드 필터링 로직 (예시)
+        return this.funds.filter(fund => fund.favorite); // 예시로 favorite인 펀드만 반환
+      } else if (this.activeTab === 'savings') {
+        // 적립액에 맞는 펀드 필터링 로직 (예시)
+        return this.funds; // 모든 펀드를 반환 (추후 수정 가능)
+      } else {
+        return this.funds; // 기본적으로 모든 펀드 반환
+      }
+    },
+  },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
@@ -137,7 +149,6 @@ export default {
   cursor: pointer;
   background: none;
   border: none;
-
 }
 
 .best-yield-title {

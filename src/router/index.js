@@ -49,7 +49,7 @@ const router = createRouter({
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
         { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
-        { path: '/installment', name: "Inst6allmentAll", component: InstallmentAll }, // 전체 할부 페이지
+        { path: '/installment', name: "InstallmentAll", component: InstallmentAll }, // 전체 할부 페이지
         { path: '/installment/compound', name: "InstallmentCompound", component: InstallmentCompound }, // 복리 할부 페이지
         { path: '/installment/simple', name: "InstallmentSimple", component: InstallmentSimple }, // 단리 할부 페이지
         { path: '/stock', name: "Stock", component: Stock },
@@ -64,7 +64,7 @@ const router = createRouter({
         { path: '/investment7', name: "Investment7", component: Investment7 },
         { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
         { path:  '/stock-high',name:"StockHighSuddenly",component:StockHighSuddenly},
-        { path:  '/stock-drop',name:"StockDropHighSuddenly",component:StockDropSuddenly},
+        { path:  '/stock-drop',name:"StockDropSuddenly",component:StockDropSuddenly},
         { path:  '/stock-detail',name:"StockDetailPage",component:StockDetailPage},
         { path:  '/stock-chart',name:"StockChartPage",component:StockChartPage},
         { path:  '/stock-community',name:"StockCommunity",component:StockCommunityPage},
