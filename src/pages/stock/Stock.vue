@@ -1,45 +1,41 @@
 <template>
-  <HeaderNormal navbarTitle="주식 리스트"/>
+  <HeaderNormal navbarTitle="주식 상품" />
+
   <div class="stock-container">
-    <div class="yellow-box" v-if="activeTab === 'sales'">
-      <h2 class="best-yield-title">판매액 베스트</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
-    </div>
-
     <div class="titles-container">
-      <div class ="title-with-divider">     <h2 class="best-yield-title yield">거래량</h2>
-        <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
-      </div>
-
-      <router-link to="/stock-high" class="title-with-divider" @click.native="setActiveTab('sales')">
-        <h2 class="best-yield-title sales">급상승</h2>
-        <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
+        <h2 class="best-yield-title">전체</h2>
+        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
       </router-link>
-      <router-link to="/stock-drop" class="title-with-divider" @click.native="setActiveTab('saving')">
-        <h2 class="best-yield-title savings">급하락</h2>
-        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('gain')">
+        <h2 class="best-yield-title">급상승</h2>
+        <div class="divider" :class="{ active: activeTab === 'gain' }"></div>
+      </router-link>
+      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('drop')">
+        <h2 class="best-yield-title">급하락</h2>
+        <div class="divider" :class="{ active: activeTab === 'drop' }"></div>
       </router-link>
     </div>
 
     <div class="stock-list">
-      <div v-for="stock in stocks" :key="stock.id" class="stock-item">
+      <div v-for="(stock, index) in filteredStocks" :key="stock.id" class="stock-item">
         <div class="stock-header">
-
-          <div class="stock-info">
-            <router-link to="/stock-detail">
-            <p class="stock-name">{{ stock.name }}</p>
-            <p class="stock-details">{{ stock.details }}</p>
-            <div class="risk-info">
-              <span class="high-rating">{{stock.price}} </span>
-              <span class="foreign-stock">{{ stock.change }}</span>
+          <div class="stock-info d-flex align-items-center">
+            <span class="stock-rank">{{ index + 1 }}</span>
+            <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
+              <span class="stock-icon">{{ stock.logo }}</span>
             </div>
-            </router-link>
+            <div>
+              <router-link :to="`/stock/detail/${stock.id}`" class="stock-name">{{ stock.name }}</router-link>
+              <p class="stock-details">{{ stock.price }} <span class="change">{{ stock.change }}</span></p>
+            </div>
           </div>
-          <div class="stock-header">
-            <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
+          <div class="stock-icon" @click="toggleFavorite(stock)">
+            <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
+               :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
+        <div class="mini-bar"></div> <!-- 미니바 추가 -->
       </div>
     </div>
   </div>
@@ -49,178 +45,198 @@
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 
 export default {
-  components: {HeaderNormal},
+  components: { HeaderNormal },
   data() {
     return {
-      activeTab: 'yield',
+      activeTab: 'all',
       stocks: [
-        { id: 1, name: '삼성전자', price: '67,500원', change: '-2.0%', favorite: true },
-        { id: 2, name: 'DVXX', price: '3,155원', change: '+25.6%', favorite: false },
-        { id: 3, name: '유한양행', price: '119,900원', change: '-4.5%', favorite: false },
-        { id: 4, name: '셀루메드', price: '3,285원', change: '+1.0%', favorite: false },
-        { id: 5, name: '실리콘투', price: '43,400원', change: '+10.1%', favorite: false },
+        {
+          id: 1,
+          name: '삼성전자',
+          price: '67,500원',
+          change: '-2.0%',
+          favorite: true,
+          logo: '삼성',
+          logoColor: '#005EB8',
+        },
+        {
+          id: 2,
+          name: 'DXVXX',
+          price: '3,155원',
+          change: '+25.6%',
+          favorite: false,
+          logo: 'DX',
+          logoColor: '#A2D7E0',
+        },
+        {
+          id: 3,
+          name: '유한양행',
+          price: '119,900원',
+          change: '-4.5%',
+          favorite: true,
+          logo: '유한',
+          logoColor: '#005EB8',
+        },
+        {
+          id: 4,
+          name: '셀루메드',
+          price: '3,285원',
+          change: '+1.0%',
+          favorite: false,
+          logo: '셀',
+          logoColor: '#A2D7E0',
+        },
+        // 추가 주식 데이터...
       ],
     };
   },
-
-
+  computed: {
+    filteredStocks() {
+      if (this.activeTab === 'gain') {
+        return this.stocks.filter(stock => stock.change.includes('+'));
+      } else if (this.activeTab === 'drop') {
+        return this.stocks.filter(stock => stock.change.includes('-'));
+      }
+      return this.stocks; // 전체 주식을 보여줌
+    },
+  },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
     },
-  },
-  mounted() {
-    // 컴포넌트가 마운트될 때 기본값을 수익률로 설정
-    this.setActiveTab('yield');
+    toggleFavorite(stock) {
+      stock.favorite = !stock.favorite; // favorite 상태 토글
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .stock-container {
   padding: 16px;
   max-width: 390px;
-}
-
-.yellow-box {
-  background-color: #FAB809;
-  padding: 10px;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.white-text {
-  color: #fff;
-}
-
-.description {
-  font-size: 12px;
-  margin-top: 5px;
+  position: relative;
+  bottom: 110px;
 }
 
 .titles-container {
   display: flex;
-  align-items: flex-start;
-
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .title-with-divider {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 16px;
+  flex: 1;
   cursor: pointer;
   background: none;
   border: none;
   text-decoration: none;
+  margin: 0; /* 마진 제거 */
 }
 
 .best-yield-title {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;
+  text-align: center;
 }
 
-.yield-divider,
-.sales-divider,
-.savings-divider {
-  height: 3px;
-  width: 120px;
-  background-color: #d6d6d6;
-}
-
-.yield-divider.active,
-.sales-divider.active,
-.savings-divider.active {
-  background-color: #000;
-}
-
-.mini-bar {
-  height: 4px;
+.divider {
+  height: 2px;
   width: 100%;
-  background-color: #fff;
-  margin: 10px auto 0;
+  background-color: #e1e1e1;
+  margin: 0; /* 마진 제거 */
 }
-.stock-list {
 
+.stock-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .stock-item {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 360px;
+  padding: 10px; /* 여백 추가 */
+  background-color: white; /* 배경색 추가 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  /* border: none; */ /* 테두리 제거 */
 }
 
 .stock-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.fund-icon {
-  font-size: 24px;
-  color: #888;
+  width: 100%;
 }
 
 .stock-info {
-  width:390px;
-height:50px;
+  display: flex;
+  align-items: center;
+}
 
-  flex: 1;
-  margin-left: 10px;
+.stock-rank {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.stock-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px; /* 마진 추가 */
 }
 
 .stock-name {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
-
+  margin-bottom: 4px;
+  text-decoration: none;
+  color: black;
 }
 
 .stock-details {
   font-size: 14px;
+  margin: 0;
+}
+
+.change {
   font-weight: bold;
-  margin-top: 0;
-  margin-left: 8px;
 }
 
-.fund-yield {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.stock-icon {
+  font-size: 24px;
+  color: #888; /* 기본 색상 */
 }
 
-.yield {
-  font-size: 15px;
-  font-weight: bold;
-  color: #000000;
+.stock-icon .fas {
+  color: #FAB809; /* 하트 아이콘 노란색 */
 }
 
-.red {
-  font-size: 22px;
-  font-weight: bold;
-  color: #ff0000;
-}
-
-.period {
-  font-size: 12px;
-  color: #7e7e7e;
-  margin-bottom: 0;
-  margin-right: 21px;
+.mini-bar {
+  height: 1px;
+  width: 100%;
+  background-color: #dddddd;
   margin-top: 10px;
 }
 
-
-
-.foreign-stock {
-  padding: 4px 6px;
-  border-radius: 5px;
-  font-size: 8px;
+.high-rating {
+  background-color: #FDEBEA;
+  color: #FF6767;
+  padding: 1px 8px 3px 8px;
+  font-size: 10px;
+  border-radius: 6px;
 }
-
 </style>

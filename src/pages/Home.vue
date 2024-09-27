@@ -236,7 +236,7 @@ export default {
     height: 400px; /* 차트 높이를 설정 */
 }
 
-.title{
+.title {
   font-weight: bold;
   position: relative;
   bottom: 4px;
@@ -247,4 +247,5 @@ export default {
     height: 150px; /* 원하는 높이로 조정 */
     object-fit: cover;
 }
+
 </style>
