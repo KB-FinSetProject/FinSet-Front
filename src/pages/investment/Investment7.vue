@@ -70,7 +70,6 @@ const goToNext = () => {
   width: 300px;
   font-family: Arial, sans-serif;
   margin-top: -30px;
-  margin-bottom: 150px;
 }
 
 .back-button {
@@ -156,9 +155,9 @@ const goToNext = () => {
   margin-top: 10px; /* 버튼들과 '1/7' 사이 간격 추가 */
 }
 
-.text-md-center {
-  font-size: 15px;
-  margin-top: 20px;
+.text-md-center{
+  font-size:15px;
+  margin-top:110px;
   text-align: center;
 }
 

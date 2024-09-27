@@ -81,7 +81,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .stock-container {
   padding: 16px;
   max-width: 390px;

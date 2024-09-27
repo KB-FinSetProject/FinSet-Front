@@ -1,49 +1,49 @@
 <template>
-    <div class="container">
+  <div class="container">
       <header class="header">
-        <nav class="navbar fixed-top bg-body-tertiary border-bottom">
-          <div class="navbar-custom container-fluid d-flex align-items-center justify-content-between">
-            <!-- 왼쪽 화살표 아이콘 -->
-            <i class="fas fa-arrow-left icon-large"></i>
-  
-            <!-- 중앙 텍스트 -->
-            <span class="navbar-brand mx-auto text-center">상품검색</span>
-          </div>
-        </nav>
+          <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom">
+              <div class="navbar-custom container-fluid" style="background-color: white;">
+                  <i class="fa-solid fa-arrow-left icon-large"></i>
+                  <span class="navbar-brand">상품검색</span>
+                  <i class="fa-solid fa-magnifying-glass icon-large" style="visibility: hidden;"></i>
+              </div>
+          </nav>
       </header>
-    </div>
-  </template>
-  
-  <script setup>
-  </script>
-  
-  <style scoped>
+  </div>
+</template>
 
-  /* navbar 관련 스타일 */
-  .navbar {
-    margin: 0;
-  }
-  
-  .navbar-brand {
-    font-size: 23px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%; /* 부모 컨테이너의 높이에 맞추기 */
-  }
-  
-  .icon-large {
-    font-size: 20px;
-  }
-  
-  /* 아이콘과 텍스트 배치를 위한 레이아웃 */
-  .navbar-custom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 56px; /* 높이를 명확히 지정하여 정렬 이슈 해결 */
-  }
-  </style>
-  
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  navbarTitle: {
+      type: String,
+      default: 'Navbar', // 기본값 설정 (선택적)
+  },
+});
+</script>
+
+<style scoped>
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-brand {
+  font-size: 23px;
+}
+.icon-large {
+  font-size: 20px;
+}
+
+.navbar-custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px; /* 높이를 명확히 지정하여 정렬 이슈 해결 */
+  margin-left: 20px;
+  margin-right: 20px;
+}
+</style>

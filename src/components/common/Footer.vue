@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <footer class="footer py-3 fixed-bottom">
+    <footer class="footer fixed-bottom">
 
       <hr>
-      <ul class="nav justify-content-between pb-3 mb-1">
+      <ul class="nav justify-content-between">
         <li class="nav-item">
           <router-link to="/" class="nav-link px-2 text-body-secondary d-flex flex-column align-items-center">
             <i class="fa-solid fa-house icon-large"></i>
@@ -45,17 +45,8 @@
 .footer {
   width: 100vw; 
   background-color: #f8f9fa; 
-  padding: 20px 0; 
+  padding-bottom: 5px;
 }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-
 
 .nav {
   display: flex;
@@ -65,10 +56,6 @@ html, body {
   margin: 0 auto; 
   padding-left: 15px; 
   padding-right: 15px; 
-}
-
-.border-bottom {
-  margin-bottom: 0;
 }
 
 .icon-large {

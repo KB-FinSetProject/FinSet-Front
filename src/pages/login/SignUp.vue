@@ -76,6 +76,10 @@ watch([password, passwordCheck], () => {
 </script>
 
 <style scoped>
+.container {
+    margin-top: -70px;
+}
+
 .btn-custom {
     background-color: #FFBF0A; /* 버튼 배경색 */
     color: white; /* 버튼 글씨색 */
@@ -107,10 +111,6 @@ watch([password, passwordCheck], () => {
 
 .text-danger {
     color: red; /* 오류 메시지 색상 */
-}
-
-.container {
-    margin-bottom: 150px; /* 원하는 크기로 조정 */
 }
 
 .form-label {

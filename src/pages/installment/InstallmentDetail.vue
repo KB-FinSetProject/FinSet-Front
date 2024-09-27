@@ -40,9 +40,8 @@
     </div>
 
     <div class="centered-info">
-      <br>
       <h5>상품 안내</h5>
-      <hr>
+      <hr style="height: 4px;">
     </div>
     
     <div class="fixed-info">
@@ -88,7 +87,9 @@ const who = '개인';
 
 <style scoped>
 .container{
-  margin-bottom: 150px;
+  position: relative;
+  bottom: 85px;
+  margin-top: -30px;
 }
 
 .details {
@@ -128,11 +129,14 @@ const who = '개인';
   justify-content: space-between; /* 요소를 양쪽 끝에 배치 */
   width: 100%; /* 전체 너비 사용 */
   margin-bottom: 10px; /* 하단 여백 추가 */
+  position: relative;
+  right: 18px;
 }
 
 .rate-highlight {
   font-size: 20px; /* 글씨 크기 설정 */
   color: #FFBB00; /* 글씨 색상 설정 */
+  font-weight: bold;
 }
 
 h7{
@@ -154,12 +158,16 @@ h7{
 .centered-info {
   text-align: center; /* 중앙 정렬 */
   margin-top: 20px; /* 위쪽 여백 추가 */
+  position: relative;
+  top:35px;
 }
 
 .fixed-info {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  position: relative;
+  top:50px;
 }
 
 .info-item {
@@ -189,11 +197,25 @@ h7{
   cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
   text-decoration: none;
+  position: relative;
+  top:150px;
 }
 
+hr{
+  width:100%;
+}
 .join-button:hover {
   background-color: #e6a600; /* 마우스 오버 시 배경색 변화 */
 }
-
+h5, p{
+  position: relative;
+  right: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
+img{
+  position: relative;
+  left: 50px;
+}
 
 </style>

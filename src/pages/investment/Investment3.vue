@@ -84,8 +84,8 @@ const goToNext = () => {
 .survey-container {
   width: 300px;
   font-family: Arial, sans-serif;
-  margin-top: -30px;
-  margin-bottom: 150px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .back-button {
@@ -162,7 +162,7 @@ const goToNext = () => {
 
 .navigation {
   text-align: center; /* 텍스트와 버튼들을 중앙 정렬 */
-  margin-top: 85px;
+  margin-top: 12px;
 }
 
 .button-group {
@@ -171,9 +171,8 @@ const goToNext = () => {
   margin-top: 10px; /* 버튼들과 '1/7' 사이 간격 추가 */
 }
 
-.text-md-center {
-  font-size: 15px;
-  margin-top: 20px;
+.text-md-center{
+  font-size:15px;
   text-align: center;
 }
 

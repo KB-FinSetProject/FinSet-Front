@@ -104,7 +104,6 @@ const cancelSubmit = () => {
 .result-container {
   width: 300px;
   font-family: Arial, sans-serif;
-  margin-top: -30px;
   margin-bottom: 150px;
 }
 

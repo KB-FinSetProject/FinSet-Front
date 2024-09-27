@@ -2,7 +2,7 @@
 
     <HeaderSignIn/>
 
-    <div>
+    <div class="continer">
 
         <h1 style="font-weight: 300;">FIND EASY,</h1>
 
@@ -47,6 +47,9 @@ import HeaderSignIn from '@/components/common/HeaderSignIn.vue';
 </script>
 
 <style scoped>
+.continer{
+    margin-top: -70px;
+}
 .normal {
     color: #816843; /* FINDY의 기본 색상 */
 }

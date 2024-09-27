@@ -1,47 +1,53 @@
 <template>
-  <HeaderNormal navbarTitle="예금상품" />
+  <HeaderNormal navbarTitle="펀드리스트" />
 
   <div class="fund-container">
     <div class="titles-container">
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('all')">
-        <h2 class="best-yield-title">전체</h2>
+      <router-link to="/fund" class="title-with-divider" @click.native="setActiveTab('all')">
+        <h2 class="best-yield-title">수익률 베스트</h2>
         <div class="divider" :class="{ active: activeTab === 'all' }"></div>
       </router-link>
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('simple')">
-        <h2 class="best-yield-title">단리</h2>
+      <router-link to="/fundsales" class="title-with-divider" @click.native="setActiveTab('simple')">
+        <h2 class="best-yield-title">판매액 베스트</h2>
         <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
       </router-link>
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('compound')">
-        <h2 class="best-yield-title">복리</h2>
+      <router-link to="/fundsavings" class="title-with-divider" @click.native="setActiveTab('compound')">
+        <h2 class="best-yield-title">적립액 베스트</h2>
         <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
       </router-link>
     </div>
 
+    <br>
+    <div class="info-box">
+      <h4>판매액 베스트</h4>
+      <hr>
+      <p>최근 3개월 동안 판매액이 가장 높은 펀드예요!</p>
+    </div>
+
+    <br>
     <div class="fund-list">
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
         <div class="fund-header">
           <div class="fund-info d-flex align-items-center">
-            <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
-              <span class="bank-icon">{{ deposit.logo }}</span>
+            <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
+              <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
+                 :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
             </div>
-            <div>
-              <router-link :to="`/deposit/detail`" class="fund-name">{{ deposit.name }}</router-link>
-              <p class="fund-details">{{ deposit.details }}</p>
+            <div class="detail">
+              <router-link :to="`/fund/detail`" class="fund-name">{{ deposit.name }}</router-link>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.sort }}</span>
+                <span class="high-rating">{{ deposit.danger }}</span>
+                <span class="fund-type">{{ deposit.type }}</span>
               </div>
             </div>
+
           </div>
           <div class="deposit-yield"> <!-- 클래스명 변경 -->
-            <span class="max">최고 {{ deposit.max }}%</span>
-            <span class="basic">기본 {{ deposit.basic }}%</span>
-          </div>
-          <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
-            <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
-               :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
+            <span style="color: #7E7E7E; font-weight:bold; margin-right:25px">3개월</span>
+            <span class="max">{{ deposit.rate }}%</span>
           </div>
         </div>
-        <div class="mini-bar"></div> <!-- 미니바 추가 -->
+
       </div>
     </div>
   </div>
@@ -58,51 +64,31 @@ export default {
       deposits: [
         {
           id: 1,
-          name: '예금 1 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
+          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
+          rate: '14.76',
+          danger:'높은위험',
+          type:'해외주식형'
         },
         {
           id: 2,
-          name: '예금 2 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
+          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
+          rate: '14.76',
+          danger:'높은위험',
+          type:'해외주식형'
         },
         {
           id: 3,
-          name: '예금 3 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
+          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
+          rate: '14.76',
+          danger:'높은위험',
+          type:'해외주식형'
         },
         {
           id: 4,
-          name: '예금 4 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
+          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
+          rate: '14.76',
+          danger:'높은위험',
+          type:'해외주식형'
         },
       ],
     };
@@ -134,6 +120,7 @@ export default {
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 130px;
 }
 
 .titles-container {
@@ -172,7 +159,7 @@ export default {
 .fund-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .fund-item {
@@ -213,12 +200,12 @@ export default {
 
 .fund-name {
   font-size: 16px;
-  font-weight: bold;
   margin-bottom: 4px;
   text-decoration: none;
   color: black;
   position: relative;
   margin-right: 16px;
+  margin-left: 0px;
 }
 
 .fund-details {
@@ -238,6 +225,7 @@ export default {
 .deposit-icon { /* 클래스명 변경 */
   font-size: 24px;
   color: #888; /* 기본 색상 */
+  margin-left: 30px;
 }
 
 .deposit-icon .fas {
@@ -258,8 +246,9 @@ export default {
 
 .max {
   font-size: 22px;
-  color: #F8A70C;
+  color: #DD0202;
   margin-bottom: 0;
+  font-weight: bold;
 }
 
 .high-rating {
@@ -268,9 +257,51 @@ export default {
   padding: 3px 8px;
   font-size: 10px;
   border-radius: 6px;
+  margin-right: 5px;
+}
+
+.fund-type {
+  background-color: #EDF1F8;
+  color: #547BC1;
+  padding: 3px 8px;
+  font-size: 10px;
+  border-radius: 6px;
 }
 
 .risk-info {
   margin-top: 10px;
 }
+
+.detail{
+  margin-left: 20px;
+}
+
+.info-box {
+  background-color: #FAB809; /* 노란색 배경 */
+  padding: 10px;
+  border-radius: 0; /* 테두리 반경 없앰 */
+  margin-bottom: 10px;
+  text-align: center;
+  height: 110px;
+  position: relative;
+  bottom: 8px;
+}
+
+.info-box h4 {
+  margin: 0;
+  color: #FFFFFF; /* 텍스트 색상 */
+}
+
+.info-box p {
+  margin: 5px 0 0; /* 제목과 내용 사이의 간격 */
+  color: #FFFFFF; /* 텍스트 색상 */
+}
+
+.mini-bar {
+  height: 4px; /* 미니 바 높이 */
+  background-color: #ffffff; /* 미니 바 색상 */
+  margin-top: 5px; /* 제목과 미니 바 사이의 간격 */
+}
+
+
 </style>

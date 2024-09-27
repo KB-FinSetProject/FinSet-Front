@@ -1,4 +1,7 @@
 <template>
+
+  <HeaderSearch/>
+  
   <div class="stock-container">
     <div class="search-container">
       <input
@@ -44,7 +47,11 @@ export default {
 };
 </script>
 
-<style>
+<script setup>
+import HeaderSearch from '@/components/common/HeaderSearch.vue';
+</script>
+
+<style scoped>
 .stock-container {
   padding: 16px;
 }
