@@ -201,7 +201,7 @@ export default {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: #FFBF0A;
+    background-color: #999;
     border: none;
     margin: 0 5px;
     cursor: pointer;
@@ -209,7 +209,7 @@ export default {
 }
 
 .circle-button:hover {
-    background-color: #999;
+    background-color: #FFBF0A;
 }
 
 .circle-button:focus {
@@ -234,5 +234,10 @@ export default {
     position: relative;
     width: 100%;
     height: 400px; /* 차트 높이를 설정 */
+}
+.title{
+  font-weight: bold;
+  position: relative;
+  bottom: 4px;
 }
 </style>

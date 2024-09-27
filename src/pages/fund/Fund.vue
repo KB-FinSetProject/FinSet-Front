@@ -20,225 +20,180 @@
     <div v-if="selected === '수익률베스트'" class="product-list">
       <div class="info-box">
         <h4>수익률 베스트</h4>
-        <p>최근 3개월 동안 기간별 시점에서 수익률이 가장 높은 펀드예요!</p>
+        <hr class="mini-bar" />
+        <p>최근 3개월 동안 수익률이 가장 높은 펀드예요!</p>
       </div>
       <div v-for="(item, index) in allProducts" :key="index" class="product-card">
-        <i class="fa-solid fa-heart icon"></i>
+        <i class="fa-solid fa-heart icon"
+           :style="{ color: item.isFavorited ? '#FFBB00' : 'gray' }"
+           @click="toggleFavorite(item)"></i>
         <div class="product-info">
           <h5>{{ item.title }}</h5>
           <p>{{ item.bank }}</p>
-          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">{{ item.type }}</p>
+          <div>
+            <p style="background-color: #ffebed; color: red; border-radius: 5px; padding: 2px 5px; display: inline-block;">높은 위험</p>
+            <p style="background-color: #e5f6fd; color: #0033ff; border-radius: 5px; padding: 2px 5px; display: inline-block;">해외주식형</p>
+          </div>
         </div>
         <div class="product-rate">
-          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
-          <p6>기본 {{ item.normal }} % </p6>
+          <p6 style="color: gray;">3개월</p6>
+          <h5 style="color: red;">14.76%</h5>
         </div>
       </div>
-      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;" />
     </div>
 
     <div v-if="selected === '판매액 베스트'" class="product-list">
       <div class="info-box">
         <h4>판매액 베스트</h4>
+        <hr class="mini-bar" />
         <p>최근 3개월 동안 판매액이 가장 높은 펀드예요!</p>
       </div>
       <div v-for="(item, index) in salesBestProducts" :key="index" class="product-card">
-        <i class="fa-solid fa-heart icon"></i>
+        <i class="fa-solid fa-heart icon"
+           :style="{ color: item.isFavorited ? '#FFBB00' : 'gray' }"
+           @click="toggleFavorite(item)"></i>
         <div class="product-info">
           <h5>{{ item.title }}</h5>
           <p>{{ item.bank }}</p>
-          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">단리</p>
+          <div>
+            <p style="background-color: #ffebed; color: red; border-radius: 5px; padding: 2px 5px; display: inline-block;">높은 위험</p>
+            <p style="background-color: #e5f6fd; color: #0033ff; border-radius: 5px; padding: 2px 5px; display: inline-block;">해외주식형</p>
+          </div>
         </div>
         <div class="product-rate">
-          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
-          <p6>기본 {{ item.normal }} % </p6>
+          <p6 style="color: gray;">3개월</p6>
+          <h5 style="color: red;">14.76%</h5>
         </div>
       </div>
-      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;" />
     </div>
 
     <div v-if="selected === '적립액 베스트'" class="product-list">
       <div class="info-box">
         <h4>적립액 베스트</h4>
+        <hr class="mini-bar" />
         <p>최근 3개월 동안 적립액이 가장 높은 펀드예요!</p>
       </div>
       <div v-for="(item, index) in savingsBestProducts" :key="index" class="product-card">
-        <i class="fa-solid fa-heart icon"></i>
+        <i class="fa-solid fa-heart icon"
+           :style="{ color: item.isFavorited ? '#FFBB00' : 'gray' }"
+           @click="toggleFavorite(item)"></i>
         <div class="product-info">
           <h5>{{ item.title }}</h5>
           <p>{{ item.bank }}</p>
-          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">복리</p>
+          <div>
+            <p style="background-color: #ffebed; color: red; border-radius: 5px; padding: 2px 5px; display: inline-block;">높은 위험</p>
+            <p style="background-color: #e5f6fd; color: #0033ff; border-radius: 5px; padding: 2px 5px; display: inline-block;">해외주식형</p>
+          </div>
         </div>
         <div class="product-rate">
-          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
-          <p6>기본 {{ item.normal }} % </p6>
+          <p6 style="color: gray;">3개월</p6>
+          <h5 style="color: red;">14.76%</h5>
         </div>
       </div>
-      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
-    </div>
-
-    <div v-if="selected === '단리'" class="product-list">
-      <div class="info-box">
-        <h4>단리 상품 리스트</h4>
-        <p>단리 상품에 대한 정보를 확인하세요!</p>
-      </div>
-      <div v-for="(item, index) in simpleInterestProducts" :key="index" class="product-card">
-        <i class="fa-solid fa-heart icon"></i>
-        <div class="product-info">
-          <h5>{{ item.title }}</h5>
-          <p>{{ item.bank }}</p>
-          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">단리</p>
-        </div>
-        <div class="product-rate">
-          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
-          <p6>기본 {{ item.normal }} % </p6>
-        </div>
-      </div>
-      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
-    </div>
-
-    <div v-if="selected === '복리'" class="product-list">
-      <div class="info-box">
-        <h4>복리 상품 리스트</h4>
-        <p>복리 상품에 대한 정보를 확인하세요!</p>
-      </div>
-      <div v-for="(item, index) in compoundInterestProducts" :key="index" class="product-card">
-        <i class="fa-solid fa-heart icon"></i>
-        <div class="product-info">
-          <h5>{{ item.title }}</h5>
-          <p>{{ item.bank }}</p>
-          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">복리</p>
-        </div>
-        <div class="product-rate">
-          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
-          <p6>기본 {{ item.normal }} % </p6>
-        </div>
-      </div>
-      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;" />
     </div>
   </div>
 </template>
-
-
-
-
-
-
-
-
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import { ref } from 'vue';
 
 const selected = ref('수익률베스트');
 
+// 제품 데이터
 const allProducts = ref([
   {
-    title: 'NH 고향사랑 기부 예금',
+    title: '미래에셋증권자',
     bank: 'NH 농협은행',
-    type: '단리',
     max: '3.75',
     normal: '3.00',
+    isFavorited: false, // 하트 상태 추가
   },
   {
-    title: 'NH 정기예금',
-    bank: 'NH 농협은행',
-    type: '단리',
-    max: '3.50',
-    normal: '2.80',
+    title: '삼성전자 주식형 펀드',
+    bank: '삼성자산운용',
+    max: '5.50',
+    normal: '4.20',
+    isFavorited: false,
   },
   {
-    title: 'NH 특별예금',
-    bank: 'NH 농협은행',
-    type: '단리',
-    max: '4.00',
-    normal: '3.20',
+    title: 'LG화학 주식형 펀드',
+    bank: 'LG자산운용',
+    max: '6.00',
+    normal: '5.00',
+    isFavorited: false,
+  },
+  {
+    title: 'SK텔레콤 주식형 펀드',
+    bank: 'SK자산운용',
+    max: '4.80',
+    normal: '3.90',
+    isFavorited: false,
   },
 ]);
 
 const salesBestProducts = ref([
   {
-    title: 'NH 판매액 베스트 상품 1',
+    title: '미래에셋증권자',
     bank: 'NH 농협은행',
     max: '4.00',
     normal: '3.50',
+    isFavorited: false,
   },
   {
-    title: 'NH 판매액 베스트 상품 2',
-    bank: 'NH 농협은행',
-    max: '4.20',
-    normal: '3.70',
-  },
-  {
-    title: 'NH 판매액 베스트 상품 3',
-    bank: 'NH 농협은행',
-    max: '4.50',
+    title: '삼성전자 주식형 펀드',
+    bank: '삼성자산운용',
+    max: '5.00',
     normal: '4.00',
+    isFavorited: false,
+  },
+  {
+    title: 'LG화학 주식형 펀드',
+    bank: 'LG자산운용',
+    max: '5.50',
+    normal: '4.50',
+    isFavorited: false,
   },
 ]);
 
 const savingsBestProducts = ref([
   {
-    title: 'NH 적립액 베스트 상품 1',
+    title: '미래에셋증권자',
     bank: 'NH 농협은행',
     max: '4.50',
     normal: '4.00',
+    isFavorited: false,
   },
   {
-    title: 'NH 적립액 베스트 상품 2',
-    bank: 'NH 농협은행',
-    max: '4.70',
+    title: '삼성전자 주식형 펀드',
+    bank: '삼성자산운용',
+    max: '5.20',
     normal: '4.20',
+    isFavorited: false,
   },
   {
-    title: 'NH 적립액 베스트 상품 3',
-    bank: 'NH 농협은행',
-    max: '5.00',
-    normal: '4.50',
-  },
-]);
-
-const simpleInterestProducts = ref([
-  {
-    title: 'NH 단리 예금 상품 1',
-    bank: 'NH 농협은행',
-    max: '3.75',
-    normal: '3.00',
-  },
-  {
-    title: 'NH 단리 예금 상품 2',
-    bank: 'NH 농협은행',
-    max: '3.85',
-    normal: '3.10',
-  },
-]);
-
-const compoundInterestProducts = ref([
-  {
-    title: 'NH 복리 예금 상품 1',
-    bank: 'NH 농협은행',
-    max: '3.75',
-    normal: '3.00',
-  },
-  {
-    title: 'NH 복리 예금 상품 2',
-    bank: 'NH 농협은행',
-    max: '3.95',
-    normal: '3.20',
+    title: 'LG화학 주식형 펀드',
+    bank: 'LG자산운용',
+    max: '5.80',
+    normal: '4.80',
+    isFavorited: false,
   },
 ]);
 
 const selectOption = (option) => {
   selected.value = option;
 };
+
+const toggleFavorite = (item) => {
+  item.isFavorited = !item.isFavorited; // 하트 상태 토글
+};
 </script>
-
-
-
 
 <style scoped>
 .container {
-  margin-top: -130px; /* 위로 올리기 위해 margin 조정 */
+  margin-top: -60px; /* 위로 올리기 위해 margin 조정 */
   width: 60%;
 }
 
@@ -254,19 +209,20 @@ const selectOption = (option) => {
   cursor: pointer;
   position: relative;
   font-size: 1.2em;
-  color: gray;
+  color: #000000;
   flex: 1;
   transition: color 0.3s ease;
+  font-weight: bold;
 }
 
 .option:hover {
   color: black;
 }
 
+
 .option.active {
   color: black;
 }
-
 hr {
   border: none;
   height: 3px;
@@ -274,6 +230,10 @@ hr {
   transition: background-color 0.3s ease;
   width: 100%;
   margin-top: 5px;
+}
+
+hr.active {
+  background-color: #000000; /* 선택되면 검정색으로 변경 */
 }
 
 .product-list {
@@ -291,7 +251,9 @@ hr {
 
 .icon {
   color: #FFBB00;
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* 아이콘 크기 줄이기 */
+  position: relative;
+  bottom: 20px; /* 하트 위치 조정 */
 }
 
 .product-info {
@@ -304,27 +266,36 @@ hr {
 }
 
 .product-info h5 {
-  font-size: small;
+  font-size: 18px; /* 글씨 크기 키우기 */
+  font-weight: bold;
   margin: 0;
+
 }
 
 .product-info p {
-  font-size: 0.9em;
+  font-size: 1em; /* 글씨 크기 키우기 */
 }
 
 .product-rate h5 {
-  font-size: 1.1em;
+  font-size: 25px;
+  color: red; /* 빨간색 */
+  font-weight: bold;
+  position: relative;
+  right:10px;
+  bottom: 10px;
 }
 
 .product-rate p6 {
   font-size: 0.9em;
+  color: gray; /* 회색 */
+  position: relative;
+  left:10px;
+  bottom: 18px;
 }
-
 .product-separator {
   width: 600px;
   visibility: hidden;
 }
-
 /* 노란색 박스 스타일 */
 .info-box {
   background-color: #FFCC00; /* 노란색 배경 */
@@ -332,6 +303,9 @@ hr {
   border-radius: 0; /* 테두리 반경 없앰 */
   margin-bottom: 10px;
   text-align: center;
+  height: 100px;
+  position: relative;
+  bottom: 8px;
 }
 
 .info-box h4 {
@@ -343,7 +317,14 @@ hr {
   margin: 5px 0 0; /* 제목과 내용 사이의 간격 */
   color: #FFFFFF; /* 텍스트 색상 */
 }
+
+.mini-bar {
+  height: 4px; /* 미니 바 높이 */
+  background-color: #ffffff; /* 미니 바 색상 */
+  margin-top: 5px; /* 제목과 미니 바 사이의 간격 */
+}
+h4{
+  font-weight: bold;
+}
+
 </style>
-
-
-
