@@ -171,8 +171,9 @@ body {
 }
 
 .icon {
-  color: #FFBB00;
-  margin-left: 160px;
+  color: #ffbf0a; /* 아이콘 색상 설정 */
+  position: absolute;
+  transform: translateX(-200%);
 }
 
 .no-underline {

@@ -2,7 +2,6 @@
   <HeaderMyPage />
 
   <div class="container">
-    <br><br><br>
     <div class="info">
       <hr style="border-color: white;">
 
@@ -34,7 +33,7 @@
       </router-link>
     </div>
 
-    <br><br><br><br>
+    <br><br>
     <div class="bottomButtons">
       <button class="withdrawButton">탈퇴하기</button>
       <button class="logoutButton">로그아웃</button>
@@ -49,9 +48,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 
 <style scoped>
 .container {
-  margin-top: 100px; /* 상단 마진 */
-  padding-top: 20px; /* 내부 여백 추가 */
-  padding-bottom: 20px; /* 하단 패딩 추가 */
+  margin-bottom: 100px;
 }
 
 .container {
