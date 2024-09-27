@@ -25,7 +25,8 @@
               <span class="bank-icon">{{ fund.logo }}</span>
             </div>
             <div>
-              <p class="fund-name">{{ fund.name }}</p>
+              <!-- <router-link :to="`/deposit/detail/${fund.id}`" class="fund-name">{{ fund.name }}</router-link> -->
+            <router-link :to="`/deposit/detail`" class="fund-name">{{ fund.name }}</router-link>
               <p class="fund-details">{{ fund.details }}</p>
               <div class="risk-info">
                 <span class="high-rating">복리</span>

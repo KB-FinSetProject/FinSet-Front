@@ -4,6 +4,7 @@ import Shop from '@/pages/Shop.vue';
 import Auth from '@/pages/auth/Auth.vue';
 import Board from '@/pages/board/Board.vue';
 import DepositAll from '@/pages/deposit/DepositAll.vue';
+import DepositDetail from '@/pages/deposit/DepositDetail.vue';
 import DepositCompound from '@/pages/deposit/DepositCompound.vue';
 import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import Dict from '@/pages/dict/Dict.vue';
@@ -14,6 +15,7 @@ import Fund from '@/pages/fund/Fund.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
 import FundSavingBest from '@/pages/fund/FundSavingBest.vue';
 import InstallmentAll from '@/pages/installment/InstallmentAll.vue';
+import InstallmentDetail from '@/pages/installment/InstallmentDetail.vue';
 import InstallmentCompound from '@/pages/installment/InstallmentCompound.vue';
 import InstallmentSimple from '@/pages/installment/InstallmentSimple.vue';
 import Stock from '@/pages/stock/Stock.vue';
@@ -33,6 +35,8 @@ import StockDetailPage from "@/pages/stock/StockDetailPage.vue";
 import StockChartPage from "@/pages/stock/StockChartPage.vue";
 import StockCommunityPage from "@/pages/stock/StockCommunityPage.vue";
 import MyBoard from "@/pages/board/MyBoard.vue";
+import SignIn from "@/pages/login/SignIn.vue";
+import SignUp from "@/pages/login/SignUp.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -42,6 +46,7 @@ const router = createRouter({
         { path: '/auth', name: "Auth", component: Auth },
         { path: '/board', name: "Board", component: Board },
         { path: '/deposit', name: "DepositAll", component: DepositAll }, // 전체 예금 페이지
+        { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail }, // 전체 할부 페이지
         { path: '/deposit/compound', name: "DepositCompound", component: DepositCompound }, // 복리 예금 페이지
         { path: '/deposit/simple', name: "DepositSimple", component: DepositSimple }, // 단리 예금 페이지
         { path: '/dict', name: "Dict", component: Dict },
@@ -51,7 +56,8 @@ const router = createRouter({
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
         { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
-        { path: '/installment', name: "Inst6allmentAll", component: InstallmentAll }, // 전체 할부 페이지
+        { path: '/installment', name: "InstallmentAll", component: InstallmentAll }, // 전체 할부 페이지
+        { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail }, // 전체 할부 페이지
         { path: '/installment/compound', name: "InstallmentCompound", component: InstallmentCompound }, // 복리 할부 페이지
         { path: '/installment/simple', name: "InstallmentSimple", component: InstallmentSimple }, // 단리 할부 페이지
         { path: '/stock', name: "Stock", component: Stock },
@@ -66,11 +72,13 @@ const router = createRouter({
         { path: '/investment7', name: "Investment7", component: Investment7 },
         { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
         { path:  '/stock-high',name:"StockHighSuddenly",component:StockHighSuddenly},
-        { path:  '/stock-drop',name:"StockDropHighSuddenly",component:StockDropSuddenly},
+        { path:  '/stock-drop',name:"StockDropSuddenly",component:StockDropSuddenly},
         { path:  '/stock-detail',name:"StockDetailPage",component:StockDetailPage},
         { path:  '/stock-chart',name:"StockChartPage",component:StockChartPage},
         { path:  '/stock-community',name:"StockCommunity",component:StockCommunityPage},
         { path:  '/myboard',name:"MyBoard",component:MyBoard},
+        { path: '/signin', name: "SignIn", component: SignIn },
+        { path: '/signup', name: "SignUp", component: SignUp },
     ]
 });
 

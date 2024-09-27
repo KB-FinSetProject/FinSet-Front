@@ -1,262 +1,349 @@
 <template>
-  <div class="fund-container">
-    <div class="titles-container">
-      <div class ="title-with-divider">     <h2 class="best-yield-title yield">수익률 베스트</h2>
-        <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
+  <HeaderNormal navbarTitle="펀드 리스트" />
+
+  <div class="container">
+    <div class="options">
+      <div class="option" @click="selectOption('수익률베스트')" :class="{ active: selected === '수익률베스트' }">
+        수익률베스트
+        <hr :class="{ active: selected === '수익률베스트' }" />
       </div>
-
-      <router-link to="/fund-sales-best" class="title-with-divider" @click.native="setActiveTab('sales')">
-        <h2 class="best-yield-title sales">판매액 베스트</h2>
-        <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
-      </router-link>
-      <router-link to="/fund-saving-best" class="title-with-divider" @click.native="setActiveTab('saving')">
-        <h2 class="best-yield-title savings">적립액 베스트</h2>
-        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-      </router-link>
+      <div class="option" @click="selectOption('판매액 베스트')" :class="{ active: selected === '판매액 베스트' }">
+        판매액 베스트
+        <hr :class="{ active: selected === '판매액 베스트' }" />
+      </div>
+      <div class="option" @click="selectOption('적립액 베스트')" :class="{ active: selected === '적립액 베스트' }">
+        적립액 베스트
+        <hr :class="{ active: selected === '적립액 베스트' }" />
+      </div>
     </div>
 
-    <div class="yellow-box" v-if="activeTab === 'sales'">
-      <h2 class="best-yield-title">판매액 베스트</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
-    </div>
-
-    <div class="yellow-box" v-if="activeTab === 'yield'">
-      <h2 class="best-yield-title">수익률 베스트</h2>
-      <div class="mini-bar"></div>
-      <p class="description white-text">최근 3개월 동안 기간별 시장에서 수익률이 가장 높은 펀드예요!</p>
-    </div>
-
-    <div class="fund-list">
-      <div v-for="fund in funds" :key="fund.id" class="fund-item">
-        <div class="fund-header">
-          <div class="fund-icon">
-            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
-          </div>
-          <div class="fund-info">
-            <p class="fund-name">{{ fund.name }}</p>
-            <p class="fund-details">{{ fund.details }}</p>
-            <div class="risk-info">
-              <span class="high-rating">높은 위험</span>
-              <span class="foreign-fund">해외주식형</span>
-            </div>
-          </div>
-          <div class="fund-yield">
-            <span class="period">{{ fund.period }}</span>
-            <span class="yield"><span class="red">{{ fund.yield }}</span></span>
-          </div>
+    <div v-if="selected === '수익률베스트'" class="product-list">
+      <div class="info-box">
+        <h4>수익률 베스트</h4>
+        <p>최근 3개월 동안 기간별 시점에서 수익률이 가장 높은 펀드예요!</p>
+      </div>
+      <div v-for="(item, index) in allProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">{{ item.type }}</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
+          <p6>기본 {{ item.normal }} % </p6>
         </div>
       </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+    </div>
+
+    <div v-if="selected === '판매액 베스트'" class="product-list">
+      <div class="info-box">
+        <h4>판매액 베스트</h4>
+        <p>최근 3개월 동안 판매액이 가장 높은 펀드예요!</p>
+      </div>
+      <div v-for="(item, index) in salesBestProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">단리</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
+          <p6>기본 {{ item.normal }} % </p6>
+        </div>
+      </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+    </div>
+
+    <div v-if="selected === '적립액 베스트'" class="product-list">
+      <div class="info-box">
+        <h4>적립액 베스트</h4>
+        <p>최근 3개월 동안 적립액이 가장 높은 펀드예요!</p>
+      </div>
+      <div v-for="(item, index) in savingsBestProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">복리</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
+          <p6>기본 {{ item.normal }} % </p6>
+        </div>
+      </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+    </div>
+
+    <div v-if="selected === '단리'" class="product-list">
+      <div class="info-box">
+        <h4>단리 상품 리스트</h4>
+        <p>단리 상품에 대한 정보를 확인하세요!</p>
+      </div>
+      <div v-for="(item, index) in simpleInterestProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">단리</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
+          <p6>기본 {{ item.normal }} % </p6>
+        </div>
+      </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
+    </div>
+
+    <div v-if="selected === '복리'" class="product-list">
+      <div class="info-box">
+        <h4>복리 상품 리스트</h4>
+        <p>복리 상품에 대한 정보를 확인하세요!</p>
+      </div>
+      <div v-for="(item, index) in compoundInterestProducts" :key="index" class="product-card">
+        <i class="fa-solid fa-heart icon"></i>
+        <div class="product-info">
+          <h5>{{ item.title }}</h5>
+          <p>{{ item.bank }}</p>
+          <p style="background-color: #EDF1F8; color: gray; border-radius: 5px; padding: 2px 5px; display: inline-block;">복리</p>
+        </div>
+        <div class="product-rate">
+          <h5 style="color: #FFBB00;">최고 {{ item.max }} % </h5>
+          <p6>기본 {{ item.normal }} % </p6>
+        </div>
+      </div>
+      <hr class="product-separator" style="width: 600px; visibility: hidden;"/>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeTab: null, // 기본값을 null로 설정
-      funds: [
-        {
-          id: 1,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: true,
-        },
-        {
-          id: 2,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-        {
-          id: 3,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-        {
-          id: 4,
-          name: '미래에셋인도중형포커스권자',
-          details: '투자신탁 1(주식) 종류 C-e',
-          yield: '14.76%',
-          period: '3개월',
-          favorite: false,
-        },
-      ],
-    };
+
+
+
+
+
+
+
+<script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import { ref } from 'vue';
+
+const selected = ref('수익률베스트');
+
+const allProducts = ref([
+  {
+    title: 'NH 고향사랑 기부 예금',
+    bank: 'NH 농협은행',
+    type: '단리',
+    max: '3.75',
+    normal: '3.00',
   },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
+  {
+    title: 'NH 정기예금',
+    bank: 'NH 농협은행',
+    type: '단리',
+    max: '3.50',
+    normal: '2.80',
   },
-  mounted() {
-    // 컴포넌트가 마운트될 때 기본값을 수익률로 설정
-    this.setActiveTab('yield');
+  {
+    title: 'NH 특별예금',
+    bank: 'NH 농협은행',
+    type: '단리',
+    max: '4.00',
+    normal: '3.20',
   },
+]);
+
+const salesBestProducts = ref([
+  {
+    title: 'NH 판매액 베스트 상품 1',
+    bank: 'NH 농협은행',
+    max: '4.00',
+    normal: '3.50',
+  },
+  {
+    title: 'NH 판매액 베스트 상품 2',
+    bank: 'NH 농협은행',
+    max: '4.20',
+    normal: '3.70',
+  },
+  {
+    title: 'NH 판매액 베스트 상품 3',
+    bank: 'NH 농협은행',
+    max: '4.50',
+    normal: '4.00',
+  },
+]);
+
+const savingsBestProducts = ref([
+  {
+    title: 'NH 적립액 베스트 상품 1',
+    bank: 'NH 농협은행',
+    max: '4.50',
+    normal: '4.00',
+  },
+  {
+    title: 'NH 적립액 베스트 상품 2',
+    bank: 'NH 농협은행',
+    max: '4.70',
+    normal: '4.20',
+  },
+  {
+    title: 'NH 적립액 베스트 상품 3',
+    bank: 'NH 농협은행',
+    max: '5.00',
+    normal: '4.50',
+  },
+]);
+
+const simpleInterestProducts = ref([
+  {
+    title: 'NH 단리 예금 상품 1',
+    bank: 'NH 농협은행',
+    max: '3.75',
+    normal: '3.00',
+  },
+  {
+    title: 'NH 단리 예금 상품 2',
+    bank: 'NH 농협은행',
+    max: '3.85',
+    normal: '3.10',
+  },
+]);
+
+const compoundInterestProducts = ref([
+  {
+    title: 'NH 복리 예금 상품 1',
+    bank: 'NH 농협은행',
+    max: '3.75',
+    normal: '3.00',
+  },
+  {
+    title: 'NH 복리 예금 상품 2',
+    bank: 'NH 농협은행',
+    max: '3.95',
+    normal: '3.20',
+  },
+]);
+
+const selectOption = (option) => {
+  selected.value = option;
 };
 </script>
 
-<style>
-.fund-container {
-  padding: 16px;
-  max-width: 390px;
+
+
+
+<style scoped>
+.container {
+  margin-top: -130px; /* 위로 올리기 위해 margin 조정 */
+  width: 60%;
 }
 
-.yellow-box {
-  background-color: #FAB809;
-  padding: 10px;
-  margin-bottom: 16px;
+.options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px; /* 위로 올리기 위해 margin 조정 */
+}
+
+.option {
   text-align: center;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.2em;
+  color: gray;
+  flex: 1;
+  transition: color 0.3s ease;
 }
 
-.white-text {
-  color: #fff;
+.option:hover {
+  color: black;
 }
 
-.description {
-  font-size: 12px;
+.option.active {
+  color: black;
+}
+
+hr {
+  border: none;
+  height: 3px;
+  background-color: gray;
+  transition: background-color 0.3s ease;
+  width: 100%;
   margin-top: 5px;
 }
 
-.titles-container {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.title-with-divider {
+.product-list {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+.product-card {
+  display: flex;
+  border-radius: 6px;
   align-items: center;
-  margin-right: 16px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  text-decoration: none;
-}
-
-.best-yield-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #000000;
-}
-
-.yield-divider,
-.sales-divider,
-.savings-divider {
-  height: 4px;
-  width: 100%;
-  max-width: 150px;
-  margin: 0 auto;
-  background-color: #aeaeae;
-}
-
-.yield-divider.active,
-.sales-divider.active,
-.savings-divider.active {
-  background-color: #000;
-}
-
-.mini-bar {
-  height: 4px;
-  width: 100%;
-  background-color: #fff;
-  margin: 10px auto 0;
-}
-
-.fund-list {
-  display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
-.fund-item {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
+.icon {
+  color: #FFBB00;
+  font-size: 1.5rem;
 }
 
-.fund-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.product-info {
+  flex-grow: 1;
 }
 
-.fund-icon {
-  font-size: 24px;
-  color: #888;
-}
-
-.fund-info {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.fund-name {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 2px;
-  margin-top: 15px;
-  margin-left: 8px;
-}
-
-.fund-details {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 0;
-  margin-left: 8px;
-}
-
-.fund-yield {
-  text-align: right;
+.product-rate {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 
-.yield {
-  font-size: 15px;
-  font-weight: bold;
-  color: #000000;
+.product-info h5 {
+  font-size: small;
+  margin: 0;
 }
 
-.red {
-  font-size: 22px;
-  font-weight: bold;
-  color: #ff0000;
+.product-info p {
+  font-size: 0.9em;
 }
 
-.period {
-  font-size: 12px;
-  color: #7e7e7e;
-  margin-bottom: 0;
-  margin-right: 21px;
-  margin-top: 10px;
+.product-rate h5 {
+  font-size: 1.1em;
 }
 
-.high-rating {
-  background-color: #FDEBEA;
-  color: #FF6767;
-  padding: 4px 6px;
-  border-radius: 5px;
-  font-size: 8px;
+.product-rate p6 {
+  font-size: 0.9em;
 }
 
-.foreign-fund {
-  background-color: #EDF1F8;
-  color: #547BC1;
-  padding: 4px 6px;
-  border-radius: 5px;
-  font-size: 8px;
+.product-separator {
+  width: 600px;
+  visibility: hidden;
+}
+
+/* 노란색 박스 스타일 */
+.info-box {
+  background-color: #FFCC00; /* 노란색 배경 */
+  padding: 10px;
+  border-radius: 0; /* 테두리 반경 없앰 */
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.info-box h4 {
+  margin: 0;
+  color: #FFFFFF; /* 텍스트 색상 */
+}
+
+.info-box p {
+  margin: 5px 0 0; /* 제목과 내용 사이의 간격 */
+  color: #FFFFFF; /* 텍스트 색상 */
 }
 </style>
+
+
+

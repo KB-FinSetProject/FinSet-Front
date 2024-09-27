@@ -1,285 +1,261 @@
 <template>
+  <HeaderNormal navbarTitle="사전" />
+
   <div class="container">
-    <header>
-      <div class="header-content">
-        <h1>단어사전</h1>
-      </div>
-      <hr>
-      <div class="search-bar">
+
+    <div class="search-bar">
+      <div class="input-container">
         <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />
-        <button @click="performSearch" class="search-button">
-          <i class="fas fa-search"></i>
-        </button>
+        <i class="fas fa-search search-icon" @click="performSearch"></i>
       </div>
-    </header>
+    </div>
 
-    <section class="info">
-        <h2>미수령주식 · 배당금</h2>
+    <br>
 
-          <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+    <div class="card-container">
+
+      <div class="card">
+        <div class="card-header">
+          <span class="title">미수령주식 · 배당금</span>
+          <i class="fa-solid fa-star icon"></i>
+        </div>
+        <p class="description">무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금</p>
+      </div>
+
+      <h6 style="color: black; font-weight: 350; margin-left: 10px">
+        "주식"에 대한 <span style="color: #FFBB00;">538</span>개 용어가 검색되었습니다. 
+      </h6>
+
+      <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">
+        <div class="card-header" @click="toggleDescription(index)">
+          <span class="title">{{ item.title }}</span>
+          <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }"></i>
+        </div>
+        <div v-if="isActive(index)">
+          <p class="description">{{ item.content }}</p>
+        </div>
+      </div>
+  
+      <!-- 더보기 버튼 -->
+      <button v-if="!showAll" @click="showAllItems" class="load-more-button">+ 더보기</button>
+
       <hr>
-      <p>
-        무수증권, 배당실험 주식이 이사 등의 사유로 통지를 받지 못하거나
-        주식에 대한 실질실험을 인지하지 못해 찾아가고 있지 않은 주식 또는 배당금
-      </p>
-    </section>
+      <br>
 
-    <p class="result-count">"주식"에 대한 {{ resultsCount }}개의 용어가 검색되었습니다.</p>
+      <div class="icon-title-container">
+        <i class="fa-solid fa-book-bookmark icon-large"></i>
+        <span class="title">단어장</span>
+      </div>
 
-    <section class="filters">
-      <div class="accordion">
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>주식</span>
-            <button class="accordion-toggle"><i class="fa-solid fa-caret-up"></i></button>
-          </div>
-          <div class="accordion-content">
-            회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다.
-          </div>
-        </div>
+      <!-- list 아이템 표시 -->
+      <div class="item-container" v-for="(item, index) in list" :key="index">
+        <router-link :to="{ path: '/dictmemo' }" class="item-text">
+          <span class="item-text">{{ item }}</span>
+        </router-link>
+        <i class="fa-solid fa-star icon2"></i>
       </div>
-      <div class="accordion">
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>주식 시장</span>
-            <button class="accordion-toggle"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>하행</span>
-            <button class="accordion-toggle"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <button class="custom-button">
-        <i class="fa-solid fa-plus"></i> 더보기
-      </button>
-    </section>
-    <hr>
-    <section class="dictionary">
-      <i class="fa-solid fa-book-bookmark"></i>
-      <h3>단어장</h3>
-      <ul>
-        <li v-for="word in dictionary" :key="word">{{ word }}</li>
-      </ul>
-    </section>
+
+    </div>
   </div>
-
 </template>
 
 <script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import { ref, computed } from 'vue';
 
-  import {ref} from 'vue'; // Vue에서 반응형 상태를 관리하는 ref를 불러옵니다.
+// 아코디언 데이터 설정
+const items = ref([
+  {
+    title: '미수령주식 · 배당금',
+    content: '무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금',
+  },
+  {
+    title: '주식',
+    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
+  },
+  {
+    title: '주식시장',
+    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
+  },
+  {
+    title: '예금',
+    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
+  },
+  {
+    title: '재테크',
+    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
+  },
+]);
 
-  // 검색어와 검색 결과 개수를 관리하는 상태
-  const searchQuery = ref('');
-  const resultsCount = ref(0);
+const list = ref([
+  '미수령주식 · 배당금',
+  '주식시장',
+  '하위',
+  '바위'
+]);
 
-  // 아코디언 항목에 대한 데이터 및 열림 상태 관리
-  const accordionItems = ref([
-  {title: '주식', content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다.', open: false},
-  {title: '주식 시장', content: '주식 시장이란 주식을 사고팔 수 있는 장소 또는 시스템입니다.', open: false},
-  {title: '하행', content: '주가가 하락하는 상황을 뜻합니다.', open: false}
-  ]);
+// "더보기" 상태 관리
+const showAll = ref(false);
 
-  // 검색 기능
-  function performSearch() {
-  // 검색어에 맞춰 검색 결과를 필터링하고 결과 수를 업데이트
-  resultsCount.value = dictionary.value.filter(word => word.includes(searchQuery.value)).length;
-}
+// 처음에 3개만 보여줌
+const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));
 
-  // 아코디언 토글 함수
-  function toggleAccordion(index) {
-  // 열림/닫힘 상태 토글
-  accordionItems.value[index].open = !accordionItems.value[index].open;
-}
+// "더보기" 버튼 클릭 시 모든 항목을 보여줌
+const showAllItems = () => {
+  showAll.value = true;
+};
+
+// 아코디언 상태 관리
+const activeIndices = ref([]); // active 상태를 저장하는 배열
+
+// 특정 인덱스가 active 상태인지 확인
+const isActive = (index) => activeIndices.value.includes(index);
+
+// 아코디언 토글 함수
+const toggleDescription = (index) => {
+  if (isActive(index)) {
+    // 이미 열려있으면 닫기
+    activeIndices.value = activeIndices.value.filter(i => i !== index);
+  } else {
+    // 열려있지 않으면 추가
+    activeIndices.value.push(index);
+  }
+};
+
+const searchQuery = ref('');
+
+const performSearch = () => {
+  // 검색 기능 구현
+  console.log('검색어:', searchQuery.value);
+};
 </script>
-
-
 
 <style scoped>
 .container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
   margin-bottom: 150px;
 }
 
-/* Header */
-.header-content {
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 카드 간 간격 조정 */
+  color: black; /* 기본 글씨 색상 */
+}
+
+.card {
+  width: 350px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #816843; /* 카드 배경색을 #6E6053로 설정 */
+  color: white; /* 카드 내부 텍스트 색상을 흰색으로 설정 */
+}
+
+.card-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  cursor: pointer; /* 클릭 가능하도록 커서 변경 */
 }
 
-.header-content h1 {
-  margin-left: 0px;
-  font-size: 22px;
+.title {
+  font-size: 1.2em; /* 제목 크기 조정 */
   font-weight: bold;
-  text-align: center;
-  flex-grow: 1;
 }
 
-/* Search Bar */
+.icon {
+  color: #ffbf0a; /* 아이콘 색상 설정 */
+  position: absolute;
+  transform: translateX(1100%);
+}
+
+.arrow{
+  margin-left: 10px;
+  position: absolute;
+  transform: translateX(3100%);
+}
+
+.cardelse{
+  background-color: #E0E0E0;
+  color: black;
+}
+
+.description{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .search-bar {
+  position: relative;
   display: flex;
-  margin-top: 10px;
-  justify-content: center;
   align-items: center;
 }
 
-.search-bar input {
-  width: 80%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-
-.search-button {
-  padding: 0 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.search-button i {
-  font-size: 20px;
-  color: #555;
-}
-.fa-star{
-  margin-bottom: auto;
-  margin-left: 300px;
-}
-.info {
-  background-color: #8B6C42;
-  padding: 15px;
-  border-radius: 10px;
-  color: white;
-  margin-top: 20px;
-}
-
-.info h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.info p {
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-.result-count {
-  margin-top: 16px;
-  font-size: 14px;
-}
-.accordion {
-  background-color: #f4f1ed;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
-  max-width: 400px;
-  margin: 20px auto;
-}
-
-.accordion-item {
-  margin-bottom: 10px;
-  border-radius: 10px;
-  background-color: #ece8e2;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #f4f1ed;
-  border-radius: 10px;
-}
-
-.accordion-toggle {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.accordion-content {
-  padding: 15px;
-  display: none;
-  font-size: 14px;
-  line-height: 1.5;
-  background-color: #ece8e2;
-  border-radius: 0 0 10px 10px;
-}
-
-
-.filters {
-  margin-top: 20px;
-}
-
-.filter-group label {
-  font-size: 14px;
-  margin-bottom: 5px;
-  display: block;
-}
-
-.filter-group select {
+.input-container {
+  position: relative;
   width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
 }
-.custom-button{
-  background-color: #ffcc00;
-  color: white;
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* 아이콘을 위한 오른쪽 패딩 */
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+}
+
+.load-more-button {
+  background-color: #FFBB00; /* 배경색을 FFBB00으로 설정 */
+  color: white; /* 글씨 색상을 흰색으로 설정 */
   border: none;
-  border-radius: 20px;
-  padding: 5px 10px;
-  font-size: 8px;
-  display: inline-flex;
-  align-items: center;
+  border-radius: 12px; /* 모서리를 둥글게 설정 */
+  padding: 5px 10px; /* 버튼 크기를 더보기 텍스트에 맞게 줄임 */
+  font-size: 14px; /* 글씨 크기 조금 줄임 */
   cursor: pointer;
-  margin-left: 150px;
+  margin-top: 10px;
+  width: 100px;
+  margin-left: 120px;
 }
 
-.dictionary {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
+/* 버튼에 hover 효과 추가 */
+.load-more-button:hover {
+  background-color: #e0a800; /* hover 시 배경색을 조금 어둡게 */
 }
 
-.fa-book-bookmark {
-  color: #ffcc00;
+.icon-title-container {
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 세로 중앙 정렬 */
 }
 
-.dictionary h3 {
-  font-size: 18px;
-  font-weight: bold;
+.icon-large {
+  margin-left: 10px;
+  margin-right: 10px; /* 아이콘과 텍스트 사이에 여백 추가 */
+  color: #FFBB00;
+  font-size: x-large;
 }
 
-.dictionary ul {
-  list-style: none;
-  padding: 0;
+.item-container {
+  display: flex; /* Flexbox 사용 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin: 10px 0; /* 아이템 간격 조정 */
 }
 
-.dictionary li {
-  padding: 10px;
-  background-color: #f0f0f0;
-  margin-top: 5px;
-  border-radius: 5px;
-  font-size: 14px;
+.item-text {
+  font-size: 1em; /* 텍스트 크기 조정 */
+  color: black;
+  text-decoration: none;
+}
 
+.icon2 {
+  color: #ffbf0a; /* 아이콘 색상 설정 */
+  position: absolute;
+  transform: translateX(2100%);
 }
 </style>
