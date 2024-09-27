@@ -9,7 +9,7 @@
       <hr>
       <h5>통화 환율</h5>
       <p>원하는 통화를 선택하면 입금(환전)으로 이동됩니다.</p>
-
+      <router-link to="/exchangedetailpage">
       <div v-for="currency in filteredCurrencies" :key="currency.code" class="currency-card">
         <div class="currency-header">
         <div class="currency-info">
@@ -21,10 +21,12 @@
           </div>
         </div>
         <div class="currency-rates">
+
           <div class="rate-item">
           <p>매매기준율</p>
           <p class="highlight">{{ currency.standardRate.toFixed(2) }}</p>
           </div>
+
           <div class="rate-item">
           <p>입금(환전)할 때</p>
           <p class="highlight">{{ currency.depositRate.toFixed(2) }}</p>
@@ -35,6 +37,7 @@
           </div>
         </div>
       </div>
+      </router-link>
     </div>
 </template>
 

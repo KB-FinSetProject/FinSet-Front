@@ -10,6 +10,7 @@ import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import Dict from '@/pages/dict/Dict.vue';
 import DictMemo from '@/pages/dict/DictMemo.vue';
 import Exchange from '@/pages/exchange/Exchange.vue';
+import ExchangeDetailPage from "@/pages/exchange/ExchangeDetailPage.vue";
 import Fund from '@/pages/fund/Fund.vue';
 import FundSalesBest from '@/pages/fund/FundSalesBest.vue';
 import FundSavingBest from '@/pages/fund/FundSavingBest.vue';
@@ -51,6 +52,7 @@ const router = createRouter({
         { path: '/dict', name: "Dict", component: Dict },
         { path: '/dictmemo', name: "DictMemo", component: DictMemo },
         { path: '/exchange', name: "Exchange", component: Exchange },
+        { path: '/exchangedetailpage', name: "ExchangeDetailPage", component: ExchangeDetailPage },
         { path: '/fund', name: "Fund", component: Fund },
         { path: '/fund-sales-best', name: "FundSalesBest", component: FundSalesBest },
         { path: '/fund-saving-best', name: "FundSavingBest", component: FundSavingBest }, // 적립액 베스트 페이지
