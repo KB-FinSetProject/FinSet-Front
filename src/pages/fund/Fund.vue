@@ -187,7 +187,7 @@ const selectOption = (option) => {
 };
 
 const toggleFavorite = (item) => {
-  item.isFavorited = !item.isFavorited; // 하트 상태 토글
+  item.isFavorited = !item.isFavorited;
 };
 </script>
 
