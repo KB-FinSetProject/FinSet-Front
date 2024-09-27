@@ -25,8 +25,7 @@
               <span class="bank-icon">{{ fund.logo }}</span>
             </div>
             <div>
-              <!-- <router-link :to="`/deposit/detail/${fund.id}`" class="fund-name">{{ fund.name }}</router-link> -->
-            <router-link :to="`/deposit/detail`" class="fund-name">{{ fund.name }}</router-link>
+              <router-link :to="`/deposit/detail`" class="fund-name">{{ fund.name }}</router-link>
               <p class="fund-details">{{ fund.details }}</p>
               <div class="risk-info">
                 <span class="high-rating">복리</span>
@@ -125,7 +124,8 @@ export default {
 .fund-container {
   padding: 16px;
   max-width: 390px;
-  margin-top: -50px;
+  position: relative;
+  bottom:110px;
 }
 
 .titles-container {
@@ -143,20 +143,22 @@ export default {
   background: none;
   border: none;
   text-decoration: none;
+  margin: 0; /* 마진 제거 */
 }
 
 .best-yield-title {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;
   text-align: center;
 }
 
 .divider {
-  height: 4px;
+  height: 2px;
   width: 100%;
-  background-color: #aeaeae;
+  background-color: #e1e1e1;
+  margin: 0; /* 마진 제거 */
 }
 
 .fund-list {
@@ -168,8 +170,8 @@ export default {
 .fund-item {
   display: flex;
   flex-direction: column;
-  padding: 10px;
   background-color: transparent;
+  width: 360px;
 }
 
 .fund-header {
@@ -182,6 +184,8 @@ export default {
 .fund-info {
   display: flex;
   align-items: center; /* 수평 정렬을 위해 추가 */
+  position: relative; /* position 추가 */
+  left: -20px; /* 왼쪽으로 이동시키기 위한 값 */
 }
 
 .bank-logo {
@@ -194,18 +198,19 @@ export default {
   color: #fff;
   font-weight: bold;
   font-size: 16px;
-  margin-right: 10px; /* 로고와 텍스트 간의 간격 조정 */
+  left: 15px;
+  position: relative;
 }
 
 .fund-name {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin: 0px;
 }
 
 .fund-details {
   font-size: 14px;
-  margin-top: 0;
+  margin: 0;
 }
 
 .fund-yield {
@@ -213,18 +218,24 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  position: relative;
+  right: 10px;
 }
 
 .fund-icon {
   font-size: 24px;
-  color: #888;
+  color: #888; /* 기본 색상 */
+}
+
+.fund-icon .fas {
+  color: #FAB809; /* 하트 아이콘 노란색 */
 }
 
 .mini-bar {
-  height: 4px;
+  height: 1px;
   width: 100%;
-  background-color: #FFD700;
-  margin-top: 5px;
+  background-color: #dddddd; /* 미니바 색상 회색으로 변경 */
+  margin-top: 25px;
 }
 
 .yield {
@@ -248,9 +259,12 @@ export default {
 .high-rating {
   background-color: #FDEBEA;
   color: #FF6767;
-  padding: 9px 8px;
+  padding: 1px 8px 3px 8px;
   font-size: 10px;
-  margin-left: 6px;
-  border-radius: 0;
+  border-radius: 6px;
+}
+
+.risk-info {
+  margin-top: 10px;
 }
 </style>
