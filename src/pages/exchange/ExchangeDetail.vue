@@ -1,312 +1,243 @@
 <template>
   <HeaderNormal navbarTitle="외환 상세" />
 
-  <h3>환전정보</h3>
-  <br>
-  <div v-for="currency in filteredCurrencies" :key="currency.code" class="currency-card">
-  <section class="exchange-info">
-    <div class="currency-info">
-      <div class="currency-details">
-      <h2>{{ currency.name }} ({{ currency.code }})</h2>
-      <span class="exchange-rate">적용 환율: {{ baseRate }}</span>
+  <div class="container">
+    <br><br>
+    <h3 style="margin-left: 10px;">환전정보</h3>
+    <br>
+
+    <div class="exchange-header d-flex align-items-center justify-content-between">
+      <div class="exchage-include">
+        <div class="exchange-info d-flex align-items-center">
+          <img src="https://i.namu.wiki/i/5ac6l60QaKXGLqeGjkxO1kqHPZd-LJWM3DhbuxjjNmiZa5NaRekkUskLmuny2B_7ueHGx2sXE1bW_-TMg5yGIQ.svg" alt="외환 이미지" class="exchange-img" />
+          <div class="exchange-detail d-flex align-items-center">
+            <h6 class="exchange-name">{{ item.name }}</h6>
+            <p class="exchange-details">적용환율: {{ item.rate }}</p>
+          </div>
+          <button @click="refreshData" class="refresh">환율 새로고침 <i class="fa-solid fa-arrows-rotate" style="margin-left: 5px;"></i></button>
+        </div>
       </div>
     </div>
-    <button @click="refreshRate" class="refresh-btn">환율 새로고침<i class="fa-solid fa-repeat"></i></button>
-  </section>
-  </div>
-  <br>
-  <section class="exchange-rate">
-    <h3>실시간 환율</h3>
-    <div class="rate-container">
-    <p class="current-rate">{{ currentRate }}원</p>
-    <p class="rate-change">
-      전일대비 {{ rateChange }}원
-      <span :class="rateChange > 0 ? 'up' : 'down'">
-          {{ rateChange > 0 ? '▲' : '▼' }}
-        </span>
-    </p>
-    </div>
-  </section>
 
-  <div class="chart-container">
-    <canvas ref="chartRef"></canvas>
-    <div class="chart-info">
-      <span class="chart-high">최고 {{ highestPrice }}원</span>
-      <span class="chart-low">최저 {{ lowestPrice }}원</span>
+    <br>
+    <p style="margin-left: 10px; color: gray;">실시간 환율</p>
+    <div class="info d-flex justify-content-between align-items-center">
+      <h1>{{ item.rate }}원</h1>
+      <span :style="{ color: item.change > 0 ? '#FF6767' : '#547BC1' }">
+        <span style="color: gray;">전일대비 </span>{{ item.change }}원 {{ item.change > 0 ? '▲' : '▼' }} 
+      </span>
     </div>
-  </div>
 
-  <section class="chart">
-    <div class="period-selector">
-      <button @click="setPeriod('1일')" :class="{active: selectedPeriod === '1일'}">1일</button>
-      <button @click="setPeriod('1주')" :class="{active: selectedPeriod === '1주'}">1주</button>
-      <button @click="setPeriod('1달')" :class="{active: selectedPeriod === '1달'}">1달</button>
-      <button @click="setPeriod('1년')" :class="{active: selectedPeriod === '1년'}">1년</button>
+    <br>
+
+    <div class="chart-container">
+      <canvas ref="stockChart"></canvas>
+      <div class="chart-info">
+        <span class="chart-high">최고 {{ highestPrice }}원</span>
+        <span class="chart-low">최저 {{ lowestPrice }}원</span>
+      </div>
     </div>
-  </section>
+  
 
-
-  <section class="profit-info" >
-    <div style="display: flex">
-    <i class="fa-solid fa-chart-line"></i>
-   <p>1일 전에 샀었다면 수익</p>
+    <div class="sort">
+      <div class="sort-include d-flex justify-content-between">
+        <div class="sort-option" 
+             :class="{ 'active': selectedTimeframe === '1일' }" 
+             @click="selectTimeframe('1일')">1일</div>
+        <div class="sort-option" 
+             :class="{ 'active': selectedTimeframe === '1주' }" 
+             @click="selectTimeframe('1주')">1주</div>
+        <div class="sort-option" 
+             :class="{ 'active': selectedTimeframe === '1달' }" 
+             @click="selectTimeframe('1달')">1달</div>
+      </div>
     </div>
-    <div style="display: flex">
-    <strong>{{ profit }}원</strong><p>(300만원 기준)</p></div>
-  </section>
+
+    <br>
+  
+    <div class="timeframe-container d-flex align-items-start">
+      <i class="fa-solid fa-chart-line icon"></i>
+      <div>
+        <div class="timeframe-info">
+          <span>{{ timeframeText }} 수익</span>
+        </div>
+        <div class="value-display">
+          <h5>{{ displayValue }}원</h5>
+        </div>
+      </div>
+    </div>
+
+</div>
 
 </template>
 
+
 <script setup>
-  import { ref, onMounted, nextTick } from 'vue';
-  import HeaderNormal from "@/components/common/HeaderNormal.vue";
-  import {Chart, registerables} from 'chart.js';
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import { ref, onMounted, computed } from 'vue';
+import { Chart, registerables } from 'chart.js';
 
-  Chart.register(...registerables);
+Chart.register(...registerables);
 
+const stockChart = ref(null);
+const chartData = ref([
+  { date: '2023-09-01', price: 67000 },
+  { date: '2023-09-02', price: 67500 },
+  { date: '2023-09-03', price: 68000 },
+  { date: '2023-09-04', price: 67800 },
+  { date: '2023-09-05', price: 68200 },
+]);
 
-  const filteredCurrencies = ref([
-    { name: '미국 달러', code: 'USD' }]);
+const highestPrice = computed(() => Math.max(...chartData.value.map(data => data.price)));
+const lowestPrice = computed(() => Math.min(...chartData.value.map(data => data.price)));
 
-  // 데이터 정의
-  const baseRate = ref(1344.80);  // 기본 환율
-  const currentRate = ref(1340.06);  // 실시간 환율
-  const rateChange = ref(3.02);  // 전일대비 변화
-  const profit = ref(6777);
-  const selectedPeriod = ref('1일');
-  const highestPrice = ref(1344.77);  // 차트의 최고 환율
-  const lowestPrice = ref(1334.77);
+const item = ref({
+  name: '미국달러(USD)',
+  rate: '1,344.80',
+  change: '3.02',
+});
 
-  // 캔버스 참조
-  const chartRef = ref(null);  // Chart.js가 그려질 캔버스 엘리먼트
+// 선택된 기간을 관리하는 변수 추가 (기본값을 '1일'로 설정)
+const selectedTimeframe = ref('1일');
 
-  // 기간 설정 함수
-  const setPeriod = (period) => {
-  selectedPeriod.value = period;
-  // 기간에 따라 차트 또는 데이터를 업데이트하는 로직 추가 가능
+const refreshData = () => {
+  console.log('데이터 새로고침');
+  // 데이터 새로고침 로직을 추가하세요.
 };
 
-  // 환율 새로고침 함수
-  const refreshRate = () => {
-  console.log('환율 새로고침!');
-  // 새로고침 로직 추가 (API 호출 등)
+const selectTimeframe = (timeframe) => {
+  selectedTimeframe.value = timeframe; // 선택된 기간 업데이트
+  console.log('선택된 기간:', timeframe);
+  // 여기에 기간 선택에 따른 추가 로직을 구현
 };
 
-  // 차트 초기화 및 렌더링
-  onMounted(async () => {
-  await nextTick();  // DOM이 완전히 렌더링된 후에 차트 생성
+// 선택된 기간에 따라 표시할 텍스트를 결정하는 computed property 추가
+const timeframeText = computed(() => {
+  return selectedTimeframe.value === '1일' ? '1일 전에 샀었다면 ' :
+         selectedTimeframe.value === '1주' ? '1주일 전에 샀었다면 ' :
+         '1달 전에 샀었다면 ';
+});
 
-  if (chartRef.value) {
-  const ctx = chartRef.value.getContext('2d');
+// 예시로 보여줄 값 (이 부분은 실제 데이터로 대체 가능)
+const displayValue = computed(() => {
+  return selectedTimeframe.value === '1일' ? '+1,340.00' :
+         selectedTimeframe.value === '1주' ? '+1,330.00' :
+         '+1,300.00';
+});
+
+onMounted(() => {
+  const ctx = stockChart.value.getContext('2d');
   new Chart(ctx, {
-  type: 'line',
-  data: {
-  labels: ['최고', '최저'],
-  datasets: [
-{
-  label: '환율',
-  data: [1344.77, 1334.77],  // 차트 데이터
-  borderColor: 'orange',
-  borderWidth: 2,
-  fill: false,
-},
-  ],
-},
-  options: {
-  responsive: true,
-  scales: {
-  x: {
-  display: true,
-  title: {
-  display: true,
-  text: '시간',
-},
-},
-  y: {
-  display: true,
-  title: {
-  display: true,
-  text: '환율 (KRW)',
-},
-},
-},
-},
+    type: 'line',
+    data: {
+      labels: chartData.value.map(data => data.date),
+      datasets: [{
+        label: '', // 데이터셋 레이블을 빈 문자열로 설정하여 표시되지 않도록 함
+        data: chartData.value.map(data => data.price),
+        borderColor: 'orange',
+        borderWidth: 2,
+        fill: false,
+        pointRadius: 0, // 점을 숨김
+      }],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: false, // x축 숨기기
+        },
+        y: {
+          display: false, // y축 숨기기
+          min: 65000, // y축 최소값
+          max: 69000, // y축 최대값
+        },
+      },
+      plugins: {
+        legend: {
+          display: false, // 범례 숨기기
+        },
+        tooltip: {
+          enabled: false, // 툴팁 숨기기
+        },
+      },
+    },
+  });
 });
-} else {
-  console.error('chartRef가 null입니다.');
-}
-});
-
 </script>
 
 <style scoped>
-/* 전체 컨테이너 스타일 */
-.exchange-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+.container{
+  margin-top: -90px;
+  margin-bottom: 120px;
 }
-h3{
-  font-weight: 700;
-margin-bottom: 0px;
-}
-/* 헤더 스타일 */
-header {
+
+.exchange-header {
   display: flex;
-  align-items: center;
+  align-items: center; /* 세로 중앙 정렬 */
   justify-content: space-between;
-  margin-bottom: 10px;
+  width: 100%;
+  background-color: rgba(110, 96, 83, 0.15);
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-right: 150px;
+.exchage-include{
+  border-radius: 10px;
+  background-color: white;
+  margin: 20px;
+  width: 350px;
 }
 
-/* 뒤로 가기 버튼 스타일 */
-.back-button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #333;
-}
-
-.back-button i {
-  font-size: 24px;
-}
-
-/* 환율 정보 섹션 */
 .exchange-info {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.currency-card{
-  background-color: #f0f0f0;
-  height: 120px;
+  align-items: center; /* 세로 중앙 정렬 */
+  padding: 20px;
 }
 
-.currency-info h2 {
-  font-size: 20px;
-  margin-bottom: 5px;
+.exchange-img {
+  width: 40px; /* 이미지 크기 */
+  height: 40px; /* 이미지 크기 */
+  margin-right: 10px; /* 이미지와 외환명 사이 간격 */
+  border-radius: 50%; /* 동그랗게 만들기 */
+  object-fit: cover; /* 이미지 비율 유지하며 잘라내기 */
 }
 
-.currency-info span {
-  font-size: 16px;
-  color: #555;
-}
-
-/* 새로고침 버튼 스타일 */
-.refresh-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.refresh-btn:hover {
-  background-color: #0056b3;
-}
-
-/* 실시간 환율 섹션 */
-.exchange-rate h3{
-  font-size: 12px;
-}
-
-.rate-container{
+.exchange-detail {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.current-rate {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.rate-change {
-  font-size: 18px;
-  color: #555;
-}
-
-.up {
-  color: red;
-}
-
-.down {
-  color: blue;
-}
-
-/* 차트 섹션 */
-.chart {
-  margin-bottom: 20px;
-}
-
-canvas {
-  max-width: 100%;
-  height: 300px;
-}
-
-/* 기간 선택 버튼 */
-.period-selector {
+  flex-direction: column;
   margin-top: 10px;
-  margin-left: 30px;
 }
 
-.period-selector button {
-  background-color: #888;
-  border: none;
-  padding: 8px 25px;
-  margin-right: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #f0f0f0;
-}
-
-.period-selector button.active {
-  background-color: white; /* 선택된 버튼의 배경색 */
-  color: black; /* 선택된 버튼의 글자 색 */
-}
-
-/* 수익 정보 */
-.profit-info {
-  height: 200px;
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 1rem;
-}
-.profit-info p{
-  margin-bottom: 0;
-  margin-left: 25px;
-}
-
-.profit-info strong{
-  margin-left: 25px;
-}
-
-.profit-info strong {
+.exchange-name{
   font-weight: bold;
-  color: #28a745;
 }
-.fa-chart-line{
-  color:dodgerblue;
+
+.exchange-details{
+  color: gray;
 }
+
+.refresh{
+  margin-left: 45px;
+  border: none;
+  background-color: transparent;
+  color: gray;
+  margin-bottom: 40px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between; /* 두 요소를 양 끝으로 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 370px; /* 필요한 경우 너비 조정 */
+  margin: 0 10px;
+}
+
+
 .chart-container {
   height: 200px;
   margin-bottom: 20px;
+  width: 330px;
+  margin-left: 30px;
 }
 
-p {
-  margin-top: -8px;
-}
 .chart-info {
   display: flex;
   justify-content: space-between;
@@ -321,5 +252,57 @@ p {
 
 .chart-low {
   color: #2eb67d;
+}
+
+.sort{
+  background-color: #E9E7E5; /* 기본 배경색 */
+  padding: 10px 15px;
+}
+
+.sort-include {
+  display: flex;
+  justify-content: space-between; /* 양쪽 끝으로 공간 분배 */
+  width: 100%; /* 전체 너비 사용 */
+}
+
+.sort-option {
+  flex: 1; /* 각 옵션이 동일한 너비를 가지도록 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  padding: 8px; /* 여백 추가 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  background-color: transparent; /* 기본 배경색은 투명 */
+  margin: 0 5px; /* 양쪽 간격 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  transition: background-color 0.3s; /* 배경색 변경 시 애니메이션 효과 */
+}
+
+.sort-option:hover {
+  background-color: white; /* 마우스 오버 시 배경색 변경 */
+}
+
+/* 선택된 옵션 스타일 */
+.sort-option.active {
+  background-color: white; /* 선택된 옵션은 흰색 */
+}
+
+.icon{
+  margin : 15px; 
+  align-self: center;
+  font-size: 30px;
+  color : #547BC1;
+}
+
+.timeframe-container {
+  margin-top: 20px; /* 상단 여백 */
+}
+
+.timeframe-info {
+  font-size: 18px; /* 글씨 크기 조정 */
+}
+
+.value-display {
+  margin-top: 5px; /* 값과 텍스트 간 간격 조정 */
+  font-size: 24px; /* 값 크기 조정 */
+  font-weight: bold; /* 값 두껍게 */
 }
 </style>

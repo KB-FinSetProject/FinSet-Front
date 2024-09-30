@@ -1,47 +1,40 @@
 <template>
+  <HeaderNormal navbarTitle="주식 상세" />
+
   <div class="stock-detail">
 
     <div class="stock-header">
-      <h1 class="stock-name">삼성전자</h1>
-      <div class="stock-price-container">
+      <div class="stock-info">
+        <h1 class="stock-name">삼성전자</h1>
         <span class="stock-price">67,500원</span>
-        <i class="far fa-heart"></i>
+      </div>
+      <div class="stock-icon" @click="toggleFavorite">
+        <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart' "
+           :style="{ color: stock.favorite ? '#FFBB00' : '#888', borderColor: stock.favorite ? '#FFBB00' : 'transparent' }"></i>
       </div>
     </div>
-    <div class="stock-container">
-      <div class="titles-container">
-        <router-link to="/stock/chart" class="title-with-divider">
-          <h2 class="best-yield-title yield">차트</h2>
-          <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
-        </router-link>
 
-        <router-link to="/stock/detail" class="title-with-divider" @click.native="setActiveTab('saving')">
-          <h2 class="best-yield-title sales">종목정보</h2>
-          <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
-        </router-link>
-
-     <div class="title-with-divider">
-          <h2 class="best-yield-title savings">커뮤니티</h2>
-          <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-      </div>
-      </div>
-      </div>
-    <!-- 탭 -->
-<!--    <div class="tabs-container">-->
-<!--      <div class="tab" :class="{ active: activeTab === 'chart' }" @click="setActiveTab('chart')">차트</div>-->
-<!--      <div class="tab" :class="{ active: activeTab === 'info' }" @click="setActiveTab('info')">종목정보</div>-->
-<!--      <div class="tab" :class="{ active: activeTab === 'community' }" @click="setActiveTab('community')">커뮤니티</div>-->
-<!--    </div>-->
+    <div class="tabs-container">
+      <router-link to="/stock/chart" class="tab" active-class="active" style="color: #DADADA;">차트</router-link>
+      <router-link to="/stock/detail" class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
+      <router-link to="/stock/community" class="tab" active-class="active">커뮤니티</router-link>
+    </div>
+    <br>
 
     <!-- 커뮤니티 탭 내용 -->
     <div v-if="activeTab === 'community'" class="community-posts">
-      <div v-for="post in communityPosts" :key="post.id" class="post">
-        <div class="post-header">
-          <span class="post-author">{{ post.author }}</span>
-          <span class="post-type" :class="post.type">{{ post.type }}</span>
-          <span class="post-date">{{ post.date }}</span>
+      <div class="card-container">
+        <div v-for="(post, index) in communityPosts" :key="post.id" class="card">
+          <div class="card-header">
+            <span class="name">{{ post.author }}</span>
+            <div class="buttons">
+              <button style="margin-right:10px;" @click="editItem(index)" class="edit-btn"> <i class="fa-solid fa-gear"></i> 수정</button>
+              <button style="margin-right:10px;" @click="deleteItem(index)" class="delete-btn"><i class="fa-solid fa-trash"></i> 삭제</button>
+            </div>
+            <span class="date">{{ post.date }}</span>
+          </div>
+          <p class="content">{{ post.content }}</p>
         </div>
-        <p class="post-content">{{ post.content }}</p>
       </div>
     </div>
 
@@ -51,48 +44,53 @@
       <button @click="submitComment" :disabled="!newComment">등록</button>
     </div>
 
-    <!-- 하단 네비게이션 -->
-
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeTab: 'community', // 초기 탭을 community로 설정
-      newComment: '',
-      communityPosts: [
-        { id: 1, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-        { id: 2, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-        { id: 3, author: '라라핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-        { id: 4, author: '키키핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-        { id: 5, author: '김호룡', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-      ]
-    }
-  },
-  methods: {
-    setActiveTab(tab) {
-      if (this.activeTab !== tab) {
-        this.activeTab = tab;
-      }
-    },
-    submitComment() {
-      if (this.newComment) {
-        console.log('Submitted comment:', this.newComment);
-        this.newComment = '';
-      }
-    }
+<script setup>
+import { ref } from 'vue';
+import HeaderNormal from "@/components/common/HeaderNormal.vue";
+
+const activeTab = ref('community');
+const newComment = ref('');
+const stock = ref({ favorite: false });
+
+const communityPosts = ref([
+  { id: 1, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+  { id: 2, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+  { id: 3, author: '라라핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+  { id: 4, author: '키키핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+  { id: 5, author: '김호룡', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+]);
+
+const submitComment = () => {
+  if (newComment.value) {
+    console.log('Submitted comment:', newComment.value);
+    newComment.value = ''; // 제출 후 초기화
   }
-}
+};
+
+const toggleFavorite = () => {
+  stock.value.favorite = !stock.value.favorite;
+};
+
+// 수정 및 삭제 함수
+const editItem = (index) => {
+  console.log("Edit item:", communityPosts.value[index]);
+};
+
+const deleteItem = (index) => {
+  communityPosts.value.splice(index, 1);
+};
 </script>
 
 <style scoped>
 .stock-detail {
   font-family: Arial, sans-serif;
-  max-width: 390px;
-  margin: 0 auto;
+  width: 390px;
   padding: 20px;
+  margin-top: 60px;
+  margin-bottom: 147px;
 }
 
 .stock-header {
@@ -102,26 +100,27 @@ export default {
   margin-bottom: 20px;
 }
 
-.stock-name {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.stock-price-container {
+.stock-info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .stock-price {
   font-size: 28px;
   font-weight: bold;
-  margin-right: 10px;
+}
+
+.stock-icon {
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .tabs-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 .tab {
@@ -129,85 +128,131 @@ export default {
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  border-bottom: 2px solid #ccc;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 .tab.active {
   border-bottom: 2px solid #000;
+  font-weight: bold;
 }
 
-.community-posts {
-  margin-bottom: 20px;
+/* 카드 관련 스타일 통합 */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 카드 간 간격 조정 */
+  background-color: rgba(110, 96, 83, 0.11);
+  width: 390px;
+  margin-left: -20px;
+  padding: 10px;
+  padding-top: 25px;
+  margin-top: -41px;
 }
 
-.post {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 15px;
+  color: black; /* 카드 내부 텍스트 색상 */
 }
 
-.post-header {
+.card-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  align-items: center;
+  background-color: white;
+  padding-top: 0%;
 }
 
-.post-type {
-  padding: 2px 5px;
-  border-radius: 3px;
+.name {
+  font-weight: bold;
+  flex: 1; /* name 영역을 차지 */
+}
+
+.date {
   font-size: 12px;
+  color: black;
+  margin-left: auto; /* 날짜를 오른쪽 끝으로 밀기 */
 }
 
-.post-type.수익 {
-  background-color: #e6f3ff;
-  color: #0066cc;
+.content {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 0%;
 }
 
-.post-date {
-  color: #888;
-  font-size: 12px;
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 5px; /* 버튼들과 날짜 간격을 조정 */
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 4px 8px; /* 버튼 크기 작게 */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem; /* 글씨 크기 작게 */
+}
+
+.edit-btn {
+  background-color: #edf1f8; /* 수정 버튼 배경색 */
+  color: #547bc1; /* 수정 버튼 글씨색 */
+}
+
+.edit-btn:hover {
+  background-color: #dce2ef; /* 수정 버튼 호버 배경색 */
+}
+
+.delete-btn {
+  background-color: #fdebea; /* 삭제 버튼 배경색 */
+  color: #ff6767; /* 삭제 버튼 글씨색 */
+}
+
+.delete-btn:hover {
+  background-color: #f9d8d6; /* 삭제 버튼 호버 배경색 */
 }
 
 .comment-input {
   display: flex;
-  margin-bottom: 20px;
+  background-color: #f7f7f7f7;
+  padding: 15px;
+  width: 390px;
+  margin-left: -20px;
+  position: fixed;
+  bottom: 99px;
 }
 
 .comment-input input {
   flex: 1;
   padding: 10px;
+  font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px;
+  border-radius: 10px;
 }
 
 .comment-input button {
+  margin-left: 10px;
   padding: 10px 20px;
-  background-color: #fab809;
-  color: white;
+  color: #4A483F;
   border: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .comment-input button:disabled {
-  background-color: #ccc;
-}
-
-.bottom-nav {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #eee;
-  padding-top: 10px;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-}
-
-.nav-item i {
-  font-size: 20px;
-  margin-bottom: 5px;
+  background-color: #FAB809;
+  cursor: not-allowed;
 }
 </style>

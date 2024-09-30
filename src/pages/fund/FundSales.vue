@@ -2,19 +2,10 @@
   <HeaderNormal navbarTitle="펀드리스트" />
 
   <div class="fund-container">
-    <div class="titles-container">
-      <router-link to="/fund" class="title-with-divider" @click.native="setActiveTab('all')">
-        <h2 class="best-yield-title">수익률 베스트</h2>
-        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
-      </router-link>
-      <router-link to="/fundsales" class="title-with-divider" @click.native="setActiveTab('simple')">
-        <h2 class="best-yield-title">판매액 베스트</h2>
-        <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
-      </router-link>
-      <router-link to="/fundsavings" class="title-with-divider" @click.native="setActiveTab('compound')">
-        <h2 class="best-yield-title">적립액 베스트</h2>
-        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
-      </router-link>
+    <div class="tabs-container">
+      <router-link to="/fund" class="tab" active-class="active" style="color: #DADADA;">수익률 Best</router-link>
+      <router-link to="/fundsales" class="tab" active-class="active">판매액 Best</router-link>
+      <router-link to="/fundsavings" class="tab" active-class="active" style="color: #DADADA;">적립액 Best</router-link>
     </div>
 
     <br>
@@ -123,30 +114,32 @@ export default {
   margin-top: 130px;
 }
 
-.titles-container {
+.tabs-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-top: 40px;
 }
 
-.title-with-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.tab {
   flex: 1;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
-  background: none;
-  border: none;
+  color: black;
   text-decoration: none;
-  margin: 0; /* 마진 제거 */
+  font-size: 19px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
 }
 
 .best-yield-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
-  color: #000000;
-  text-align: center;
+  margin: 0; /* 제목 마진 초기화 */
 }
 
 .divider {
@@ -285,6 +278,8 @@ export default {
   height: 110px;
   position: relative;
   bottom: 8px;
+  width: 390px;
+  margin-left: -16px;
 }
 
 .info-box h4 {

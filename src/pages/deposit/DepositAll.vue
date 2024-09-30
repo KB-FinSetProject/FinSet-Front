@@ -2,20 +2,23 @@
   <HeaderNormal navbarTitle="예금상품" />
 
   <div class="fund-container">
-    <div class="titles-container">
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('all')">
+
+    <div class="tabs-container">
+      <div class="tab" @click.native="setActiveTab('all')" :class="{ active: activeTab === 'all' }">
         <h2 class="best-yield-title">전체</h2>
-        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
-      </router-link>
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('simple')">
+      </div>
+      <div class="tab" @click.native="setActiveTab('simple')" :class="{ active: activeTab === 'simple' }">
         <h2 class="best-yield-title">단리</h2>
-        <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
-      </router-link>
-      <router-link to="/deposit" class="title-with-divider" @click.native="setActiveTab('compound')">
+    
+      </div>
+      <div class="tab" @click.native="setActiveTab('compound')" :class="{ active: activeTab === 'compound' }">
         <h2 class="best-yield-title">복리</h2>
-        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
-      </router-link>
+      
+      </div>
     </div>
+  
+    <br>
+
 
     <div class="fund-list">
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
@@ -136,31 +139,38 @@ export default {
   bottom: 110px;
 }
 
-.titles-container {
+.tabs-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-top: 40px;
 }
 
-.title-with-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.tab {
   flex: 1;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
-  background: none;
-  border: none;
+  color: black;
   text-decoration: none;
-  margin: 0; /* 마진 제거 */
+  font-size: 24px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
 }
 
 .best-yield-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;
   text-align: center;
 }
+
 
 .divider {
   height: 2px;
