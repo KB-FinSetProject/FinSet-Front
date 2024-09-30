@@ -5,8 +5,6 @@
     <div class="info" style="width: 350px">
       <hr style="border-color: white;">
 
-      <!-- <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div> -->
-
       <div>
         <h1>
         홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i>
@@ -52,7 +50,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 
 <style scoped>
 .container {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .container {
@@ -66,6 +64,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
   color: white; /* 글씨색 흰색으로 설정 */
   padding: 20px; /* 패딩 추가 */
   border-radius: 10px; /* 모서리 둥글게 */
+  margin-top: -50px;
 }
 
 .email {
@@ -88,7 +87,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 .bottomButtons {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 100px;
 }
 
 .withdrawButton,

@@ -7,8 +7,8 @@
           <div class="card-header">
             <span class="name">{{ item.name }}</span>
             <div class="buttons">
-              <button style="margin-right:10px;" @click="editItem(index)" class="edit-btn">수정</button>
-              <button style="margin-right:10px;" @click="deleteItem(index)" class="delete-btn">삭제</button>
+              <button style="margin-right:10px;" @click="editItem(index)" class="edit-btn"> <i class="fa-solid fa-gear"></i> 수정</button>
+              <button style="margin-right:10px;" @click="deleteItem(index)" class="delete-btn"><i class="fa-solid fa-trash"></i> 삭제</button>
             </div>
             <span class="date">{{ item.date }}</span>
           </div>
@@ -98,7 +98,7 @@
   }
   
   .buttons {
-    margin-right: 10px; /* 버튼들과 날짜 간격을 조정 */
+    margin-right: 5px; /* 버튼들과 날짜 간격을 조정 */
   }
   
   .edit-btn,

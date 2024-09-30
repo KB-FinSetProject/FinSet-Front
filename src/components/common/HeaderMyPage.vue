@@ -15,11 +15,11 @@
   
   <style scoped>
 *{
-    color: white;
+    color: black;
     margin: 0;
     padding-top: 0;
     padding-bottom: 0;
-    background-color: #FFBB00;
+    background-color: white;
 }
   /* navbar 관련 스타일 */
   .navbar {

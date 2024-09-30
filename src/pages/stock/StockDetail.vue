@@ -1,168 +1,312 @@
 <template>
-  <HeaderNormal navbarTitle="주식 리스트"/>
 
-  <div :key="stocks[0].id" class="stock-top">
-    <h2 class="stocks">{{ stocks[0].name }}</h2>
-    <h1>{{ stocks[0].price }}</h1>
-  </div>
+  <HeaderNormal navbarTitle="주식 상세" />
 
-  <div class="stock-container">
-    <div class="titles-container">
-      <router-link to="/stock/chart" class="title-with-divider">
-        <h2 class="best-yield-title yield">차트</h2>
-        <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
-      </router-link>
+  <div class="stock-detail">
 
-      <div class="title-with-divider">
-        <h2 class="best-yield-title sales">종목정보</h2>
-        <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
+    <div class="stock-header">
+      <div class="stock-info">
+        <h1 class="stock-name">삼성전자</h1>
+        <span class="stock-price">67,500원</span>
       </div>
-
-      <router-link to="/stock/community" class="title-with-divider" @click.native="setActiveTab('saving')">
-        <h2 class="best-yield-title savings">커뮤니티</h2>
-        <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
-      </router-link>
-    </div>
-
-    <div class="stock-list">
-      <div v-for="stock in stocks" :key="stock.id" class="stock-item">
-        <div class="stock-header">
-          <div class="stock-info">
-            <p class="stock-name">{{ stock.name }}</p>
-            <p class="stock-price">{{ stock.price }}</p>
-            <div class="risk-info">
-              <span class="high-rating">{{ stock.price }}</span>
-              <span class="foreign-stock">{{ stock.change }}</span>
-            </div>
-          </div>
-          <div class="stock-favorite">
-            <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
-          </div>
-        </div>
+      <div class="stock-icon" @click="toggleFavorite"> <!-- toggleFavorite 함수 호출 -->
+        <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart' "
+           :style="{ color: stock.favorite ? '#FFBB00' : '#888', borderColor: stock.favorite ? '#FFBB00' : 'transparent' }"></i>
       </div>
     </div>
+    
 
-    <!-- 새로 추가된 시세 정보 섹션 -->
+    <div class="tabs-container">
+      <router-link to="/stock/chart" class="tab" active-class="active" style="color: #DADADA;">차트</router-link>
+      <router-link to="/stock/detail" class="tab" active-class="active">종목정보</router-link>
+      <router-link to="/stock/community" class="tab" active-class="active" style="color: #DADADA;">커뮤니티</router-link>
+    </div>
+    <br>
+
     <div class="stock-details">
-      <h3>시세</h3>
+      <h3 style="font-weight: bold;">시세</h3>
+
       <div class="price-range">
-        <span>1일 최저가</span>
-        <input type="range" v-model="currentPrice" :min="minPrice" :max="maxPrice" disabled>
-        <span>1일 최고가</span>
+        <input type="range" v-model="currentPrice" :min="minPrice" :max="maxPrice" disabled class="range-slider">
+        <div class="price-labels">
+          <span class="min-price">1일 최저가</span>
+          <span class="max-price">1일 최고가</span>
+        </div>
+        <div class="price-info">
+          <span class="min-price-value">{{ minPrice }}원</span>
+          <span class="max-price-value">{{ maxPrice }}원</span>
+        </div>
       </div>
-      <div class="price-info">
-        <span>{{ minPrice }}원</span>
-        <span>{{ maxPrice }}원</span>
-      </div>
+      
+    
+      <br>
       <div class="stock-info-grid">
-        <div>
-          <p>시가</p>
-          <p>{{ openPrice }}원</p>
+        <div class="stock-info-item">
+          <span>시가</span>
+          <span style="font-weight: bold; color:#555555">{{ openPrice }}원</span>
         </div>
-        <div>
-          <p>종가</p>
-          <p>{{ closePrice }}원</p>
+        <hr style="margin: 0 15px; border-color:orange; width:300px">
+        <div class="stock-info-item">
+          <span>종가</span>
+          <span style="font-weight: bold; color:#555555">{{ closePrice }}원</span>
         </div>
-        <div>
-          <p>거래대금</p>
-          <p>{{ tradingVolume }}주</p>
+        <hr style="margin: 0 15px; border-color:orange; width:300px">
+        <div class="stock-info-item">
+          <span>거래대금</span>
+          <span style="font-weight: bold; color:#555555">{{ tradingVolume }}주</span>
         </div>
       </div>
+      <br>
+      
       <div class="additional-info">
-        <div>
-          <p>매출</p>
-          <p>{{ revenue }}조원</p>
+        <div class="info-item">
+          <h5 style="margin-top: 5px;">매출</h5>
+          <h5 style="margin-bottom: 5px;">{{ revenue }}조원</h5>
         </div>
-        <div>
-          <p>영업이익</p>
-          <p>{{ operatingProfit }}조원</p>
+        <div class="info-item">
+          <h5 style="margin-top: 5px;">영업이익</h5>
+          <h5 style="margin-bottom: 5px;">{{ operatingProfit }}조원</h5>
         </div>
-        <div>
-          <p>순수익</p>
-          <p>{{ netProfit }}조원</p>
+        <div class="info-item">
+          <h5 style="margin-top: 5px;">순수익</h5>
+          <h5 style="margin-bottom: 5px;">{{ netProfit }}조원</h5>
         </div>
       </div>
+      
+
     </div>
+
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 
-export default {
-  components: {HeaderNormal},
-  data() {
-    return {
-      activeTab: 'yield',
-      stocks: [
-        {id: 1, name: '삼성전자', price: '67,500원', change: '-2.0%', favorite: true},
-        // 추가적인 주식 데이터
-      ],
-      minPrice: 3000,
-      maxPrice: 6000,
-      currentPrice: 67000,
-      openPrice: 67000,
-      closePrice: 68000,
-      tradingVolume: 30,
-      revenue: 74,
-      operatingProfit: 10,
-      netProfit: 9.8
-    };
-  },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
-  },
-  mounted() {
-    this.setActiveTab('yield');
-  },
+const minPrice = ref(67000); // 1일 최저가 (예시로 시가와 같게 설정)
+const maxPrice = ref(68000); // 1일 최고가 (예시로 종가와 같게 설정)
+const currentPrice = ref(67000); // 현재 가격
+const openPrice = ref(67000); // 시가
+const closePrice = ref(68000); // 종가
+const tradingVolume = ref(30); // 거래 대금 (주)
+const revenue = ref(74); // 매출 (조원)
+const operatingProfit = ref(10); // 영업이익 (조원)
+const netProfit = ref(9.8); // 순수익 (조원)
+
+// 주식 정보 상태 관리
+const stock = ref({
+  name: '삼성전자',
+  price: '67,500원',
+  favorite: true, // 초기 즐겨찾기 상태
+});
+
+// 활성화된 탭 상태 관리
+const activeTab = ref('yield');
+
+// 즐겨찾기 토글 함수
+const toggleFavorite = () => {
+  stock.value.favorite = !stock.value.favorite; // favorite 상태 토글
 };
+
+// 활성화된 탭 설정 함수
+const setActiveTab = (tab) => {
+  activeTab.value = tab; // activeTab 상태 변경
+};
+
+// 컴포넌트 마운트 시 초기 탭 설정
+onMounted(() => {
+  setActiveTab('yield');
+});
 </script>
 
 <style scoped>
-/* 기존 스타일은 그대로 유지 */
+.stock-detail {
+  font-family: Arial, sans-serif;
+  width: 390px;
+  padding: 20px;
+  margin-top: 28px;
+  margin-bottom: 100px;
+}
 
-.stock-details {
-  margin-top: 20px;
-  background-color: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
+.stock-header {
+  display: flex;
+  justify-content: space-between; /* Space between stock info and icon */
+  align-items: center; /* Center align items vertically */
+  margin-bottom: 20px;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column; /* Stack name and price vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+.stock-info-grid {
+  display: flex;
+  flex-direction: column; /* 항목들을 수직으로 나열 */
+  background-color: rgba(250, 176, 9, 0.16);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.stock-info-item {
+  display: flex;
+  justify-content: space-between; /* 이름과 값을 양쪽으로 정렬 */
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 17px;
+}
+
+
+.stock-price {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.stock-price-container {
+  display: flex;
+  align-items: center;
+}
+
+.stock-icon{
+  font-size: 30px;
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  color: black; /* 텍스트 색상을 검정색으로 설정 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-size: 20px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}
+
+
+.stock-info-grid {
+  display: flex;
+  justify-content: space-between; /* 이름과 값을 양쪽으로 배치 */
+}
+
+.stock-info-item {
+  flex: 1; /* 각 항목이 균등하게 공간을 차지하도록 설정 */
+  display: flex;
+  justify-content: space-between; /* 각 항목의 이름과 값을 양쪽으로 정렬 */
+  padding: 10px 0; /* 위아래 여백 추가 */
+}
+
+.additional-info {
+  display: flex; /* Flexbox를 사용하여 가로 배치 */ 
+}
+
+.info-item {
+  flex: 1; /* 각 항목이 동일한 비율로 공간을 차지하게 설정 */
+  padding: 10px; /* 각 항목의 내부 여백 */
+  text-align: center; /* 텍스트를 중앙 정렬 */
+  margin: 0px 10px; /* 좌우 간격 추가 */
+  border-radius: 20px;
+  background-color: rgba(110, 96, 83, 0.5);
+}
+
+/* 첫 번째 및 마지막 항목의 좌우 마진을 조정하여 불균형을 피함 */
+.info-item:first-child {
+  margin-left: 0; /* 첫 번째 항목의 왼쪽 마진 제거 */
+}
+
+.info-item:last-child {
+  margin-right: 0; /* 마지막 항목의 오른쪽 마진 제거 */
+}
+
+h5{
+  color: white;
 }
 
 .price-range {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  flex-direction: column; /* 세로 방향으로 쌓기 */
+  align-items: stretch; /* 아이템을 수평으로 늘리기 */
 }
 
-.price-range input[type="range"] {
-  flex-grow: 1;
-  margin: 0 10px;
+.range-slider {
+  margin-bottom: 10px; /* 슬라이더와 레이블 간의 간격 */
+}
+
+.price-labels {
+  display: flex; /* 가로 방향으로 배치 */
+  justify-content: space-between; /* 양쪽 끝으로 배치 */
+}
+
+.min-price {
+  text-align: left; /* 왼쪽 정렬 */
+  color: #FF6767; 
+  font-weight:bold;
+}
+
+.max-price {
+  text-align: right; /* 오른쪽 정렬 */
+  color: #547BC1; 
+  font-weight:bold;
+}
+
+.min-price-value{
+  color: #9B9B9B; 
+}
+
+.max-price-value{
+  color: #9B9B9B; 
 }
 
 .price-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  display: flex; /* 가로 방향으로 배치 */
+  justify-content: space-between; /* 양쪽 끝으로 배치 */
+  margin-top: 5px; /* 레이블과 가격 정보 간의 간격 */
 }
 
-.stock-info-grid, .additional-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  text-align: center;
+.range-slider {
+  -webkit-appearance: none; /* 기본 스타일 제거 */
+  width: 100%; /* 슬라이더 너비 */
+  height: 6px; /* 슬라이더 두께 */
+  background: transparent; /* 배경 투명 */
+  position: relative; /* 가상 요소를 위한 포지션 설정 */
 }
 
-.stock-info-grid div, .additional-info div {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+.range-slider::-webkit-slider-runnable-track {
+  height: 6px; /* 슬라이더 두께 */
+  background: #FAB809; /* 전체 색상 */
+  border-radius: 5px; /* 모서리 둥글게 */
 }
 
-.stock-info-grid p:first-child, .additional-info p:first-child {
-  font-weight: bold;
-  margin-bottom: 5px;
+
+.range-slider::before {
+  content: '';
+  position: absolute;
+  left: 67%;
+  top: -2px;
+  transform: translateX(-50%); /* 정중앙으로 조정 */
+  width: 10px; /* 점의 너비 */
+  height: 10px; /* 점의 높이 */
+  background: #6E6053; /* 점 색상 */
+  border-radius: 50%; /* 둥글게 */
 }
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* 기본 썸 스타일 제거 */
+  background: transparent; /* 썸 배경 투명 */
+  width: 0; /* 썸 크기 0으로 설정하여 보이지 않게 함 */
+  height: 0; /* 썸 크기 0으로 설정하여 보이지 않게 함 */
+}
+
 </style>

@@ -2,20 +2,21 @@
   <HeaderNormal navbarTitle="주식 상품" />
 
   <div class="stock-container">
-    <div class="titles-container">
-      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('all')">
+
+    <div class="tabs-container">
+      <div class="tab" @click.native="setActiveTab('all')" :class="{ active: activeTab === 'all' }">
         <h2 class="best-yield-title">전체</h2>
-        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
-      </router-link>
-      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('gain')">
+      </div>
+      <div class="tab" @click.native="setActiveTab('gain')" :class="{ active: activeTab === 'gain' }">
         <h2 class="best-yield-title">급상승</h2>
-        <div class="divider" :class="{ active: activeTab === 'gain' }"></div>
-      </router-link>
-      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('drop')">
+    
+      </div>
+      <div class="tab" @click.native="setActiveTab('drop')" :class="{ active: activeTab === 'drop' }">
         <h2 class="best-yield-title">급하락</h2>
-        <div class="divider" :class="{ active: activeTab === 'drop' }"></div>
-      </router-link>
+      
+      </div>
     </div>
+    <br>
 
     <div class="stock-list">
       <div v-for="(stock, index) in filteredStocks" :key="stock.id" class="stock-item">
@@ -27,7 +28,7 @@
             </div>
             
             <div class="stock-detail">
-              <router-link :to="`/stock/detail`" class="stock-name">{{ stock.name }}</router-link>
+              <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
               <p class="stock-details">{{ stock.price }} 
                 <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
               </p>
@@ -127,30 +128,37 @@ export default {
   margin-top: 100px;
 }
 
-.titles-container {
+.tabs-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-top: 40px;
 }
 
-.title-with-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.tab {
   flex: 1;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
-  background: none;
-  border: none;
+  color: black;
   text-decoration: none;
-  margin: 0; /* 마진 제거 */
+  font-size: 24px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
 }
 
 .best-yield-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;
   text-align: center;
+  margin: 0; /* 제목 마진 초기화 */
 }
 
 .divider {
