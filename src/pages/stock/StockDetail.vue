@@ -8,7 +8,7 @@
 
   <div class="stock-container">
     <div class="titles-container">
-      <router-link to="/stock-chart" class="title-with-divider">
+      <router-link to="/stock/chart" class="title-with-divider">
         <h2 class="best-yield-title yield">차트</h2>
         <div class="yield-divider" :class="{ active: activeTab === 'yield' }"></div>
       </router-link>
@@ -18,7 +18,7 @@
         <div class="sales-divider" :class="{ active: activeTab === 'sales' }"></div>
       </div>
 
-      <router-link to="/stock-community" class="title-with-divider" @click.native="setActiveTab('saving')">
+      <router-link to="/stock/community" class="title-with-divider" @click.native="setActiveTab('saving')">
         <h2 class="best-yield-title savings">커뮤니티</h2>
         <div class="savings-divider" :class="{ active: activeTab === 'savings' }"></div>
       </router-link>

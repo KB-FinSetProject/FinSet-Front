@@ -3,15 +3,15 @@
 
   <div class="stock-container">
     <div class="titles-container">
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
+      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('all')">
         <h2 class="best-yield-title">전체</h2>
         <div class="divider" :class="{ active: activeTab === 'all' }"></div>
       </router-link>
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('gain')">
+      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('gain')">
         <h2 class="best-yield-title">급상승</h2>
         <div class="divider" :class="{ active: activeTab === 'gain' }"></div>
       </router-link>
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('drop')">
+      <router-link to="/stock" class="title-with-divider" @click.native="setActiveTab('drop')">
         <h2 class="best-yield-title">급하락</h2>
         <div class="divider" :class="{ active: activeTab === 'drop' }"></div>
       </router-link>
@@ -23,19 +23,22 @@
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span class="stock-icon">{{ stock.logo }}</span>
+              <span>{{ stock.logo }}</span>
             </div>
-            <div>
-              <router-link :to="`/stock/detail/${stock.id}`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} <span class="change">{{ stock.change }}</span></p>
+            
+            <div class="stock-detail">
+              <router-link :to="`/stock/detail`" class="stock-name">{{ stock.name }}</router-link>
+              <p class="stock-details">{{ stock.price }} 
+                <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
+              </p>
             </div>
           </div>
+
           <div class="stock-icon" @click="toggleFavorite(stock)">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
-        <div class="mini-bar"></div> <!-- 미니바 추가 -->
       </div>
     </div>
   </div>
@@ -107,16 +110,21 @@ export default {
     toggleFavorite(stock) {
       stock.favorite = !stock.favorite; // favorite 상태 토글
     },
+    getColor(change) {
+      return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+    },
   },
 };
 </script>
 
 <style scoped>
+/* 스타일은 그대로 유지합니다 */
 .stock-container {
   padding: 16px;
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 100px;
 }
 
 .titles-container {
@@ -195,8 +203,9 @@ export default {
   border-radius: 50%;
   color: #fff;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 10px;
   margin-right: 10px; /* 마진 추가 */
+  margin-left: 5px;
 }
 
 .stock-name {
@@ -207,18 +216,24 @@ export default {
   color: black;
 }
 
+.stock-detail {
+  margin-left: 10px;
+}
+
 .stock-details {
   font-size: 14px;
   margin: 0;
 }
 
 .change {
-  font-weight: bold;
+  margin-left: 7px;
 }
 
 .stock-icon {
-  font-size: 24px;
+  font-size: 15px;
   color: #888; /* 기본 색상 */
+  margin-right: 15px;
+  margin-top: 10px;
 }
 
 .stock-icon .fas {
