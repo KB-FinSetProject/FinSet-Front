@@ -2,12 +2,16 @@
   <HeaderMyPage />
 
   <div class="container">
-    <div class="info">
+    <div class="info" style="width: 350px">
       <hr style="border-color: white;">
 
-      <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
+      <!-- <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div> -->
 
-      <h1>홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i></h1>
+      <div>
+        <h1>
+        홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i>
+      </h1>
+        </div>
       <br>
       <div class="email">
         hongildong@kb.com

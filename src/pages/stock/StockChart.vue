@@ -9,9 +9,9 @@
     </div>
 
     <div class="tabs-container">
-      <router-link to="/stock-chart" class="tab" active-class="active">차트</router-link>
-      <router-link to="/stock-detail" class="tab" active-class="active">종목정보</router-link>
-      <router-link to="/stock-community" class="tab" active-class="active">커뮤니티</router-link>
+      <router-link to="/stock/chart" class="tab" active-class="active">차트</router-link>
+      <router-link to="/stock/detail" class="tab" active-class="active">종목정보</router-link>
+      <router-link to="/stock/community" class="tab" active-class="active">커뮤니티</router-link>
     </div>
 
     <div class="chart-container">
