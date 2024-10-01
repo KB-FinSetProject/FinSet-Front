@@ -162,7 +162,7 @@
             <img :src="forex.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             
             <div class="forex-detail">
-              <router-link :to="`/forex/chart`" class="forex-name">{{ forex.name }}</router-link>
+              <router-link :to="`/exchangedetail`" class="exchangedetail">{{ forex.name }}</router-link>
               <p class="forex-details">{{ forex.value }} </p>
             </div>
           </div>
@@ -185,7 +185,7 @@
               <img :src="forex.image" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
               
               <div class="forex-detail">
-                <router-link :to="`/forex/chart`" class="forex-name">{{ forex.name }}</router-link>
+                <router-link :to="`/exchangedetail`" class="exchangedetail">{{ forex.name }}</router-link>
                 <p class="forex-details">{{ forex.value }} </p>
               </div>
             </div>
@@ -351,23 +351,7 @@ export default {
   border-radius: 5px; /* Rounded corners */
   padding: 10px; /* Padding around items */
 }
-.deposit-yield {
-  text-align: right;
-  flex-direction: column;
-  display: flex;
-  position: relative;
-  right: 10px;
-  align-items: flex-end;
-}
-.max {
-  font-size: 22px;
-  color: #F8A70C;
-  margin-bottom: 0;
-}
-.basic {
-  font-size: 15px;
-  color: #7e7e7e;
-}
+
 
 .fa-caret-down {
   cursor: pointer;
@@ -452,19 +436,7 @@ export default {
   margin-left: 0px;
 }
 
-.fund-details {
-  font-size: 14px;
-  margin: 0;
-}
 
-.deposit-yield { /* 클래스명 변경 */
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: relative;
-  right: 10px;
-}
 
 .icon { /* 클래스명 변경 */
   font-size: 24px;
@@ -476,24 +448,7 @@ export default {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
 
-.mini-bar {
-  height: 1px;
-  width: 100%;
-  background-color: #dddddd; /* 미니바 색상 회색으로 변경 */
-  margin-top: 25px;
-}
 
-.basic {
-  font-size: 15px;
-  color: #7e7e7e;
-}
-
-.max {
-  font-size: 22px;
-  color: #DD0202;
-  margin-bottom: 0;
-  font-weight: bold;
-}
 
 .fund-high-rating {
   background-color: #FDEBEA;
@@ -520,18 +475,7 @@ export default {
   margin-left: 10px;
 }
 
-.info-box {
-  background-color: #FAB809; /* 노란색 배경 */
-  padding: 10px;
-  border-radius: 0; /* 테두리 반경 없앰 */
-  margin-bottom: 10px;
-  text-align: center;
-  height: 110px;
-  position: relative;
-  bottom: 8px;
-  width: 390px;
-  margin-left: -16px;
-}
+
 
 .info-box h4 {
   margin: 0;
@@ -543,11 +487,7 @@ export default {
   color: #FFFFFF; /* 텍스트 색상 */
 }
 
-.mini-bar {
-  height: 4px; /* 미니 바 높이 */
-  background-color: #ffffff; /* 미니 바 색상 */
-  margin-top: 5px; /* 제목과 미니 바 사이의 간격 */
-}
+
 
 .forex-header,
 .stock-header {
@@ -562,29 +502,9 @@ export default {
   align-items: center;
 }
 
-.forex-info,
-.stock-rank {
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 10px;
-}
 
-.forex-info,
-.stock-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: #fff;
-  font-weight: bold;
-  font-size: 10px;
-  margin-right: 10px; /* 마진 추가 */
-  margin-left: 5px;
-}
 
-.forex-info,
+.forex-name,
 .stock-name {
   font-size: 16px;
   font-weight: bold;
@@ -593,12 +513,12 @@ export default {
   color: black;
 }
 
-.forex-info,
+.forex-detail,
 .stock-detail {
   margin-left: 10px;
 }
 
-.forex-info,
+.forex-details,
 .stock-details {
   font-size: 14px;
   margin: 0;
@@ -609,31 +529,19 @@ export default {
   margin-left: 7px;
 }
 
-.forex-info,
-.stock-icon {
-  font-size: 15px;
-  color: #888; /* 기본 색상 */
-  margin-right: 15px;
-  margin-top: 10px;
-}
 
-.forex-info .fas ,
+.forex-icon .fas ,
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
 
-.mini-bar {
-  height: 1px;
-  width: 100%;
-  background-color: #dddddd;
-  margin-top: 10px;
+.exchangedetail{
+  color:black;
+  text-decoration: none;
 }
+.rounded-circle{
+  position: relative;
+  left: 14px;
 
-.high-rating {
-  background-color: #FDEBEA;
-  color: #FF6767;
-  padding: 1px 8px 3px 8px;
-  font-size: 10px;
-  border-radius: 6px;
 }
 </style>
