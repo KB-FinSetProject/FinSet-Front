@@ -153,7 +153,7 @@ const goToNext = () => {
 
 .text-md-center{
   font-size:15px;
-  margin-top:160px;
+  margin-top:185px;
   text-align: center;
 }
 

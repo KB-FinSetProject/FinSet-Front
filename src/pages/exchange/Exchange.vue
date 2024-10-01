@@ -132,6 +132,7 @@ body {
   margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
+  border: 0.5px solid gray;
 }
 
 .currency-rates {

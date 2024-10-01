@@ -118,6 +118,7 @@ const goToNext = () => {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 50px;
 }
 
 .option-label {
@@ -157,7 +158,7 @@ const goToNext = () => {
 
 .text-md-center{
   font-size:15px;
-  margin-top:150px;
+  margin-top:140px;
   text-align: center;
 }
 

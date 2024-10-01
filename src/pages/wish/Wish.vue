@@ -12,7 +12,7 @@
             <span class="bank-icon">{{ deposit.logo }}</span>
           </div>
           <div>
-            <p class="deposit-name">{{ deposit.name }}</p>
+            <router-link :to="`/deposit/detail`" class="deposit-name" style="text-decoration: none; color:black">{{ deposit.name }}</router-link>
             <p class="deposit-details">{{ deposit.details }}</p>
             <div class="risk-info">
               <span class="deposit-high-rating">{{ deposit.sort }}</span>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="text-center">
-        <i @click="toggleVisibility('deposit')" class="fa-solid fa-caret-down"></i>
+        <i @click="toggleVisibility('deposit')" class="fa-solid" :class="isMoreItemsVisible.deposit ? 'fa-caret-up' : 'fa-caret-down'"></i>
       </div>
 
       <div v-show="isMoreItemsVisible.deposit" class="mt-2">
@@ -45,7 +45,7 @@
             </div>
           </div>
   
-          <div class="icon" @click="toggleFavorite(deposit)">
+          <div class="icon" @click="toggleFavorite(deposit)" style="margin-left: 40px;">
             <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
           </div>
@@ -77,7 +77,7 @@
       </div>
 
       <div class="text-center">
-        <i @click="toggleVisibility('fund')" class="fa-solid fa-caret-down"></i>
+        <i @click="toggleVisibility('fund')" class="fa-solid" :class="isMoreItemsVisible.fund ? 'fa-caret-up' : 'fa-caret-down'"></i>
       </div>
 
       <div v-show="isMoreItemsVisible.fund" class="mt-2">
@@ -119,7 +119,7 @@
             </div>
           </div>
 
-          <div class="icon" @click="toggleFavorite(stock)">
+          <div class="stock-icon" @click="toggleFavorite(stock)">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
           </div>
@@ -127,7 +127,7 @@
       </div>
 
       <div class="text-center">
-        <i @click="toggleVisibility('stock')" class="fa-solid fa-caret-down"></i>
+        <i @click="toggleVisibility('stock')" class="fa-solid" :class="isMoreItemsVisible.stock ? 'fa-caret-up' : 'fa-caret-down'"></i>
       </div>
 
       <div v-show="isMoreItemsVisible.stock" class="mt-2">
@@ -167,7 +167,7 @@
             </div>
           </div>
 
-          <div class="icon" @click="toggleFavorite(forex)">
+          <div class="forex-icon" @click="toggleFavorite(forex)">
             <i :class="forex.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: forex.favorite ? '#FAB809' : '#888' }"></i>
           </div>
@@ -175,7 +175,7 @@
       </div>
 
       <div class="text-center">
-        <i @click="toggleVisibility('forex')" class="fa-solid fa-caret-down"></i>
+        <i @click="toggleVisibility('forex')" class="fa-solid" :class="isMoreItemsVisible.forex ? 'fa-caret-up' : 'fa-caret-down'"></i>
       </div>
 
       <div v-show="isMoreItemsVisible.forex" class="mt-2">
@@ -190,7 +190,7 @@
               </div>
             </div>
   
-            <div class="icon" @click="toggleFavorite(forex)">
+            <div class="forex-icon" @click="toggleFavorite(forex)">
               <i :class="forex.favorite ? 'fas fa-heart' : 'far fa-heart'"
                  :style="{ color: forex.favorite ? '#FAB809' : '#888' }"></i>
             </div>
@@ -231,7 +231,7 @@ export default {
           sort: '단리', // 예금 종류
           max: 3.75, // 최고 이율
           basic: 3.00, // 기본 이율
-          favorite: false,
+          favorite: true,
         },
         {
           logo: 'NH',
@@ -241,7 +241,7 @@ export default {
           sort: '복리',
           max: 3.75,
           basic: 3.00,
-          favorite: false,
+          favorite: true,
         },
         {
           logo: 'NH',
@@ -251,7 +251,7 @@ export default {
           sort: '단리',
           max: 3.75,
           basic: 3.00,
-          favorite: false,
+          favorite: true,
         },
         // Add more items...
       ],
@@ -262,7 +262,7 @@ export default {
           danger: '높은위험',
           type:'해외주식형',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         {
           name: '미래에셋인도중소형포커스증권자',
@@ -270,7 +270,7 @@ export default {
           danger: '높은위험',
           type:'해외주식형',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         // Add more items...
       ],
@@ -280,14 +280,14 @@ export default {
           price: '67,500원',
           change: '+2.0',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         {
           name: '삼성전자',
           price: '67,500원',
           change: '-2.0',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         // Add more items...
       ],
@@ -296,13 +296,13 @@ export default {
           name: '미국달러(USD)',
           value: '1,344.50',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         {
           name: '미국달러(USD)',
           value: '1,344.50',
           image: 'https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800',
-          favorite: false, // 추가: favorite 속성
+          favorite: true, // 추가: favorite 속성
         },
         // Add more items...
       ],
@@ -359,16 +359,27 @@ export default {
 }
 
 .wish {
-  margin-top: 100px;
-  margin-bottom: 150px;
+  margin-top: 80px;
+  margin-bottom: 130px;
+  width: 370px;
+  
 }
 
 .icon {
   color: #FFBF0A;
   font-size: 1.5rem;
   position: absolute;
-  transform: translateX(1030%);
+  transform: translateX(1133%);
 }
+
+
+.icon { /* 클래스명 변경 */
+  font-size: 24px;
+  color: #888; /* 기본 색상 */
+  margin-left: 30px;
+}
+
+
 
 .deposit-header {
   display: flex;
@@ -437,13 +448,6 @@ export default {
 }
 
 
-
-.icon { /* 클래스명 변경 */
-  font-size: 24px;
-  color: #888; /* 기본 색상 */
-  margin-left: 30px;
-}
-
 .deposit-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
@@ -494,6 +498,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-left: -20px;
 }
 
 .forex-info,
@@ -533,6 +538,14 @@ export default {
 .forex-icon .fas ,
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
+}
+
+
+.forex-icon ,
+.stock-icon {
+  position: absolute;
+  transform: translateX(1338%);
+  font-size: 24px;
 }
 
 .exchangedetail{
