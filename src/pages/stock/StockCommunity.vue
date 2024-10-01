@@ -27,6 +27,12 @@
         <div v-for="(post, index) in communityPosts" :key="post.id" class="card">
           <div class="card-header">
             <span class="name">{{ post.author }}</span>
+            <span class="like-container">
+              <div class="like-box">
+                <i class="fa-regular fa-thumbs-up like" @click="incrementLikeCount(post)"></i>
+                <span class="like-count" style="margin-left: 5px;">{{ post.likeCount }}</span>
+              </div>
+            </span>            
             <div class="buttons">
               <button style="margin-right:10px;" @click="editItem(index)" class="edit-btn"> <i class="fa-solid fa-gear"></i> 수정</button>
               <button style="margin-right:10px;" @click="deleteItem(index)" class="delete-btn"><i class="fa-solid fa-trash"></i> 삭제</button>
@@ -56,11 +62,11 @@ const newComment = ref('');
 const stock = ref({ favorite: false });
 
 const communityPosts = ref([
-  { id: 1, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-  { id: 2, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-  { id: 3, author: '라라핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-  { id: 4, author: '키키핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
-  { id: 5, author: '김호룡', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?' },
+  { id: 1, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?', likeCount: 0 },
+  { id: 2, author: '악동핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?', likeCount: 0 },
+  { id: 3, author: '라라핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?', likeCount: 0 },
+  { id: 4, author: '키키핑', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?', likeCount: 0 },
+  { id: 5, author: '김호룡', type: '수익', date: '24.09.10', content: '혹시 10월에 다 같이 살까요?', likeCount: 0 },
 ]);
 
 const submitComment = () => {
@@ -72,6 +78,11 @@ const submitComment = () => {
 
 const toggleFavorite = () => {
   stock.value.favorite = !stock.value.favorite;
+};
+
+// 좋아요 수 증가 함수
+const incrementLikeCount = (post) => {
+  post.likeCount += 1;
 };
 
 // 수정 및 삭제 함수
@@ -90,7 +101,7 @@ const deleteItem = (index) => {
   width: 390px;
   padding: 20px;
   margin-top: 60px;
-  margin-bottom: 147px;
+  margin-bottom: 120px;
 }
 
 .stock-header {
@@ -189,7 +200,7 @@ const deleteItem = (index) => {
 .buttons {
   display: flex;
   align-items: center;
-  margin-right: 5px; /* 버튼들과 날짜 간격을 조정 */
+  margin-right: 2px; /* 버튼들과 날짜 간격을 조정 */
 }
 
 button {
@@ -203,7 +214,8 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.85rem; /* 글씨 크기 작게 */
+  font-size: 0.6rem; /* 글씨 크기 작게 */
+
 }
 
 .edit-btn {
@@ -231,7 +243,7 @@ button {
   width: 390px;
   margin-left: -20px;
   position: fixed;
-  bottom: 99px;
+  bottom: 80px;
 }
 
 .comment-input input {
@@ -255,4 +267,25 @@ button {
   background-color: #FAB809;
   cursor: not-allowed;
 }
+
+.like{
+  margin-left: 1px;
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.like-box {
+  display: flex;
+  align-items: center;
+  border-radius: 5px; /* 모서리 둥글게 */
+  padding: 4px; /* 안쪽 여백 */
+  margin-left: -100px;
+  width: 45px;
+  color: #6E6053;
+}
+
+
 </style>
