@@ -11,6 +11,8 @@
             <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
               <span class="bank-icon">{{ deposit.logo }}</span>
             </div>
+
+<!--            dsds-->
             <div>
 <!--              <router-link :to="`/deposit/detail`" class="fund-name">{{ deposit.name }}</router-link>-->
               <p class="fund-name">{{ deposit.name }}</p>
