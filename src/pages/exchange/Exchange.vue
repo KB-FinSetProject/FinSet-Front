@@ -6,21 +6,18 @@
       <h5>통화 환율</h5>
       <p style="color: #9B9B9B;">원하는 통화를 선택하면 상세페이지로 이동됩니다.</p>
     </div>
-    
+
     <div v-for="currency in filteredCurrencies" :key="currency.code" class="currency-card">
       <div class="currency-header">
         <div class="currency-info">
           <img :src="currency.flagUrl" :alt="currency.name" />
-          <!-- <router-link :to="`/exchangedetail/${currency.id}`" class="no-underline">
-            <h7>{{ currency.name }}</h7>
-          </router-link>                  -->
           <router-link :to="`/exchangedetail`" class="no-underline">
             <h7>{{ currency.name }}</h7>
-          </router-link>                 
+          </router-link>
         </div>
         <div class="favorite" @click="toggleFavorite(currency)">
-          <span :class="{'active': currency.isFavorite}">
-            <i class="fa-solid fa-heart icon"></i>
+          <span>
+            <i :class="['fa-solid', 'fa-heart', 'icon', { 'favorite-active': currency.isFavorite }]"></i>
           </span>
         </div>
       </div>
@@ -94,7 +91,6 @@ const filteredCurrencies = computed(() => {
 </script>
 
 <style scoped>
-
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
@@ -115,7 +111,7 @@ body {
   padding: 15px;
   border-radius: 10px;
   display: flex;
-  flex-direction: column; /* 수직으로 배치 */
+  flex-direction: column;
   background-color: transparent;
 }
 
@@ -131,31 +127,18 @@ body {
 }
 
 .currency-info img {
-  width: 20px;  /* 이미지의 너비 */
-  height: 20px; /* 이미지의 높이 */
+  width: 20px;
+  height: 20px;
   margin-right: 10px;
-  border-radius: 50%; /* 원형으로 만들기 위한 속성 추가 */
+  border-radius: 50%;
   object-fit: cover;
-}
-
-.highlight {
-  font-weight: 400; /* 글씨 두께를 얇게 */
-  color: #F8A70C;
-}
-
-.standard-rate {
-  color: #FFBB00; /* 표준 환율 색상 */
-}
-
-.other-rate {
-  color: #838687; /* 다른 환율 색상 */
 }
 
 .currency-rates {
   margin-top: 10px;
   background-color: rgba(110, 96, 83, 0.17);
   padding: 15px 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
   height: 125px;
   width: 320px;
 }
@@ -167,17 +150,22 @@ body {
 }
 
 .label {
-  color: #595959; /* 매매기준율, 입금(환전)할 때, 원화로 환전할 때의 텍스트 색상 */
+  color: #595959;
 }
 
 .icon {
-  color: #ffbf0a; /* 아이콘 색상 설정 */
+  color: gray;
   position: absolute;
   transform: translateX(-200%);
+  cursor: pointer;
+}
+
+.icon.favorite-active {
+  color: #ffbf0a; /* 선택 시 노란색 */
 }
 
 .no-underline {
-  text-decoration: none; /* 밑줄 제거 */
+  text-decoration: none;
   color: #595959;
 }
 

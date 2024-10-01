@@ -2,7 +2,6 @@
   <HeaderNormal navbarTitle="사전" />
 
   <div class="container">
-
     <div class="search-bar">
       <div class="input-container">
         <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />
@@ -13,18 +12,17 @@
     <br>
 
     <div class="card-container">
-
       <div class="card">
         <div class="card-header">
           <span class="title">미수령주식 · 배당금</span>
-          <i class="fa-solid fa-star icon"></i>
+          <i class="fa-solid fa-star icon" :class="{ active: isStarActive }" @click="toggleStar"></i>
         </div>
         <br>
         <p class="description">무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금</p>
       </div>
 
       <h6 style="color: black; font-weight: 350; margin-left: 10px">
-        "주식"에 대한 <span style="color: #FFBB00;">538</span>개 용어가 검색되었습니다. 
+        "주식"에 대한 <span style="color: #FFBB00;">538</span>개 용어가 검색되었습니다.
       </h6>
 
       <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">
@@ -37,15 +35,16 @@
           <p class="description">{{ item.content }}</p>
         </div>
       </div>
-  
+
       <!-- 더보기 버튼 -->
-      <button v-if="!showAll" @click="showAllItems" class="load-more-button">+ 더보기</button>
+      <button v-if="!showAll" @click="showAllItems" class="load-more-button">+</button>
 
       <hr>
 
       <div class="icon-title-container">
         <i class="fa-solid fa-book-bookmark icon-large"></i>
         <span class="title">단어장</span>
+        <button @click="addWord" class="add-word-button">+</button> <!-- 오른쪽으로 이동 -->
       </div>
 
       <!-- list 아이템 표시 -->
@@ -53,9 +52,8 @@
         <router-link :to="{ path: '/dictmemo' }" class="item-text">
           <span class="item-text">{{ item }}</span>
         </router-link>
-        <i class="fa-solid fa-star icon2"></i>
+        <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>
       </div>
-
     </div>
   </div>
 </template>
@@ -129,6 +127,30 @@ const performSearch = () => {
   // 검색 기능 구현
   console.log('검색어:', searchQuery.value);
 };
+
+// 별 아이콘 상태 관리
+const isStarActive = ref(false);
+
+// 별 아이콘 클릭 시 상태 토글
+const toggleStar = () => {
+  isStarActive.value = !isStarActive.value;
+};
+
+// 리스트 아이템 별 상태 관리
+const listStarStates = ref(Array(list.value.length).fill(false)); // 초기 상태는 모두 비활성화
+
+// 리스트 아이템 별 클릭 시 상태 토글
+const toggleListStar = (index) => {
+  listStarStates.value[index] = !listStarStates.value[index];
+};
+
+// 해당 아이템의 별 상태 확인
+const isListStarActive = (index) => listStarStates.value[index];
+
+// 단어 추가 함수
+const addWord = () => {
+  console.log('단어 추가 버튼 클릭');
+};
 </script>
 
 <style scoped>
@@ -149,12 +171,13 @@ const performSearch = () => {
   border: 1px solid #CAC4B7;
   border-radius: 8px;
   padding: 15px;
-  background-color: #816843; /* 카드 배경색을 #6E6053로 설정 */
-  color: white; /* 카드 내부 텍스트 색상을 흰색으로 설정 */
+  background-color: #816843; /* 카드 배경색 */
+  color: white; /* 카드 내부 텍스트 색상 */
 }
 
 .card-header {
   display: flex;
+  justify-content: space-between; /* 텍스트와 별 아이콘을 양쪽으로 배치 */
   align-items: center;
   cursor: pointer; /* 클릭 가능하도록 커서 변경 */
   padding-bottom: 10px;
@@ -168,23 +191,25 @@ const performSearch = () => {
 }
 
 .icon {
-  color: #ffbf0a; /* 아이콘 색상 설정 */
-  position: absolute;
-  transform: translateX(1750%);
+  color: gray; /* 기본 별 색상 - 회색 */
 }
 
-.arrow{
+.icon.active {
+  color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
+}
+
+.arrow {
   margin-left: 10px;
   position: absolute;
   transform: translateX(3100%);
 }
 
 .cardelse{
-  background-color: rgba(110, 96, 83, 0.10);
+  background-color: rgba(110, 96, 83, 0.17);
   color: black;
 }
 
-.description{
+.description {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -216,26 +241,37 @@ input[type="text"] {
 }
 
 .load-more-button {
-  background-color: #FFBB00; /* 배경색을 FFBB00으로 설정 */
-  color: white; /* 글씨 색상을 흰색으로 설정 */
+  background-color: #816843; /* 갈색으로 변경 */
+  color: white; /* 글씨 색상 */
   border: none;
-  border-radius: 12px; /* 모서리를 둥글게 설정 */
-  padding: 5px 10px; /* 버튼 크기를 더보기 텍스트에 맞게 줄임 */
-  font-size: 14px; /* 글씨 크기 조금 줄임 */
+  border-radius: 8px; /* 모서리를 둥글게 설정 */
+  font-size: 18px; /* 글씨 크기를 조금 더 크게 설정 */
+  font-weight: bold; /* 글씨 두께를 더 두껍게 설정 */
   cursor: pointer;
-  margin-top: 10px;
-  width: 100px;
-  margin-left: 120px;
+  width: 50px; /* 버튼의 폭을 줄임 */
+  margin-left: auto; /* 왼쪽 여백 자동으로 설정 */
+  margin-right: auto; /* 오른쪽 여백 자동으로 설정 */
+  display: block; /* block으로 설정하여 중앙 정렬 */
 }
 
-/* 버튼에 hover 효과 추가 */
-.load-more-button:hover {
-  background-color: #e0a800; /* hover 시 배경색을 조금 어둡게 */
+.add-word-button {
+  background-color: #FFBB00; /* 노란색 배경 */
+  color: white; /* 글씨 색상 */
+  border: none;
+  border-radius: 6px; /* 모서리를 둥글게 설정 */
+  font-size: 20px; /* 글씨 크기를 조금 더 크게 설정 */
+  font-weight: bold; /* 글씨 두께를 더 두껍게 설정 */
+  cursor: pointer;
+  width: 30px; /* 버튼 폭 */
+  height: 25px; /* 버튼 높이 */
+  margin-left: 225px; /* 아이콘과 버튼 사이 간격 */
+  position: relative;
 }
-
 .icon-title-container {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  margin: 10px 0; /* 위 아래 여백 추가 */
 }
 
 .icon-large {
@@ -249,7 +285,7 @@ input[type="text"] {
   display: flex; /* Flexbox 사용 */
   justify-content: space-between; /* 양쪽 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  margin: 10px ; /* 아이템 간격 조정 */
+  margin: 10px; /* 아이템 간격 조정 */
 }
 
 .item-text {
@@ -259,8 +295,12 @@ input[type="text"] {
 }
 
 .icon2 {
-  color: #ffbf0a; /* 아이콘 색상 설정 */
+  color: gray; /* 리스트 아이템 기본 별 색상 */
   position: absolute;
   transform: translateX(2000%);
+}
+
+.icon2.active {
+  color: #ffbf0a; /* 활성화된 리스트 아이템 별 색상 */
 }
 </style>
