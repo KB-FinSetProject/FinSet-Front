@@ -2,7 +2,7 @@
 
     <HeaderSignIn/>
 
-    <div class="continer">
+    <div class="container">
 
         <h1 style="font-weight: 300;">FIND EASY,</h1>
 
@@ -15,17 +15,17 @@
         <br>
 
         <div class="form-floating mb-3">
-            <input type="email" class="form-control custom-input" id="floatingInput" placeholder="name@example.com">
+            <input type="id" class="form-control custom-input" id="floatingInput" placeholder="name@example.com" v-model="member.id">
             <label for="floatingInput">이메일 주소</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="password" class="form-control custom-input" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control custom-input" id="floatingPassword" placeholder="Password" v-model="member.password">
             <label for="floatingPassword">비밀번호</label>
         </div>
 
         <br>
 
-        <button class="custom-button" type="submit">로그인</button>
+        <button class="custom-button" :disabled="disableSubmit" @click="login">로그인</button>
 
         <div class="mt-3 text-center">
             <router-link to="/signup" class="text-muted">회원가입</router-link> |
@@ -41,13 +41,41 @@
 </template>
 
 <script setup>
-
 import HeaderSignIn from '@/components/common/HeaderSignIn.vue';
+import { computed, reactive, ref } from "vue";
+import { useLoginStore } from "@/stores/login";
+import loginApi from "@/api/loginApi";
+import { useRoute, useRouter } from "vue-router";
 
+const router = useRouter();
+const auth = useLoginStore();
+const cr = useRoute();
+const member = reactive({
+  id: '',
+  password: '',
+});
+const error = ref('');
+
+const disableSubmit = computed(() => !(member.id && member.password));
+
+const login = async () => {
+  console.log(member);
+  try {
+    await auth.login(member);
+    if (cr.query.next) {
+      router.push({name: cr.query.name});
+    } else {
+      router.push('/');
+    }
+  } catch (e) {
+    console.error("에러=========", e);
+    error.value = e.response?.data || "로그인 실패. 다시 시도하세요.";
+  }
+};
 </script>
 
 <style scoped>
-.continer{
+.container{
     margin-top: -70px;
 }
 .normal {

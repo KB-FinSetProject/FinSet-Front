@@ -103,7 +103,7 @@ const showAll = ref(false);
 // 처음에 3개만 보여줌
 const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));
 
-// "더보기" 버튼 클릭 시 모든 항목을 보여줌
+
 const showAllItems = () => {
   showAll.value = true;
 };
