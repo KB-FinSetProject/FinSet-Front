@@ -5,7 +5,7 @@
         <div class="navbar-custom container-fluid d-flex align-items-center" style="background-color: white;">
           <!-- 왼쪽 화살표 아이콘 -->
           <div class="nav-item flex-fill d-flex">
-            <i class="fas fa-arrow-left icon-large"></i>
+            <i class="fas fa-arrow-left icon-large" onclick="history.back()"></i>
           </div>
   
           <!-- 중앙 텍스트 -->

@@ -44,7 +44,10 @@
       <div class="icon-title-container">
         <i class="fa-solid fa-book-bookmark icon-large"></i>
         <span class="title">단어장</span>
-        <button @click="addWord" class="add-word-button">+</button> <!-- 오른쪽으로 이동 -->
+        <router-link to="/dictmemo">
+          <button @click="addWord" class="add-word-button">+</button>
+        </router-link>
+        
       </div>
 
       <!-- list 아이템 표시 -->
@@ -168,7 +171,7 @@ const addWord = () => {
 
 .card {
   width: 350px;
-  border: 1px solid #ccc;
+  border: 1px solid #CAC4B7;
   border-radius: 8px;
   padding: 15px;
   background-color: #816843; /* 카드 배경색 */
@@ -180,7 +183,9 @@ const addWord = () => {
   justify-content: space-between; /* 텍스트와 별 아이콘을 양쪽으로 배치 */
   align-items: center;
   cursor: pointer; /* 클릭 가능하도록 커서 변경 */
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  padding-top: 0px;
+  background-color: transparent;
 }
 
 .title {
@@ -202,7 +207,7 @@ const addWord = () => {
   transform: translateX(3100%);
 }
 
-.cardelse {
+.cardelse{
   background-color: rgba(110, 96, 83, 0.17);
   color: black;
 }
@@ -261,9 +266,10 @@ input[type="text"] {
   font-weight: bold; /* 글씨 두께를 더 두껍게 설정 */
   cursor: pointer;
   width: 30px; /* 버튼 폭 */
-  height: 25px; /* 버튼 높이 */
+  height: 30px; /* 버튼 높이 */
   margin-left: 225px; /* 아이콘과 버튼 사이 간격 */
   position: relative;
+
 }
 .icon-title-container {
   display: flex; /* Flexbox 사용 */

@@ -73,7 +73,7 @@ const sections = [
   right: 15px; /* 아이콘 위치 조정 */
   top:4%;
   right:10%;
-  color: #000000; /* 아이콘 색상을 검정색으로 설정 */
+  color: #000000;
 }
 
 .section {

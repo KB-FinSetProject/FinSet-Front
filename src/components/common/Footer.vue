@@ -3,7 +3,7 @@
 
     <footer class="footer fixed-bottom">
 
-      <hr>
+      <hr style="margin-top: 0%;">
       <ul class="nav justify-content-between">
         <li class="nav-item">
           <router-link to="/" class="nav-link px-2 text-body-secondary d-flex flex-column align-items-center">

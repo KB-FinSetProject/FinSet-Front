@@ -4,18 +4,11 @@
   <div class="stock-container">
 
     <div class="tabs-container">
-      <div class="tab" @click.native="setActiveTab('all')" :class="{ active: activeTab === 'all' }">
-        <h2 class="best-yield-title">전체</h2>
-      </div>
-      <div class="tab" @click.native="setActiveTab('gain')" :class="{ active: activeTab === 'gain' }">
-        <h2 class="best-yield-title">급상승</h2>
-    
-      </div>
-      <div class="tab" @click.native="setActiveTab('drop')" :class="{ active: activeTab === 'drop' }">
-        <h2 class="best-yield-title">급하락</h2>
-      
-      </div>
+      <router-link to="/stock" class="tab" active-class="active">전체</router-link>
+      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승</router-link>
+      <router-link to="/stockdrop" class="tab" active-class="active" style="color: #DADADA;">급하락</router-link>
     </div>
+
     <br>
 
     <div class="stock-list">
@@ -124,8 +117,7 @@ export default {
   padding: 16px;
   max-width: 390px;
   position: relative;
-  bottom: 110px;
-  margin-top: 100px;
+  margin-top: -370px;
 }
 
 .tabs-container {
@@ -135,7 +127,6 @@ export default {
   border-bottom: 1px solid #ccc;
   margin-top: 40px;
 }
-
 
 .tab {
   flex: 1;
