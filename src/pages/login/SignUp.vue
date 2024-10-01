@@ -8,9 +8,9 @@
         <br>
 
         <div class="col-12">
-            <label for="email" class="form-label">*이메일</label>
+            <label for="id" class="form-label">*이메일</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="email" placeholder="hongildong@kb.com" required>
+                <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" required>
                 <button class="btn btn-custom" type="button">인증하기</button>
             </div>
             <div class="invalid-feedback">
@@ -31,10 +31,10 @@
         <br>
 
         <div class="col-12">
-            <label for="passwordcheck" class="form-label">*비밀번호 확인</label>
+            <label for="password2" class="form-label">*비밀번호 확인</label>
             <span v-if="passwordMismatch" class="text-danger ms-2">비밀번호가 일치하지 않습니다.</span>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="passwordcheck" placeholder="1234" v-model="passwordCheck" required>
+                <input type="text" class="form-control" id="password2" placeholder="1234" v-model="passwordCheck" required>
             </div>
             <div class="invalid-feedback">
                 비밀번호를 확인해주세요.
@@ -57,22 +57,65 @@
         <br>
         <br>
 
-        <button class="btn btn-signup" type="submit">회원가입</button>
+        <button class="btn btn-signup" type="submit" @click="join">회원가입</button>
+
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import {reactive, ref, watch} from 'vue';
 import HeaderSignUp from '@/components/common/HeaderSignUp.vue';
+import loginApi from "@/api/loginApi";
+import {useRouter} from'vue-router';
 
+const router=useRouter();
+const checkError=ref('')
 const password = ref('');
 const passwordCheck = ref('');
 const passwordMismatch = ref(false);
 
+const member=reactive({
+  id:'',
+  password:'',
+  password2:'',
+  name:''
+})
+
+const disableSubmit=ref(true);
+const checkId=async ()=>{
+  if(!member.id){
+    return alert('사용자 ID를 입력하세요')
+  }
+  disableSubmit.value=await loginApi.checkId(member.id);
+  console.log(disableSubmit.value,typeof disableSubmit.value);
+  checkError.value=disableSubmit.value ? "이미 사용중인 아이디 입니다" : "사용가능한 아이디 입니다.";
+}
+const changeUsername=()=>{
+  disableSubmit.value=true;
+  if(member.id){
+    checkError.value='ID 중복 체크를 하셔야 합니다.';
+
+  }else{
+    checkError.value='';
+  }
+};
+
+
+const join=async ()=>{
+  if(member.password!=member.password2){
+    return alert('비밀번호가 일치하지 않습니다')
+  }
+  try{
+    await loginApi.create(member);
+    router.push({name:'home'});
+  }catch(e){
+    console.error(e);
+  }
+};
 // Watcher to check for password mismatch
-watch([password, passwordCheck], () => {
-    passwordMismatch.value = password.value !== passwordCheck.value;
-});
+// watch([password, passwordCheck], () => {
+//     passwordMismatch.value = password.value !== passwordCheck.value;
+// });
 </script>
 
 <style scoped>
