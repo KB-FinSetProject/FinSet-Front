@@ -3,7 +3,7 @@ import {isAuthenticated} from "@/util/guard.js";
 
 export default [
     {
-        path:'/siginin',
+        path:'/signin',
         name:'login',
         component:()=> import('../pages/login/signIn.vue'),
     },

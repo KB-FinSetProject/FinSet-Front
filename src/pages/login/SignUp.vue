@@ -67,6 +67,7 @@
 
 <script setup>
 import {reactive, ref, computed} from 'vue';
+
 import HeaderSignUp from '@/components/common/HeaderSignUp.vue';
 import loginApi from "@/api/loginApi";
 import {useRouter} from'vue-router';
