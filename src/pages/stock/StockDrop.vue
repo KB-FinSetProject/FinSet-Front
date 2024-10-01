@@ -5,10 +5,14 @@
 
     <div class="tabs-container">
       <router-link to="/stock" class="tab" active-class="active" style="color: #DADADA;">전체</router-link>
-      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승</router-link>
-      <router-link to="/stockdrop" class="tab" active-class="active">급하락</router-link>
+      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">
+        급상승 ▲
+      </router-link>
+      <router-link to="/stockdrop" class="tab" active-class="active">
+        급하락 <span style="color: #547BC1;">▼</span>
+      </router-link>
     </div>
-
+    
     <br>
 
     <div class="stock-list">

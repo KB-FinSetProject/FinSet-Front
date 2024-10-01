@@ -1,3 +1,4 @@
+// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Shop from '@/pages/Shop.vue';
@@ -19,7 +20,8 @@ import InstallmentSimple from '@/pages/installment/InstallmentSimple.vue';
 import InstallmentCompound from '@/pages/installment/InstallmentCompound.vue';
 import InstallmentDetail from '@/pages/installment/InstallmentDetail.vue';
 import Wish from '@/pages/wish/Wish.vue';
-import Search from "@/pages/Search/Search.vue";
+import Search from "@/pages/Search/Search.vue"; // 검색 페이지
+import SearchResults from "@/pages/Search/SearchResults.vue"; // 검색 결과 페이지 추가
 import Investment1 from "@/pages/investment/Investment1.vue";
 import Investment2 from "@/pages/investment/Investment2.vue";
 import Investment3 from "@/pages/investment/Investment3.vue";
@@ -39,8 +41,46 @@ import SignIn from "@/pages/login/SignIn.vue";
 import SignUp from "@/pages/login/SignUp.vue";
 import loginRoutes from './login'
 
+const routes = [
+    { path: '/', name: "Home", component: Home },
+    { path: '/shop', name: "Shop", component: Shop },
+    { path: '/auth', name: "Auth", component: Auth },
+    { path: '/board', name: "Board", component: Board },
+    { path: '/deposit', name: "DepositAll", component: DepositAll },
+    { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail },
+    { path: '/dict', name: "Dict", component: Dict },
+    { path: '/dictmemo', name: "DictMemo", component: DictMemo },
+    { path: '/exchange', name: "Exchange", component: Exchange },
+    { path: '/exchangedetail', name: "ExchangeDetail", component: ExchangeDetail },
+    { path: '/fund', name: "Fund", component: Fund },
+    { path: '/fund/detail', name: "FundDetail", component: FundDetail },
+    { path: '/fundsales', name: "FundSales", component: FundSales },
+    { path: '/fundsavings', name: "FundSavings", component: FundSavings },
+    { path: '/installment', name: "InstallmentAll", component: InstallmentAll },
+    { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail },
+    { path: '/search', name: "Search", component: Search }, // 검색 페이지
+    { path: '/search/results', name: "SearchResults", component: SearchResults }, // 검색 결과 페이지 추가
+    { path: '/wish', name: "Wish", component: Wish },
+    { path: '/investment1', name: "Investment1", component: Investment1 },
+    { path: '/investment2', name: "Investment2", component: Investment2 },
+    { path: '/investment3', name: "Investment3", component: Investment3 },
+    { path: '/investment4', name: "Investment4", component: Investment4 },
+    { path: '/investment5', name: "Investment5", component: Investment5 },
+    { path: '/investment6', name: "Investment6", component: Investment6 },
+    { path: '/investment7', name: "Investment7", component: Investment7 },
+    { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
+    { path: '/stock', name: "Stock", component: Stock },
+    { path: '/stock/detail', name: "StockDetail", component: StockDetail },
+    { path: '/stock/chart', name: "StockChart", component: StockChart },
+    { path: '/stock/community', name: "StockCommunity", component: StockCommunity },
+    { path: '/myboard', name: "MyBoard", component: MyBoard },
+    { path: '/signin', name: "SignIn", component: SignIn },
+    { path: '/signup', name: "SignUp", component: SignUp },
+];
+
 const router = createRouter({
     history: createWebHistory(),
+
     routes: [
         { path: '/', name: "Home", component: Home },
         { path: '/shop', name: "Shop", component: Shop },

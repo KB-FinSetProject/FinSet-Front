@@ -12,17 +12,16 @@
             <span class="bank-icon">{{ deposit.logo }}</span>
           </div>
           <div>
-            <p class="fund-name">{{ deposit.name }}</p>
+            <RouterLink :to="`/deposit/detail`">
+              <p class="fund-name">{{ deposit.name }}</p>
+            </RouterLink>
             <p class="fund-details">{{ deposit.details }}</p>
             <div class="risk-info">
               <span class="high-rating">{{ deposit.sort }}</span>
             </div>
           </div>
         </div>
-        <div class="deposit-yield">
-          <span class="max">최고 {{ deposit.max }}%</span>
-          <span class="basic">기본 {{ deposit.basic }}%</span>
-        </div>
+      
         <div class="deposit-icon" @click="toggleFavorite(deposit)">
           <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
              :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
@@ -30,7 +29,7 @@
       </div>
 
       <div class="text-center">
-        <i @click="toggleVisibility('deposit')" class="fa-solid fa-caret-down"></i>
+        <i v-if="!showAll" @click="toggleVisibility('deposit')" class="fa-solid fa-caret-down"></i>
       </div>
 
       <div v-show="isMoreItemsVisible.deposit" class="mt-2">
@@ -40,17 +39,16 @@
               <span class="bank-icon">{{ deposit.logo }}</span>
             </div>
             <div>
-              <p class="fund-name">{{ deposit.name }}</p>
+              <RouterLink :to="`/deposit/detail`">
+                <p class="fund-name">{{ deposit.name }}</p>
+              </RouterLink>
               <p class="fund-details">{{ deposit.details }}</p>
               <div class="risk-info">
                 <span class="high-rating">{{ deposit.sort }}</span>
               </div>
             </div>
           </div>
-          <div class="deposit-yield">
-            <span class="max">최고 {{ deposit.max }}%</span>
-            <span class="basic">기본 {{ deposit.basic }}%</span>
-          </div>
+
           <div class="deposit-icon" @click="toggleFavorite(deposit)">
             <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
@@ -279,6 +277,9 @@ export default {
     },
   },
 };
+
+// "더보기" 상태 관리
+const showAll = ref(false);
 </script>
 
 <style scoped>
@@ -352,6 +353,7 @@ export default {
   margin-bottom: 0;
   font-weight: bold;
 }
+
 .high-rating {
   background-color: #FDEBEA;
   color: #FF6767;
@@ -359,4 +361,5 @@ export default {
   font-size: 10px;
   border-radius: 6px;
 }
+
 </style>
