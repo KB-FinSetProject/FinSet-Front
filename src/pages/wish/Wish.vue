@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-      
+
         <div class="deposit-icon" @click="toggleFavorite(deposit)">
           <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
              :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>

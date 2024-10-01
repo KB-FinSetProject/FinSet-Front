@@ -11,7 +11,7 @@ const initState={
     },
 };
 
-export const useAuthStore=defineStore('auth',()=>{
+export const useLoginStore=defineStore('auth',()=>{
     const state=ref({...initState});
 
     const isLogin=computed(()=> !!state.value.user.id);

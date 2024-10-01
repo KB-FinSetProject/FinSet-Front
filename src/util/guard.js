@@ -1,7 +1,7 @@
-import {useAuthStore} from "@/stores/login.js";
+import {useLoginStore} from "@/stores/login.js";
 
 export const isAuthenticated=(to,from)=>{
-    const auth=useAuthStore();
+    const auth=useLoginStore();
 
     if (!auth.isLogin) {
         console.log('로그인 필요 .....');
