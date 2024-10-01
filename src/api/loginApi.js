@@ -18,6 +18,11 @@ export default {
         console.log('AUTH POST', data);
         return data;
     },
+    async checkName(name){
+        const {data}=await api.get(`${BASE_URL}/checkname/${name}`);
+        console.log('login get checkname',data);
+        return data;
+    },
     async update(member) {
         const formData=new FormData();
         // formData.append('id', member.id);
