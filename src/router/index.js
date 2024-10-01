@@ -37,6 +37,7 @@ import StockCommunity from "@/pages/stock/StockCommunity.vue";
 import MyBoard from "@/pages/board/MyBoard.vue";
 import SignIn from "@/pages/login/SignIn.vue";
 import SignUp from "@/pages/login/SignUp.vue";
+import loginRoutes from './login'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -77,8 +78,9 @@ const router = createRouter({
         { path:  '/stock/chart',name:"StockChart",component:StockChart},
         { path:  '/stock/community',name:"StockCommunity",component:StockCommunity},
         { path:  '/myboard',name:"MyBoard",component:MyBoard},
-        { path: '/signin', name: "SignIn", component: SignIn },
-        { path: '/signup', name: "SignUp", component: SignUp },
+        ...loginRoutes,
+        // { path: '/signin', name: "SignIn", component: SignIn },
+        // { path: '/signup', name: "SignUp", component: SignUp },
     ]
 });
 

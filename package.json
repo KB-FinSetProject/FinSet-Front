@@ -10,18 +10,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
-
     "axios": "^1.7.7",
-    "bootstrap": "^5.2.3",
-
-    "axios": "^1.7.5",
     "bootstrap": "^5.3.3",
-
     "chart.js": "^4.4.4",
     "frontend": "file:",
     "mitt": "^3.0.1",
     "moment": "^2.30.1",
-    "pinia": "^2.1.7",
+    "pinia": "^2.2.3",
     "qs": "^6.13.0",
     "vite-plugin-webpackchunkname": "^1.0.1",
     "vue": "^3.4.37",
