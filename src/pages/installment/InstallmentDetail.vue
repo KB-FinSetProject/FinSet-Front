@@ -193,7 +193,7 @@ h7{
   border: none; /* 기본 테두리 제거 */
   border-radius: 5px; /* 모서리 둥글게 */
   padding: 3px 30px; /* 버튼 내부 여백 */
-  font-size: 15px; /* 글씨 크기 */
+  font-size: 20px; /* 글씨 크기 */
   cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
   text-decoration: none;

@@ -3,7 +3,7 @@
         <nav class="navbar fixed-top bg-body-tertiary border-bottom">
           <div class="navbar-custom container-fluid d-flex align-items-center justify-content-between">
             <!-- 왼쪽 화살표 아이콘 -->
-            <i class="fas fa-arrow-left icon-large"></i>
+            <i class="fas fa-arrow-left icon-large" onclick="history.back()"></i>
   
             <!-- 중앙 텍스트 -->
             <span class="navbar-brand mx-auto text-center">마이페이지</span>
@@ -15,15 +15,16 @@
   
   <style scoped>
 *{
-    color: black;
+    color: white;
     margin: 0;
     padding-top: 0;
     padding-bottom: 0;
-    background-color: white;
+    background-color: #FFBB00;
 }
   /* navbar 관련 스타일 */
   .navbar {
     margin: 0;
+    border-bottom: 1px solid #FFBB00;
   }
   
   .navbar-brand {

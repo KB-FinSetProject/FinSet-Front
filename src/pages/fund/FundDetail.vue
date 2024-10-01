@@ -95,20 +95,54 @@ export default {
             currentSlide: 0, // 슬라이드 인덱스
             type: 'line', // 차트 타입을 'line'으로 설정
             data: {
-                labels: ['January', ' February', ' March', ' April', ' May', 'June', 'July'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [40, 20, 30, 50, 70, 80, 50],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: true, // 영역 채우기
-                }]
+                labels: ['23/10/01', '23/12/01', '24/02/01', '24/04/01', '24/06/01', '24/08/01', '24/10/01'],
+                datasets: [
+                    {
+                        label: '펀드',
+                        data: [40, 20, 30, 50, 70, 80, 50],
+                        backgroundColor: 'rgba(255, 0, 0, 0)', // 투명 배경
+                        borderColor: '#FF6767', // 빨강
+                        borderWidth: 2,
+                        fill: false, // 그래프 아래 배경색 없음
+                        pointRadius: 0, // 점 마크 없앰
+                    },
+                    {
+                        label: '벤치마크',
+                        data: [20, 0, 10, 30, 50, 60, 30],
+                        backgroundColor: 'rgba(0, 255, 0, 0)', // 투명 배경
+                        borderColor: '#00953C', // 초록
+                        borderWidth: 2,
+                        fill: false, // 그래프 아래 배경색 없음
+                        pointRadius: 0, // 점 마크 없앰
+                    },
+                    {
+                        label: '유형평균',
+                        data: [30, 10, 20, 40, 60, 70, 40],
+                        backgroundColor: 'rgba(0, 0, 255, 0)', // 투명 배경
+                        borderColor: '#547BC1', // 파랑
+                        borderWidth: 2,
+                        fill: false, // 그래프 아래 배경색 없음
+                        pointRadius: 0, // 점 마크 없앰
+                    }
+                ]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        grid: {
+                            display: false // y축의 그리드 라인 숨김
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false // x축의 그리드 라인 숨김
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom', // 범례를 아래로 위치 이동
                     }
                 }
             }
@@ -134,6 +168,8 @@ export default {
     }
 }
 </script>
+
+
 
 <style scoped>
 .container {
@@ -209,7 +245,7 @@ export default {
   border: none; /* 기본 테두리 제거 */
   border-radius: 5px; /* 모서리 둥글게 */
   padding: 5px 50px; /* 버튼 내부 여백 */
-  font-size: 15px; /* 글씨 크기 */
+  font-size: 20px; /* 글씨 크기 */
   cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
   text-decoration: none;
@@ -225,5 +261,6 @@ export default {
 .chart {
   width: 100%; /* 가로 100% */
   height: 400px; /* 원하는 높이 설정 */
+  margin-left: -5px;
 }
 </style>

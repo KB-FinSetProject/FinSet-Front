@@ -146,7 +146,7 @@ const performSearch = () => {
 
 .card {
   width: 350px;
-  border: 1px solid #ccc;
+  border: 1px solid #CAC4B7;
   border-radius: 8px;
   padding: 15px;
   background-color: #816843; /* 카드 배경색을 #6E6053로 설정 */
@@ -157,7 +157,9 @@ const performSearch = () => {
   display: flex;
   align-items: center;
   cursor: pointer; /* 클릭 가능하도록 커서 변경 */
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  padding-top: 0px;
+  background-color: transparent;
 }
 
 .title {
@@ -178,7 +180,7 @@ const performSearch = () => {
 }
 
 .cardelse{
-  background-color: rgba(110, 96, 83, 0.17);
+  background-color: rgba(110, 96, 83, 0.10);
   color: black;
 }
 

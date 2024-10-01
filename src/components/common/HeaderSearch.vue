@@ -3,7 +3,7 @@
       <header class="header">
           <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom">
               <div class="navbar-custom container-fluid" style="background-color: white;">
-                  <i class="fa-solid fa-arrow-left icon-large"></i>
+                  <i class="fa-solid fa-arrow-left icon-large" onclick="history.back()"></i>
                   <span class="navbar-brand">상품검색</span>
                   <i class="fa-solid fa-magnifying-glass icon-large" style="visibility: hidden;"></i>
               </div>

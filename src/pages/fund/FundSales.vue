@@ -10,7 +10,7 @@
 
     <br>
     <div class="info-box">
-      <h4>판매액 베스트</h4>
+      <h4>판매액 Best</h4>
       <hr>
       <p>최근 3개월 동안 판매액이 가장 높은 펀드예요!</p>
     </div>
@@ -119,7 +119,6 @@ export default {
   justify-content: space-between;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
-  margin-top: 40px;
 }
 
 
