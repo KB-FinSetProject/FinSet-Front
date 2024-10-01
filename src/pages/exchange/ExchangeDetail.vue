@@ -4,6 +4,7 @@
   <div class="container">
     <br><br>
     <h3 style="margin-left: 10px;">환전정보</h3>
+    <span style="margin-left: 10px; color:gray">2024/10/01 09:00 기준 </span>
     <br>
 
     <div class="exchange-header d-flex align-items-center justify-content-between">
@@ -14,7 +15,6 @@
             <h6 class="exchange-name">{{ item.name }}</h6>
             <p class="exchange-details">적용환율: {{ item.rate }}</p>
           </div>
-          <button @click="refreshData" class="refresh">환율 새로고침 <i class="fa-solid fa-arrows-rotate" style="margin-left: 5px;"></i></button>
         </div>
       </div>
     </div>

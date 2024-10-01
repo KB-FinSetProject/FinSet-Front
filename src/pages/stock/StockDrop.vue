@@ -188,6 +188,7 @@ export default {
   font-weight: bold;
   font-size: 10px;
   margin-right: 10px; /* 마진 추가 */
+  margin-left: 5px;
 }
 
 .stock-name {

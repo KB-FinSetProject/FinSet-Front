@@ -6,13 +6,14 @@
     <br>
     <div class="investment-levels">
       <div
-          v-for="(level, index) in investmentLevels"
-          :key="index"
-          :class="{ active: totalScore <= level.maxScore }"
-          class="option-item">
-        <h3>{{ level.level }}</h3>
-        <p>{{ level.maxScore === Infinity ? '80점 초과' : level.maxScore + '점 이하' }}</p>
-      </div>
+      v-for="(level, index) in investmentLevels"
+      :key="index"
+      :class="{ active: totalScore > (index > 0 ? investmentLevels[index - 1].maxScore : -Infinity) && totalScore <= level.maxScore }"
+      class="option-item">
+    <h3>{{ level.level }}</h3>
+    <p>{{ level.maxScore === Infinity ? '80점 초과' : level.maxScore + '점 이하' }}</p>
+  </div>
+  
     </div>
 
     <!-- 저장 및 저장하지 않음을 처리하는 버튼 -->
@@ -105,7 +106,7 @@ const cancelSubmit = () => {
 .result-container {
   width: 300px;
   font-family: Arial, sans-serif;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
 }
 
 .back-button {

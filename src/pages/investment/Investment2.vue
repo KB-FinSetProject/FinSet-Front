@@ -43,6 +43,7 @@ const investmentDurations = [
 const selectDuration = (id) => {
   selectedDuration.value = id
 }
+
 // 점수를 저장하는 방법
 const saveScore = () => {
   const score = investmentDurations.find(duration => duration.id === selectedDuration.value)?.score || 0;
@@ -119,6 +120,7 @@ const goToNext = () => {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 50px;
 }
 
 .option-item:hover {
@@ -146,7 +148,7 @@ const goToNext = () => {
 
 .navigation {
   text-align: center; /* 텍스트와 버튼들을 중앙 정렬 */
-  margin-top: 85px;
+  margin-top: 50px;
 }
 
 
@@ -158,7 +160,7 @@ const goToNext = () => {
 
 .text-md-center{
   font-size:15px;
-  margin-top:180px;
+  margin-top:160px;
   text-align: center;
 }
 

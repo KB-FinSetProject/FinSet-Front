@@ -52,21 +52,25 @@
       <br>
 
       <div class="wish-item d-flex align-items-center mt-2">
-        <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-        <div>
-          <p class="mb-0">NH 고향사랑 기부 예금</p>
-          <p class="mb-0 text-muted">NH 농협은행</p>
-        </div>
+        <router-link to="/wish" class="d-flex align-items-center" style="text-decoration: none; color:black">
+          <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+          <div>
+            <p class="mb-0" style="font-weight: bold;">NH 고향사랑 기부 예금</p>
+            <p class="mb-0 text-muted">NH 농협은행</p>
+          </div>
+        </router-link>
       </div>
 
       <div class="wish-item d-flex align-items-center mt-2">
-        <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-        <div>
-          <p class="mb-0">삼성전자</p>
-          <p class="mb-0 text-muted">
-            67,500원 <span style="color: #547BC1;">~2.0%</span>
-          </p>
-        </div>
+        <router-link to="/wish" class="d-flex align-items-center" style="text-decoration: none; color:black">
+          <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800" alt="Thumbnail" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+          <div>
+            <p class="mb-0" style="font-weight: bold;">삼성전자</p>
+            <p class="mb-0 text-muted">
+              67,500원 <span style="color: #547BC1;">-2.0</span>
+            </p>
+          </div>
+        </router-link>
       </div>
     </div>
 
@@ -176,7 +180,7 @@ export default {
 .container {
   width: 58%;
   margin-top:70px;
-  margin-bottom: 10px;
+  margin-bottom: 100px;
 }
 
 .card-slider {
