@@ -6,12 +6,12 @@
 
         <br>
         <br>
-
         <div class="col-12">
             <label for="id" class="form-label">*이메일</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" required>
-                <button class="btn btn-custom" type="button">인증하기</button>
+                <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" v-model="member.id">
+                <button class="btn btn-custom" type="button" @click="checkId">인증하기</button>
+              <span :class="disableSubmit.value ? 'text-primary':'text-danger'">{{checkError}}</span>
             </div>
             <div class="invalid-feedback">
                 이메일을 입력해주세요.
@@ -22,7 +22,7 @@
 
         <div class="col-12">
             <label for="password" class="form-label">*비밀번호</label>
-            <input type="text" class="form-control" id="password" placeholder="1234" v-model="password" required>
+            <input type="text" class="form-control" id="password" placeholder="1234" v-model="member.password" required>
             <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
             </div>
@@ -34,7 +34,7 @@
             <label for="password2" class="form-label">*비밀번호 확인</label>
             <span v-if="passwordMismatch" class="text-danger ms-2">비밀번호가 일치하지 않습니다.</span>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="password2" placeholder="1234" v-model="passwordCheck" required>
+                <input type="text" class="form-control" id="password2" placeholder="1234" v-model="member.password2" required>
             </div>
             <div class="invalid-feedback">
                 비밀번호를 확인해주세요.
@@ -46,8 +46,11 @@
         <div class="col-12">
             <label for="name" class="form-label">*닉네임</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="name" placeholder="키키핑" required>
-                <button class="btn btn-custom" type="button">중복 확인</button>
+                <input type="text" class="form-control" id="name" placeholder="키키핑" v-model="member.name" required>
+                <button class="btn btn-custom" type="button" @click="checkName">중복 확인</button>
+              <span :class="disableSubmitName.value ? 'text-primary':'text-danger'">{{checkErrorName}}</span>
+
+
             </div>
             <div class="invalid-feedback">
                 닉네임을 입력해주세요.
@@ -63,15 +66,15 @@
 </template>
 
 <script setup>
-import {reactive, ref, watch} from 'vue';
+import {reactive, ref, computed} from 'vue';
 import HeaderSignUp from '@/components/common/HeaderSignUp.vue';
 import loginApi from "@/api/loginApi";
 import {useRouter} from'vue-router';
 
 const router=useRouter();
 const checkError=ref('')
-const password = ref('');
-const passwordCheck = ref('');
+const checkErrorName=ref('')
+
 const passwordMismatch = ref(false);
 
 const member=reactive({
@@ -82,9 +85,16 @@ const member=reactive({
 })
 
 const disableSubmit=ref(true);
+const disableSubmitName=ref(true);
+const isEmailValid = computed(() => {
+  return member.id.includes('@');
+});
 const checkId=async ()=>{
   if(!member.id){
     return alert('사용자 ID를 입력하세요')
+  }
+  if(!isEmailValid.value){
+    return alert('유효한 이메일을 입력해주세요');
   }
   disableSubmit.value=await loginApi.checkId(member.id);
   console.log(disableSubmit.value,typeof disableSubmit.value);
@@ -107,9 +117,18 @@ const join=async ()=>{
   }
   try{
     await loginApi.create(member);
-    router.push({name:'home'});
+    router.push('/');
   }catch(e){
     console.error(e);
+  }
+};
+const checkName=async ()=>{
+  if(!member.name){
+    return alert('사용자 닉네임을 입력해주셔야됩니다.')
+  }else{
+    disableSubmitName.value=await loginApi.checkName(member.name);
+    console.log(disableSubmitName.value,typeof disableSubmitName.value);
+    checkErrorName.value=disableSubmitName.value ? "이미 사용중인 닉네임 입니다" : "사용가능한 닉네임 입니다.";
   }
 };
 // Watcher to check for password mismatch
