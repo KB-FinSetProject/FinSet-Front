@@ -2,15 +2,14 @@
   <HeaderNormal navbarTitle="투자성향 결과" />
 
   <div class="result-container">
-
     <h5>홍길동 님의 투자 성향 점수: <span class="score">{{ totalScore }}</span> 점</h5>
- <br>
+    <br>
     <div class="investment-levels">
-      <div 
-        v-for="(level, index) in investmentLevels" 
-        :key="index"
-        :class="{ active: totalScore <= level.maxScore }" 
-        class="option-item">
+      <div
+          v-for="(level, index) in investmentLevels"
+          :key="index"
+          :class="{ active: totalScore <= level.maxScore }"
+          class="option-item">
         <h3>{{ level.level }}</h3>
         <p>{{ level.maxScore === Infinity ? '80점 초과' : level.maxScore + '점 이하' }}</p>
       </div>
@@ -22,13 +21,15 @@
       <button @click="cancelSubmit" class="next-button">다시하기</button>
     </div>
 
-    <!-- Confirmation Dialog -->
-    <div v-if="showConfirmDialog" class="confirm-dialog">
-      <br>
-      <p>설문을 다시 하시겠습니까?</p>
-      <div class="dialog-button-group">
-        <button @click="confirmRedirect" class="confirm-button">확인</button>
-        <button @click="showConfirmDialog = false" class="cancel-button">취소</button>
+    <!-- Confirmation Dialog Overlay -->
+    <div v-if="showConfirmDialog" class="confirm-overlay">
+      <div class="confirm-dialog">
+        <br>
+        <p>설문을 다시 하시겠습니까?</p>
+        <div class="dialog-button-group">
+          <button @click="confirmRedirect" class="confirm-button">확인</button>
+          <button @click="showConfirmDialog = false" class="cancel-button">취소</button>
+        </div>
       </div>
     </div>
   </div>
@@ -167,15 +168,27 @@ const cancelSubmit = () => {
   color: #FFBB00; /* 점수 색상 설정 */
 }
 
+.confirm-overlay {
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* 투명한 검정 배경 */
+  z-index: 10; /* 다른 요소들 위에 표시 */
+}
+
 .confirm-dialog {
-  display: flex;
-  flex-direction: column;
+  position: fixed; /* 화면에 고정 */
+  top: 45%; /* 중앙보다 약간 위로 배치 */
+  left: 50%; /* 중앙에 배치 */
+  transform: translate(-50%, -50%); /* 중앙 정렬 */
   border: 1px solid #60584C;
   background-color: white;
   border-radius: 10px;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 20px; /* 패딩 추가 */
   text-align: center;
+  z-index: 11; /* 오버레이 위에 표시 */
 }
 
 .dialog-button-group {
@@ -185,7 +198,7 @@ const cancelSubmit = () => {
   padding-right: 20px;
 }
 
-.confirm-button{
+.confirm-button {
   background-color: #ffffff; /* 배경을 흰색으로 설정 */
   border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
   color: #60584C; /* 글씨 색을 #60584C로 설정 */
@@ -195,6 +208,8 @@ const cancelSubmit = () => {
   border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
   width: 100px;
   margin-top: 10px; /* 버튼 간 간격 추가 */
+  position: relative;
+  right:5px;
 }
 
 .cancel-button {
@@ -207,6 +222,8 @@ const cancelSubmit = () => {
   border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
   width: 100px;
   margin-top: 10px; /* 버튼 간 간격 추가 */
+  position: relative;
+  left:5px;
 }
 
 .confirm-button:hover,

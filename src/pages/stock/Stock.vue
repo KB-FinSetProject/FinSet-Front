@@ -19,10 +19,10 @@
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
               <span>{{ stock.logo }}</span>
             </div>
-            
+
             <div class="stock-detail">
               <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} 
+              <p class="stock-details">{{ stock.price }}
                 <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
               </p>
             </div>
@@ -229,7 +229,7 @@ export default {
 }
 
 .stock-icon {
-  font-size: 15px;
+  font-size: 25px; /* 여기에 크기를 조정 */
   color: #888; /* 기본 색상 */
   margin-right: 15px;
   margin-top: 10px;
@@ -237,6 +237,7 @@ export default {
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
+  font-size: inherit; /* 부모 요소의 font-size를 상속 받도록 설정 */
 }
 
 .mini-bar {

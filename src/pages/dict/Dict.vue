@@ -28,7 +28,8 @@
       <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">
         <div class="card-header" @click="toggleDescription(index)">
           <span class="title">{{ item.title }}</span>
-          <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }"></i>
+          <!-- 조건부 렌더링을 통해 아이콘을 교체 -->
+          <i class="fa-solid" :class="[isActive(index) ? 'fa-caret-up' : 'fa-caret-down', 'arrow']"></i>
         </div>
         <div v-if="isActive(index)">
           <br>
@@ -45,9 +46,8 @@
         <i class="fa-solid fa-book-bookmark icon-large"></i>
         <span class="title">단어장</span>
         <router-link to="/dictmemo">
-          <button @click="addWord" class="add-word-button">+</button>
+          <i class="fa-solid fa-arrow-right"></i> <!-- 수정된 부분 -->
         </router-link>
-        
       </div>
 
       <!-- list 아이템 표시 -->
@@ -60,6 +60,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
@@ -200,6 +201,13 @@ const addWord = () => {
 .icon.active {
   color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
 }
+.fa-arrow-right{
+  color: #ffbf0a;
+  position: relative;
+  left: 100px;
+  font-size: 20px;
+}
+
 
 .arrow {
   margin-left: 10px;
@@ -207,7 +215,7 @@ const addWord = () => {
   transform: translateX(3100%);
 }
 
-.cardelse{
+.cardelse {
   background-color: rgba(110, 96, 83, 0.17);
   color: black;
 }
@@ -261,16 +269,21 @@ input[type="text"] {
   background-color: #FFBB00; /* 노란색 배경 */
   color: white; /* 글씨 색상 */
   border: none;
-  border-radius: 6px; /* 모서리를 둥글게 설정 */
+  border-radius: 5px; /* 모서리를 둥글게 설정 */
   font-size: 20px; /* 글씨 크기를 조금 더 크게 설정 */
   font-weight: bold; /* 글씨 두께를 더 두껍게 설정 */
   cursor: pointer;
-  width: 30px; /* 버튼 폭 */
-  height: 30px; /* 버튼 높이 */
-  margin-left: 225px; /* 아이콘과 버튼 사이 간격 */
-  position: relative;
-
+  width: 25px; /* 원하는 가로 길이 설정 (예: 40px로 변경) */
+  height: 25px; /* 높이 조정 */
+  position: relative; /* 필요 시 위치 조정 */
+  left: 100px; /* 필요에 따라 조정 */
+  line-height: 40px; /* 텍스트를 세로 중앙에 위치시킴 (높이와 같게 설정) */
+  text-align: center; /* 텍스트를 수평 중앙에 위치시킴 */
 }
+
+
+
+
 .icon-title-container {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 세로 중앙 정렬 */
@@ -278,33 +291,46 @@ input[type="text"] {
   margin: 10px 0; /* 위 아래 여백 추가 */
 }
 
+.icon-title-container .title {
+  font-size: 24px; /* 글씨 크기를 24px로 설정 */
+  font-weight: bold; /* 글씨 두께를 두껍게 설정 */
+  position: relative;
+  right: 107px;
+}
+
 .icon-large {
   margin-left: 10px;
   margin-right: 10px; /* 아이콘과 텍스트 사이에 여백 추가 */
   color: #FFBB00;
   font-size: x-large;
+  position: relative;
+  right: 108px;
 }
 
 .item-container {
   display: flex; /* Flexbox 사용 */
-  justify-content: space-between; /* 양쪽 정렬 */
+  justify-content: space-between; /* 아이템을 양쪽 끝으로 배치 */
   align-items: center; /* 세로 중앙 정렬 */
-  margin: 10px; /* 아이템 간격 조정 */
+  padding: 10px; /* 아이템 패딩 */
 }
 
 .item-text {
-  font-size: 1em; /* 텍스트 크기 조정 */
-  color: black;
-  text-decoration: none;
+  color: black; /* 아이템 텍스트 색상 */
+  text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+  font-size: 18px;
 }
 
 .icon2 {
-  color: gray; /* 리스트 아이템 기본 별 색상 */
-  position: absolute;
-  transform: translateX(2000%);
+  cursor: pointer; /* 클릭 가능하도록 커서 변경 */
+  color: gray;
+  font-size: 19px/* 비활성화 상태 색상 */
 }
-
+.icon{
+  font-size: 19px;
+  position: relative;
+  left: 5px;
+}
 .icon2.active {
-  color: #ffbf0a; /* 활성화된 리스트 아이템 별 색상 */
+  color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
 }
 </style>
