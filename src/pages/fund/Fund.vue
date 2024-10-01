@@ -120,7 +120,6 @@ export default {
   justify-content: space-between;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
-  margin-top: 40px;
 }
 
 

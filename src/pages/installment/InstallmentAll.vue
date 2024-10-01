@@ -4,18 +4,11 @@
   <div class="fund-container">
     
     <div class="tabs-container">
-      <div class="tab" @click.native="setActiveTab('all')" :class="{ active: activeTab === 'all' }">
-        <h2 class="best-yield-title">전체</h2>
-      </div>
-      <div class="tab" @click.native="setActiveTab('simple')" :class="{ active: activeTab === 'simple' }">
-        <h2 class="best-yield-title">단리</h2>
-    
-      </div>
-      <div class="tab" @click.native="setActiveTab('compound')" :class="{ active: activeTab === 'compound' }">
-        <h2 class="best-yield-title">복리</h2>
-      
-      </div>
+      <router-link to="/installment" class="tab" active-class="active">전체</router-link>
+      <router-link to="/installmentsimple" class="tab" active-class="active" style="color: #DADADA;">단리</router-link>
+      <router-link to="/installmentcompound" class="tab" active-class="active" style="color: #DADADA;">복리</router-link>
     </div>
+
     <br>
 
     <div class="fund-list">

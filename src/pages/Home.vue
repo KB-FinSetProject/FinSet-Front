@@ -6,73 +6,13 @@
             <br>
             <div class="card-slider">
                 <div class="d-flex flex-row card-wrapper" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-                    <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
+                    <div v-for="(card, index) in cards" :key="index" class="card shadow-sm me-3" style="width: calc(50% - 10px);">
+                        <img class="card-img-top" :src="card.imgUrl" :alt="`Thumbnail ${index + 1}`">
                         <div class="card-body">
-                            <p class="card-text">content1</p>
+                            <p class="card-text">{{ card.content }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article1')">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
-                        <div class="card-body">
-                            <p class="card-text">content2</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article2')">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
-                        <div class="card-body">
-                            <p class="card-text">content3</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article3')">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" >
-                        <div class="card-body">
-                            <p class="card-text">content4</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article4')">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm me-3" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail">
-                        <div class="card-body">
-                            <p class="card-text">content5</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article5')">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card shadow-sm" style="width: calc(50% - 10px);">
-                        <img class="card-img-top" src="https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg" alt="Thumbnail" >
-                        <div class="card-body">
-                            <p class="card-text">content6</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl('https://example.com/article6')">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl(card.url)">View</button>
                                 </div>
                             </div>
                         </div>
@@ -83,10 +23,9 @@
             <br>
 
             <div class="d-flex justify-content-center mt-3">
-                <button class="circle-button" @click="goToSlide(0)"></button>
-                <button class="circle-button" @click="goToSlide(1)"></button>
-                <button class="circle-button" @click="goToSlide(2)"></button>
+                <button class="circle-button" v-for="(card, index) in cards.slice(0, 3)" :key="index" @click="goToSlide(index)"></button>
             </div>
+            
         </div>
 
         <br>
@@ -122,7 +61,11 @@
         <br>
 
         <div class="chart-container">
-            <h2>2,572.09</h2>
+            <h2><i class="fa-solid fa-magnifying-glass-chart icon"></i>TODAY KOSPI</h2>
+            <h2 style="margin-top: 10px;">2,572.09</h2>
+            <h6 style="color: #547BC1;">-56.51 (2.13%) ▼ 오늘</h6>
+
+            <br>
             <canvas ref="lineChart" />
         </div>
         
@@ -130,6 +73,7 @@
 
     </div>
 </template>
+
 
 <script>
 import { Chart, registerables } from 'chart.js';
@@ -139,22 +83,71 @@ export default {
     data() {
         return {
             currentSlide: 0, // 슬라이드 인덱스
+            cards: [
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content1',
+                    url: 'https://example.com/article1'
+                },
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content2',
+                    url: 'https://example.com/article2'
+                },
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content3',
+                    url: 'https://example.com/article3'
+                },
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content4',
+                    url: 'https://example.com/article4'
+                },
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content5',
+                    url: 'https://example.com/article5'
+                },
+                {
+                    imgUrl: 'https://i.pinimg.com/474x/fd/29/9a/fd299aac8ae19c908fac63c9407a8460.jpg',
+                    content: 'content6',
+                    url: 'https://example.com/article6'
+                }
+            ],
             type: 'line', // 차트 타입을 'line'으로 설정
             data: {
-                labels: ['January', ' February', ' March', ' April', ' May', 'June', 'July'],
+                labels: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
                 datasets: [{
                     label: 'Sales',
                     data: [40, 20, 30, 50, 70, 80, 50],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
+                    backgroundColor: 'rgba(253, 235, 234, 0.5)', // 배경색
+                    borderColor: 'rgba(255, 103, 103, 1)', // 선 색상
+                    borderWidth: 2, // 선 두께
                     fill: true, // 영역 채우기
+                    tension: 0.4, // 라인을 부드럽게 곡선으로
+                    pointRadius: 0, // 점 없애기
+                    pointHoverRadius: 0 // 마우스 오버 시 점 없애기
                 }]
             },
             options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false // 범례(legend) 없애기
+                    }
+                },
                 scales: {
+                    x: {
+                        grid: {
+                            display: false // X축 점선 없애기
+                        }
+                    },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        grid: {
+                            display: false // Y축 점선 없애기
+                        }
                     }
                 }
             }
@@ -179,13 +172,16 @@ export default {
         },
     }
 }
+
 </script>
+
 
 
 <style scoped>
 .container {
-  width: 60%;
-  margin-top:70px
+  width: 58%;
+  margin-top:70px;
+  margin-bottom: 10px;
 }
 
 .card-slider {
@@ -247,5 +243,6 @@ export default {
     height: 150px; /* 원하는 높이로 조정 */
     object-fit: cover;
 }
+
 
 </style>
