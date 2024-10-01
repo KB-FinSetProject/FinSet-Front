@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Shop from '@/pages/Shop.vue';
 import Auth from '@/pages/auth/Auth.vue';
-import Board from '@/pages/board/Board.vue';
 import DepositAll from '@/pages/deposit/DepositAll.vue';
 import DepositSimple from '@/pages/deposit/DepositSimple.vue';
 import DepositCompound from '@/pages/deposit/DepositCompound.vue';
@@ -45,7 +44,6 @@ const router = createRouter({
         { path: '/', name: "Home", component: Home },
         { path: '/shop', name: "Shop", component: Shop },
         { path: '/auth', name: "Auth", component: Auth },
-        { path: '/board', name: "Board", component: Board },
         { path: '/deposit', name: "DepositAll", component: DepositAll }, // 전체 예금 페이지
         { path: '/depositsimple', name: "DepositSimple", component: DepositSimple }, // 전체 예금 페이지
         { path: '/depositcompound', name: "DepositCompound", component: DepositCompound }, // 전체 예금 페이지

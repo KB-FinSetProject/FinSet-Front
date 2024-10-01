@@ -44,7 +44,10 @@
       <div class="icon-title-container">
         <i class="fa-solid fa-book-bookmark icon-large"></i>
         <span class="title">단어장</span>
-        <button @click="addWord" class="add-word-button">+</button> <!-- 오른쪽으로 이동 -->
+        <router-link to="/dictmemo">
+          <button @click="addWord" class="add-word-button">+</button>
+        </router-link>
+        
       </div>
 
       <!-- list 아이템 표시 -->
@@ -263,9 +266,10 @@ input[type="text"] {
   font-weight: bold; /* 글씨 두께를 더 두껍게 설정 */
   cursor: pointer;
   width: 30px; /* 버튼 폭 */
-  height: 25px; /* 버튼 높이 */
+  height: 30px; /* 버튼 높이 */
   margin-left: 225px; /* 아이콘과 버튼 사이 간격 */
   position: relative;
+
 }
 .icon-title-container {
   display: flex; /* Flexbox 사용 */
