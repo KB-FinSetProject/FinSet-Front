@@ -3,9 +3,9 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom" >
                 <div class="navbar-custom container-fluid" style="background-color: white;">
-                    <i class="fa-solid fa-arrow-left icon-large"></i>
+                    <i class="fa-solid fa-arrow-left icon-large" onclick="history.back()"></i>
                     <span class="navbar-brand">{{ navbarTitle }}</span>
-                    <i class="fa-solid fa-magnifying-glass icon-large"></i>
+                    <RouterLink to="/search"><i class="fa-solid fa-magnifying-glass icon-large"></i></RouterLink>
                 </div>
             </nav>
         </header>
@@ -35,6 +35,7 @@ const props = defineProps({
 }
 .icon-large {
     font-size: 20px;
+    color: black;
 }
 
 .navbar-custom {

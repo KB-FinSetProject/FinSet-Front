@@ -2,20 +2,14 @@
   <HeaderNormal navbarTitle="적금상품" />
 
   <div class="fund-container">
-    <div class="titles-container">
-      <router-link to="/installment" class="title-with-divider" @click.native="setActiveTab('all')">
-        <h2 class="best-yield-title">전체</h2>
-        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
-      </router-link>
-      <router-link to="/installment" class="title-with-divider" @click.native="setActiveTab('simple')">
-        <h2 class="best-yield-title">단리</h2>
-        <div class="divider" :class="{ active: activeTab === 'simple' }"></div>
-      </router-link>
-      <router-link to="/installment" class="title-with-divider" @click.native="setActiveTab('compound')">
-        <h2 class="best-yield-title">복리</h2>
-        <div class="divider" :class="{ active: activeTab === 'compound' }"></div>
-      </router-link>
+    
+    <div class="tabs-container">
+      <router-link to="/installment" class="tab" active-class="active">전체</router-link>
+      <router-link to="/installmentsimple" class="tab" active-class="active" style="color: #DADADA;">단리</router-link>
+      <router-link to="/installmentcompound" class="tab" active-class="active" style="color: #DADADA;">복리</router-link>
     </div>
+
+    <br>
 
     <div class="fund-list">
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
@@ -136,6 +130,34 @@ export default {
   bottom: 110px;
 }
 
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-top: 40px;
+}
+
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}
+
+.best-yield-title {
+  margin: 0; /* 제목 마진 초기화 */
+}
+
 .titles-container {
   display: flex;
   justify-content: space-between;
@@ -155,7 +177,7 @@ export default {
 }
 
 .best-yield-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;

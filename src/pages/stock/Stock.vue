@@ -2,20 +2,14 @@
   <HeaderNormal navbarTitle="주식 상품" />
 
   <div class="stock-container">
-    <div class="titles-container">
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('all')">
-        <h2 class="best-yield-title">전체</h2>
-        <div class="divider" :class="{ active: activeTab === 'all' }"></div>
-      </router-link>
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('gain')">
-        <h2 class="best-yield-title">급상승</h2>
-        <div class="divider" :class="{ active: activeTab === 'gain' }"></div>
-      </router-link>
-      <router-link to="#" class="title-with-divider" @click.native="setActiveTab('drop')">
-        <h2 class="best-yield-title">급하락</h2>
-        <div class="divider" :class="{ active: activeTab === 'drop' }"></div>
-      </router-link>
+
+    <div class="tabs-container">
+      <router-link to="/stock" class="tab" active-class="active">전체</router-link>
+      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승 ▲</router-link>
+      <router-link to="/stockdrop" class="tab" active-class="active" style="color: #DADADA;">급하락 ▼</router-link>
     </div>
+
+    <br>
 
     <div class="stock-list">
       <div v-for="(stock, index) in filteredStocks" :key="stock.id" class="stock-item">
@@ -23,19 +17,22 @@
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span class="stock-icon">{{ stock.logo }}</span>
+              <span>{{ stock.logo }}</span>
             </div>
-            <div>
-              <router-link :to="`/stock/detail/${stock.id}`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} <span class="change">{{ stock.change }}</span></p>
+
+            <div class="stock-detail">
+              <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
+              <p class="stock-details">{{ stock.price }}
+                <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
+              </p>
             </div>
           </div>
+
           <div class="stock-icon" @click="toggleFavorite(stock)">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
-        <div class="mini-bar"></div> <!-- 미니바 추가 -->
       </div>
     </div>
   </div>
@@ -107,42 +104,52 @@ export default {
     toggleFavorite(stock) {
       stock.favorite = !stock.favorite; // favorite 상태 토글
     },
+    getColor(change) {
+      return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+    },
   },
 };
 </script>
 
 <style scoped>
+/* 스타일은 그대로 유지합니다 */
 .stock-container {
   padding: 16px;
   max-width: 390px;
   position: relative;
-  bottom: 110px;
+  margin-top: -370px;
 }
 
-.titles-container {
+.tabs-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-top: 40px;
 }
 
-.title-with-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.tab {
   flex: 1;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
-  background: none;
-  border: none;
+  color: black;
   text-decoration: none;
-  margin: 0; /* 마진 제거 */
+  font-size: 24px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
 }
 
 .best-yield-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
   color: #000000;
   text-align: center;
+  margin: 0; /* 제목 마진 초기화 */
 }
 
 .divider {
@@ -195,8 +202,9 @@ export default {
   border-radius: 50%;
   color: #fff;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 10px;
   margin-right: 10px; /* 마진 추가 */
+  margin-left: 5px;
 }
 
 .stock-name {
@@ -207,22 +215,29 @@ export default {
   color: black;
 }
 
+.stock-detail {
+  margin-left: 10px;
+}
+
 .stock-details {
   font-size: 14px;
   margin: 0;
 }
 
 .change {
-  font-weight: bold;
+  margin-left: 7px;
 }
 
 .stock-icon {
-  font-size: 24px;
+  font-size: 25px; /* 여기에 크기를 조정 */
   color: #888; /* 기본 색상 */
+  margin-right: 15px;
+  margin-top: 10px;
 }
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
+  font-size: inherit; /* 부모 요소의 font-size를 상속 받도록 설정 */
 }
 
 .mini-bar {

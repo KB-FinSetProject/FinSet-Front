@@ -19,7 +19,7 @@
 
           <!-- 다섯 번째 칸: 돋보기 아이콘 -->
           <div class="search-icon d-flex justify-content-end align-items-center mt-2">
-            <i class="fa-solid fa-magnifying-glass icon-large"></i>
+            <router-link to="/search"><i class="fa-solid fa-magnifying-glass icon-large"></i></router-link> 
           </div>
         </div>
       </nav>

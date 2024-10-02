@@ -8,11 +8,7 @@
 </template>
 
 <script setup>
-import HeaderHome from './components/common/HeaderHome.vue';
-import HeaderMyPage from './components/common/HeaderMyPage.vue';
-import Header from '@/components/common/HeaderNormal.vue'
-import HeaderSearch from './components/common/HeaderSearch.vue';
-import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import HeaderHome from '@/components/common/HeaderHome.vue';
 import Footer from '@/components/common/Footer.vue'
 
 </script>

@@ -2,12 +2,11 @@
   <HeaderMyPage />
 
   <div class="container">
-    <div class="info">
-      <hr style="border-color: white;">
+    <div class="info" style="width: 390px">
 
-      <div style="visibility: hidden;">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
-
-      <h1>홍길동 <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px;"></i></h1>
+      <div>
+        <h1 style="margin-top: 25px;">홍길동 <RouterLink to="/signup"><i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px; color:white"></i></RouterLink></h1>
+      </div>
       <br>
       <div class="email">
         hongildong@kb.com
@@ -48,11 +47,11 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 
 <style scoped>
 .container {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .container {
-  margin-top: 60px; /* 헤더 높이보다 약간 더 크게 설정 */
+  margin-top: 100px; /* 헤더 높이보다 약간 더 크게 설정 */
   padding: 20px; /* 패딩 추가 */
 }
 
@@ -61,7 +60,8 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
   background-color: #FFBB00; /* 배경색 설정 */
   color: white; /* 글씨색 흰색으로 설정 */
   padding: 20px; /* 패딩 추가 */
-  border-radius: 10px; /* 모서리 둥글게 */
+  margin-top: -100px;
+  height: 170px;
 }
 
 .email {
@@ -84,10 +84,11 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 .bottomButtons {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 130px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.withdrawButton,
 .logoutButton {
   width: 48%;
   padding: 0.75rem;
@@ -99,10 +100,22 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
   transition: background-color 0.3s ease;
 }
 
+.withdrawButton{
+  width: 48%;
+  padding: 0.75rem;
+  border-color: #816843; 
+  background-color: white;
+  color: #816843;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid;
+}
 
 .list {
   width: 100%; /* 리스트 전체 폭 */
   max-width: 600px; /* 최대 폭 제한 */
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .list-item {
@@ -114,5 +127,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 }
 
 
-
+hr{
+  width: 350px;
+}
 </style>

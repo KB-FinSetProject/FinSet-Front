@@ -1,7 +1,6 @@
 <template>
+  <HeaderSearch />
 
-  <HeaderSearch/>
-  
   <div class="stock-container">
     <div class="search-container">
       <input
@@ -9,12 +8,23 @@
           placeholder="검색어를 입력하세요"
           class="search-input"
       />
-      <i class="fas fa-magnifying-glass search-icon"></i> <!-- 검색 아이콘 -->
+      <i class="fas fa-magnifying-glass search-icon" @click="performSearch"></i> <!-- 검색 아이콘 클릭 시 검색 수행 -->
     </div>
     <p class="example-text">ex) 500000원에 맞는 주식을 찾아줘</p>
     <p class="example-text">ex) 3000000, 3년, 펀드</p>
 
-    <hr class="divider" /> <!-- 구분선 추가 -->
+    <hr class="divider" />
+
+    <!-- 검색 결과 섹션 추가 -->
+    <div v-if="searchResults.length > 0">
+      <h2 class="section-title">검색 결과</h2>
+      <div class="results-container">
+        <div class="result-item" v-for="result in searchResults" :key="result.id">
+          {{ result.name }} <!-- 결과 이름 또는 다른 속성 표시 -->
+        </div>
+      </div>
+    </div>
+
     <h2 class="section-title">상품 바로가기</h2>
     <div class="quick-links">
       <div class="button-container">
@@ -42,8 +52,26 @@ export default {
       searchTerm: '',
       quickLinks: ['예적금', '주식', '펀드', '외환'],
       recentKeywords: ['A', 'B', 'C'],
+      searchResults: [], // 검색 결과 저장
     };
   },
+  methods: {
+    performSearch() {
+      if (this.searchTerm) {
+        // 여기에 API 호출이나 검색 로직 추가하여 결과를 얻음
+        // 예시: this.searchResults = fetchResults(this.searchTerm);
+
+        // 임시로 결과를 설정 (예시)
+        this.searchResults = [
+          { id: 1, name: '검색 결과 1' },
+          { id: 2, name: '검색 결과 2' },
+          { id: 3, name: '검색 결과 3' }
+        ];
+      } else {
+        alert('검색어를 입력해주세요.');
+      }
+    }
+  }
 };
 </script>
 

@@ -121,6 +121,7 @@ const goToNext = () => {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 50px;
 }
 
 .option-item:hover {

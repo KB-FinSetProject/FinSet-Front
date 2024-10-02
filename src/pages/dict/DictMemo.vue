@@ -4,17 +4,20 @@
   <div class="container">
     <div class="card-container">
       <div v-for="(item, index) in items" :key="item.title" class="card">
-        <div class="card-header" @click="toggleDescription(index)">
-          <i class="fa-solid fa-star icon"></i>
-          <span class="title">{{ item.title }}</span>
-          <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }"></i>
+        <div class="card-header">
+          <i 
+            class="fa-solid fa-star icon" 
+            :class="{ active: isStarActive(index) }" 
+            @click="toggleStar(index)"
+          ></i>
+          <span class="title" @click="toggleDescription(index)">{{ item.title }}</span>
+          <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }" @click="toggleDescription(index)"></i>
         </div>
-        <!-- description 및 memo 부분을 active 상태에 따라 함께 보여줌 -->
         <div v-if="isActive(index)">
           <p class="description">{{ item.content }}</p>
           <div class="memo">
             <p>Memo</p>
-            <textarea :value="item.memo" readonly />
+            <textarea v-model="item.memo" readonly />
           </div>
         </div>
       </div>
@@ -58,19 +61,28 @@ const items = ref([
 // 아코디언 상태 관리
 const activeIndices = ref([]); // active 상태를 저장하는 배열
 
+// 별 아이콘 상태 관리 (각 항목별로 개별 상태 관리)
+const starStates = ref(Array(items.value.length).fill(true)); // 각 리스트 항목별로 false로 초기화
+
 // 특정 인덱스가 active 상태인지 확인
 const isActive = (index) => activeIndices.value.includes(index);
 
 // 아코디언 토글 함수
 const toggleDescription = (index) => {
   if (isActive(index)) {
-    // 이미 열려있으면 닫기
     activeIndices.value = activeIndices.value.filter(i => i !== index);
   } else {
-    // 열려있지 않으면 추가
     activeIndices.value.push(index);
   }
 };
+
+// 리스트 항목의 별 상태 토글 함수
+const toggleStar = (index) => {
+  starStates.value[index] = !starStates.value[index]; // 해당 인덱스의 별 상태 토글
+};
+
+// 해당 인덱스의 별이 활성화된 상태인지 확인
+const isStarActive = (index) => starStates.value[index];
 </script>
 
 <style scoped>
@@ -103,6 +115,7 @@ const toggleDescription = (index) => {
 
 .title {
   font-size: 1.2em; /* 제목 크기 조정 */
+  margin-left: 10px;
 }
 
 .memo {
@@ -123,10 +136,15 @@ textarea {
 }
 
 .icon {
-  color: #ffbf0a; /* 아이콘 색상 설정 */
+  color: gray; /* 기본 별 색상 - 회색 */
+  margin-left: -10px;
 }
 
-.arrow{
+.icon.active {
+  color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
+}
+
+.arrow {
   margin-left: 10px;
   position: absolute;
   transform: translateX(3100%);
