@@ -1,7 +1,7 @@
 <template>
   <HeaderNormal navbarTitle="적금상품" />
 
-  <div class="fund-container">
+  <div class="installment-container">
     
     <div class="tabs-container">
       <router-link to="/installment" class="tab" active-class="active" style="color: #DADADA;">전체</router-link>
@@ -83,13 +83,13 @@ export default {
     },
   },
   mounted() {
-    this.fetchInstallments('total'); // 페이지가 로드될 때 전체 목록을 불러옴
+    this.fetchInstallments('simple'); // 페이지가 로드될 때 전체 목록을 불러옴
   },
 };
 </script>
 
 <style scoped>
-.fund-container {
+.installment-container {
   padding: 16px;
   max-width: 390px;
   position: relative;
@@ -157,27 +157,27 @@ export default {
   margin: 0; /* 마진 제거 */
 }
 
-.fund-list {
+.installment-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.fund-item {
+.installment-item {
   display: flex;
   flex-direction: column;
   background-color: transparent;
   width: 360px;
 }
 
-.fund-header {
+.installment-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.fund-info {
+.installment-info {
   display: flex;
   align-items: center; /* 수평 정렬을 위해 추가 */
   position: relative; /* position 추가 */
@@ -199,7 +199,7 @@ export default {
   margin-right: 20px;
 }
 
-.fund-name {
+.installment-name {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 4px;
@@ -209,12 +209,12 @@ export default {
   margin-right: 16px;
 }
 
-.fund-details {
+.installment-details {
   font-size: 14px;
   margin: 0;
 }
 
-.deposit-yield { /* 클래스명 변경 */
+.installment-yield { /* 클래스명 변경 */
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -223,12 +223,12 @@ export default {
   right: 10px;
 }
 
-.deposit-icon { /* 클래스명 변경 */
+.installment-icon { /* 클래스명 변경 */
   font-size: 24px;
   color: #888; /* 기본 색상 */
 }
 
-.deposit-icon .fas {
+.installment-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
 
