@@ -1,7 +1,7 @@
 <template>
   <HeaderNormal navbarTitle="예금상품" />
 
-  <div class="fund-container">
+  <div class="deposit-container">
 
     <div class="tabs-container">
       <router-link to="/deposit" class="tab" active-class="active">전체</router-link>
@@ -12,24 +12,24 @@
     <br>
 
 
-    <div class="fund-list">
-      <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
-        <div class="fund-header">
-          <div class="fund-info d-flex align-items-center">
+    <div class="deposit-list">
+      <div v-for="deposit in filteredDeposits" :key="deposit.id" class="deposit-item">
+        <div class="deposit-header">
+          <div class="deposit-info d-flex align-items-center">
             <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
               <span class="bank-icon">{{ deposit.logo }}</span>
             </div>
             <div>
-              <router-link :to="`/deposit/detail`" class="fund-name">{{ deposit.name }}</router-link>
-              <p class="fund-details">{{ deposit.details }}</p>
+              <p class="deposit-name" @click="goToDetail(deposit)">{{ deposit.depositName }}</p> <!-- 클릭 이벤트 추가 -->
+              <p class="deposit-details">{{ deposit.depositBank }}</p>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.sort }}</span>
+                <span class="high-rating">{{ deposit.depositCategory }}</span>
               </div>
             </div>
           </div>
           <div class="deposit-yield"> <!-- 클래스명 변경 -->
-            <span class="max">최고 {{ deposit.max }}%</span>
-            <span class="basic">기본 {{ deposit.basic }}%</span>
+            <span class="max">최고 {{ deposit.depositMaxRate }}%</span>
+            <span class="basic">기본 {{ deposit.depositNormalRate }}%</span>
           </div>
           <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
             <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
@@ -38,93 +38,58 @@
         </div>
         <div class="mini-bar"></div> <!-- 미니바 추가 -->
       </div>
+      
     </div>
   </div>
 </template>
 
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import depositApi from "@/api/depositApi"; // depositApi import
 
 export default {
   components: { HeaderNormal },
   data() {
     return {
       activeTab: 'all',
-      deposits: [
-        {
-          id: 1,
-          name: '예금 1 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
-        },
-        {
-          id: 2,
-          name: '예금 2 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
-        },
-        {
-          id: 3,
-          name: '예금 3 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
-        },
-        {
-          id: 4,
-          name: '예금 4 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
-        },
-      ],
+      deposits: [],
     };
   },
   computed: {
     filteredDeposits() {
       if (this.activeTab === 'simple') {
-        return this.deposits.filter(deposit => deposit.type === 'simple');
+        return this.deposits.filter(deposit => deposit.depositCategory === '단리');
       } else if (this.activeTab === 'compound') {
-        return this.deposits.filter(deposit => deposit.type === 'compound');
+        return this.deposits.filter(deposit => deposit.depositCategory === '복리');
       }
       return this.deposits; // 전체 예금을 보여줌
     },
   },
   methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
+    async fetchDeposits() {
+      try {
+        this.deposits = await depositApi.fetchDeposits(); // API 호출
+      } catch (error) {
+        console.error("Error fetching deposits:", error); // 오류 처리
+      }
     },
     toggleFavorite(deposit) {
       deposit.favorite = !deposit.favorite; // favorite 상태 토글
     },
+    goToDetail(deposit) {
+    // 클릭한 예금의 dno를 저장하고 상세 페이지로 이동
+    this.$router.push({ path: '/deposit/detail', query: { dno: deposit.dno } });
+    },
+  },
+  mounted() {
+    this.fetchDeposits(); // 컴포넌트가 마운트될 때 데이터 가져오기
   },
 };
 </script>
 
+
 <style scoped>
-.fund-container {
+.deposit-container {
   padding: 16px;
   max-width: 390px;
   position: relative;
@@ -172,27 +137,27 @@ export default {
   margin: 0; /* 마진 제거 */
 }
 
-.fund-list {
+.deposit-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.fund-item {
+.deposit-item {
   display: flex;
   flex-direction: column;
   background-color: transparent;
   width: 360px;
 }
 
-.fund-header {
+.deposit-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.fund-info {
+.deposit-info {
   display: flex;
   align-items: center; /* 수평 정렬을 위해 추가 */
   position: relative; /* position 추가 */
@@ -214,7 +179,7 @@ export default {
   margin-right: 20px;
 }
 
-.fund-name {
+.deposit-name {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 4px;
@@ -224,7 +189,7 @@ export default {
   margin-right: 16px;
 }
 
-.fund-details {
+.deposit-details {
   font-size: 14px;
   margin: 0;
 }
