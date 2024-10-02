@@ -40,6 +40,7 @@ import MyBoard from "@/pages/board/MyBoard.vue";
 import SignIn from "@/pages/login/SignIn.vue";
 import SignUp from "@/pages/login/SignUp.vue";
 import loginRoutes from './login'
+import stockRoutes from './stock'
 
 const routes = [
     { path: '/', name: "Home", component: Home },
@@ -84,7 +85,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
 
     routes: [
         { path: '/', name: "Home", component: Home },
@@ -116,15 +117,15 @@ const router = createRouter({
         { path: '/investment6', name: "Investment6", component: Investment6 },
         { path: '/investment7', name: "Investment7", component: Investment7 },
         { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
-        { path: '/stock', name: "Stock", component: Stock },
-        { path: '/stockhigh', name: "StockHigh", component: StockHigh },
-        { path: '/stockdrop', name: "StockDrop", component: StockDrop },
-        { path:  '/stock/detail',name:"StockDetail",component:StockDetail},
-        { path:  '/stock/chart',name:"StockChart",component:StockChart},
-        { path:  '/stock/community',name:"StockCommunity",component:StockCommunity},
+        // { path: '/stock', name: "Stock", component: Stock },
+        // { path: '/stockhigh', name: "StockHigh", component: StockHigh },
+        // { path: '/stockdrop', name: "StockDrop", component: StockDrop },
+        // { path:  '/stock/detail',name:"StockDetail",component:StockDetail},
+        // { path:  '/stock/chart',name:"StockChart",component:StockChart},
+        // { path:  '/stock/community',name:"StockCommunity",component:StockCommunity},
         { path:  '/myboard',name:"MyBoard",component:MyBoard},
         ...loginRoutes,
-        
+        ...stockRoutes,
     ]
 });
 
