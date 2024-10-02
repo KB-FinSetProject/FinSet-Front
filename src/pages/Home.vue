@@ -1,4 +1,7 @@
 <template>
+
+  <HeaderHome />
+
   <div class="container">
 
     <div class="chart-container">
@@ -76,6 +79,10 @@
 
   </div>
 </template>
+
+<script setup>
+import HeaderHome from '@/components/common/HeaderHome.vue';
+</script>
 
 <script>
 import { Chart, registerables } from 'chart.js';
