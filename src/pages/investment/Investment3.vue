@@ -84,7 +84,7 @@ const goToNext = () => {
 .survey-container {
   width: 300px;
   font-family: Arial, sans-serif;
-  margin-top: 100px;
+  margin-top: 85px;
   margin-bottom: 100px;
 }
 
@@ -174,6 +174,7 @@ const goToNext = () => {
 .text-md-center{
   font-size:15px;
   text-align: center;
+  margin-top: 30px;
 }
 
 .progress-line {

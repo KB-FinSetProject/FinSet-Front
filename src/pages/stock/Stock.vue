@@ -34,9 +34,11 @@
             </div>
 
             <div class="stock-detail">
+
               <router-link :to="{ name: 'stockDetail', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }}
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
+
               </p>
             </div>
           </div>
@@ -237,7 +239,7 @@ const getColor = (change) => {
 }
 
 .stock-icon {
-  font-size: 15px;
+  font-size: 25px; /* 여기에 크기를 조정 */
   color: #888; /* 기본 색상 */
   margin-right: 15px;
   margin-top: 10px;
@@ -245,6 +247,7 @@ const getColor = (change) => {
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
+  font-size: inherit; /* 부모 요소의 font-size를 상속 받도록 설정 */
 }
 
 .mini-bar {

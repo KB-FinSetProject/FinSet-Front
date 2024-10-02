@@ -46,8 +46,9 @@ const routes = [
     { path: '/', name: "Home", component: Home },
     { path: '/shop', name: "Shop", component: Shop },
     { path: '/auth', name: "Auth", component: Auth },
-    // { path: '/board', name: "Board", component: Board },
     { path: '/deposit', name: "DepositAll", component: DepositAll },
+    { path: '/depositsimple', name: "DepositSimple", component: DepositSimple },
+    { path: '/depositcompound', name: "DepositCompound", component: DepositCompound },
     { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail },
     { path: '/dict', name: "Dict", component: Dict },
     { path: '/dictmemo', name: "DictMemo", component: DictMemo },
@@ -58,6 +59,8 @@ const routes = [
     { path: '/fundsales', name: "FundSales", component: FundSales },
     { path: '/fundsavings', name: "FundSavings", component: FundSavings },
     { path: '/installment', name: "InstallmentAll", component: InstallmentAll },
+    { path: '/installmentsimple', name: "InstallmentSimple", component: InstallmentSimple },
+    { path: '/installmentcompound', name: "InstallmentCompound", component: InstallmentCompound },
     { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail },
     { path: '/search', name: "Search", component: Search }, // 검색 페이지
     { path: '/search/results', name: "SearchResults", component: SearchResults }, // 검색 결과 페이지 추가
@@ -71,6 +74,8 @@ const routes = [
     { path: '/investment7', name: "Investment7", component: Investment7 },
     { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
     { path: '/stock', name: "Stock", component: Stock },
+    { path: '/stockhigh', name: "StockHigh", component: StockHigh },
+    { path: '/stockdrop', name: "StockDrop", component: StockDrop },
     { path: '/stock/detail', name: "StockDetail", component: StockDetail },
     { path: '/stock/chart', name: "StockChart", component: StockChart },
     { path: '/stock/community', name: "StockCommunity", component: StockCommunity },

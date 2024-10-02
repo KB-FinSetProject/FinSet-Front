@@ -41,7 +41,6 @@
   text-align: center;
 }
 
-/* 로그인/회원가입 링크 스타일 */
 .auth-links a {
   font-size: 11px; /* 텍스트 크기 수정 */
   text-decoration: none;

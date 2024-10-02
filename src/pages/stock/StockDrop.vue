@@ -5,14 +5,10 @@
 
     <div class="tabs-container">
       <router-link to="/stock" class="tab" active-class="active" style="color: #DADADA;">전체</router-link>
-      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">
-        급상승 ▲
-      </router-link>
-      <router-link to="/stockdrop" class="tab" active-class="active">
-        급하락 <span style="color: #547BC1;">▼</span>
-      </router-link>
+      <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승 ▲</router-link>
+      <router-link to="/stockdrop" class="tab" active-class="active">급하락 <span style="color: #547BC1;">▼</span></router-link>
     </div>
-    
+
     <br>
 
     <div class="stock-list">
@@ -23,10 +19,10 @@
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
               <span>{{ stock.logo }}</span>
             </div>
-            
+
             <div class="stock-detail">
               <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} 
+              <p class="stock-details">{{ stock.price }}
                 <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
               </p>
             </div>
@@ -133,7 +129,6 @@ export default {
   margin-top: 40px;
 }
 
-
 .tab {
   flex: 1;
   text-align: center;
@@ -147,22 +142,6 @@ export default {
 .tab.active {
   border-bottom: 2px solid #000;
   font-weight: bold;
-}
-
-.best-yield-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 8px; /* 제목과 구분선 간의 간격 유지 */
-  color: #000000;
-  text-align: center;
-  margin: 0; /* 제목 마진 초기화 */
-}
-
-.divider {
-  height: 2px;
-  width: 100%;
-  background-color: #e1e1e1;
-  margin: 0; /* 마진 제거 */
 }
 
 .stock-list {
@@ -179,7 +158,6 @@ export default {
   padding: 10px; /* 여백 추가 */
   background-color: white; /* 배경색 추가 */
   border-radius: 8px; /* 모서리 둥글게 */
-  /* border: none; */ /* 테두리 제거 */
 }
 
 .stock-header {
@@ -235,7 +213,7 @@ export default {
 }
 
 .stock-icon {
-  font-size: 15px;
+  font-size: 25px; /* 여기에 크기를 조정 */
   color: #888; /* 기본 색상 */
   margin-right: 15px;
   margin-top: 10px;
@@ -243,6 +221,7 @@ export default {
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
+  font-size: inherit; /* 부모 요소의 font-size를 상속 받도록 설정 */
 }
 
 .mini-bar {
