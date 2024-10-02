@@ -126,7 +126,6 @@ const router = createRouter({
         { path:  '/myboard',name:"MyBoard",component:MyBoard},
         ...loginRoutes,
         ...stockRoutes,
-
     ]
 });
 

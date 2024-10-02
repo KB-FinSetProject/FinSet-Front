@@ -1,88 +1,94 @@
 <template>
   <HeaderNormal navbarTitle="예금 상세" />
 
-<div class="container">
-
-  <div class="wish-item d-flex align-items-center mt-2">
-    <div style="width: 300px;">
-      <h5 class="mb-0">NH 고향사랑 기부 예금</h5>
-      <p class="mb-0 text-muted">NH 농협은행</p>
-    </div>
-    <img
-      src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800"
-      alt="Thumbnail"
-      class="rounded-circle me-3 thumbnail"
-    />
-  </div>
-
-  <div class="join-info d-flex mt-2">
-    <p class="join-text join-bg">방문없이 가입</p>
-    <p class="join-text join-bg">누구나 가입</p>
-  </div>
-
-
-  <div class="details mt-3">
-    <div class="rate-info">
-      <div>
-        <span>최고</span>
-        <br />
-        <span class="rate-highlight">연 {{ max }}%</span>
+  <div class="container">
+    <div class="wish-item d-flex align-items-center mt-2">
+      <div style="width: 300px;">
+        <h5 class="mb-0">{{ deposit.depositName }}</h5> <!-- 예금 이름 -->
+        <p class="mb-0 text-muted">{{ deposit.depositBank }}</p> <!-- 은행 이름 -->
       </div>
-
-      <div class="separator"></div>
-
-      <div>
-        <span>기본</span>
-        <br />
-        <span class="rate-highlight">연 {{ base }}%</span>
-        <span class="small-text" style="color: #838687;">(12개월, 세전)</span>
-      </div>
+      <img
+        src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800"
+        alt="Thumbnail"
+        class="rounded-circle me-3 thumbnail"
+      />
     </div>
 
-    <div class="centered-info">
-      <h5>상품 안내</h5>
-      <hr style="height: 4px;">
-    </div>
-    
-    <div class="fixed-info">
-      <div class="info-item">
-        <span class="info-label" style="margin-right: 80px;">기간</span>
-        <span>{{ date }}</span>
-      </div>
-      <div class="info-item">
-        <span class="info-label" style="margin-right: 80px;">금액</span>
-        <span>{{ limit }}</span>
-      </div>
-      <div class="info-item">
-        <span class="info-label" style="margin-right: 50px;">가입 방법</span>
-        <span>{{ join }}</span>
-      </div>
-      <div class="info-item">
-        <span class="info-label" style="margin-right: 80px;">대상</span>
-        <span>{{ who }}</span>
-      </div>
+    <div class="join-info d-flex mt-2">
+      <p class="join-text join-bg">방문없이 가입</p>
+      <p class="join-text join-bg">누구나 가입</p>
     </div>
 
+    <div class="details mt-3">
+      <div class="rate-info">
+        <div>
+          <span>최고</span>
+          <br />
+          <span class="rate-highlight">연 {{ deposit.depositMaxRate }}%</span> <!-- 최고 금리 -->
+        </div>
+
+        <div class="separator"></div>
+
+        <div>
+          <span>기본</span>
+          <br />
+          <span class="rate-highlight">연 {{ deposit.depositNormalRate }}%</span> <!-- 기본 금리 -->
+          <span class="small-text" style="color: #838687;">(12개월, 세전)</span>
+        </div>
+      </div>
+
+      <div class="centered-info">
+        <h5>상품 안내</h5>
+        <hr style="height: 4px;">
+      </div>
+
+      <div class="fixed-info">
+        <div class="info-item">
+          <span class="info-label" style="margin-right: 80px;">기간</span>
+          <span>{{ deposit.depositJoin }}</span> <!-- 가입 기간 -->
+        </div>
+        <div class="info-item">
+          <span class="info-label" style="margin-right: 80px;">금액</span>
+          <span>{{ deposit.depositAmount }}</span> <!-- 가입 금액 -->
+        </div>
+        <div class="info-item">
+          <span class="info-label" style="margin-right: 50px;">가입 방법</span>
+          <span>{{ deposit.depositWay }}</span> <!-- 가입 방법 -->
+        </div>
+        <div class="info-item">
+          <span class="info-label" style="margin-right: 80px;">대상</span>
+          <span>{{ deposit.depositTarget }}</span> <!-- 대상 -->
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <a :href="deposit.depositLink" class="join-button">지금 바로 가입하기</a> <!-- 가입 링크 -->
+    </div>
   </div>
-
-  <div class="button-container">
-    <a href="당신이연결할링크" class="join-button">지금 바로 가입하기</a>
-  </div>
-
-</div>
-
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import depositApi from '@/api/depositApi'; // 예금 API 가져오기
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 
 // 데이터 정의
-const max = '3.75';
-const base = '3.00';
-const date = '1년(12개월) 가능';
-const limit = '1백만원 이상 가입 가능';
-const join = '영업점 및 비대면';
-const who = '개인';
+const route = useRoute();
+const deposit = ref({}); // 예금 정보 초기화
+
+// 예금 상세 정보 가져오기
+// DepositDetail.vue
+onMounted(async () => {
+  const dno = route.query.dno; // 쿼리에서 dno 가져오기
+  console.log('dno:', dno); // dno 값을 로그로 출력
+  if (dno) {
+    deposit.value = await depositApi.fetchDepositById(dno); // 예금 정보 가져오기
+  }
+});
+
+
 </script>
 
 <style scoped>
