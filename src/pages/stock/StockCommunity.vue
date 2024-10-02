@@ -33,11 +33,7 @@
                 <span class="like-count" style="margin-left: 5px;">{{ post.likeCount }}</span>
               </div>
             </span>            
-            <div class="buttons">
-              <button v-if="!post.isEditing" @click="editItem(index)" class="edit-btn"><i class="fa-solid fa-gear"></i> 수정</button>
-              <button v-if="post.isEditing" @click="saveItem(index)" class="save-btn"><i class="fa-solid fa-check"></i> 저장</button>
-              <button style="margin-right:10px;" @click="showDeleteConfirm(index)" class="delete-btn"><i class="fa-solid fa-trash"></i> 삭제</button>
-            </div>
+            
             <span class="date">{{ post.date }}</span>
           </div>
           <div v-if="post.isEditing" class="edit-container">
@@ -52,26 +48,6 @@
     <div v-if="activeTab === 'community'" class="comment-input">
       <input type="text" placeholder="의견을 입력하세요" v-model="newComment" />
       <button @click="submitComment" :disabled="!newComment">등록</button>
-    </div>
-
-    <!-- 삭제 확인 다이얼로그 -->
-    <div v-if="showConfirmDialog" class="confirm-overlay">
-      <div class="confirm-dialog">
-        <p>이 게시물을 삭제하면 복구할 수 없습니다.<br>삭제를 계속 진행하시겠습니까?</p>
-        <div class="dialog-button-group">
-          <button @click="confirmDelete" class="confirm-button">확인</button>
-          <button @click="cancelDelete" class="cancel-button">취소</button>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="showEditCompleteDialog" class="confirm-overlay">
-      <div class="confirm-dialog">
-        <p>수정이 완료되었습니다.</p>
-        <div class="dialog-button-group">
-          <button @click="closeEditCompleteDialog" class="confirm-button">확인</button>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -351,7 +327,7 @@ button {
   align-items: center;
   border-radius: 5px; /* 모서리 둥글게 */
   padding: 4px; /* 안쪽 여백 */
-  margin-left: -100px;
+  margin-left: -210px;
   width: 45px;
   color: #6E6053;
 }
@@ -387,9 +363,9 @@ button {
 }
 
 .confirm-button {
-  background-color: #ffffff; /* 배경을 흰색으로 설정 */
+  background-color: #816843; /* 배경을 흰색으로 설정 */
   border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
-  color: #60584C; /* 글씨 색을 #60584C로 설정 */
+  color: #ffffff; /* 글씨 색을 #60584C로 설정 */
   font-size: 16px;
   text-align: center;
   padding: 5px 10px; /* 약간의 패딩 추가 */
@@ -397,13 +373,14 @@ button {
   width: 100px;
   margin-top: 10px; /* 버튼 간 간격 추가 */
   position: relative;
-  right:5px;
+  right: 5px;
+  
 }
 
 .cancel-button {
-  background-color: #816843; /* 배경을 흰색으로 설정 */
+  background-color: #ffffff; /* 배경을 흰색으로 설정 */
   border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
-  color: #ffff; /* 글씨 색을 #60584C로 설정 */
+  color: #60584C; /* 글씨 색을 #60584C로 설정 */
   font-size: 16px;
   text-align: center;
   padding: 5px 10px; /* 약간의 패딩 추가 */

@@ -247,31 +247,31 @@ padding-right: 20px;
 }
 
 .confirm-button {
-background-color: #ffffff; /* 배경을 흰색으로 설정 */
-border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
-color: #60584C; /* 글씨 색을 #60584C로 설정 */
-font-size: 16px;
-text-align: center;
-padding: 5px 10px; /* 약간의 패딩 추가 */
-border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
-width: 100px;
-margin-top: 10px; /* 버튼 간 간격 추가 */
-position: relative;
-right: 5px;
+  background-color: #816843; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #ffffff; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 100px;
+  margin-top: 10px; /* 버튼 간 간격 추가 */
+  position: relative;
+  right: 5px;  
 }
 
 .cancel-button {
-background-color: #816843; /* 배경을 흰색으로 설정 */
-border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
-color: #ffffff; /* 글씨 색을 #60584C로 설정 */
-font-size: 16px;
-text-align: center;
-padding: 5px 10px; /* 약간의 패딩 추가 */
-border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
-width: 100px;
-margin-top: 10px; /* 버튼 간 간격 추가 */
-position: relative;
-left: 5px;
+  background-color: #ffffff; /* 배경을 흰색으로 설정 */
+  border: 1px solid #60584C; /* 테두리 색을 #60584C로 설정 */
+  color: #60584C; /* 글씨 색을 #60584C로 설정 */
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 10px; /* 약간의 패딩 추가 */
+  border-radius: 5px; /* 버튼에 둥근 모서리 추가 */
+  width: 100px;
+  margin-top: 10px; /* 버튼 간 간격 추가 */
+  position: relative;
+  left: 5px;
 }
 
 .confirm-button:hover,
