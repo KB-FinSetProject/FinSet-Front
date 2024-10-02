@@ -6,8 +6,8 @@
 
     <div class="stock-header">
       <div class="stock-info">
-        <h1 class="stock-name">삼성전자</h1>
-        <span class="stock-price">67,500원</span>
+        <h1 class="stock-name">{{ stock.stockName }}</h1>
+        <span class="stock-price">{{stock.stockPrice}}</span>
       </div>
       <div class="stock-icon" @click="toggleFavorite"> <!-- toggleFavorite 함수 호출 -->
         <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart' "
@@ -82,7 +82,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-
+import api from "@/api/stockApi.js";
 const minPrice = ref(67000); // 1일 최저가 (예시로 시가와 같게 설정)
 const maxPrice = ref(68000); // 1일 최고가 (예시로 종가와 같게 설정)
 const currentPrice = ref(67000); // 현재 가격
@@ -92,11 +92,13 @@ const tradingVolume = ref(30); // 거래 대금 (주)
 const revenue = ref(74); // 매출 (조원)
 const operatingProfit = ref(10); // 영업이익 (조원)
 const netProfit = ref(9.8); // 순수익 (조원)
-
+const sno=ref({
+  sno:''
+});
 // 주식 정보 상태 관리
 const stock = ref({
-  name: '삼성전자',
-  price: '67,500원',
+  stockName: '',
+  stockPrice: '',
   favorite: true, // 초기 즐겨찾기 상태
 });
 
@@ -117,6 +119,12 @@ const setActiveTab = (tab) => {
 onMounted(() => {
   setActiveTab('yield');
 });
+const load=async ()=>{
+  stock.value=await api.get(sno);
+  console.log('DETAIL',stock.value);
+};
+
+load();
 </script>
 
 <style scoped>

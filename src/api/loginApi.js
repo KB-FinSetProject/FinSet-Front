@@ -1,6 +1,8 @@
 import api from '@/api';
 
 const BASE_URL='/api/member';
+const headers={'Content-Type': 'application/json'};
+
 `${BASE_URL}/checkname/${name}`
 export default {
     async checkId(id) {
@@ -10,9 +12,7 @@ export default {
     },
     async create(member) {
         const { data } = await api.post(`${BASE_URL}/signup`, member, {
-            headers: {
-                'Content-Type': 'application/json', // JSON 형식으로 전송
-            },
+            headers
         });
 
         console.log('AUTH POST', data);
