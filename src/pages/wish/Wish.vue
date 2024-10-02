@@ -279,7 +279,7 @@ export default {
 };
 
 // "더보기" 상태 관리
-const showAll = ref(false);
+// const showAll = ref(false);
 </script>
 
 <style scoped>

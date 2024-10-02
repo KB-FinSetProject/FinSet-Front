@@ -8,22 +8,35 @@
       <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승 ▲</router-link>
       <router-link to="/stockdrop" class="tab" active-class="active" style="color: #DADADA;">급하락 ▼</router-link>
     </div>
-
     <br>
+<!--    <table class="table table-striped">-->
+<!--      <tr v-for="stock in stocks" :key="stock.sno">-->
+<!--        <td>{{stock.sno}}</td>-->
+<!--        <td>{{stock.stockPrice}}</td>-->
+
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+<!--&lt;!&ndash;          <router-link :to="{name: 'board/detail',params:{no:p=},query:cr.query}">&ndash;&gt;-->
+<!--&lt;!&ndash;            {{article.title}}&ndash;&gt;-->
+<!--&lt;!&ndash;          </router-link>&ndash;&gt;-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>{{article.writer}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>{{moment(article.regDate).format('YYYY-MM-DD') }}</td>&ndash;&gt;-->
+<!--      </tr>-->
+<!--    </table>-->
 
     <div class="stock-list">
-      <div v-for="(stock, index) in filteredStocks" :key="stock.id" class="stock-item">
+      <div v-for="(stock,index )  in stocks" :key="stock.sno" class="stock-item">
         <div class="stock-header">
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span>{{ stock.logo }}</span>
+              <span>{{ stock.stockSymbol }}</span>
             </div>
-            
+
             <div class="stock-detail">
-              <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} 
-                <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
+              <router-link :to="{ name: 'stockDetail', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
+              <p class="stock-details">{{ stock.stockPrice }}
+                <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
             </div>
           </div>
@@ -38,78 +51,73 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import api from '@/api/stockApi'
+import {ref,reactive,computed,onMounted} from "vue";
+import moment from 'moment';
+import {useRouter,useRoute} from "vue-router";
+import {VueAwesomePaginate} from "vue-awesome-paginate";
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+const cr=useRoute();
+const router=useRouter();
 
-export default {
-  components: { HeaderNormal },
-  data() {
-    return {
-      activeTab: 'all',
-      stocks: [
-        {
-          id: 1,
-          name: '삼성전자',
-          price: '67,500원',
-          change: '-2.0%',
-          favorite: true,
-          logo: '삼성',
-          logoColor: '#005EB8',
-        },
-        {
-          id: 2,
-          name: 'DXVXX',
-          price: '3,155원',
-          change: '+25.6%',
-          favorite: false,
-          logo: 'DX',
-          logoColor: '#A2D7E0',
-        },
-        {
-          id: 3,
-          name: '유한양행',
-          price: '119,900원',
-          change: '-4.5%',
-          favorite: true,
-          logo: '유한',
-          logoColor: '#005EB8',
-        },
-        {
-          id: 4,
-          name: '셀루메드',
-          price: '3,285원',
-          change: '+1.0%',
-          favorite: false,
-          logo: '셀',
-          logoColor: '#A2D7E0',
-        },
-        // 추가 주식 데이터...
-      ],
-    };
-  },
-  computed: {
-    filteredStocks() {
-      if (this.activeTab === 'gain') {
-        return this.stocks.filter(stock => stock.change.includes('+'));
-      } else if (this.activeTab === 'drop') {
-        return this.stocks.filter(stock => stock.change.includes('-'));
-      }
-      return this.stocks; // 전체 주식을 보여줌
-    },
-  },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
-    toggleFavorite(stock) {
-      stock.favorite = !stock.favorite; // favorite 상태 토글
-    },
-    getColor(change) {
-      return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
-    },
-  },
+const stocks = ref([]);
+const articles=computed(()=> page.value.list);
+
+
+// const addWish=async ()=>{
+//
+//
+// };
+const addWish = async(stock)=>{
+  stocks.value=await api.addWish(stock);
+  console.log(stocks.value);
 };
+const removeWish=async (stock)=>{
+  stocks.value=await api.removeWish(stock);
+  console.log(stock.value);
+}
+const load = async (query) => {
+  try {
+    // API에서 주식 리스트를 가져오는 함수
+    stocks.value = await api.getList(query);
+    console.log(stocks.value);
+  } catch (error) {
+    console.error("Error loading stocks:", error);
+  }
+};
+
+onMounted(() => {
+  load();
+});
+console.log("Route Params:", cr.params);
+console.log("Stocks:", stocks.value);
+// 즐겨찾기 토글 메서드
+const toggleFavorite = async (stock) => {
+  try {
+    stock.favorite = !stock.favorite; // favorite 상태 토글
+
+    // 주식이 favorite에 추가되었으면 addWish 호출
+    if (stock.favorite) {
+      await addWish(stock); // 즐겨찾기 추가
+      console.log('WISH POST', stock);
+      // 페이지 리다이렉트
+      router.push({ path: '/stock' }); // 예: '/stock' 또는 원하는 경로로 변경
+    } else {
+      const data = await removeWish(stock); // 즐겨찾기에서 삭제
+      console.log('WISH DELETE', data);
+    }
+  } catch (error) {
+    console.error('Error in toggleFavorite:', error);
+  }
+};
+// 변동률에 따라 색상을 반환하는 메서드
+const getColor = (change) => {
+    // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+};
+
 </script>
+
 
 <style scoped>
 /* 스타일은 그대로 유지합니다 */
