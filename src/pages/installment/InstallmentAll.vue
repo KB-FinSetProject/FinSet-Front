@@ -1,8 +1,7 @@
 <template>
   <HeaderNormal navbarTitle="적금상품" />
 
-  <div class="fund-container">
-    
+  <div class="installment-container">
     <div class="tabs-container">
       <router-link to="/installment" class="tab" active-class="active">전체</router-link>
       <router-link to="/installmentsimple" class="tab" active-class="active" style="color: #DADADA;">단리</router-link>
@@ -11,28 +10,28 @@
 
     <br>
 
-    <div class="fund-list">
-      <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
-        <div class="fund-header">
-          <div class="fund-info d-flex align-items-center">
-            <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
-              <span class="bank-icon">{{ deposit.logo }}</span>
+    <div class="installment-list">
+      <div v-for="installment in filteredInstallments" :key="installment.ino" class="installment-item">
+        <div class="installment-header">
+          <div class="installment-info d-flex align-items-center">
+            <div class="bank-logo" :style="{ backgroundColor: installment.logoColor }">
+              <span class="bank-icon">{{ installment.logo }}</span>
             </div>
             <div>
-              <router-link :to="`/installment/detail`" class="fund-name">{{ deposit.name }}</router-link>
-              <p class="fund-details">{{ deposit.details }}</p>
+              <p class="installment-name" @click="goToDetail(installment)">{{ installment.installmentName }}</p>
+              <p class="installment-details">{{ installment.installmentBank }}</p>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.sort }}</span>
+                <span class="high-rating">{{ installment.installmentCategory }}</span>
               </div>
             </div>
           </div>
-          <div class="deposit-yield"> <!-- 클래스명 변경 -->
-            <span class="max">최고 {{ deposit.max }}%</span>
-            <span class="basic">기본 {{ deposit.basic }}%</span>
+          <div class="installment-yield"> <!-- 클래스명 변경 -->
+            <span class="max">최고 {{ installment.installmentMaxRate }}%</span>
+            <span class="basic">기본 {{ installment.installmentNormalRate }}%</span>
           </div>
-          <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
-            <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
-               :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
+          <div class="installment-icon" @click="toggleFavorite(installment)"> <!-- 클래스명 변경 -->
+            <i :class="installment.favorite ? 'fas fa-heart' : 'far fa-heart'"
+               :style="{ color: installment.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
         <div class="mini-bar"></div> <!-- 미니바 추가 -->
@@ -43,87 +42,54 @@
 
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import installmentApi from "@/api/installmentApi"; // installmentApi를 가져옴
 
 export default {
   components: { HeaderNormal },
   data() {
     return {
-      activeTab: 'all',
-      deposits: [
-        {
-          id: 1,
-          name: '적금 1 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
-        },
-        {
-          id: 2,
-          name: '적금 2 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
-        },
-        {
-          id: 3,
-          name: '적금 3 (단리)',
-          details: 'NH 농협은행',
-          sort: '단리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: true,
-          logo: 'NH',
-          logoColor: '#005EB8',
-          type: 'simple',
-        },
-        {
-          id: 4,
-          name: '적금 4 (복리)',
-          details: 'NH 농협은행',
-          sort: '복리',
-          basic: '3.00',
-          max: '3.75',
-          favorite: false,
-          logo: 'NH',
-          logoColor: '#A2D7E0',
-          type: 'compound',
-        },
-      ],
+      activeTab: 'total',
+      installments: [], // API에서 받아올 데이터
     };
   },
   computed: {
-    filteredDeposits() {
-      if (this.activeTab === 'simple') {
-        return this.deposits.filter(deposit => deposit.type === 'simple');
-      } else if (this.activeTab === 'compound') {
-        return this.deposits.filter(deposit => deposit.type === 'compound');
-      }
-      return this.deposits; // 전체 예금을 보여줌
+    filteredInstallments() {
+      return this.installments;
     },
   },
   methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
+    async fetchInstallments(type) {
+      this.activeTab = type;
+      try {
+        let data;
+        if (type === 'simple') {
+          data = await installmentApi.fetchSimpleInstallments();
+        } else if (type === 'compound') {
+          data = await installmentApi.fetchCompoundInstallments();
+        } else {
+          data = await installmentApi.fetchAllInstallments();
+        }
+        this.installments = data;
+      } catch (error) {
+        console.error("Error fetching installments:", error);
+      }
     },
-    toggleFavorite(deposit) {
-      deposit.favorite = !deposit.favorite; // favorite 상태 토글
+    goToDetail(installment) {
+      this.$router.push({ path: `/installment/detail`, query: { ino: installment.ino } });
     },
+    toggleFavorite(installment) {
+      installment.favorite = !installment.favorite; // favorite 상태 토글
+    },
+  },
+  mounted() {
+    this.fetchInstallments('total'); // 페이지가 로드될 때 전체 목록을 불러옴
   },
 };
 </script>
 
+
 <style scoped>
-.fund-container {
+.installment-container {
   padding: 16px;
   max-width: 390px;
   position: relative;
@@ -191,27 +157,27 @@ export default {
   margin: 0; /* 마진 제거 */
 }
 
-.fund-list {
+.installment-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.fund-item {
+.installment-item {
   display: flex;
   flex-direction: column;
   background-color: transparent;
   width: 360px;
 }
 
-.fund-header {
+.installment-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.fund-info {
+.installment-info {
   display: flex;
   align-items: center; /* 수평 정렬을 위해 추가 */
   position: relative; /* position 추가 */
@@ -233,7 +199,7 @@ export default {
   margin-right: 20px;
 }
 
-.fund-name {
+.installment-name {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 4px;
@@ -243,12 +209,12 @@ export default {
   margin-right: 16px;
 }
 
-.fund-details {
+.installment-details {
   font-size: 14px;
   margin: 0;
 }
 
-.deposit-yield { /* 클래스명 변경 */
+.installment-yield { /* 클래스명 변경 */
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -257,12 +223,12 @@ export default {
   right: 10px;
 }
 
-.deposit-icon { /* 클래스명 변경 */
+.installment-icon { /* 클래스명 변경 */
   font-size: 24px;
   color: #888; /* 기본 색상 */
 }
 
-.deposit-icon .fas {
+.installment-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
 

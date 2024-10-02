@@ -124,7 +124,7 @@ const router = createRouter({
         { path:  '/stock/community',name:"StockCommunity",component:StockCommunity},
         { path:  '/myboard',name:"MyBoard",component:MyBoard},
         ...loginRoutes,
-
+        
     ]
 });
 
