@@ -2,7 +2,7 @@
   <div class="container">
     <header class="header">
       <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
-        <div class="container-fluid grid-layout">
+        <div clanpm rss="container-fluid grid-layout">
           <!-- 첫 번째 + 두 번째 칸: 로그인/회원가입 -->
           <div class="auth-links d-flex align-items-center" style="grid-column: 1 / 3;">
             <router-link to="/signin" class="text-muted ms-3 me-2">로그인</router-link> |
@@ -41,7 +41,6 @@
   text-align: center;
 }
 
-/* 로그인/회원가입 링크 스타일 */
 .auth-links a {
   font-size: 11px; /* 텍스트 크기 수정 */
   text-decoration: none;
