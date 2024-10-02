@@ -1,56 +1,56 @@
 <template>
   <HeaderNormal navbarTitle="펀드 상세" />
 
-  <div class="container">
+  <div class="container" v-if="fund">
     <span class="high-risk">높은 위험</span>
     <span class="foreign-stock">해외주식형</span>
     <br /><br />
-    <h4 style="font-weight: bold;">{{ name }}</h4>
+    <h4 style="font-weight: bold;">{{ fund.name }}</h4>
     <span>수수료미징구-온라인</span>
     <br /><br />
 
     <div class="rate-display">
       <p>3개월 수익률</p>
       <hr />
-      <h3>{{ rate }}%</h3>
+      <h3>{{ fund.rate }}%</h3>
     </div>
 
     <div class="base-display">
       <p>기준가</p>
-      <h3 style="font-weight: bold;">{{ base }}원</h3>
-      <p style="color: #547BC1;">{{ change }}</p>
+      <h3 style="font-weight: bold;">{{ fund.base }}원</h3>
+      <p style="color: #547BC1;">{{ fund.change }}</p>
       <hr />
     </div>
 
     <div class="data-display">
       <div class="data-item">
         <p>규모</p>
-        <p><strong>{{ amount }}</strong></p>
+        <p><strong>{{ fund.amount }}</strong></p>
       </div>
       <hr />
       <div class="data-item">
         <p>운용사</p>
-        <p><strong>{{ company }}</strong></p>
+        <p><strong>{{ fund.company }}</strong></p>
       </div>
       <hr />
       <div class="data-item">
         <p>위험 등급</p>
-        <p><strong>{{ danger }}</strong></p>
+        <p><strong>{{ fund.danger }}</strong></p>
       </div>
       <hr />
       <div class="data-item">
         <p>펀드 유형</p>
-        <p><strong>{{ type }}</strong></p>
+        <p><strong>{{ fund.type }}</strong></p>
       </div>
       <hr />
       <div class="data-item">
         <p>선취 수수료</p>
-        <p><strong>{{ fees }}</strong></p>
+        <p><strong>{{ fund.fees }}</strong></p>
       </div>
       <hr />
       <div class="data-item">
         <p>설정일</p>
-        <p><strong>{{ date }}</strong></p>
+        <p><strong>{{ fund.date }}</strong></p>
       </div>
       <hr />
     </div>
@@ -72,17 +72,28 @@
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import { onMounted, ref } from 'vue';
+import api from '@/api'; // API 모듈 가져오기
 
-const name = '미래에셋인도중형포커스증권자 투자신탁 1(주식) 종류 C-e';
-const rate = 14.08;
-const base = 4813.93;
-const change = -7.44;
-const amount = 1131.38;
-const company = '미래에셋 자산운용';
-const danger = '높은 위험';
-const type = '인도주식';
-const fees = '수수료없음';
-const date = '2015/09/23';
+const fund = ref(null); // 펀드 정보를 저장할 ref 변수
+
+// 펀드 ID (예: URL 파라미터 등으로 가져올 수 있음)
+const fundId = '123'; // 예시 ID
+
+// 펀드 상세 정보 가져오기
+async function fetchFundDetail() {
+  try {
+    const response = await api.get(fundId); // 펀드 ID로 API 호출
+    fund.value = response; // 응답 데이터를 ref에 저장
+  } catch (error) {
+    console.error('펀드 상세 정보 가져오기 실패:', error);
+  }
+}
+
+// 컴포넌트가 마운트될 때 API 호출
+onMounted(() => {
+  fetchFundDetail();
+});
 </script>
 
 <script>
@@ -90,177 +101,81 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 export default {
-    data() {
-        return {
-            currentSlide: 0, // 슬라이드 인덱스
-            type: 'line', // 차트 타입을 'line'으로 설정
-            data: {
-                labels: ['23/10/01', '23/12/01', '24/02/01', '24/04/01', '24/06/01', '24/08/01', '24/10/01'],
-                datasets: [
-                    {
-                        label: '펀드',
-                        data: [40, 20, 30, 50, 70, 80, 50],
-                        backgroundColor: 'rgba(255, 0, 0, 0)', // 투명 배경
-                        borderColor: '#FF6767', // 빨강
-                        borderWidth: 2,
-                        fill: false, // 그래프 아래 배경색 없음
-                        pointRadius: 0, // 점 마크 없앰
-                    },
-                    {
-                        label: '벤치마크',
-                        data: [20, 0, 10, 30, 50, 60, 30],
-                        backgroundColor: 'rgba(0, 255, 0, 0)', // 투명 배경
-                        borderColor: '#00953C', // 초록
-                        borderWidth: 2,
-                        fill: false, // 그래프 아래 배경색 없음
-                        pointRadius: 0, // 점 마크 없앰
-                    },
-                    {
-                        label: '유형평균',
-                        data: [30, 10, 20, 40, 60, 70, 40],
-                        backgroundColor: 'rgba(0, 0, 255, 0)', // 투명 배경
-                        borderColor: '#547BC1', // 파랑
-                        borderWidth: 2,
-                        fill: false, // 그래프 아래 배경색 없음
-                        pointRadius: 0, // 점 마크 없앰
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            display: false // y축의 그리드 라인 숨김
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false // x축의 그리드 라인 숨김
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom', // 범례를 아래로 위치 이동
-                    }
-                }
+  data() {
+    return {
+      currentSlide: 0,
+      type: 'line',
+      data: {
+        labels: ['23/10/01', '23/12/01', '24/02/01', '24/04/01', '24/06/01', '24/08/01', '24/10/01'],
+        datasets: [
+          {
+            label: '펀드',
+            data: [40, 20, 30, 50, 70, 80, 50],
+            backgroundColor: 'rgba(255, 0, 0, 0)',
+            borderColor: '#FF6767',
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0,
+          },
+          {
+            label: '벤치마크',
+            data: [20, 0, 10, 30, 50, 60, 30],
+            backgroundColor: 'rgba(0, 255, 0, 0)',
+            borderColor: '#00953C',
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0,
+          },
+          {
+            label: '유형평균',
+            data: [30, 10, 20, 40, 60, 70, 40],
+            backgroundColor: 'rgba(0, 0, 255, 0)',
+            borderColor: '#547BC1',
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0,
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              display: false
             }
-        };
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+          }
+        }
+      }
+    };
+  },
+  mounted() {
+    this.createChart();
+  },
+  methods: {
+    createChart() {
+      new Chart(this.$refs.lineChart, {
+        type: this.type,
+        data: this.data,
+        options: this.options
+      });
     },
-    mounted() {
-        this.createChart();
+    goToSlide(index) {
+      this.currentSlide = index;
     },
-    methods: {
-        createChart() {
-            new Chart(this.$refs.lineChart, {
-                type: this.type, // 'line' 차트를 생성
-                data: this.data,
-                options: this.options
-            });
-        },
-        goToSlide(index) {
-            this.currentSlide = index; // 클릭한 버튼에 따라 슬라이드 변경
-        },
-        goToUrl(url) {
-            window.location.href = url; // 해당 URL로 이동
-        },
-    }
+    goToUrl(url) {
+      window.location.href = url;
+    },
+  }
 }
 </script>
-
-
-
-<style scoped>
-.container {
-  margin-bottom: 100px;
-  width: 100%;
-  margin-top: -30px;
-}
-
-.data-display {
-  width: 80%;
-  margin: 20px auto;
-}
-
-/* 색상 스타일 추가 */
-.high-risk {
-  background-color: #FDEBEA;
-  color: #FF6767;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 10px;
-}
-
-.foreign-stock {
-  margin-left: 10px;
-  background-color: #EDF1F8;
-  color: #547BC1;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 10px;
-}
-
-.rate-display {
-  background-color: #6E6053; /* 배경색 설정 */
-  color: white; /* 글씨색 흰색으로 설정 */
-  padding: 10px; /* 패딩 추가 */
-  text-align: center;
-}
-
-.rate-display hr {
-  border: 1px solid white; /* hr도 흰색으로 설정 */
-}
-
-.base-display {
-  padding: 10px; /* 패딩 추가 */
-  text-align: center;
-}
-
-.data-display {
-  display: flex;
-  flex-direction: column; /* 수직 방향으로 배치 */
-}
-
-.data-item {
-  display: flex;
-  justify-content: space-between; /* 항목 간의 공간을 동일하게 배분 */
-}
-
-.notice-display {
-  background-color: #F5F5F5; /* 배경색 설정 */
-  padding: 10px; /* 패딩 추가 */
-  text-align: center;
-  margin-top: 20px;
-}
-
-.button-container {
-  display: flex; /* flexbox 사용 */
-  justify-content: center; /* 가로 중앙 정렬 */
-}
-
-.join-button {
-  background-color: #FFBB00; /* 버튼 배경색 */
-  color: white; /* 글씨 색상 */
-  border: none; /* 기본 테두리 제거 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  padding: 5px 50px; /* 버튼 내부 여백 */
-  font-size: 20px; /* 글씨 크기 */
-  cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
-  transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
-  text-decoration: none;
-  position: relative;
-  margin-top: 30px;
-}
-
-.join-button:hover {
-  background-color: #e6a600; /* 마우스 오버 시 배경색 변화 */
-}
-
-/* 차트 스타일 추가 */
-.chart {
-  width: 100%; /* 가로 100% */
-  height: 400px; /* 원하는 높이 설정 */
-  margin-left: -5px;
-}
-</style>
