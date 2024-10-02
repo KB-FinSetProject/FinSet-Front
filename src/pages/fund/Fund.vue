@@ -2,7 +2,6 @@
   <HeaderNormal navbarTitle="펀드리스트" />
 
   <div class="fund-container">
-  
     <div class="tabs-container">
       <router-link to="/fund" class="tab" active-class="active">수익률 Best</router-link>
       <router-link to="/fundsales" class="tab" active-class="active" style="color: #DADADA;">판매액 Best</router-link>
@@ -18,94 +17,58 @@
 
     <br>
     <div class="fund-list">
-      <div v-for="deposit in filteredDeposits" :key="deposit.id" class="fund-item">
+      <div v-for="deposit in filteredDeposits" :key="deposit.fno" class="fund-item">
         <div class="fund-header">
           <div class="fund-info d-flex align-items-center">
-            <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
-              <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
-                 :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
+            <div class="deposit-icon" @click="toggleFavorite(deposit)">
+              <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
             </div>
             <div class="detail">
-              <router-link :to="`/fund/detail`" class="fund-name">{{ deposit.name }}</router-link>
+              <router-link :to="`/fund/detail/${deposit.fno}`" class="fund-name">{{ deposit.fundName }}</router-link>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.danger }}</span>
-                <span class="fund-type">{{ deposit.type }}</span>
+                <span class="high-rating">{{ deposit.fundRisk }}</span>
+                <span class="fund-type">{{ deposit.fundType }}</span>
               </div>
             </div>
-
           </div>
-          <div class="deposit-yield"> <!-- 클래스명 변경 -->
-            <span style="color: #7E7E7E; font-weight:bold; margin-right:25px">3개월</span>
-            <span class="max">{{ deposit.rate }}%</span>
+          <div class="deposit-yield">
+            <span style="color: #7E7E7E; font-weight: bold; margin-right: 25px">3개월</span>
+            <span class="max">{{ deposit.fundEarningRatio }}%</span>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import fundsApi from "@/api/FundApi"; // API 모듈 가져오기
 
-export default {
-  components: { HeaderNormal },
-  data() {
-    return {
-      activeTab: 'all',
-      deposits: [
-        {
-          id: 1,
-          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
-          rate: '14.76',
-          danger:'높은위험',
-          type:'해외주식형'
-        },
-        {
-          id: 2,
-          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
-          rate: '14.76',
-          danger:'높은위험',
-          type:'해외주식형'
-        },
-        {
-          id: 3,
-          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
-          rate: '14.76',
-          danger:'높은위험',
-          type:'해외주식형'
-        },
-        {
-          id: 4,
-          name: '미래에셋인도중형포커스증권자투자신탁 1(주식) 종류 C-e',
-          rate: '14.76',
-          danger:'높은위험',
-          type:'해외주식형'
-        },
-      ],
-    };
-  },
-  computed: {
-    filteredDeposits() {
-      if (this.activeTab === 'simple') {
-        return this.deposits.filter(deposit => deposit.type === 'simple');
-      } else if (this.activeTab === 'compound') {
-        return this.deposits.filter(deposit => deposit.type === 'compound');
-      }
-      return this.deposits; // 전체 예금을 보여줌
-    },
-  },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
-    toggleFavorite(deposit) {
-      deposit.favorite = !deposit.favorite; // favorite 상태 토글
-    },
-  },
+const deposits = ref([]);
+
+const filteredDeposits = computed(() => {
+  return deposits.value; // 전체 예금을 보여줌
+});
+
+const fetchDeposits = async () => {
+  try {
+    const params = {}; // 필요한 파라미터를 설정
+    deposits.value = await fundsApi.getList(params); // 수익률 Best API 호출
+  } catch (error) {
+    console.error('Failed to fetch deposits:', error);
+  }
 };
-</script>
 
+const toggleFavorite = (deposit) => {
+  deposit.favorite = !deposit.favorite; // favorite 상태 토글
+};
+
+onMounted(() => {
+  fetchDeposits(); // 컴포넌트가 마운트될 때 데이터 가져오기
+});
+</script>
 <style scoped>
 .fund-container {
   padding: 16px;

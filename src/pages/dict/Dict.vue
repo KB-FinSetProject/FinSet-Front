@@ -1,3 +1,61 @@
+<!--<template>-->
+<!--  <HeaderNormal navbarTitle="사전" />-->
+
+<!--  <div class="container">-->
+<!--    &lt;!&ndash; 검색 바 &ndash;&gt;-->
+<!--    <div class="search-bar">-->
+<!--      <div class="input-container">-->
+<!--        <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />-->
+<!--        <i class="fas fa-search search-icon" @click="performSearch"></i>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <br>-->
+
+<!--    &lt;!&ndash; 검색된 항목 개수 표시 &ndash;&gt;-->
+<!--    <h6 v-if="searchQuery && items.length" style="color: black; font-weight: 350; margin-left: 10px">-->
+<!--      "{{ searchQuery }}"에 대한 <span style="color: #FFBB00;">{{ items.length }}</span>개 용어가 검색되었습니다.-->
+<!--    </h6>-->
+
+<!--    &lt;!&ndash; 사전 항목 카드 리스트 &ndash;&gt;-->
+<!--    <div class="card-container">-->
+<!--      &lt;!&ndash; 사전 항목 리스트 &ndash;&gt;-->
+<!--      <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">-->
+<!--        <div class="card-header" @click="toggleDescription(index)">-->
+<!--          <span class="title">{{ item.title }}</span>-->
+<!--          <i class="fa-solid" :class="[isActive(index) ? 'fa-caret-up' : 'fa-caret-down', 'arrow']"></i>-->
+<!--        </div>-->
+<!--        <div v-if="isActive(index)">-->
+<!--          <br>-->
+<!--          <p class="description">{{ item.content }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; 더보기 버튼 &ndash;&gt;-->
+<!--      <button v-if="!showAll" @click="showAllItems" class="load-more-button">+</button>-->
+
+<!--      <hr>-->
+
+<!--      &lt;!&ndash; 단어장 섹션 &ndash;&gt;-->
+<!--      <div class="icon-title-container">-->
+<!--        <i class="fa-solid fa-book-bookmark icon-large"></i>-->
+<!--        <span class="title">단어장</span>-->
+<!--        <router-link to="/dictmemo">-->
+<!--          <i class="fa-solid fa-arrow-right"></i>-->
+<!--        </router-link>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; 단어 리스트 &ndash;&gt;-->
+<!--      <div class="item-container" v-for="(item, index) in list" :key="index">-->
+<!--        <router-link :to="{ path: '/dictmemo' }" class="item-text">-->
+<!--          <span class="item-text">{{ item }}</span>-->
+<!--        </router-link>-->
+<!--        <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+
 <template>
   <HeaderNormal navbarTitle="사전" />
 
@@ -62,9 +120,93 @@
 </template>
 
 
+<!--<script setup>-->
+<!--import HeaderNormal from '@/components/common/HeaderNormal.vue';-->
+<!--import { ref, computed, onMounted } from 'vue';-->
+<!--import dictApi from '@/api/dictApi'; // dictApi 모듈 가져오기-->
+
+<!--// 상태 관리 변수 정의-->
+<!--const items = ref([]); // 사전 항목 리스트-->
+<!--const list = ref([]); // 단어 리스트-->
+<!--const showAll = ref(false); // 더보기 버튼 상태-->
+<!--const activeIndices = ref([]); // 아코디언 활성 상태-->
+<!--const searchQuery = ref(''); // 검색어 상태-->
+<!--const isStarActive = ref(false); // 전체 별 아이콘 상태-->
+<!--const listStarStates = ref([]); // 리스트 아이템 별 상태-->
+
+<!--// 모든 사전 항목 조회 함수-->
+<!--const fetchDictionaryItems = async () => {-->
+<!--  try {-->
+<!--    const data = await dictApi.getAll(); // dictApi를 통해 모든 항목 조회-->
+<!--    items.value = data.map(item => ({-->
+<!--      title: item.word,-->
+<!--      content: item.content,-->
+<!--    }));-->
+<!--    list.value = data.map(item => item.word); // 단어 리스트 초기화-->
+<!--    listStarStates.value = Array(data.length).fill(false); // 초기 리스트 상태 설정-->
+<!--    console.log('사전 항목 조회 성공:', data);-->
+<!--  } catch (error) {-->
+<!--    console.error('사전 항목 조회 오류:', error);-->
+<!--  }-->
+<!--};-->
+
+<!--// 검색 기능 함수-->
+<!--const performSearch = async () => {-->
+<!--  try {-->
+<!--    const result = await dictApi.search(searchQuery.value); // dictApi를 사용하여 검색-->
+<!--    items.value = result.map(item => ({-->
+<!--      title: item.word,-->
+<!--      content: item.content,-->
+<!--    }));-->
+<!--    list.value = result.map(item => item.word);-->
+<!--    console.log('검색 결과:', result);-->
+<!--  } catch (error) {-->
+<!--    console.error('검색 오류:', error);-->
+<!--  }-->
+<!--};-->
+
+<!--// 컴포넌트 마운트 시 사전 항목 조회-->
+<!--onMounted(() => {-->
+<!--  fetchDictionaryItems();-->
+<!--});-->
+
+<!--// 더보기 버튼 클릭 시 전체 항목 표시-->
+<!--const showAllItems = () => {-->
+<!--  showAll.value = true;-->
+<!--};-->
+
+<!--// 특정 인덱스가 아코디언 활성화 상태인지 확인-->
+<!--const isActive = (index) => activeIndices.value.includes(index);-->
+
+<!--// 아코디언 토글 함수-->
+<!--const toggleDescription = (index) => {-->
+<!--  if (isActive(index)) {-->
+<!--    activeIndices.value = activeIndices.value.filter(i => i !== index);-->
+<!--  } else {-->
+<!--    activeIndices.value.push(index);-->
+<!--  }-->
+<!--};-->
+
+<!--// 전체 별 아이콘 클릭 시 상태 토글-->
+<!--const toggleStar = () => {-->
+<!--  isStarActive.value = !isStarActive.value;-->
+<!--};-->
+
+<!--// 리스트 아이템 별 클릭 시 상태 토글-->
+<!--const toggleListStar = (index) => {-->
+<!--  listStarStates.value[index] = !listStarStates.value[index];-->
+<!--};-->
+
+<!--// 리스트 아이템의 별 상태 확인-->
+<!--const isListStarActive = (index) => listStarStates.value[index];-->
+
+<!--// 더보기 버튼이 활성화되었을 때 표시할 항목-->
+<!--const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));-->
+<!--</script>-->
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import { ref, computed } from 'vue';
+import dictApi from '@/api/dictApi';
 
 // 아코디언 데이터 설정
 const items = ref([
@@ -156,6 +298,7 @@ const addWord = () => {
   console.log('단어 추가 버튼 클릭');
 };
 </script>
+
 
 <style scoped>
 .container {
