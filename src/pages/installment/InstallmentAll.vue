@@ -8,7 +8,6 @@
       <router-link to="/installmentcompound" class="tab" active-class="active" style="color: #DADADA;">복리</router-link>
     </div>
 
-    <br>
 
     <div class="installment-list">
       <div v-for="installment in filteredInstallments" :key="installment.ino" class="installment-item">
@@ -94,6 +93,7 @@ export default {
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 110px;
 }
 
 .tabs-container {
@@ -260,5 +260,6 @@ export default {
 
 .risk-info {
   margin-top: 10px;
+  margin-bottom: -10px;
 }
 </style>

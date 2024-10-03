@@ -45,7 +45,8 @@
 
 <script>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-import dictWishApi from '@/api/dictWish'; // API 호출 파일
+import dictWishApi from '@/api/dictWishApi'; // API 호출 파일
+import dictApi from '@/api/dictApi'; // 추가된 API 호출 파일
 import { ref } from 'vue';
 
 export default {
@@ -58,21 +59,47 @@ export default {
       activeIndices: [], // active 상태를 저장하는 배열
       starStates: [], // 각 리스트 항목별로 false로 초기화
       showEditCompleteDialog: false, // 수정 완료 다이얼로그 표시 여부
+      uno: null, // uno 값을 초기화합니다.
     };
   },
-  created() {
+  mounted() {
+    const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+    this.uno = authData.uno; // uno 값 가져오기
+    console.log('UNO:', this.uno); // uno 값 확인
+
     this.fetchItems(); // 컴포넌트가 생성될 때 데이터 로드
   },
   methods: {
     async fetchItems() {
       try {
-        this.items = await dictWishApi.getAll(); // API를 통해 단어장 항목을 가져옵니다.
-        this.starStates = Array(this.items.length).fill(true); // 별 상태 초기화
-        console.log('Fetched items:', this.items);
+        const response = await dictWishApi.getAll(this.uno); // uno를 API 호출에 전달합니다.
+        if (response && Array.isArray(response)) {
+          this.items = response; // API를 통해 단어장 항목을 가져옵니다.
+          this.starStates = Array(this.items.length).fill(true); // 별 상태 초기화
+          console.log('Fetched items:', this.items);
+          
+          // 각 item의 dino에 대해 추가 정보를 가져옵니다.
+          for (let item of this.items) {
+            const data = await dictApi.getByDino(item.dino); // dino로 사전 항목 조회
+            item.word = data.word;
+            item.content = data.content;
+          }
+        } else {
+          console.error('API 응답 형식이 올바르지 않습니다.', response);
+        }
       } catch (error) {
-        console.error('Error fetching items:', error);
+        console.error('Error fetching items:', error.message || error); // 오류 메시지 로그
+        if (error.response) {
+          console.error('Response data:', error.response.data);
+          console.error('Response status:', error.response.status);
+        } else if (error.request) {
+          console.error('No response received:', error.request);
+        } else {
+          console.error('Error setting up request:', error.message);
+        }
       }
     },
+
     isActive(index) {
       return this.activeIndices.includes(index); // 특정 인덱스가 active 상태인지 확인
     },
@@ -104,7 +131,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .container {

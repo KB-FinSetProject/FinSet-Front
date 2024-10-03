@@ -5,7 +5,7 @@
     <br><br>
     <h3 style="margin-left: 10px;">환전정보</h3>
     <span style="margin-left: 10px; color:gray">2024/10/01 09:00 기준 </span>
-    <br>
+    <br><br>
 
     <div class="exchange-header d-flex align-items-center justify-content-between" v-if="item">
       <div class="exchage-include">
@@ -228,7 +228,7 @@ export default {
 
 <style scoped>
 .container{
-  margin-top: -90px;
+  margin-top: -100px;
   margin-bottom: 120px;
 }
 
