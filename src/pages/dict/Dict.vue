@@ -52,12 +52,13 @@
       </div>
 
       <!-- list 아이템 표시 -->
-      <div class="item-container" v-for="(item, index) in list" :key="index">
+      <div class="item-container" v-for="(wishItem, index) in wishItems" :key="index">
         <router-link :to="{ path: '/dictmemo' }" class="item-text">
-          <span class="item-text">{{ item }}</span>
+          <span class="item-text">{{ wishItem.word }}</span>
         </router-link>
         <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>
       </div>
+      
     </div>
   </div>
 </template>
@@ -130,6 +131,7 @@
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import { ref, computed, onMounted, } from 'vue';
 import dictApi from '@/api/dictApi'; // dictApi 모듈 가져오기
+import dictWishApi from '@/api/dictWishApi';
 
 // 상태 관리 변수 정의
 const items = ref([]); // 사전 항목 리스트
@@ -141,6 +143,8 @@ const isStarActive = ref(false); // 전체 별 아이콘 상태
 const listStarStates = ref([]); // 리스트 아이템 별 상태
 const searchResult = computed(() => items.value.find(item => item.title === searchQuery.value));
 const filteredItems = computed(() => items.value.filter(item => item.title !== searchQuery.value));
+const wishItems = ref([]); // 단어장 항목 리스트
+const uno = ref(null); // uno 값 저장
 
 // 모든 사전 항목 조회 함수
 const fetchDictionaryItems = async () => {
@@ -155,6 +159,35 @@ const fetchDictionaryItems = async () => {
     console.log('사전 항목 조회 성공:', data);
   } catch (error) {
     console.error('사전 항목 조회 오류:', error);
+  }
+};
+
+// 단어장 항목 조회 함수
+const fetchWishItems = async (userUno) => {
+  try {
+    const response = await dictWishApi.getAll(userUno); // uno를 API 호출에 전달합니다.
+    if (response && Array.isArray(response)) {
+      wishItems.value = response; // API를 통해 단어장 항목을 가져옵니다.
+      console.log('Fetched wish items:', wishItems.value);
+
+      // 각 wish item의 dino에 대해 추가 정보를 가져옵니다.
+      for (let wishItem of wishItems.value) {
+        const data = await dictApi.getByDino(wishItem.dino); // dino로 사전 항목 조회
+        wishItem.word = data.word;
+      }
+    } else {
+      console.error('API 응답 형식이 올바르지 않습니다.', response);
+    }
+  } catch (error) {
+    console.error('Error fetching wish items:', error.message || error); // 오류 메시지 로그
+    if (error.response) {
+      console.error('Response data:', error.response.data);
+      console.error('Response status:', error.response.status);
+    } else if (error.request) {
+      console.error('No response received:', error.request);
+    } else {
+      console.error('Error setting up request:', error.message);
+    }
   }
 };
 
@@ -176,6 +209,10 @@ const performSearch = async () => {
 // 컴포넌트 마운트 시 사전 항목 조회
 onMounted(() => {
   fetchDictionaryItems();
+  const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+  uno.value = authData.uno; // uno 값 가져오기
+  console.log('UNO:', uno.value); // uno 값 확인
+  fetchWishItems(uno.value); // fetchWishItems 호출 시 uno 값 전달
 });
 
 // 더보기 버튼 클릭 시 전체 항목 표시
