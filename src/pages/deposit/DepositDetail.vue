@@ -49,7 +49,7 @@
         </div>
         <div class="info-item">
           <span class="info-label" style="margin-right: 80px;">금액</span>
-          <span>{{ deposit.depositAmount }}</span> <!-- 가입 금액 -->
+          <span>{{ Number(deposit.depositAmount).toLocaleString() }}</span>
         </div>
         <div class="info-item">
           <span class="info-label" style="margin-right: 50px;">가입 방법</span>

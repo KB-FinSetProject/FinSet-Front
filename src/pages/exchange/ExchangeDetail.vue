@@ -13,7 +13,7 @@
           <img :src="getFlagUrl(item.forexName)" alt="외환 이미지" class="exchange-img" />
           <div class="exchange-detail d-flex align-items-center">
             <h6 class="exchange-name">{{ item.forexName }}</h6>
-            <p class="exchange-details">적용환율: {{ item.forexBasicRate }}원</p>
+            <p class="exchange-details">적용환율: {{ item.forexBasicRate.toLocaleString() }}원</p>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <br>
     <p style="margin-left: 10px; color: gray;">실시간 환율</p>
     <div class="info d-flex justify-content-between align-items-center" v-if="item">
-      <h1>{{ item.forexBasicRate }}원</h1>
+      <h1>{{ item.forexBasicRate.toLocaleString() }}원</h1>
       <span :style="{ color: item.change > 0 ? '#FF6767' : '#547BC1' }">
         <span style="color: gray;">전일대비 </span>{{ change }}원 {{ change > 0 ? '▲' : '▼' }}
       </span>
@@ -33,8 +33,8 @@
     <div class="chart-container">
       <canvas ref="stockChart"></canvas>
       <div class="chart-info" v-if="item">
-        <span class="chart-high">최고 {{ highestPrice }}원</span>
-        <span class="chart-low">최저 {{ lowestPrice }}원</span>
+        <span class="chart-high">최고 {{ highestPrice.toLocaleString() }}원</span>
+        <span class="chart-low">최저 {{ lowestPrice.toLocaleString() }}원</span>
       </div>
     </div>
 
@@ -61,13 +61,17 @@
           <span>{{ timeframeText }} 전에 샀었다면 수익</span>
         </div>
         <div class="value-display">
-          <h5>{{ displayValue }}원</h5>
+          <h5>{{ displayValue.toLocaleString() }}원</h5>
         </div>
       </div>
     </div>
 
   </div>
 </template>
+
+<script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+</script>
 
 <script>
 import forexApi from "@/api/forexApi"; // 외환 정보를 가져오는 API 모듈
@@ -188,27 +192,25 @@ export default {
       } else if (this.selectedTimeframe === '1주') {
         pastRate = this.chartData[5] ? this.chartData[5].forexBasicRate : currentRate; // 1주 전 (5일 전)
       } else if (this.selectedTimeframe === '1달') {
-        pastRate = this.chartData[22] ? this.chartData[22].forexBasicRate : currentRate; // 1달 전 (22일 전)
+        pastRate = this.chartData[19] ? this.chartData[19].forexBasicRate : currentRate; // 1달 전 (22일 전)
       }
       
       // 수익 계산 (현재 값에서 과거 값을 뺀 결과)
       this.displayValue = (currentRate - pastRate).toFixed(2); // 소수점 2자리까지
     },
-    getFlagUrl(forexName) {
-      // 외환 이름에 따른 플래그 URL 반환
-      switch (forexName) {
-        case 'CNH':
-          return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
-        case 'EUR':
-          return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
-        case 'GBP':
-          return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
-        case 'JPY(100)':
-          return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
-        case 'USD':
-          return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
-        default:
-          return ''; // 기본값은 빈 문자열
+    getFlagUrl(forexName){
+      if (forexName.includes('CNH')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
+      } else if (forexName.includes('EUR')) {
+        return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
+      } else if (forexName.includes('GBP')) {
+        return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
+      } else if (forexName.includes('JPY')) {
+        return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
+      } else if (forexName.includes('USD')) {
+        return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
+      } else {
+        return ''; // 기본값은 빈 문자열
       }
     },
     selectTimeframe(timeframe) {
