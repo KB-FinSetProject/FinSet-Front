@@ -3,10 +3,17 @@
     <header class="header">
       <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
         <div class="container-fluid grid-layout">
-          <!-- 첫 번째 + 두 번째 칸: 로그인/회원가입 -->
+          <!-- 첫 번째 + 두 번째 칸: 로그인/회원가입 또는 로그아웃 -->
           <div class="auth-links d-flex align-items-center" style="grid-column: 1 / 3;">
-            <router-link to="/signin" class="text-muted ms-3 me-2">로그인</router-link> |
-            <router-link to="/signup" class="text-muted ms-2">회원가입</router-link>
+            <!-- 로그인 상태에 따라 다른 링크 표시 -->
+            <template v-if="isLoggedIn">
+              <span class="text-muted ms-3 me-2">{{ userName }}님</span> |
+              <a href="#" class="text-muted ms-2" @click="logout">로그아웃</a>
+            </template>
+            <template v-else>
+              <router-link to="/signin" class="text-muted ms-3 me-2">로그인</router-link> |
+              <router-link to="/signup" class="text-muted ms-2">회원가입</router-link>
+            </template>
           </div>
 
           <!-- 세 번째 칸: FINDY 로고 -->
@@ -19,7 +26,7 @@
 
           <!-- 다섯 번째 칸: 돋보기 아이콘 -->
           <div class="search-icon d-flex justify-content-end align-items-center mt-2">
-            <router-link to="/search"><i class="fa-solid fa-magnifying-glass icon-large"></i></router-link> 
+            <router-link to="/search"><i class="fa-solid fa-magnifying-glass icon-large"></i></router-link>
           </div>
         </div>
       </nav>
@@ -27,8 +34,46 @@
   </div>
 </template>
 
-<script setup>
+<script>
+export default {
+  data() {
+    return {
+      isLoggedIn: false,  // 로그인 여부
+      userName: '',       // 사용자 이름
+    };
+  },
+  mounted() {
+    // localStorage에서 저장된 auth 정보 가져오기
+    const storedAuth = localStorage.getItem('auth');
+    
+    if (storedAuth) {
+      const authData = JSON.parse(storedAuth);
+
+      // authData에서 user 정보를 추출해 data에 할당
+      if (authData && authData.name) {
+        this.userName = authData.name;
+        this.isLoggedIn = true; // 로그인 상태를 true로 설정
+      } else {
+        console.error("User 정보가 존재하지 않습니다.");
+      }
+    } else {
+      console.error("localStorage에 저장된 auth 정보가 없습니다.");
+    }
+  },
+  methods: {
+    logout() {
+      // 로그아웃 처리
+      localStorage.removeItem('auth');  // localStorage에서 auth 정보 삭제
+      this.isLoggedIn = false;          // 로그인 상태를 false로 변경
+
+      // 로그아웃 후 로그인 페이지로 이동
+      this.$router.push('/signin');
+    },
+  },
+};
 </script>
+
+
 
 <style scoped>
 /* 전체 헤더 관련 스타일 */

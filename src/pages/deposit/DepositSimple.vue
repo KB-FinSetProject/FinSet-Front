@@ -6,10 +6,9 @@
     <div class="tabs-container">
       <router-link to="/deposit" class="tab" active-class="active" style="color: #DADADA;">전체</router-link>
       <router-link to="/depositsimple" class="tab" active-class="active" @click="fetchDeposits('simple')">단리</router-link>
-      <router-link to="/depositcompound" class="tab" active-class="active" @click="fetchDeposits('compound')">복리</router-link>
+      <router-link to="/depositcompound" class="tab" active-class="active" @click="fetchDeposits('compound')" style="color: #DADADA;">복리</router-link>
     </div>
   
-    <br>
 
     <div class="deposit-list">
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="deposit-item">
@@ -92,6 +91,7 @@ export default {
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 110px;
 }
 
 .tabs-container {
@@ -237,5 +237,6 @@ export default {
 
 .risk-info {
   margin-top: 10px;
+  margin-bottom: -10px;
 }
 </style>
