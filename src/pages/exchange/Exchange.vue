@@ -24,15 +24,15 @@
       <div class="currency-rates">
         <div class="rate-item">
           <p class="label">매매기준율</p>
-          <p class="highlight rate">{{ currency.forexBasicRate.toFixed(2) }}</p>
+          <p class="highlight rate">{{ currency.forexBasicRate.toLocaleString() }}</p>
         </div>
         <div class="rate-item">
           <p class="label">입금(환전)할 때</p>
-          <p class="rate">{{ currency.forexBuy.toFixed(2) }}</p>
+          <p class="rate">{{ currency.forexBuy.toLocaleString() }}</p>
         </div>
         <div class="rate-item">
           <p class="label">원화로 환전할 때</p>
-          <p class="rate">{{ currency.forexSell.toFixed(2) }}</p>
+          <p class="rate">{{ currency.forexSell.toLocaleString() }}</p>
         </div>
       </div>
     </div>
@@ -58,21 +58,21 @@ const fetchCurrencies = async () => {
 
 // 플래그 URL 반환 함수
 const getFlagUrl = (forexName) => {
-  switch (forexName) {
-    case 'CNH':
-      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
-    case 'EUR':
-      return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
-    case 'GBP':
-      return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
-    case 'JPY(100)':
-      return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
-    case 'USD':
-      return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
-    default:
-      return ''; // 기본값은 빈 문자열
+  if (forexName.includes('CNH')) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
+  } else if (forexName.includes('EUR')) {
+    return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
+  } else if (forexName.includes('GBP')) {
+    return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
+  } else if (forexName.includes('JPY')) {
+    return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
+  } else if (forexName.includes('USD')) {
+    return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
+  } else {
+    return ''; // 기본값은 빈 문자열
   }
 };
+
 
 // 컴포넌트가 마운트될 때 외환 정보 가져오기
 onMounted(() => {

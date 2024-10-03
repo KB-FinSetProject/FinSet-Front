@@ -3,14 +3,14 @@
 
   <div class="container">
     <div class="card-container">
-      <div v-for="(item, index) in items" :key="item.title" class="card">
+      <div v-for="(item, index) in items" :key="item.dwno" class="card">
         <div class="card-header">
           <i 
             class="fa-solid fa-star icon" 
             :class="{ active: isStarActive(index) }" 
             @click="toggleStar(index)"
           ></i>
-          <span class="title" @click="toggleDescription(index)">{{ item.title }}</span>
+          <span class="title" @click="toggleDescription(index)">{{ item.word }}</span>
           <i class="fa-solid fa-caret-down arrow" :class="{ active: isActive(index) }" @click="toggleDescription(index)"></i>
         </div>
         <div v-if="isActive(index)">
@@ -29,7 +29,6 @@
             </div>
             <textarea v-model="item.memo" :readonly="!item.isEditing" />
           </div>
-          
         </div>
       </div>
     </div>
@@ -44,93 +43,68 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import dictWishApi from '@/api/dictWish'; // API 호출 파일
 import { ref } from 'vue';
 
-// 아코디언 데이터 설정
-const items = ref([
-  {
-    title: '미수령주식 · 배당금',
-    content: '무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금',
-    memo: '이거 진짜 어렵다...ㅠㅠㅠ 금융상품 공부하기 어려워용...',
-    isEditing: false
+export default {
+  components: {
+    HeaderNormal,
   },
-  {
-    title: '주식',
-    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
-    memo: '주식이 뭐더라',
-    isEditing: false
+  data() {
+    return {
+      items: [], // 아코디언 데이터
+      activeIndices: [], // active 상태를 저장하는 배열
+      starStates: [], // 각 리스트 항목별로 false로 초기화
+      showEditCompleteDialog: false, // 수정 완료 다이얼로그 표시 여부
+    };
   },
-  {
-    title: '주식시장',
-    content: '',
-    memo: '',
-    isEditing: false
+  created() {
+    this.fetchItems(); // 컴포넌트가 생성될 때 데이터 로드
   },
-  {
-    title: '예금',
-    content: '',
-    memo: '',
-    isEditing: false
+  methods: {
+    async fetchItems() {
+      try {
+        this.items = await dictWishApi.getAll(); // API를 통해 단어장 항목을 가져옵니다.
+        this.starStates = Array(this.items.length).fill(true); // 별 상태 초기화
+        console.log('Fetched items:', this.items);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    },
+    isActive(index) {
+      return this.activeIndices.includes(index); // 특정 인덱스가 active 상태인지 확인
+    },
+    toggleDescription(index) {
+      if (this.isActive(index)) {
+        this.activeIndices = this.activeIndices.filter(i => i !== index); // active 상태 해제
+      } else {
+        this.activeIndices.push(index); // active 상태 추가
+      }
+    },
+    toggleStar(index) {
+      this.starStates[index] = !this.starStates[index]; // 해당 인덱스의 별 상태 토글
+    },
+    isStarActive(index) {
+      return this.starStates[index]; // 해당 인덱스의 별이 활성화된 상태인지 확인
+    },
+    editItem(index) {
+      const item = this.items[index];
+      item.isEditing = true; // 수정 모드 활성화
+    },
+    saveItem(index) {
+      const item = this.items[index];
+      item.isEditing = false; // 수정 모드 비활성화
+      this.showEditCompleteDialog = true; // 수정 완료 다이얼로그 표시
+    },
+    closeEditCompleteDialog() {
+      this.showEditCompleteDialog = false; // 수정 완료 다이얼로그 닫기
+    },
   },
-  {
-    title: '재테크',
-    content: '',
-    memo: '',
-    isEditing: false
-  },
-]);
-
-// 아코디언 상태 관리
-const activeIndices = ref([]); // active 상태를 저장하는 배열
-
-// 별 아이콘 상태 관리 (각 항목별로 개별 상태 관리)
-const starStates = ref(Array(items.value.length).fill(true)); // 각 리스트 항목별로 false로 초기화
-
-// 특정 인덱스가 active 상태인지 확인
-const isActive = (index) => activeIndices.value.includes(index);
-
-// 아코디언 토글 함수
-const toggleDescription = (index) => {
-  if (isActive(index)) {
-    activeIndices.value = activeIndices.value.filter(i => i !== index);
-  } else {
-    activeIndices.value.push(index);
-  }
 };
-
-// 리스트 항목의 별 상태 토글 함수
-const toggleStar = (index) => {
-  starStates.value[index] = !starStates.value[index]; // 해당 인덱스의 별 상태 토글
-};
-
-// 해당 인덱스의 별이 활성화된 상태인지 확인
-const isStarActive = (index) => starStates.value[index];
-
-const showEditCompleteDialog = ref(false); // 수정 완료 다이얼로그 표시 여부
-
-// 항목 수정 함수
-const editItem = (index) => {
-  const item = items.value[index];
-  item.isEditing = true; // 수정 모드 활성화
-};
-
-// 항목 저장 함수
-const saveItem = (index) => {
-  const item = items.value[index];
-  item.isEditing = false; // 수정 모드 비활성화
-
-  // 수정 완료 다이얼로그 표시
-  showEditCompleteDialog.value = true;
-};
-
-// 수정 완료 다이얼로그 닫기 함수
-const closeEditCompleteDialog = () => {
-  showEditCompleteDialog.value = false;
-};
-
 </script>
+
 
 <style scoped>
 .container {
