@@ -6,7 +6,7 @@
       <div class="input-container">
         <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />
         <i class="fas fa-search search-icon" @click="performSearch"></i>
-<!--        텍스트 입력 / 엔터 입력 시 perform search 추가-->
+        <!--        텍스트 입력 / 엔터 입력 시 perform search 추가-->
       </div>
     </div>
 
