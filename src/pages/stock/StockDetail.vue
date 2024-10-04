@@ -87,7 +87,7 @@ const snoFromRoute = route.params.sno;
 // const revenue = ref(); // 매출 (조원)
 // const operatingProfit = ref(); // 영업이익 (조원)
 // const netProfit = ref(); // 순수익 (조원)
-// const sno = ref(''); // 주식 번호
+// const sno = ref('');
 const stock = ref( ''// 주식 정보
 
 );
