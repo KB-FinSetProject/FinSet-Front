@@ -16,8 +16,9 @@
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span>{{ stock.stockSymbol }}</span>
+              <span>  <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;"/></span>
             </div>
+
 
             <div class="stock-detail">
               <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
@@ -69,11 +70,15 @@ export default {
     getColor(change) {
       // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
     },
+    getStockImg(imgUrl) {
+      return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+    },
   },
   async mounted() {
     await this.getDrop(); // 컴포넌트가 마운트될 때 getHigh 호출
   },
 };
+
 </script>
 
 <style scoped>

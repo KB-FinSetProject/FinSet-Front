@@ -16,11 +16,11 @@
         <div class="stock-header">
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
-            <img src="" alt="">
+
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
                 <span>  <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;"/></span>
             </div>
-            <img src="" alt="">
+
             <div class="stock-detail">
               <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }}
