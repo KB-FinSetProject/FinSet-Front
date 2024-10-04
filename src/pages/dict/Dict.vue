@@ -58,7 +58,7 @@
         </router-link>
         <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -129,7 +129,7 @@
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-import { ref, computed, onMounted, } from 'vue';
+import {ref, computed, onMounted,} from 'vue';
 import dictApi from '@/api/dictApi'; // dictApi 모듈 가져오기
 import dictWishApi from '@/api/dictWishApi';
 
@@ -390,7 +390,8 @@ const displayedItems = computed(() => (showAll.value ? items.value : items.value
 .icon.active {
   color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
 }
-.fa-arrow-right{
+
+.fa-arrow-right {
   color: #ffbf0a;
   position: relative;
   left: 100px;
@@ -471,8 +472,6 @@ input[type="text"] {
 }
 
 
-
-
 .icon-title-container {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 세로 중앙 정렬 */
@@ -512,13 +511,15 @@ input[type="text"] {
 .icon2 {
   cursor: pointer; /* 클릭 가능하도록 커서 변경 */
   color: gray;
-  font-size: 19px/* 비활성화 상태 색상 */
+  font-size: 19px /* 비활성화 상태 색상 */
 }
-.icon{
+
+.icon {
   font-size: 19px;
   position: relative;
   left: 5px;
 }
+
 .icon2.active {
   color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
 }

@@ -6,11 +6,16 @@
       <input type="text" placeholder="의견을 입력하세요" v-model="newComment" />
       <button @click="submitComment" :disabled="!newComment">등록</button>
     </div>
-
+    <div class="tabs-container">
+      <router-link :to="{ name: 'stockChart', params: { sno: snoFromRoute } }" class="tab" active-class="active" style="color: #DADADA;">차트</router-link>
+      <router-link :to="{ name: 'stockDetail', params: { sno: snoFromRoute } }" class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
+      <router-link to="/stock/community" class="tab" active-class="active">커뮤니티</router-link>
+    </div>
+    <br>
     <div class="card-container">
       <div v-for="(post, index) in communityPosts" :key="post.bno" class="card">
         <div class="card-header">
-          <span class="name">{{ post.sno }}</span>
+          <span class="name">{{ post.likes }}</span>
           <span class="like-container">
             <div class="like-box">
               <i class="fa-regular fa-thumbs-up like" @click="incrementLikeCount(post)"></i>
@@ -24,52 +29,43 @@
             <button style="margin-right:10px;" @click="deleteItem(index)" class="delete-btn">
               <i class="fa-solid fa-trash"></i> 삭제
             </button>
+            {{post.wirter}}
           </div>
-          <span class="date">{{ post.updatedAt }}</span>
+          <span class="date">{{ post.createdAt }}</span>
         </div>
         <p class="content">{{ post.content }}</p>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
 import { onMounted, ref } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 import api from "@/api/stockApi";
 import { useRoute } from 'vue-router';
-import {useLoginStore} from "@/stores/login.js";
 
 const route = useRoute();
-const snoFromRoute = route.params.sno; // 경로에서 sno 가져오기
+const snoFromRoute = ref(route.params.sno); // URL에서 파라미터 가져오기
 const newComment = ref('');
 const communityPosts = ref([]);
-const auth=useLoginStore();
 
 const getCommunity = async () => {
   try {
-    const { data } = await api.getCommunity(snoFromRoute); // API 호출
-    console.log('GET COMMUNITY', data);
-
-    // 데이터가 배열인지 확인 후 설정
-    if (data && Array.isArray(data)) {
-      communityItems.value = data; // 커뮤니티 데이터 설정
-    } else {
-      console.error('Unexpected community data format:', data);
-    }
+    const data = await api.getCommunity(snoFromRoute.value); // API 호출
+    communityPosts.value = data; // API에서 받아온 데이터로 설정
+    console.log("GET COMMUNITY", data);
   } catch (error) {
-    console.error('Error fetching community data:', error);
+    console.error("Error loading COMMUNITY:", error);
   }
 };
-
 
 const submitComment = async () => {
   if (newComment.value) {
     try {
       const commentData = { content: newComment.value }; // 댓글 데이터 형식
-      await api.submitComment(snoFromRoute, commentData); // API 호출
+      await api.submitComment(snoFromRoute.value, commentData); // API 호출
       newComment.value = ''; // 제출 후 초기화
-      await getCommunity(snoFromRoute); // 댓글 제출 후 커뮤니티 데이터 다시 가져오기
+      await getCommunity(); // 댓글 제출 후 커뮤니티 데이터 다시 가져오기
     } catch (error) {
       console.error('Error submitting comment:', error);
     }
@@ -78,21 +74,10 @@ const submitComment = async () => {
 
 // 페이지가 로드될 때 커뮤니티 데이터를 가져옵니다.
 onMounted(() => {
-  getCommunity(snoFromRoute); // sno로 커뮤니티 데이터를 가져옵니다.
+  getCommunity(); // sno로 커뮤니티 데이터를 가져옵니다.
 });
-
-const incrementLikeCount = (post) => {
-  post.likeCount += 1;
-};
-
-const editItem = (index) => {
-  console.log("Edit item:", communityPosts.value[index]);
-};
-
-const deleteItem = (index) => {
-  communityPosts.value.splice(index, 1);
-};
 </script>
+
 
 <style scoped>
 .stock-detail {
