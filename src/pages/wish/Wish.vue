@@ -6,7 +6,7 @@
       <h3 style="width:300px">예적금</h3>
       <hr>
 
-      <div v-for="(deposit, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="deposit-header">
+      <div v-for="(deposit,index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="deposit-header">
         <div class="deposit-info d-flex align-items-center">
           <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
             <span class="bank-icon">{{ deposit.logo }}</span>

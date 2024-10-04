@@ -1,20 +1,17 @@
 <template>
-
   <HeaderNormal navbarTitle="주식 상세" />
 
   <div class="stock-detail">
-
     <div class="stock-header">
       <div class="stock-info">
-        <h1 class="stock-name">{{ stock.stockName }}</h1>
-        <span class="stock-price">{{stock.stockPrice}}</span>
+        <h1 class="stock-name">{{ stocks.stockName }}</h1>
+        <span class="stock-price">{{ stocks .stockPrice }}</span>
       </div>
-      <div class="stock-icon" @click="toggleFavorite"> <!-- toggleFavorite 함수 호출 -->
-        <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart' "
-           :style="{ color: stock.favorite ? '#FFBB00' : '#888', borderColor: stock.favorite ? '#FFBB00' : 'transparent' }"></i>
-      </div>
+<!--      <div class="stock-icon" @click="toggleFavorite">-->
+<!--        <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"-->
+<!--           :style="{ color: stock.favorite ? '#FFBB00' : '#888', borderColor: stock.favorite ? '#FFBB00' : 'transparent' }"></i>-->
+<!--      </div>-->
     </div>
-    
 
     <div class="tabs-container">
       <router-link to="/stock/chart" class="tab" active-class="active" style="color: #DADADA;">차트</router-link>
@@ -25,7 +22,6 @@
 
     <div class="stock-details">
       <h3 style="font-weight: bold;">시세</h3>
-
       <div class="price-range">
         <input type="range" v-model="currentPrice" :min="minPrice" :max="maxPrice" disabled class="range-slider">
         <div class="price-labels">
@@ -33,12 +29,11 @@
           <span class="max-price">1일 최고가</span>
         </div>
         <div class="price-info">
-          <span class="min-price-value">{{ minPrice }}원</span>
-          <span class="max-price-value">{{ maxPrice }}원</span>
+          <span class="min-price-value">{{ stock.openPrice }}원</span>
+          <span class="max-price-value">{{ stock.endPrice }}원</span>
         </div>
       </div>
-      
-    
+
       <br>
       <div class="stock-info-grid">
         <div class="stock-info-item">
@@ -57,7 +52,7 @@
         </div>
       </div>
       <br>
-      
+
       <div class="additional-info">
         <div class="info-item">
           <h5 style="margin-top: 5px;">매출</h5>
@@ -72,59 +67,64 @@
           <h5 style="margin-bottom: 5px;">{{ netProfit }}조원</h5>
         </div>
       </div>
-      
-
     </div>
-
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import { useRoute } from "vue-router";
 import api from "@/api/stockApi.js";
-const minPrice = ref(67000); // 1일 최저가 (예시로 시가와 같게 설정)
-const maxPrice = ref(68000); // 1일 최고가 (예시로 종가와 같게 설정)
-const currentPrice = ref(67000); // 현재 가격
-const openPrice = ref(67000); // 시가
-const closePrice = ref(68000); // 종가
-const tradingVolume = ref(30); // 거래 대금 (주)
-const revenue = ref(74); // 매출 (조원)
-const operatingProfit = ref(10); // 영업이익 (조원)
-const netProfit = ref(9.8); // 순수익 (조원)
-const sno=ref({
-  sno:''
-});
-// 주식 정보 상태 관리
-const stock = ref({
-  stockName: '',
-  stockPrice: '',
-  favorite: true, // 초기 즐겨찾기 상태
-});
+const route = useRoute();
+const snoFromRoute = route.params.sno;
+// const minPrice = ref(); // 1일 최저가
+// const maxPrice = ref(); // 1일 최고가
+// const currentPrice = ref(); // 현재 가격
+// const openPrice = ref(); // 시가
+// const closePrice = ref(); // 종가
+// const tradingVolume = ref(); // 거래 대금 (주)
+// const revenue = ref(); // 매출 (조원)
+// const operatingProfit = ref(); // 영업이익 (조원)
+// const netProfit = ref(); // 순수익 (조원)
+// const sno = ref(''); // 주식 번호
+const stock = ref( ''// 주식 정보
 
-// 활성화된 탭 상태 관리
-const activeTab = ref('yield');
+);
+
+const stocks=ref('');
 
 // 즐겨찾기 토글 함수
 const toggleFavorite = () => {
-  stock.value.favorite = !stock.value.favorite; // favorite 상태 토글
+  // stock.value.favorite = !stock.value.favorite; // favorite 상태 토글
 };
 
-// 활성화된 탭 설정 함수
-const setActiveTab = (tab) => {
-  activeTab.value = tab; // activeTab 상태 변경
+// 주식 정보 로딩 함수
+const load = async () => {
+  try {
+    stocks.value = await api.get(snoFromRoute.value); // 주식 정보 로딩
+    console.log('DETAIL', stock.value);
+  } catch (error) {
+    console.error('Error loading stock details:', error);
+  }
+};
+const getSymbol = async (snoFromRoute) => {
+  try {
+    // API에서 주식 리스트를 가져오는 함수
+    stock.value = await api.getSymbol(snoFromRoute);
+    console.log(stocks.value);
+  } catch (error) {
+    console.error("Error loading stocks:", error);
+  }
 };
 
-// 컴포넌트 마운트 시 초기 탭 설정
+
+
+// 컴포넌트 마운트 시 데이터 로딩
 onMounted(() => {
-  setActiveTab('yield');
+  load(snoFromRoute);
+  getSymbol(snoFromRoute);
 });
-const load=async ()=>{
-  stock.value=await api.get(sno);
-  console.log('DETAIL',stock.value);
-};
-
-load();
 </script>
 
 <style scoped>

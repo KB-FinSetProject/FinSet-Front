@@ -15,7 +15,7 @@
 
     <div class="tabs-container">
       <router-link to="/stock/chart" class="tab" active-class="active">차트</router-link>
-      <router-link to="/stock/detail" class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
+      <router-link :to= "{ name: 'stockDetail', params: { sno: stock.sno } }"  class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
       <router-link :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" class="tab" active-class="active" style="color: #DADADA;">커뮤니티</router-link>
     </div>
     <br>
