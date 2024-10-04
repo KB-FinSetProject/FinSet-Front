@@ -13,9 +13,7 @@
       <div v-for="installment in filteredInstallments" :key="installment.ino" class="installment-item">
         <div class="installment-header">
           <div class="installment-info d-flex align-items-center">
-            <div class="bank-logo" :style="{ backgroundColor: installment.logoColor }">
-              <span class="bank-icon">{{ installment.logo }}</span>
-            </div>
+            <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
             <div>
               <p class="installment-name" @click="goToDetail(installment)">{{ installment.installmentName }}</p>
               <p class="installment-details">{{ installment.installmentBank }}</p>
@@ -78,6 +76,9 @@ export default {
     },
     toggleFavorite(installment) {
       installment.favorite = !installment.favorite; // favorite 상태 토글
+    },
+    getImg(imgUrl) {
+      return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
     },
   },
   mounted() {

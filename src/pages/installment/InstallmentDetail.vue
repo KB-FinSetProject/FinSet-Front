@@ -7,11 +7,7 @@
         <h5 class="mb-0">{{ installment.installmentName }}</h5> <!-- 예금 이름 -->
         <p class="mb-0 text-muted">{{ installment.installmentBank }}</p> <!-- 은행 이름 -->
       </div>
-      <img
-        src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800"
-        alt="Thumbnail"
-        class="rounded-circle me-3 thumbnail"
-      />
+      <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
     </div>
 
     <div class="join-info d-flex mt-2">
@@ -86,6 +82,10 @@ onMounted(async () => {
     installment.value = await installmentApi.fetchInstallmentById(ino); // 예금 정보 가져오기
   }
 });
+
+function getImg(imgUrl) {
+  return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+}
 </script>
 
 <style scoped>
