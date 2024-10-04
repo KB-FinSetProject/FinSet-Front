@@ -27,7 +27,7 @@
             <div class="detail">
               <router-link :to="`/fund/detail`" class="fund-name">{{ deposit.fundName }}</router-link>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.danger }}</span>
+                <span class="high-rating">{{ deposit.fundLisk }}</span>
                 <span class="fund-type">{{ deposit.fundType }}</span>
               </div>
             </div>

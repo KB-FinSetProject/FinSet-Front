@@ -1,4 +1,3 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Shop from '@/pages/Shop.vue';
@@ -55,15 +54,15 @@ const routes = [
     { path: '/exchange', name: "Exchange", component: Exchange },
     { path: '/exchange/detail', name: "ExchangeDetail", component: ExchangeDetail },
     { path: '/fund', name: "Fund", component: Fund },
-    { path: '/fund/detail', name: "FundDetail", component: FundDetail },
+    { path: '/fund/detail/:id', name: "FundDetail", component: FundDetail }, // 상세 페이지 경로
     { path: '/fundsales', name: "FundSales", component: FundSales },
     { path: '/fundsavings', name: "FundSavings", component: FundSavings },
     { path: '/installment', name: "InstallmentAll", component: InstallmentAll },
     { path: '/installmentsimple', name: "InstallmentSimple", component: InstallmentSimple },
     { path: '/installmentcompound', name: "InstallmentCompound", component: InstallmentCompound },
     { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail },
-    { path: '/search', name: "Search", component: Search }, // 검색 페이지
-    { path: '/search/results', name: "SearchResults", component: SearchResults }, // 검색 결과 페이지 추가
+    { path: '/search', name: "Search", component: Search },
+    { path: '/search/results', name: "SearchResults", component: SearchResults },
     { path: '/wish', name: "Wish", component: Wish },
     { path: '/investment1', name: "Investment1", component: Investment1 },
     { path: '/investment2', name: "Investment2", component: Investment2 },
@@ -86,27 +85,26 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-
     routes: [
         { path: '/', name: "Home", component: Home },
         { path: '/shop', name: "Shop", component: Shop },
         { path: '/auth', name: "Auth", component: Auth },
-        { path: '/deposit', name: "DepositAll", component: DepositAll }, // 전체 예금 페이지
-        { path: '/depositsimple', name: "DepositSimple", component: DepositSimple }, // 전체 예금 페이지
-        { path: '/depositcompound', name: "DepositCompound", component: DepositCompound }, // 전체 예금 페이지
-        { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail }, // 전체 할부 페이지
+        { path: '/deposit', name: "DepositAll", component: DepositAll },
+        { path: '/depositsimple', name: "DepositSimple", component: DepositSimple },
+        { path: '/depositcompound', name: "DepositCompound", component: DepositCompound },
+        { path: '/deposit/detail', name: "DepositDetail", component: DepositDetail },
         { path: '/dict', name: "Dict", component: Dict },
         { path: '/dictmemo', name: "DictMemo", component: DictMemo },
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/exchange/detail', name: "ExchangeDetail", component: ExchangeDetail },
         { path: '/fund', name: "Fund", component: Fund },
-        { path: '/fund/detail', name: "FundDetail", component: FundDetail },
+        { path: '/fund/detail/:fno', name: "FundDetail", component: FundDetail }, // 상세 페이지 경로
         { path: '/fundsales', name: "FundSales", component: FundSales },
-        { path: '/fundsavings', name: "FundSavings", component: FundSavings }, // 적립액 베스트 페이지
-        { path: '/installment', name: "InstallmentAll", component: InstallmentAll }, // 전체 할부 페이지
-        { path: '/installmentsimple', name: "InstallmentSimple", component: InstallmentSimple }, // 전체 할부 페이지
-        { path: '/installmentcompound', name: "InstallmentCompound", component: InstallmentCompound }, // 전체 할부 페이지
-        { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail }, // 전체 할부 페이지
+        { path: '/fundsavings', name: "FundSavings", component: FundSavings },
+        { path: '/installment', name: "InstallmentAll", component: InstallmentAll },
+        { path: '/installmentsimple', name: "InstallmentSimple", component: InstallmentSimple },
+        { path: '/installmentcompound', name: "InstallmentCompound", component: InstallmentCompound },
+        { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail },
         { path: '/search', name: "Search", component: Search },
         { path: '/wish', name: "Wish", component: Wish },
         { path: '/investment1', name: "Investment1", component: Investment1 },
@@ -117,16 +115,16 @@ const router = createRouter({
         { path: '/investment6', name: "Investment6", component: Investment6 },
         { path: '/investment7', name: "Investment7", component: Investment7 },
         { path: '/investment/result', name: "InvestmentResult", component: InvestmentResult },
-        // { path: '/stock', name: "Stock", component: Stock },
-        // { path: '/stockhigh', name: "StockHigh", component: StockHigh },
-        // { path: '/stockdrop', name: "StockDrop", component: StockDrop },
-        // { path:  '/stock/detail',name:"StockDetail",component:StockDetail},
-        // { path:  '/stock/chart',name:"StockChart",component:StockChart},
-        // { path:  '/stock/community',name:"StockCommunity",component:StockCommunity},
-        { path:  '/myboard',name:"MyBoard",component:MyBoard},
-        ...loginRoutes,
-        ...stockRoutes,
-    ]
+        { path: '/stock', name: "Stock", component: Stock },
+        { path: '/stockhigh', name: "StockHigh", component: StockHigh },
+        { path: '/stockdrop', name: "StockDrop", component: StockDrop },
+        { path: '/stock/detail', name: "StockDetail", component: StockDetail },
+        { path: '/stock/chart', name: "StockChart", component: StockChart },
+        { path: '/stock/community', name: "StockCommunity", component: StockCommunity },
+        { path: '/myboard', name: "MyBoard", component: MyBoard },
+        { path: '/signin', name: "SignIn", component: SignIn },
+        { path: '/signup', name: "SignUp", component: SignUp },
+    ],
 });
 
 export default router;

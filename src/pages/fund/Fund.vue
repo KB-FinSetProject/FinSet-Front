@@ -26,7 +26,7 @@
             <div class="detail">
               <router-link :to="`/fund/detail/${deposit.fno}`" class="fund-name">{{ deposit.fundName }}</router-link>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.fundRisk }}</span>
+                <span class="high-rating">{{ deposit.fundLisk }}</span>
                 <span class="fund-type">{{ deposit.fundType }}</span>
               </div>
             </div>
@@ -69,6 +69,7 @@ onMounted(() => {
   fetchDeposits(); // 컴포넌트가 마운트될 때 데이터 가져오기
 });
 </script>
+
 <style scoped>
 .fund-container {
   padding: 16px;
