@@ -81,6 +81,7 @@ const routes = [
     { path: '/myboard', name: "MyBoard", component: MyBoard },
     { path: '/signin', name: "SignIn", component: SignIn },
     { path: '/signup', name: "SignUp", component: SignUp },
+    ...stockRoutes,
 ];
 
 const router = createRouter({
@@ -124,6 +125,7 @@ const router = createRouter({
         { path: '/myboard', name: "MyBoard", component: MyBoard },
         { path: '/signin', name: "SignIn", component: SignIn },
         { path: '/signup', name: "SignUp", component: SignUp },
+        ...stockRoutes,
     ],
 });
 
