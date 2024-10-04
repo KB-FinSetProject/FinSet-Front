@@ -1,6 +1,7 @@
 <template>
   <HeaderNormal navbarTitle="커뮤니티" />
-
+  {{stock.stockName}}
+  {{stock.stockPrice}}
   <div class="community-container">
     <div class="comment-input">
       <input type="text" placeholder="의견을 입력하세요" v-model="newComment" />
@@ -48,7 +49,7 @@ const route = useRoute();
 const snoFromRoute = ref(route.params.sno);
 const newComment = ref('');
 const communityPosts = ref([]);
-
+const stock=ref([]);
 const getCommunity = async () => {
   try {
     const data = await api.getCommunity(snoFromRoute.value); // API 호출
@@ -71,10 +72,39 @@ const submitComment = async () => {
     }
   }
 };
+const deleteItem = async (index) => {
+  const post = communityPosts.value[index]; // 삭제할 포스트 정보 가져오기
+  try {
+    // API 호출하여 포스트 삭제
+    const response = await api.deleteCommunity(post.sno, post.bno);
+    console.log("Delete response:", response); // 응답 로그 추가
+    // 여기서 response.data가 아닌 response를 비교
+    if (response === "delete success") {
+      communityPosts.value.splice(index, 1); // 해당 인덱스에서 아이템을 삭제
+      console.log("Item deleted:", index);
+      await getCommunity(); // 커뮤니티 데이터를 다시 가져옵니다.
+    } else {
+      console.error("Delete failed:", response); // 삭제 실패 시 에러 로그
+    }
+  } catch (error) {
+    console.error("Error deleting item:", error); // 에러 발생 시 로그
+  }
+};
 
+
+const getStockDetails = async (query) => {
+  try {
+    stock.value = await api.get(query);
+    console.log(stock.value);
+  } catch (error) {
+    console.error(`error`, error);
+  }
+};
 // 페이지가 로드될 때 커뮤니티 데이터를 가져옵니다.
 onMounted(() => {
+  getStockDetails(snoFromRoute.value);
   getCommunity(); // sno로 커뮤니티 데이터를 가져옵니다.
+
 });
 </script>
 

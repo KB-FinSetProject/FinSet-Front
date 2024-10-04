@@ -16,8 +16,9 @@
         <div class="stock-header">
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
+            <img src="" alt="">
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span>{{ stock.stockSymbol }}</span>
+                <span>  <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;"/></span>
             </div>
             <img src="" alt="">
             <div class="stock-detail">
@@ -48,9 +49,7 @@ import HeaderNormal from "@/components/common/HeaderNormal.vue";
 const cr=useRoute();
 const router=useRouter();
 
-const stocks=ref({
-
-});
+const stocks=ref([]);
 
 const articles=computed(()=> page.value.list);
 
@@ -106,6 +105,10 @@ const getColor = (change) => {
   // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
 };
 
+const getStockImg = (imgUrl) => {
+  return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+};
+console.log("stock.value"+stocks);
 </script>
 
 
@@ -253,5 +256,5 @@ const getColor = (change) => {
 }
 </style>
 
-야그래도안되자난
+
 

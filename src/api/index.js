@@ -4,7 +4,7 @@ import {useLoginStore} from '@/stores/login';
 import router from '@/router';
 
 const instance=axios.create({
-    timeout:1000,
+    timeout:5000,
 });
 
 instance.interceptors.request.use(

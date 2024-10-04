@@ -4,53 +4,63 @@
   <div class="stock-detail">
     <div class="stock-header">
       <div class="stock-info">
+
+        <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" style="width: 50px; height: 50px; object-fit: cover;"/>
+
         <h1 class="stock-name">{{ stock.stockName }}</h1>
         <span class="stock-price">{{ stock.stockPrice }}</span>
+
+        <span></span>
       </div>
       <div class="stock-icon" @click="toggleFavorite">
         <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
            :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
       </div>
     </div>
-    <div class="tabs-container">
-      <router-link to="/stock/chart" class="tab" active-class="active">차트</router-link>
-      <router-link :to= "{ name: 'stockDetail', params: { sno: stock.sno } }"  class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
-      <router-link :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" class="tab" active-class="active" style="color: #DADADA;">커뮤니티</router-link>
+  </div>
+
+  <div class="tabs-container">
+    <router-link to="/stock/chart" class="tab" active-class="active">차트</router-link>
+    <router-link :to="{ name: 'stockDetail', params: { sno: stock.sno } }" class="tab" active-class="active"
+                 style="color: #DADADA;">종목정보
+    </router-link>
+    <router-link :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" class="tab" active-class="active"
+                 style="color: #DADADA;">커뮤니티
+    </router-link>
+  </div>
+  <br>
+
+  <div class="chart-container">
+    <canvas ref="stockChart"></canvas>
+    <div class="chart-info">
+      <span class="chart-high">최고 {{ highestPrice }}원</span>
+      <span class="chart-low">최저 {{ lowestPrice }}원</span>
     </div>
     <br>
-
-    <div class="chart-container">
-      <canvas ref="stockChart"></canvas>
-      <div class="chart-info">
-        <span class="chart-high">최고 {{ highestPrice }}원</span>
-        <span class="chart-low">최저 {{ lowestPrice }}원</span>
-      </div>
-      <br>
-      <div class="time-buttons">
-        <button v-for="period in timePeriods" :key="period"
-                :class="['time-button', { active: activePeriod === period }]"
-                @click="changePeriod(period)">
-          {{ period }}
-        </button>
-      </div>
+    <div class="time-buttons">
+      <button v-for="period in timePeriods" :key="period"
+              :class="['time-button', { active: activePeriod === period }]"
+              @click="changePeriod(period)">
+        {{ period }}
+      </button>
     </div>
-    <br><br><br>
-    <div class="news-section">
-      <div v-for="(news, index) in newsItems" :key="index" class="news-item">
-        <div class="news-content">
-          <h3>{{ news.title }}</h3>
-          <p>{{ news.content }} · {{ news.link }}</p>
-        </div>
+  </div>
+  <br><br><br>
+  <div class="news-section">
+    <div v-for="(news, index) in newsItems" :key="index" class="news-item">
+      <div class="news-content">
+        <h3>{{ news.title }}</h3>
+        <p>{{ news.content }} · {{ news.link }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import {ref, onMounted, computed} from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import { Chart, registerables } from 'chart.js';
-import { useRoute } from "vue-router";
+import {Chart, registerables} from 'chart.js';
+import {useRoute} from "vue-router";
 import api from "@/api/stockApi.js";
 
 const route = useRoute();
@@ -87,17 +97,17 @@ const renderChart = () => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false },
-          tooltip: { enabled: false },
+          legend: {display: false},
+          tooltip: {enabled: false},
         },
         scales: {
           x: {
             display: true,
-            title: { display: true, text: '시간' },
+            title: {display: true, text: '시간'},
           },
           y: {
             display: true,
-            title: { display: true, text: '가격 (원)' },
+            title: {display: true, text: '가격 (원)'},
           },
         },
       },
@@ -152,6 +162,10 @@ const getChart = async (query) => {
     console.error('Error loading stocks:', error);
   }
 };
+const getStockImg = (imgUrl) => {
+  return imgUrl ? `@/src${imgUrl}` : ''; // 절대 URL로 수정
+};
+
 </script>
 
 <style scoped>

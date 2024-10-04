@@ -72,12 +72,12 @@ export default {
         return data;
 
     },
-    async deleteAttachment(no){
-        const {data} = await api.delete(`${BASE_URL}/deleteAttachment/${no}`);
-
-        console.log('ATTACHMENT DELETE: ',data);
-        return data;
+    async deleteCommunity(sno, bno) {
+        const response = await api.delete(`${BASE_URL}/${sno}/community/${bno}`);
+        console.log('COMMUNITY DELETE: ', response.data); // 여기서 response.data를 확인
+        return response.data;
     },
+
     async getCommunity(sno){
         const{data}= await api.get(`${BASE_URL}/${sno}/community`);
         console.log('GET COMMUNITY',data);
