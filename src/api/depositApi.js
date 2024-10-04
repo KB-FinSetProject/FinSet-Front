@@ -6,7 +6,9 @@ const BASE_URL = "/api/deposits";
 export default {
   async fetchDeposits(sort = 'total') {
     try {
-      const response = await api.get(`${BASE_URL}`);
+      const response = await api.get(`${BASE_URL}`, {
+        params: { sort } // sort 파라미터를 추가
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching deposits:", error);
@@ -23,4 +25,14 @@ export default {
       throw error;
     }
   },
+
+  // 간단 예금 정보만 가져오기
+  async fetchSimpleDeposits() {
+    return this.fetchDeposits('simple'); // sort를 'simple'로 설정
+  },
+
+  // 복리 예금 정보만 가져오기
+  async fetchCompoundDeposits() {
+    return this.fetchDeposits('compound'); // sort를 'compound'로 설정
+  }
 };

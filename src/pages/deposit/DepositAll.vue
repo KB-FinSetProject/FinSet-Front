@@ -9,7 +9,6 @@
       <router-link to="/depositcompound" class="tab" active-class="active" style="color: #DADADA;">복리</router-link>
     </div>
   
-    <br>
 
 
     <div class="deposit-list">
@@ -42,6 +41,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
@@ -94,6 +94,7 @@ export default {
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 110px;
 }
 
 .tabs-container {
@@ -240,5 +241,6 @@ export default {
 
 .risk-info {
   margin-top: 10px;
+  margin-bottom: -10px;
 }
 </style>

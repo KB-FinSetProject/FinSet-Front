@@ -5,12 +5,10 @@
 
     <div class="tabs-container">
       <router-link to="/deposit" class="tab" active-class="active" style="color: #DADADA;">전체</router-link>
-      <router-link to="/depositsimple" class="tab" active-class="active">단리</router-link>
-      <router-link to="/depositcompound" class="tab" active-class="active" style="color: #DADADA;">복리</router-link>
+      <router-link to="/depositsimple" class="tab" active-class="active" @click="fetchDeposits('simple')">단리</router-link>
+      <router-link to="/depositcompound" class="tab" active-class="active" @click="fetchDeposits('compound')" style="color: #DADADA;">복리</router-link>
     </div>
   
-    <br>
-
 
     <div class="deposit-list">
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="deposit-item">
@@ -20,23 +18,23 @@
               <span class="bank-icon">{{ deposit.logo }}</span>
             </div>
             <div>
-              <p class="deposit-name" @click="goToDetail(deposit)">{{ deposit.depositName }}</p> <!-- 클릭 이벤트 추가 -->
+              <p class="deposit-name" @click="goToDetail(deposit)">{{ deposit.depositName }}</p>
               <p class="deposit-details">{{ deposit.depositBank }}</p>
               <div class="risk-info">
                 <span class="high-rating">{{ deposit.depositCategory }}</span>
               </div>
             </div>
           </div>
-          <div class="deposit-yield"> <!-- 클래스명 변경 -->
+          <div class="deposit-yield">
             <span class="max">최고 {{ deposit.depositMaxRate }}%</span>
             <span class="basic">기본 {{ deposit.depositNormalRate }}%</span>
           </div>
-          <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
+          <div class="deposit-icon" @click="toggleFavorite(deposit)">
             <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
                :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
-        <div class="mini-bar"></div> <!-- 미니바 추가 -->
+        <div class="mini-bar"></div>
       </div>
     </div>
   </div>
@@ -50,24 +48,24 @@ export default {
   components: { HeaderNormal },
   data() {
     return {
-      activeTab: 'all',
+      activeTab: 'simple', // 기본 탭을 단리로 설정
       deposits: [],
     };
   },
   computed: {
     filteredDeposits() {
-      if (this.activeTab === 'simple') {
-        return this.deposits.filter(deposit => deposit.depositCategory === '단리');
-      } else if (this.activeTab === 'compound') {
-        return this.deposits.filter(deposit => deposit.depositCategory === '복리');
-      }
-      return this.deposits; // 전체 예금을 보여줌
+      return this.deposits; // 선택된 탭에 따른 deposits를 반환
     },
   },
   methods: {
-    async fetchDeposits() {
+    async fetchDeposits(type) {
       try {
-        this.deposits = await depositApi.fetchDeposits(); // API 호출
+        if (type === 'simple') {
+          this.deposits = await depositApi.fetchSimpleDeposits(); // 단리 상품만 가져오는 API 호출
+        } else if (type === 'compound') {
+          this.deposits = await depositApi.fetchCompoundDeposits(); // 복리 상품만 가져오는 API 호출
+        }
+        this.activeTab = type; // 활성화된 탭 설정
       } catch (error) {
         console.error("Error fetching deposits:", error); // 오류 처리
       }
@@ -76,15 +74,16 @@ export default {
       deposit.favorite = !deposit.favorite; // favorite 상태 토글
     },
     goToDetail(deposit) {
-    // 클릭한 예금의 dno를 저장하고 상세 페이지로 이동
-    this.$router.push({ path: '/deposit/detail', query: { dno: deposit.dno } });
+      // 클릭한 예금의 dno를 저장하고 상세 페이지로 이동
+      this.$router.push({ path: '/deposit/detail', query: { dno: deposit.dno } });
     },
   },
   mounted() {
-    this.fetchDeposits(); // 컴포넌트가 마운트될 때 데이터 가져오기
+    this.fetchDeposits('simple'); // 컴포넌트가 마운트될 때 단리 상품 데이터 가져오기
   },
 };
 </script>
+
 
 <style scoped>
 .deposit-container {
@@ -92,6 +91,7 @@ export default {
   max-width: 390px;
   position: relative;
   bottom: 110px;
+  margin-top: 110px;
 }
 
 .tabs-container {
@@ -237,5 +237,6 @@ export default {
 
 .risk-info {
   margin-top: 10px;
+  margin-bottom: -10px;
 }
 </style>

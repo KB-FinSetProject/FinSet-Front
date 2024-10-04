@@ -7,15 +7,15 @@
       <p style="color: #9B9B9B;">원하는 통화를 선택하면 상세페이지로 이동됩니다.</p>
     </div>
 
-    <div v-for="currency in filteredCurrencies" :key="currency.code" class="currency-card">
+    <div v-for="currency in filteredCurrencies" :key="currency.feno" class="currency-card">
       <div class="currency-header">
         <div class="currency-info">
-          <img :src="currency.flagUrl" :alt="currency.name" />
-          <router-link :to="`/exchangedetail`" class="no-underline">
-            <h7>{{ currency.name }}</h7>
+          <img :src="getFlagUrl(currency.forexName)" :alt="currency.forexName" />
+          <router-link :to="{ path: '/exchange/detail', query: { feno: currency.feno } }" class="no-underline">
+            <h7>{{ currency.forexName }}</h7>
           </router-link>
         </div>
-        <div class="favorite" @click="toggleFavorite(currency)">
+        <div class="favorite" @click="toggleFavorite(currency)" style="margin-bottom: 20px;">
           <span>
             <i :class="['fa-solid', 'fa-heart', 'icon', { 'favorite-active': currency.isFavorite }]"></i>
           </span>
@@ -24,15 +24,15 @@
       <div class="currency-rates">
         <div class="rate-item">
           <p class="label">매매기준율</p>
-          <p class="highlight rate">{{ currency.standardRate.toFixed(2) }}</p>
+          <p class="highlight rate">{{ currency.forexBasicRate.toLocaleString() }}</p>
         </div>
         <div class="rate-item">
           <p class="label">입금(환전)할 때</p>
-          <p class="rate">{{ currency.depositRate.toFixed(2) }}</p>
+          <p class="rate">{{ currency.forexBuy.toLocaleString() }}</p>
         </div>
         <div class="rate-item">
           <p class="label">원화로 환전할 때</p>
-          <p class="rate">{{ currency.withdrawalRate.toFixed(2) }}</p>
+          <p class="rate">{{ currency.forexSell.toLocaleString() }}</p>
         </div>
       </div>
     </div>
@@ -41,40 +41,43 @@
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import forexApi from '@/api/forexApi'; // Axios API 인스턴스 가져오기
 
 const searchQuery = ref('');
+const currencies = ref([]); // 외환 정보를 저장할 배열
 
-// 통화 정보
-const currencies = ref([
-  {
-    name: '미국 달러(USD)',
-    code: 'USD',
-    flagUrl: 'https://i.namu.wiki/i/5ac6l60QaKXGLqeGjkxO1kqHPZd-LJWM3DhbuxjjNmiZa5NaRekkUskLmuny2B_7ueHGx2sXE1bW_-TMg5yGIQ.svg',
-    standardRate: 1344.50,
-    depositRate: 1344.50,
-    withdrawalRate: 1344.50,
-    isFavorite: true,
-  },
-  {
-    name: '일본 엔(JPY)',
-    code: 'JPY',
-    flagUrl: 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg',
-    standardRate: 1344.50,
-    depositRate: 1344.50,
-    withdrawalRate: 1344.50,
-    isFavorite: false,
-  },
-  {
-    name: '유럽 유로(EUR)',
-    code: 'EUR',
-    flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1200px-Flag_of_Europe.svg.png',
-    standardRate: 1344.50,
-    depositRate: 1344.50,
-    withdrawalRate: 1344.50,
-    isFavorite: false,
-  },
-]);
+// 외환 정보 가져오기
+const fetchCurrencies = async () => {
+  try {
+    currencies.value = await forexApi.fetchAllForex(); // 외환 정보 API 호출
+  } catch (error) {
+    console.error("Failed to fetch currencies:", error);
+  }
+};
+
+// 플래그 URL 반환 함수
+const getFlagUrl = (forexName) => {
+  if (forexName.includes('CNH')) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
+  } else if (forexName.includes('EUR')) {
+    return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
+  } else if (forexName.includes('GBP')) {
+    return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
+  } else if (forexName.includes('JPY')) {
+    return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
+  } else if (forexName.includes('USD')) {
+    return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
+  } else {
+    return ''; // 기본값은 빈 문자열
+  }
+};
+
+
+// 컴포넌트가 마운트될 때 외환 정보 가져오기
+onMounted(() => {
+  fetchCurrencies();
+});
 
 // 즐겨찾기 토글 함수
 const toggleFavorite = (currency) => {
@@ -84,11 +87,11 @@ const toggleFavorite = (currency) => {
 // 검색 필터링된 통화 목록
 const filteredCurrencies = computed(() => {
   return currencies.value.filter((currency) =>
-      currency.name.includes(searchQuery.value)
+    currency.forexName.includes(searchQuery.value)
   );
 });
-
 </script>
+
 
 <style scoped>
 body {
@@ -124,6 +127,7 @@ body {
 .currency-info {
   display: flex;
   align-items: center;
+  margin-left: 10px;
 }
 
 .currency-info img {
@@ -152,13 +156,19 @@ body {
 
 .label {
   color: #595959;
+  margin-left: 10px;
+}
+
+.rate{
+  margin-right: 10px;
 }
 
 .icon {
   color: gray;
   position: absolute;
-  transform: translateX(-200%);
+  transform: translateX(-170%);
   cursor: pointer;
+  font-size: 23px;
 }
 
 .icon.favorite-active {
@@ -170,4 +180,8 @@ body {
   color: #595959;
 }
 
+.highlight{
+  color: #F8A70C;
+
+}
 </style>

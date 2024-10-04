@@ -6,23 +6,24 @@
       <div class="input-container">
         <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />
         <i class="fas fa-search search-icon" @click="performSearch"></i>
+        <!--        텍스트 입력 / 엔터 입력 시 perform search 추가-->
       </div>
     </div>
 
     <br>
 
     <div class="card-container">
-      <div class="card">
+      <div class="card" v-if="searchResult">
         <div class="card-header">
-          <span class="title">미수령주식 · 배당금</span>
+          <span class="title">{{ searchResult.title }}</span>
           <i class="fa-solid fa-star icon" :class="{ active: isStarActive }" @click="toggleStar"></i>
         </div>
         <br>
-        <p class="description">무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금</p>
+        <p class="description">{{ searchResult.content }}</p>
       </div>
 
       <h6 style="color: black; font-weight: 350; margin-left: 10px">
-        "주식"에 대한 <span style="color: #FFBB00;">538</span>개 용어가 검색되었습니다.
+        "{{ searchQuery }}"에 대한 <span style="color: #FFBB00;">{{ items.length }}</span>개 용어가 검색되었습니다.
       </h6>
 
       <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">
@@ -51,111 +52,299 @@
       </div>
 
       <!-- list 아이템 표시 -->
-      <div class="item-container" v-for="(item, index) in list" :key="index">
+      <div class="item-container" v-for="(wishItem, index) in wishItems" :key="index">
         <router-link :to="{ path: '/dictmemo' }" class="item-text">
-          <span class="item-text">{{ item }}</span>
+          <span class="item-text">{{ wishItem.word }}</span>
         </router-link>
         <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>
       </div>
+      
     </div>
   </div>
 </template>
 
+<!--<template>-->
+<!--  <HeaderNormal navbarTitle="사전" />-->
+
+<!--  <div class="container">-->
+<!--    <div class="search-bar">-->
+<!--      <div class="input-container">-->
+<!--        <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요." />-->
+<!--        <i class="fas fa-search search-icon" @click="performSearch"></i>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <br>-->
+
+<!--    <div class="card-container">-->
+<!--      <div class="card">-->
+<!--        <div class="card-header">-->
+<!--          <span class="title">미수령주식 · 배당금</span>-->
+<!--          <i class="fa-solid fa-star icon" :class="{ active: isStarActive }" @click="toggleStar"></i>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <p class="description">무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금</p>-->
+<!--      </div>-->
+
+<!--      <h6 style="color: black; font-weight: 350; margin-left: 10px">-->
+<!--        "주식"에 대한 <span style="color: #FFBB00;">538</span>개 용어가 검색되었습니다.-->
+<!--      </h6>-->
+
+<!--      <div v-for="(item, index) in displayedItems" :key="item.title" class="card cardelse">-->
+<!--        <div class="card-header" @click="toggleDescription(index)">-->
+<!--          <span class="title">{{ item.title }}</span>-->
+<!--          &lt;!&ndash; 조건부 렌더링을 통해 아이콘을 교체 &ndash;&gt;-->
+<!--          <i class="fa-solid" :class="[isActive(index) ? 'fa-caret-up' : 'fa-caret-down', 'arrow']"></i>-->
+<!--        </div>-->
+<!--        <div v-if="isActive(index)">-->
+<!--          <br>-->
+<!--          <p class="description">{{ item.content }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; 더보기 버튼 &ndash;&gt;-->
+<!--      <button v-if="!showAll" @click="showAllItems" class="load-more-button">+</button>-->
+
+<!--      <hr>-->
+
+<!--      <div class="icon-title-container">-->
+<!--        <i class="fa-solid fa-book-bookmark icon-large"></i>-->
+<!--        <span class="title">단어장</span>-->
+<!--        <router-link to="/dictmemo">-->
+<!--          <i class="fa-solid fa-arrow-right"></i> &lt;!&ndash; 수정된 부분 &ndash;&gt;-->
+<!--        </router-link>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; list 아이템 표시 &ndash;&gt;-->
+<!--      <div class="item-container" v-for="(item, index) in list" :key="index">-->
+<!--        <router-link :to="{ path: '/dictmemo' }" class="item-text">-->
+<!--          <span class="item-text">{{ item }}</span>-->
+<!--        </router-link>-->
+<!--        <i class="fa-solid fa-star icon2" :class="{ active: isListStarActive(index) }" @click="toggleListStar(index)"></i>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, } from 'vue';
+import dictApi from '@/api/dictApi'; // dictApi 모듈 가져오기
+import dictWishApi from '@/api/dictWishApi';
 
-// 아코디언 데이터 설정
-const items = ref([
-  {
-    title: '미수령주식 · 배당금',
-    content: '무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금',
-  },
-  {
-    title: '주식',
-    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
-  },
-  {
-    title: '주식시장',
-    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
-  },
-  {
-    title: '예금',
-    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
-  },
-  {
-    title: '재테크',
-    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',
-  },
-]);
+// 상태 관리 변수 정의
+const items = ref([]); // 사전 항목 리스트
+const list = ref([]); // 단어 리스트
+const showAll = ref(false); // 더보기 버튼 상태
+const activeIndices = ref([]); // 아코디언 활성 상태
+const searchQuery = ref(''); // 검색어 상태
+const isStarActive = ref(false); // 전체 별 아이콘 상태
+const listStarStates = ref([]); // 리스트 아이템 별 상태
+const searchResult = computed(() => items.value.find(item => item.title === searchQuery.value));
+const filteredItems = computed(() => items.value.filter(item => item.title !== searchQuery.value));
+const wishItems = ref([]); // 단어장 항목 리스트
+const uno = ref(null); // uno 값 저장
 
-const list = ref([
-  '미수령주식 · 배당금',
-  '주식시장',
-  '하위',
-  '바위'
-]);
+// 모든 사전 항목 조회 함수
+const fetchDictionaryItems = async () => {
+  try {
+    const data = await dictApi.getAll(); // dictApi를 통해 모든 항목 조회
+    items.value = data.map(item => ({
+      title: item.word,
+      content: item.content,
+    }));
+    list.value = data.map(item => item.word); // 단어 리스트 초기화
+    listStarStates.value = Array(data.length).fill(false); // 초기 리스트 상태 설정
+    console.log('사전 항목 조회 성공:', data);
+  } catch (error) {
+    console.error('사전 항목 조회 오류:', error);
+  }
+};
 
-// "더보기" 상태 관리
-const showAll = ref(false);
+// 단어장 항목 조회 함수
+const fetchWishItems = async (userUno) => {
+  try {
+    const response = await dictWishApi.getAll(userUno); // uno를 API 호출에 전달합니다.
+    if (response && Array.isArray(response)) {
+      wishItems.value = response; // API를 통해 단어장 항목을 가져옵니다.
+      console.log('Fetched wish items:', wishItems.value);
 
-// 처음에 3개만 보여줌
-const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));
+      // 각 wish item의 dino에 대해 추가 정보를 가져옵니다.
+      for (let wishItem of wishItems.value) {
+        const data = await dictApi.getByDino(wishItem.dino); // dino로 사전 항목 조회
+        wishItem.word = data.word;
+      }
+    } else {
+      console.error('API 응답 형식이 올바르지 않습니다.', response);
+    }
+  } catch (error) {
+    console.error('Error fetching wish items:', error.message || error); // 오류 메시지 로그
+    if (error.response) {
+      console.error('Response data:', error.response.data);
+      console.error('Response status:', error.response.status);
+    } else if (error.request) {
+      console.error('No response received:', error.request);
+    } else {
+      console.error('Error setting up request:', error.message);
+    }
+  }
+};
 
+// 검색 기능 함수
+const performSearch = async () => {
+  try {
+    const result = await dictApi.search(searchQuery.value); // dictApi를 사용하여 검색
+    items.value = result.map(item => ({
+      title: item.word,
+      content: item.content,
+    }));
+    list.value = result.map(item => item.word);
+    console.log('검색 결과:', result);
+  } catch (error) {
+    console.error('검색 오류:', error);
+  }
+};
 
+// 컴포넌트 마운트 시 사전 항목 조회
+onMounted(() => {
+  fetchDictionaryItems();
+  const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+  uno.value = authData.uno; // uno 값 가져오기
+  console.log('UNO:', uno.value); // uno 값 확인
+  fetchWishItems(uno.value); // fetchWishItems 호출 시 uno 값 전달
+});
+
+// 더보기 버튼 클릭 시 전체 항목 표시
 const showAllItems = () => {
   showAll.value = true;
 };
 
-// 아코디언 상태 관리
-const activeIndices = ref([]); // active 상태를 저장하는 배열
-
-// 특정 인덱스가 active 상태인지 확인
+// 특정 인덱스가 아코디언 활성화 상태인지 확인
 const isActive = (index) => activeIndices.value.includes(index);
 
 // 아코디언 토글 함수
 const toggleDescription = (index) => {
   if (isActive(index)) {
-    // 이미 열려있으면 닫기
     activeIndices.value = activeIndices.value.filter(i => i !== index);
   } else {
-    // 열려있지 않으면 추가
     activeIndices.value.push(index);
   }
 };
 
-const searchQuery = ref('');
-
-const performSearch = () => {
-  // 검색 기능 구현
-  console.log('검색어:', searchQuery.value);
-};
-
-// 별 아이콘 상태 관리
-const isStarActive = ref(false);
-
-// 별 아이콘 클릭 시 상태 토글
+// 전체 별 아이콘 클릭 시 상태 토글
 const toggleStar = () => {
   isStarActive.value = !isStarActive.value;
 };
-
-// 리스트 아이템 별 상태 관리
-const listStarStates = ref(Array(list.value.length).fill(false)); // 초기 상태는 모두 비활성화
 
 // 리스트 아이템 별 클릭 시 상태 토글
 const toggleListStar = (index) => {
   listStarStates.value[index] = !listStarStates.value[index];
 };
 
-// 해당 아이템의 별 상태 확인
+// 리스트 아이템의 별 상태 확인
 const isListStarActive = (index) => listStarStates.value[index];
 
-// 단어 추가 함수
-const addWord = () => {
-  console.log('단어 추가 버튼 클릭');
-};
+// 더보기 버튼이 활성화되었을 때 표시할 항목
+const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));
 </script>
+
+<!--<script setup>-->
+<!--import HeaderNormal from '@/components/common/HeaderNormal.vue';-->
+<!--import { ref, computed } from 'vue';-->
+<!--import dictApi from '@/api/dictApi';-->
+
+<!--// 아코디언 데이터 설정-->
+<!--const items = ref([-->
+<!--  {-->
+<!--    title: '미수령주식 · 배당금',-->
+<!--    content: '무상증자, 배당사실을 주주가 이사 등의 사유로 통지를 받지 못했거나 상속인이 상속사실을 인지하지 못하여 찾아가고 있지 않은 주식 또는 배당금',-->
+<!--  },-->
+<!--  {-->
+<!--    title: '주식',-->
+<!--    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',-->
+<!--  },-->
+<!--  {-->
+<!--    title: '주식시장',-->
+<!--    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',-->
+<!--  },-->
+<!--  {-->
+<!--    title: '예금',-->
+<!--    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',-->
+<!--  },-->
+<!--  {-->
+<!--    title: '재테크',-->
+<!--    content: '회사가 투자금 조달을 위하여 회사를 지분으로 나누어 판 것입니다',-->
+<!--  },-->
+<!--]);-->
+
+<!--const list = ref([-->
+<!--  '미수령주식 · 배당금',-->
+<!--  '주식시장',-->
+<!--  '하위',-->
+<!--  '바위'-->
+<!--]);-->
+
+<!--// "더보기" 상태 관리-->
+<!--const showAll = ref(false);-->
+
+<!--// 처음에 3개만 보여줌-->
+<!--const displayedItems = computed(() => (showAll.value ? items.value : items.value.slice(0, 3)));-->
+
+
+<!--const showAllItems = () => {-->
+<!--  showAll.value = true;-->
+<!--};-->
+
+<!--// 아코디언 상태 관리-->
+<!--const activeIndices = ref([]); // active 상태를 저장하는 배열-->
+
+<!--// 특정 인덱스가 active 상태인지 확인-->
+<!--const isActive = (index) => activeIndices.value.includes(index);-->
+
+<!--// 아코디언 토글 함수-->
+<!--const toggleDescription = (index) => {-->
+<!--  if (isActive(index)) {-->
+<!--    // 이미 열려있으면 닫기-->
+<!--    activeIndices.value = activeIndices.value.filter(i => i !== index);-->
+<!--  } else {-->
+<!--    // 열려있지 않으면 추가-->
+<!--    activeIndices.value.push(index);-->
+<!--  }-->
+<!--};-->
+
+<!--const searchQuery = ref('');-->
+
+<!--const performSearch = () => {-->
+<!--  // 검색 기능 구현-->
+<!--  console.log('검색어:', searchQuery.value);-->
+<!--};-->
+
+<!--// 별 아이콘 상태 관리-->
+<!--const isStarActive = ref(false);-->
+
+<!--// 별 아이콘 클릭 시 상태 토글-->
+<!--const toggleStar = () => {-->
+<!--  isStarActive.value = !isStarActive.value;-->
+<!--};-->
+
+<!--// 리스트 아이템 별 상태 관리-->
+<!--const listStarStates = ref(Array(list.value.length).fill(false)); // 초기 상태는 모두 비활성화-->
+
+<!--// 리스트 아이템 별 클릭 시 상태 토글-->
+<!--const toggleListStar = (index) => {-->
+<!--  listStarStates.value[index] = !listStarStates.value[index];-->
+<!--};-->
+
+<!--// 해당 아이템의 별 상태 확인-->
+<!--const isListStarActive = (index) => listStarStates.value[index];-->
+
+<!--// 단어 추가 함수-->
+<!--const addWord = () => {-->
+<!--  console.log('단어 추가 버튼 클릭');-->
+<!--};-->
+<!--</script>-->
+
 
 <style scoped>
 .container {

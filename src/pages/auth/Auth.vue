@@ -3,13 +3,17 @@
 
   <div class="container">
     <div class="info" style="width: 390px">
-
       <div>
-        <h1 style="margin-top: 25px;">홍길동 <RouterLink to="/signup"><i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px; color:white"></i></RouterLink></h1>
+        <h1 style="margin-top: 25px;">
+          {{ userName }}
+          <RouterLink to="/signup">
+            <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px; color:white"></i>
+          </RouterLink>
+        </h1>
       </div>
       <br>
       <div class="email">
-        hongildong@kb.com
+        {{ userId }}
       </div>
     </div>
 
@@ -40,6 +44,36 @@
     
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      userName: '',
+      userId: ''
+    };
+  },
+  mounted() {
+    // localStorage에서 저장된 auth 정보 가져오기
+    const storedAuth = localStorage.getItem('auth');
+    
+    if (storedAuth) {
+      const authData = JSON.parse(storedAuth);
+
+      // authData에서 user 정보를 추출해 data에 할당
+      if (authData) {
+        this.userName = authData.name;
+        this.userId = authData.id;
+      } else {
+        console.error("User 정보가 존재하지 않습니다.");
+      }
+    } else {
+      console.error("localStorage에 저장된 auth 정보가 없습니다.");
+    }
+  },
+};
+</script>
+
 
 <script setup>
 import HeaderMyPage from '@/components/common/HeaderMyPage.vue';

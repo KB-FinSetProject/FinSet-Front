@@ -5,15 +5,15 @@
     <br><br>
     <h3 style="margin-left: 10px;">환전정보</h3>
     <span style="margin-left: 10px; color:gray">2024/10/01 09:00 기준 </span>
-    <br>
+    <br><br>
 
-    <div class="exchange-header d-flex align-items-center justify-content-between">
+    <div class="exchange-header d-flex align-items-center justify-content-between" v-if="item">
       <div class="exchage-include">
         <div class="exchange-info d-flex align-items-center">
-          <img src="https://i.namu.wiki/i/5ac6l60QaKXGLqeGjkxO1kqHPZd-LJWM3DhbuxjjNmiZa5NaRekkUskLmuny2B_7ueHGx2sXE1bW_-TMg5yGIQ.svg" alt="외환 이미지" class="exchange-img" />
+          <img :src="getFlagUrl(item.forexName)" alt="외환 이미지" class="exchange-img" />
           <div class="exchange-detail d-flex align-items-center">
-            <h6 class="exchange-name">{{ item.name }}</h6>
-            <p class="exchange-details">적용환율: {{ item.rate }}</p>
+            <h6 class="exchange-name">{{ item.forexName }}</h6>
+            <p class="exchange-details">적용환율: {{ item.forexBasicRate.toLocaleString() }}원</p>
           </div>
         </div>
       </div>
@@ -21,10 +21,10 @@
 
     <br>
     <p style="margin-left: 10px; color: gray;">실시간 환율</p>
-    <div class="info d-flex justify-content-between align-items-center">
-      <h1>{{ item.rate }}원</h1>
+    <div class="info d-flex justify-content-between align-items-center" v-if="item">
+      <h1>{{ item.forexBasicRate.toLocaleString() }}원</h1>
       <span :style="{ color: item.change > 0 ? '#FF6767' : '#547BC1' }">
-        <span style="color: gray;">전일대비 </span>{{ item.change }}원 {{ item.change > 0 ? '▲' : '▼' }} 
+        <span style="color: gray;">전일대비 </span>{{ change }}원 {{ change > 0 ? '▲' : '▼' }}
       </span>
     </div>
 
@@ -32,12 +32,11 @@
 
     <div class="chart-container">
       <canvas ref="stockChart"></canvas>
-      <div class="chart-info">
-        <span class="chart-high">최고 {{ highestPrice }}원</span>
-        <span class="chart-low">최저 {{ lowestPrice }}원</span>
+      <div class="chart-info" v-if="item">
+        <span class="chart-high">최고 {{ highestPrice.toLocaleString() }}원</span>
+        <span class="chart-low">최저 {{ lowestPrice.toLocaleString() }}원</span>
       </div>
     </div>
-  
 
     <div class="sort">
       <div class="sort-include d-flex justify-content-between">
@@ -55,119 +54,181 @@
 
     <br>
   
-    <div class="timeframe-container d-flex align-items-start">
+    <div class="timeframe-container d-flex align-items-start" v-if="item">
       <i class="fa-solid fa-chart-line icon"></i>
       <div>
         <div class="timeframe-info">
-          <span>{{ timeframeText }} 수익</span>
+          <span>{{ timeframeText }} 전에 샀었다면 수익</span>
         </div>
         <div class="value-display">
-          <h5>{{ displayValue }}원</h5>
+          <h5>{{ displayValue.toLocaleString() }}원</h5>
         </div>
       </div>
     </div>
 
-</div>
-
+  </div>
 </template>
 
-
 <script setup>
-import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import { ref, onMounted, computed } from 'vue';
-import { Chart, registerables } from 'chart.js';
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+</script>
 
+<script>
+import forexApi from "@/api/forexApi"; // 외환 정보를 가져오는 API 모듈
+import { Chart, registerables } from 'chart.js'; // Chart.js 가져오기
 Chart.register(...registerables);
 
-const stockChart = ref(null);
-const chartData = ref([
-  { date: '2023-09-01', price: 67000 },
-  { date: '2023-09-02', price: 67500 },
-  { date: '2023-09-03', price: 68000 },
-  { date: '2023-09-04', price: 67800 },
-  { date: '2023-09-05', price: 68200 },
-]);
-
-const highestPrice = computed(() => Math.max(...chartData.value.map(data => data.price)));
-const lowestPrice = computed(() => Math.min(...chartData.value.map(data => data.price)));
-
-const item = ref({
-  name: '미국달러(USD)',
-  rate: '1,344.80',
-  change: '3.02',
-});
-
-// 선택된 기간을 관리하는 변수 추가 (기본값을 '1일'로 설정)
-const selectedTimeframe = ref('1일');
-
-const refreshData = () => {
-  console.log('데이터 새로고침');
-  // 데이터 새로고침 로직을 추가하세요.
-};
-
-const selectTimeframe = (timeframe) => {
-  selectedTimeframe.value = timeframe; // 선택된 기간 업데이트
-  console.log('선택된 기간:', timeframe);
-  // 여기에 기간 선택에 따른 추가 로직을 구현
-};
-
-// 선택된 기간에 따라 표시할 텍스트를 결정하는 computed property 추가
-const timeframeText = computed(() => {
-  return selectedTimeframe.value === '1일' ? '1일 전에 샀었다면 ' :
-         selectedTimeframe.value === '1주' ? '1주일 전에 샀었다면 ' :
-         '1달 전에 샀었다면 ';
-});
-
-// 예시로 보여줄 값 (이 부분은 실제 데이터로 대체 가능)
-const displayValue = computed(() => {
-  return selectedTimeframe.value === '1일' ? '+1,340.00' :
-         selectedTimeframe.value === '1주' ? '+1,330.00' :
-         '+1,300.00';
-});
-
-onMounted(() => {
-  const ctx = stockChart.value.getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: chartData.value.map(data => data.date),
-      datasets: [{
-        label: '', // 데이터셋 레이블을 빈 문자열로 설정하여 표시되지 않도록 함
-        data: chartData.value.map(data => data.price),
-        borderColor: 'orange',
-        borderWidth: 2,
-        fill: false,
-        pointRadius: 0, // 점을 숨김
-      }],
+export default {
+  data() {
+    return {
+      item: null, // 외환 정보를 저장할 객체
+      chartData: null, // 차트 데이터를 저장할 객체
+      selectedTimeframe: '1일', // 초기 값 설정
+      highestPrice: 0, // 최대 가격
+      lowestPrice: 0, // 최소 가격
+      timeframeText: '1일', // 초기 텍스트 설정
+      displayValue: 0, // 계산된 수익 값을 저장
+      change: 0, // 전일 대비 변동 값을 저장
+    };
+  },
+  async mounted() {
+    const feno = this.$route.query.feno; // 쿼리 파라미터에서 feno를 가져옴
+    await this.fetchExchangeDetails(feno); // 해당 feno로 외환 정보 요청
+    await this.fetchForexChartById(feno); // 차트 데이터 요청
+    this.calculateDisplayValue(); // 초기 로드 시 1일 기준으로 displayValue 계산
+    this.calculateChange(); // 전일 대비 변동 값 계산
+  },
+  methods: {
+    async fetchExchangeDetails(feno) {
+      try {
+        this.item = await forexApi.fetchForexById(feno);
+      } catch (error) {
+        console.error("Error fetching exchange details:", error);
+      }
     },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          display: false, // x축 숨기기
-        },
-        y: {
-          display: false, // y축 숨기기
-          min: 65000, // y축 최소값
-          max: 69000, // y축 최대값
-        },
-      },
-      plugins: {
-        legend: {
-          display: false, // 범례 숨기기
-        },
-        tooltip: {
-          enabled: false, // 툴팁 숨기기
-        },
-      },
+    async fetchForexChartById(feno) {
+      try {
+        this.chartData = await forexApi.fetchForexChartById(feno);
+        console.log("Fetched chart data:", this.chartData);
+        const forexRates = this.chartData.map(data => data.forexBasicRate);
+
+        // 최대값과 최소값 계산 후 저장
+        this.highestPrice = Math.max(...forexRates);
+        this.lowestPrice = Math.min(...forexRates);
+
+        console.log("Highest Price:", this.highestPrice);
+        console.log("Lowest Price:", this.lowestPrice);
+        this.renderChart(); // 차트 렌더링
+      } catch (error) {
+        console.error("Error fetching forex chart by ID:", error);
+      }
     },
-  });
-});
+    renderChart() {
+      const ctx = this.$refs.stockChart.getContext('2d');
+      
+      new Chart(ctx, {
+        type: 'line', // 차트 타입
+        data: {
+          labels: this.chartData.map(data => data.forexDatetime), // x축 레이블
+          datasets: [{
+            label: '', // 데이터셋 레이블을 빈 문자열로 설정하여 표시되지 않도록 함
+            data: this.chartData.map(data => data.forexBasicRate), // y축 데이터
+            borderColor: 'orange', // 선 색상
+            borderWidth: 2, // 선 두께
+            fill: false, // 선 아래 영역을 채우지 않음
+            pointRadius: 0, // 점을 숨김
+          }]
+        },
+        options: {
+          responsive: true, // 반응형 차트
+          scales: {
+            x: {
+              display: false, // x축 숨기기
+              grid: {
+                display: false, // x축 그리드 라인 숨기기
+              }
+            },
+            y: {
+              display: false, // y축 숨기기
+              grid: {
+                display: false, // y축 그리드 라인 숨기기
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false, // 범례 숨기기
+            },
+            tooltip: {
+              enabled: false, // 툴팁 숨기기
+            },
+          },
+          elements: {
+            line: {
+              tension: 0.4 // 선을 부드럽게 함 (0: 직선, 1: 곡선)
+            }
+          }
+        }
+      });
+    },
+    calculateChange() {
+      if (this.chartData && this.chartData.length > 1) {
+        // 인덱스 0과 인덱스 1의 forexBasicRate 차이를 계산
+        this.change = (this.chartData[0].forexBasicRate - this.chartData[1].forexBasicRate).toFixed(2);
+      } else {
+        this.change = 0; // 데이터가 부족할 경우 0으로 설정
+      }
+    },
+    calculateDisplayValue() {
+      if (!this.chartData || this.chartData.length === 0) {
+        return; // 차트 데이터가 없으면 계산할 수 없으므로 리턴
+      }
+
+      const currentRate = this.chartData[0].forexBasicRate; // 가장 최근 가격
+      
+      let pastRate;
+      if (this.selectedTimeframe === '1일') {
+        pastRate = this.chartData[1] ? this.chartData[1].forexBasicRate : currentRate;
+      } else if (this.selectedTimeframe === '1주') {
+        pastRate = this.chartData[5] ? this.chartData[5].forexBasicRate : currentRate; // 1주 전 (5일 전)
+      } else if (this.selectedTimeframe === '1달') {
+        pastRate = this.chartData[19] ? this.chartData[19].forexBasicRate : currentRate; // 1달 전 (22일 전)
+      }
+      
+      // 수익 계산 (현재 값에서 과거 값을 뺀 결과)
+      this.displayValue = (currentRate - pastRate).toFixed(2); // 소수점 2자리까지
+    },
+    getFlagUrl(forexName){
+      if (forexName.includes('CNH')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
+      } else if (forexName.includes('EUR')) {
+        return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
+      } else if (forexName.includes('GBP')) {
+        return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
+      } else if (forexName.includes('JPY')) {
+        return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
+      } else if (forexName.includes('USD')) {
+        return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
+      } else {
+        return ''; // 기본값은 빈 문자열
+      }
+    },
+    selectTimeframe(timeframe) {
+      this.selectedTimeframe = timeframe;
+      this.timeframeText = timeframe; // 선택한 시간대를 그대로 timeframeText에 반영
+      
+      // 시간대에 따라 수익 값을 계산하는 로직 추가
+      this.calculateDisplayValue();
+    }
+  }
+};
 </script>
+
+
 
 <style scoped>
 .container{
-  margin-top: -90px;
+  margin-top: -100px;
   margin-bottom: 120px;
 }
 
@@ -198,6 +259,7 @@ onMounted(() => {
   margin-right: 10px; /* 이미지와 외환명 사이 간격 */
   border-radius: 50%; /* 동그랗게 만들기 */
   object-fit: cover; /* 이미지 비율 유지하며 잘라내기 */
+  border: 0.5px solid gray;
 }
 
 .exchange-detail {
