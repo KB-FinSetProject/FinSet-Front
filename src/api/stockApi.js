@@ -26,23 +26,7 @@ export default {
             console.error('Error getting high stocks:', error);
         }
     },
-    // async create(stock){
-    //     const formData=new FormData();
-    //     formData.append('sno',stock.sno);
-    //     formData.append('writer',stock.writer);
-    //     formData.append('content',stock .content);
-    //     formData.append('content',stock .content);
-    //     formData.append('content',stock .content);
-    //     formData.append('content',stock .content);
-    //     formData.append('content',stock .content);
-    //
-    //
-    //
-    //     const {data} = await api.post(BASE_URL,formData,{headers});
-    //     console.log('BOARD POST: ',data);
-    //     return data;
-    //
-    // },
+
     async removeWish(stock) {
         try {
             const { data } = await api.delete(`/api/wishes`, {
