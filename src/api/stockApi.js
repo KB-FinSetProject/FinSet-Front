@@ -47,18 +47,44 @@ export default {
             console.error('Error adding wish:', error);
         }
     },
-
-
     async get(sno){
+        const {data}=await api.get(`${BASE_URL}/${sno}`);
+        console.log('STOCK CHART',data);
+        return data;
+    },
+
+    async getSymbol(sno){
         const {data}= await api.get(`${BASE_URL}/${sno}/symbol`);
         console.log(`BOARD GET`,data);
         return data;
+    },
+    async getNews(sno){
+        const {data}=await api.get(`${BASE_URL}/${sno}/news`)
+        console.log('NEWS GET',data);
+        return data;
+    }
+    ,
+    async getChart(sno){
+        const {data}= await api.get(`${BASE_URL}/${sno}/chart`);
+        console.log(`BOARD GET`,data);
+        return data;
+
     },
     async deleteAttachment(no){
         const {data} = await api.delete(`${BASE_URL}/deleteAttachment/${no}`);
 
         console.log('ATTACHMENT DELETE: ',data);
         return data;
-    }
+    },
+    async getCommunity(sno){
+        const{data}= await api.get(`${BASE_URL}/${sno}/community`);
+        console.log('GET COMMUNITY',data);
+        return data;
 
+    },
+    async submitComment(sno, commentData) {
+        const { data } = await api.post(`${BASE_URL}/${sno}/community`, commentData);
+        console.log('POST comment', data);
+        return data;
+    }
 }

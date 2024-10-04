@@ -8,7 +8,7 @@ export default [
         component:()=> import('../pages/stock/Stock.vue'),
     },
     {
-        path:'/stock/chart',
+        path:'/stock/chart/:sno',
         name:'stockChart',
         component:()=> import('../pages/stock/stockChart.vue'),
     },
@@ -18,9 +18,19 @@ export default [
         component:()=> import('../pages/stock/stockDetail.vue'),
     },
     {
+        path:'/stock/community/:sno',
+        name:'stockCommunity',
+        component:()=> import('../pages/stock/stockCommunity.vue'),
+    },
+    {
         path:'/stockdrop',
         name:'stockDrop',
         component:()=> import('../pages/stock/stockDrop.vue'),
+    },
+    {
+        path:'/stockhigh',
+        name:'stcokhigh',
+        component:()=> import('../pages/stock/stockHigh.vue'),
     },
     // {
     //     path:'/auth/profile',

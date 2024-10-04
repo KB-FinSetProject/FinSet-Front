@@ -1,0 +1,1526 @@
+*   [33mcommit a9b31f3b0f46dd4ba5b2a8c23e4372cfff91b54e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+[31m|[m[32m\[m  Merge: bb83822 8547d7a
+[31m|[m [32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[31m|[m [32m|[m Date:   Wed Oct 2 15:03:18 2024 +0900
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     Merge pull request #85 from Haneull-Kim/sky
+[31m|[m [32m|[m     
+[31m|[m [32m|[m     김하늘/241002/connect deposit & installment
+[31m|[m [32m|[m   
+[31m|[m *   [33mcommit 8547d7a066123db8f975ce096791912f4bf7e722[m
+[31m|[m [33m|[m[31m\[m  Merge: 6f0274b bb83822
+[31m|[m [33m|[m[31m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[31m|[m[31m/[m[33m|[m   Date:   Wed Oct 2 15:03:09 2024 +0900
+[31m|[m [33m|[m   
+[31m|[m [33m|[m       Merge branch 'develop' into sky
+[31m|[m [33m|[m   
+* [33m|[m   [33mcommit bb83822b5a1fb146668608f4fc81818ff57a33ee[m
+[35m|[m[36m\[m [33m\[m  Merge: d502bcc 1207a9e
+[35m|[m [36m|[m [33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m [36m|[m [33m|[m Date:   Wed Oct 2 14:13:09 2024 +0900
+[35m|[m [36m|[m [33m|[m 
+[35m|[m [36m|[m [33m|[m     Merge pull request #84 from kimjongsoo97/develop
+[35m|[m [36m|[m [33m|[m     
+[35m|[m [36m|[m [33m|[m     김종수/20241002/주식페이지진행중
+[35m|[m [36m|[m [33m|[m   
+[35m|[m * [33m|[m   [33mcommit 1207a9e004e29b9a9eeaece033d72f1a0bcefaa8[m
+[35m|[m [1;31m|[m[35m\[m [33m\[m  Merge: 1d43d50 d502bcc
+[35m|[m [1;31m|[m[35m/[m [33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m[35m/[m[1;31m|[m [33m|[m   Date:   Wed Oct 2 14:13:02 2024 +0900
+[35m|[m [1;31m|[m [33m|[m   
+[35m|[m [1;31m|[m [33m|[m       Merge branch 'develop' into develop
+[35m|[m [1;31m|[m [33m|[m 
+[35m|[m * [33m|[m [33mcommit 1d43d5005c8045a132c0565a097a5dcfbec4b699[m
+[35m|[m [1;32m|[m [33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[35m|[m [1;32m|[m [33m|[m Date:   Wed Oct 2 14:11:32 2024 +0900
+[35m|[m [1;32m|[m [33m|[m 
+[35m|[m [1;32m|[m [33m|[m     김종수/20241002/주식페이지진행중
+[35m|[m [1;32m|[m [33m|[m 
+[35m|[m [1;32m|[m * [33mcommit 6f0274badb2c939631ea68bff62aad579ebd2e01[m
+[35m|[m [1;32m|[m[35m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m[35m/[m[1;32m|[m   Date:   Wed Oct 2 15:01:51 2024 +0900
+[35m|[m [1;32m|[m   
+[35m|[m [1;32m|[m       김하늘/241002/connect deposit & installment
+[35m|[m [1;32m|[m   
+* [1;32m|[m   [33mcommit d502bcc88cb8d7ef1e9d8d240cb2beb55939fe35[m
+[1;33m|[m[1;34m\[m [1;32m\[m  Merge: 1c2adae a10966d
+[1;33m|[m [1;34m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;33m|[m [1;34m|[m [1;32m|[m Date:   Wed Oct 2 10:06:50 2024 +0900
+[1;33m|[m [1;34m|[m [1;32m|[m 
+[1;33m|[m [1;34m|[m [1;32m|[m     Merge pull request #83 from Haneull-Kim/sky
+[1;33m|[m [1;34m|[m [1;32m|[m     
+[1;33m|[m [1;34m|[m [1;32m|[m     김하늘/241002/solve header error
+[1;33m|[m [1;34m|[m [1;32m|[m 
+[1;33m|[m * [1;32m|[m [33mcommit a10966dbe298172878d2251cc195c54af19ba358[m
+[1;33m|[m[1;33m/[m [1;32m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m [1;32m|[m   Date:   Wed Oct 2 10:05:45 2024 +0900
+[1;33m|[m [1;32m|[m   
+[1;33m|[m [1;32m|[m       김하늘/241002/solve header error
+[1;33m|[m [1;32m|[m   
+* [1;32m|[m   [33mcommit 1c2adae0966a323047e3f83b619414333ba227b9[m
+[1;35m|[m[1;36m\[m [1;32m\[m  Merge: 26ef1ec 8c7f0e9
+[1;35m|[m [1;36m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m [1;32m|[m Date:   Wed Oct 2 09:56:03 2024 +0900
+[1;35m|[m [1;36m|[m [1;32m|[m 
+[1;35m|[m [1;36m|[m [1;32m|[m     Merge pull request #82 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m [1;32m|[m     
+[1;35m|[m [1;36m|[m [1;32m|[m     김하늘/241002/modify memo
+[1;35m|[m [1;36m|[m [1;32m|[m 
+[1;35m|[m * [1;32m|[m [33mcommit 8c7f0e981a8a31628107c57786da5b106e65d69a[m
+[1;35m|[m [1;36m|[m [1;32m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m [1;32m|[m Date:   Wed Oct 2 09:55:27 2024 +0900
+[1;35m|[m [1;36m|[m [1;32m|[m 
+[1;35m|[m [1;36m|[m [1;32m|[m     김하늘/241002/modify memo
+[1;35m|[m [1;36m|[m [1;32m|[m   
+* [1;36m|[m [1;32m|[m   [33mcommit 26ef1eccfd3b240878d76a2c3e327ce33226db91[m
+[1;36m|[m[32m\[m [1;36m\[m [1;32m\[m  Merge: 1d16f7e 9e40d33
+[1;36m|[m [32m|[m[1;36m/[m [1;32m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;36m|[m[1;36m/[m[32m|[m [1;32m|[m   Date:   Wed Oct 2 09:19:57 2024 +0900
+[1;36m|[m [32m|[m [1;32m|[m   
+[1;36m|[m [32m|[m [1;32m|[m       Merge pull request #81 from yeseuljung1/develop
+[1;36m|[m [32m|[m [1;32m|[m       
+[1;36m|[m [32m|[m [1;32m|[m       정예슬/20241002/다시저장
+[1;36m|[m [32m|[m [1;32m|[m   
+[1;36m|[m * [1;32m|[m   [33mcommit 9e40d333f27ce364e8fd7ad021a5fb27ba934105[m
+[1;36m|[m [33m|[m[1;36m\[m [1;32m\[m  Merge: 3b23142 1d16f7e
+[1;36m|[m [33m|[m[1;36m/[m [1;32m/[m  Author: yeseul_jung <jys033022@naver.com>
+[1;36m|[m[1;36m/[m[33m|[m [1;32m|[m   Date:   Wed Oct 2 09:18:31 2024 +0900
+[1;36m|[m [33m|[m [1;32m|[m   
+[1;36m|[m [33m|[m [1;32m|[m       저장
+[1;36m|[m [33m|[m [1;32m|[m   
+* [33m|[m [1;32m|[m   [33mcommit 1d16f7e8dcecd2c1dd8b762fab98429a28fd0fb5[m
+[35m|[m[36m\[m [33m\[m [1;32m\[m  Merge: 73c802c 7595b73
+[35m|[m [36m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[35m|[m [36m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 23:34:43 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;32m|[m 
+[35m|[m [36m|[m [33m|[m [1;32m|[m     Merge pull request #80 from Haneull-Kim/sky
+[35m|[m [36m|[m [33m|[m [1;32m|[m     
+[35m|[m [36m|[m [33m|[m [1;32m|[m     Sky
+[35m|[m [36m|[m [33m|[m [1;32m|[m 
+[35m|[m * [33m|[m [1;32m|[m [33mcommit 7595b73fc8056ca211e994795de457165137f31a[m
+[35m|[m [36m|[m [33m|[m [1;32m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m [36m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 23:33:56 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;32m|[m 
+[35m|[m [36m|[m [33m|[m [1;32m|[m     김하늘/241001/modify detail
+[35m|[m [36m|[m [33m|[m [1;32m|[m   
+[35m|[m * [33m|[m [1;32m|[m   [33mcommit e9645b2dbe7bb7feecc1e1128f9b675663814c71[m
+[35m|[m [1;31m|[m[35m\[m [33m\[m [1;32m\[m  Merge: 684cce6 73c802c
+[35m|[m [1;31m|[m[35m/[m [33m/[m [1;32m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m[35m/[m[1;31m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 21:26:41 2024 +0900
+[35m|[m [1;31m|[m [33m|[m [1;32m|[m   
+[35m|[m [1;31m|[m [33m|[m [1;32m|[m       Merge branch 'develop' of https://github.com/Haneull-Kim/FinSet-Front into sky
+[35m|[m [1;31m|[m [33m|[m [1;32m|[m   
+* [1;31m|[m [33m|[m [1;32m|[m   [33mcommit 73c802c900d314f4474124dab0c298a7c6fc029c[m
+[1;33m|[m[1;34m\[m [1;31m\[m [33m\[m [1;32m\[m  Merge: 914aebe fce4179
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 21:23:16 2024 +0900
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m 
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m     Merge pull request #79 from KIMISM/develop
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m     
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m     김세진/20241001/패키지추가
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;32m|[m 
+[1;33m|[m * [1;31m|[m [33m|[m [1;32m|[m [33mcommit fce4179b4e80ab6f08b9a055c236a0a8dc9d5ee2[m
+[1;33m|[m[1;33m/[m [1;31m/[m [33m/[m [1;32m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;33m|[m [1;31m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 17:51:26 2024 +0900
+[1;33m|[m [1;31m|[m [33m|[m [1;32m|[m   
+[1;33m|[m [1;31m|[m [33m|[m [1;32m|[m       김세진/20241001/패키지추가
+[1;33m|[m [1;31m|[m [33m|[m [1;32m|[m 
+[1;33m|[m * [33m|[m [1;32m|[m [33mcommit 684cce64905aeb9e4c6af50a0c5de110e6c57668[m
+[1;33m|[m[1;33m/[m [33m/[m [1;32m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 21:26:22 2024 +0900
+[1;33m|[m [33m|[m [1;32m|[m   
+[1;33m|[m [33m|[m [1;32m|[m       김하늘/241001/add package
+[1;33m|[m [33m|[m [1;32m|[m   
+* [33m|[m [1;32m|[m   [33mcommit 914aebeb642d97d65c1fce01b6c8e10fdc4fe368[m
+[1;35m|[m[1;36m\[m [33m\[m [1;32m\[m  Merge: 5663a83 ceb9ee5
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 17:30:36 2024 +0900
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m 
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m     Merge pull request #78 from yeseuljung1/develop
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m     
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m     정예슬/20241001/위시 수정
+[1;35m|[m [1;36m|[m [33m|[m [1;32m|[m 
+[1;35m|[m * [33m|[m [1;32m|[m [33mcommit ceb9ee566d8a94d708b5bca1ff013cf778455acd[m
+[1;35m|[m[1;35m/[m [33m/[m [1;32m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;35m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 17:29:37 2024 +0900
+[1;35m|[m [33m|[m [1;32m|[m   
+[1;35m|[m [33m|[m [1;32m|[m       정예슬/20241001/위위시 수정
+[1;35m|[m [33m|[m [1;32m|[m   
+* [33m|[m [1;32m|[m   [33mcommit 5663a8376a666add1d2e683df186af04c4b7fdd9[m
+[31m|[m[32m\[m [33m\[m [1;32m\[m  Merge: 532714a 2a07e7c
+[31m|[m [32m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[31m|[m [32m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 17:13:53 2024 +0900
+[31m|[m [32m|[m [33m|[m [1;32m|[m 
+[31m|[m [32m|[m [33m|[m [1;32m|[m     Merge pull request #77 from Haneull-Kim/sky
+[31m|[m [32m|[m [33m|[m [1;32m|[m     
+[31m|[m [32m|[m [33m|[m [1;32m|[m     김하늘/241001/modify wish
+[31m|[m [32m|[m [33m|[m [1;32m|[m 
+[31m|[m * [33m|[m [1;32m|[m [33mcommit 2a07e7c1617d14bf159f81425b3d95aaa8dc3cce[m
+[31m|[m[31m/[m [33m/[m [1;32m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[31m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 17:13:07 2024 +0900
+[31m|[m [33m|[m [1;32m|[m   
+[31m|[m [33m|[m [1;32m|[m       김하늘/241001/modify wish
+[31m|[m [33m|[m [1;32m|[m   
+* [33m|[m [1;32m|[m   [33mcommit 532714af34a721f3d6bb516bf99cd2cfc85ac9f7[m
+[33m|[m[34m\[m [33m\[m [1;32m\[m  Merge: 5d0d5ff dfa49b2
+[33m|[m [34m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[33m|[m [34m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 17:10:24 2024 +0900
+[33m|[m [34m|[m [33m|[m [1;32m|[m 
+[33m|[m [34m|[m [33m|[m [1;32m|[m     Merge pull request #76 from yeseuljung1/develop
+[33m|[m [34m|[m [33m|[m [1;32m|[m     
+[33m|[m [34m|[m [33m|[m [1;32m|[m     정예슬/20241001/페이지 전체 수정
+[33m|[m [34m|[m [33m|[m [1;32m|[m   
+[33m|[m * [33m|[m [1;32m|[m   [33mcommit dfa49b22f3f870d954226f060bf878aee92305e5[m
+[33m|[m [35m|[m[33m\[m [33m\[m [1;32m\[m  Merge: dd43323 5d0d5ff
+[33m|[m [35m|[m[33m/[m [33m/[m [1;32m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[33m|[m[33m/[m[35m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 17:09:29 2024 +0900
+[33m|[m [35m|[m [33m|[m [1;32m|[m   
+[33m|[m [35m|[m [33m|[m [1;32m|[m       정예슬 202410001/페이지 전체 수정
+[33m|[m [35m|[m [33m|[m [1;32m|[m   
+* [35m|[m [33m|[m [1;32m|[m   [33mcommit 5d0d5ff3b8287d8bb9fedd61845f374b17abc819[m
+[1;31m|[m[1;32m\[m [35m\[m [33m\[m [1;32m\[m  Merge: e4258b7 3d9e3dc
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 16:53:59 2024 +0900
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m 
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m     Merge pull request #75 from Haneull-Kim/sky
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m     
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m     김하늘/241001/modify wish
+[1;31m|[m [1;32m|[m [35m|[m [33m|[m [1;32m|[m   
+[1;31m|[m * [35m|[m [33m|[m [1;32m|[m   [33mcommit 3d9e3dcfba1e79a3e45e0f4305cc612503f3c9c3[m
+[1;31m|[m [1;33m|[m[1;31m\[m [35m\[m [33m\[m [1;32m\[m  Merge: 9291746 e4258b7
+[1;31m|[m [1;33m|[m[1;31m/[m [35m/[m [33m/[m [1;32m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [35m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 16:53:47 2024 +0900
+[1;31m|[m [1;33m|[m [35m|[m [33m|[m [1;32m|[m   
+[1;31m|[m [1;33m|[m [35m|[m [33m|[m [1;32m|[m       Merge branch 'develop' into sky
+[1;31m|[m [1;33m|[m [35m|[m [33m|[m [1;32m|[m 
+[1;31m|[m * [35m|[m [33m|[m [1;32m|[m [33mcommit 92917462ae6336672d224d21737fd8b6462f48a2[m
+[1;31m|[m [1;34m|[m [35m|[m [33m|[m [1;32m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;31m|[m [1;34m|[m [35m|[m [33m|[m [1;32m|[m Date:   Tue Oct 1 16:52:37 2024 +0900
+[1;31m|[m [1;34m|[m [35m|[m [33m|[m [1;32m|[m 
+[1;31m|[m [1;34m|[m [35m|[m [33m|[m [1;32m|[m     김하늘/241001/modify wish
+[1;31m|[m [1;34m|[m [35m|[m [33m|[m [1;32m|[m   
+[1;31m|[m [1;34m|[m * [33m|[m [1;32m|[m   [33mcommit dd4332394bb3e26cec1deea788c97752c9994b86[m
+[1;31m|[m [1;34m|[m [1;35m|[m[1;31m\[m [33m\[m [1;32m\[m  Merge: 5114d99 e4258b7
+[1;31m|[m [1;34m|[m[1;31m_[m[1;35m|[m[1;31m/[m [33m/[m [1;32m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;31m|[m[1;31m/[m[1;34m|[m [1;35m|[m [33m|[m [1;32m|[m   Date:   Tue Oct 1 17:07:30 2024 +0900
+[1;31m|[m [1;34m|[m [1;35m|[m [33m|[m [1;32m|[m   
+[1;31m|[m [1;34m|[m [1;35m|[m [33m|[m [1;32m|[m       정예슬 /20241001/전체페이지 수정
+[1;31m|[m [1;34m|[m [1;35m|[m [33m|[m [1;32m|[m   
+* [1;34m|[m [1;35m|[m [33m|[m [1;32m|[m   [33mcommit e4258b744fc405aa9f5d47d48ffbcb656be312ab[m
+[31m|[m[1;32m\[m [1;34m\[m [1;35m\[m [33m\[m [1;32m\[m  Merge: 6151121 5db9f5e
+[31m|[m [1;32m|[m [1;34m|[m[1;32m_[m[1;35m|[m[1;32m_[m[33m|[m[1;32m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[31m|[m [1;32m|[m[1;32m/[m[1;34m|[m [1;35m|[m [33m|[m   Date:   Tue Oct 1 16:48:36 2024 +0900
+[31m|[m [1;32m|[m [1;34m|[m [1;35m|[m [33m|[m   
+[31m|[m [1;32m|[m [1;34m|[m [1;35m|[m [33m|[m       Merge pull request #74 from kimjongsoo97/develop
+[31m|[m [1;32m|[m [1;34m|[m [1;35m|[m [33m|[m       
+[31m|[m [1;32m|[m [1;34m|[m [1;35m|[m [33m|[m       김종수/20241001/login complete
+[31m|[m [1;32m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[31m|[m * [1;34m|[m [1;35m|[m [33m|[m [33mcommit 5db9f5ec3bea086bbc808b1d160a4eeebbaf3547[m
+[31m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[31m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m Date:   Tue Oct 1 16:47:51 2024 +0900
+[31m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[31m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m     김종수/20241001/login complete
+[31m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m 
+* [32m|[m [1;34m|[m [1;35m|[m [33m|[m [33mcommit 6151121894b901805ddbb1ba3be33153e7b2592d[m
+[33m|[m[32m\[m[32m|[m [1;34m|[m [1;35m|[m [33m|[m Merge: a3e8d09 c8c3d5c
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m Date:   Tue Oct 1 16:26:08 2024 +0900
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m     Merge pull request #73 from kimjongsoo97/develop
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m     
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m     Develop
+[33m|[m [32m|[m [1;34m|[m [1;35m|[m [33m|[m   
+[33m|[m * [1;34m|[m [1;35m|[m [33m|[m   [33mcommit c8c3d5c30a3c1cbba1a3387c5103e35b49a12c14[m
+[33m|[m [35m|[m[36m\[m [1;34m\[m [1;35m\[m [33m\[m  Merge: 73a54f3 50c6521
+[33m|[m [35m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[33m|[m [35m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m Date:   Tue Oct 1 16:20:46 2024 +0900
+[33m|[m [35m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[33m|[m [35m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m     Merge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into develop
+[33m|[m [35m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[33m|[m * [36m|[m [1;34m|[m [1;35m|[m [33m|[m [33mcommit 73a54f3e3c176dd111fd74c244525760ae3dc811[m
+[33m|[m [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[33m|[m [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m Date:   Tue Oct 1 16:20:22 2024 +0900
+[33m|[m [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[33m|[m [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m     김종수/20241001/join complete
+[33m|[m [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m   
+* [36m|[m [36m|[m [1;34m|[m [1;35m|[m [33m|[m   [33mcommit a3e8d0955289289de4400904829976e2052dd626[m
+[1;34m|[m[36m\[m [36m\[m [36m\[m [1;34m\[m [1;35m\[m [33m\[m  Merge: 88dcbbb 50c6521
+[1;34m|[m [36m|[m [36m|[m[36m/[m [1;34m/[m [1;35m/[m [33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;34m|[m [36m|[m[36m/[m[36m|[m [1;34m/[m [1;35m/[m [33m/[m   Date:   Tue Oct 1 15:04:47 2024 +0900
+[1;34m|[m [36m|[m[1;34m_[m[36m|[m[1;34m/[m [1;35m/[m [33m/[m    
+[1;34m|[m[1;34m/[m[36m|[m [36m|[m [1;35m|[m [33m|[m         Merge pull request #72 from kimjongsoo97/develop
+[1;34m|[m [36m|[m [36m|[m [1;35m|[m [33m|[m         
+[1;34m|[m [36m|[m [36m|[m [1;35m|[m [33m|[m         김종수/2024/1001/회원가입연동중
+[1;34m|[m [36m|[m [36m|[m [1;35m|[m [33m|[m   
+[1;34m|[m * [36m|[m [1;35m|[m [33m|[m   [33mcommit 50c652183228aa4887ad321e6ed8421d8da61c4b[m
+[1;34m|[m [36m|[m[1;34m\[m [36m\[m [1;35m\[m [33m\[m  Merge: 56c8b73 88dcbbb
+[1;34m|[m [36m|[m[1;34m/[m [36m/[m [1;35m/[m [33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;34m|[m[1;34m/[m[36m|[m [36m/[m [1;35m/[m [33m/[m   Date:   Tue Oct 1 15:04:34 2024 +0900
+[1;34m|[m [36m|[m[36m/[m [1;35m/[m [33m/[m    
+[1;34m|[m [36m|[m [1;35m|[m [33m|[m         Merge branch 'develop' into develop
+[1;34m|[m [36m|[m [1;35m|[m [33m|[m 
+[1;34m|[m * [1;35m|[m [33m|[m [33mcommit 56c8b739f49b15c8ab324e88a0681bc7c0101ef7[m
+[1;34m|[m [1;34m|[m [1;35m|[m [33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[1;34m|[m [1;34m|[m [1;35m|[m [33m|[m Date:   Tue Oct 1 14:46:45 2024 +0900
+[1;34m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[1;34m|[m [1;34m|[m [1;35m|[m [33m|[m     김종수/2024/1001/회원가입연동중
+[1;34m|[m [1;34m|[m [1;35m|[m [33m|[m 
+[1;34m|[m [1;34m|[m * [33m|[m [33mcommit 5114d99633fd0899f8e9ebd8c8e107adde793267[m
+[1;34m|[m [1;34m|[m[1;34m/[m [33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;34m|[m[1;34m/[m[1;34m|[m [33m|[m   Date:   Tue Oct 1 16:52:19 2024 +0900
+[1;34m|[m [1;34m|[m [33m|[m   
+[1;34m|[m [1;34m|[m [33m|[m       정예슬 / 20241001/전체적인 수정
+[1;34m|[m [1;34m|[m [33m|[m   
+* [1;34m|[m [33m|[m   [33mcommit 88dcbbbb663007ef9ac572d31a130d02e2a4ac87[m
+[1;35m|[m[1;36m\[m [1;34m\[m [33m\[m  Merge: 53ad6ae c024351
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m Date:   Tue Oct 1 14:44:21 2024 +0900
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m 
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m     Merge pull request #71 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m     
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m     김하늘/241001/modify stock
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m 
+[1;35m|[m * [1;34m|[m [33m|[m [33mcommit c02435107a352279263182a1168e71c8efbf605a[m
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m Date:   Tue Oct 1 14:43:48 2024 +0900
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m 
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m     김하늘/241001/modify stock
+[1;35m|[m [1;36m|[m [1;34m|[m [33m|[m   
+* [1;36m|[m [1;34m|[m [33m|[m   [33mcommit 53ad6aec98385964fbc1eb9ce6bb489048c9ba94[m
+[1;36m|[m[32m\[m [1;36m\[m [1;34m\[m [33m\[m  Merge: b245cfa 20a3de6
+[1;36m|[m [32m|[m[1;36m/[m [1;34m/[m [33m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;36m|[m[1;36m/[m[32m|[m [1;34m|[m [33m|[m   Date:   Tue Oct 1 14:43:07 2024 +0900
+[1;36m|[m [32m|[m [1;34m|[m [33m|[m   
+[1;36m|[m [32m|[m [1;34m|[m [33m|[m       Merge pull request #70 from yeseuljung1/develop
+[1;36m|[m [32m|[m [1;34m|[m [33m|[m       
+[1;36m|[m [32m|[m [1;34m|[m [33m|[m       "정예슬/20241001/검색상세페이지"
+[1;36m|[m [32m|[m [1;34m|[m [33m|[m   
+[1;36m|[m * [1;34m|[m [33m|[m   [33mcommit 20a3de665dadd7c2964b5ce684a38af52209ed3d[m
+[1;36m|[m [33m|[m[1;36m\[m [1;34m\[m [33m\[m  Merge: df4daff b245cfa
+[1;36m|[m [33m|[m[1;36m/[m [1;34m/[m [33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;36m|[m[1;36m/[m[33m|[m [1;34m|[m [33m|[m   Date:   Tue Oct 1 14:41:28 2024 +0900
+[1;36m|[m [33m|[m [1;34m|[m [33m|[m   
+[1;36m|[m [33m|[m [1;34m|[m [33m|[m       정예슬/20241001/검색상세페이지
+[1;36m|[m [33m|[m [1;34m|[m [33m|[m   
+* [33m|[m [1;34m|[m [33m|[m   [33mcommit b245cfa7ebff941d3791d21400cb6f2302274517[m
+[1;34m|[m[36m\[m [33m\[m [1;34m\[m [33m\[m  Merge: 8ec460c 43d5aa8
+[1;34m|[m [36m|[m[1;34m_[m[33m|[m[1;34m/[m [33m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;34m|[m[1;34m/[m[36m|[m [33m|[m [33m|[m   Date:   Tue Oct 1 14:08:23 2024 +0900
+[1;34m|[m [36m|[m [33m|[m [33m|[m   
+[1;34m|[m [36m|[m [33m|[m [33m|[m       Merge pull request #69 from KIMISM/develop
+[1;34m|[m [36m|[m [33m|[m [33m|[m       
+[1;34m|[m [36m|[m [33m|[m [33m|[m       Develop
+[1;34m|[m [36m|[m [33m|[m [33m|[m   
+[1;34m|[m * [33m|[m [33m|[m   [33mcommit 43d5aa802c0712626cf0c9138d7cbeef676f7708[m
+[1;34m|[m [1;31m|[m[1;34m\[m [33m\[m [33m\[m  Merge: 6f81853 8ec460c
+[1;34m|[m [1;31m|[m[1;34m/[m [33m/[m [33m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;34m|[m[1;34m/[m[1;31m|[m [33m|[m [33m|[m   Date:   Tue Oct 1 14:06:52 2024 +0900
+[1;34m|[m [1;31m|[m [33m|[m [33m|[m   
+[1;34m|[m [1;31m|[m [33m|[m [33m|[m       김세진/241001/solve conflict
+[1;34m|[m [1;31m|[m [33m|[m [33m|[m   
+* [1;31m|[m [33m|[m [33m|[m   [33mcommit 8ec460c819883586f64b19ad4d9b91bc3550a09b[m
+[1;33m|[m[1;34m\[m [1;31m\[m [33m\[m [33m\[m  Merge: eae9e49 24ac6fd
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m Date:   Tue Oct 1 11:35:35 2024 +0900
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m 
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m     Merge pull request #68 from Haneull-Kim/sky
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m     
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m     Sky
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m 
+[1;33m|[m * [1;31m|[m [33m|[m [33m|[m [33mcommit 24ac6fdc76ba081ea1be1cddd8d5d2892a19ebd9[m
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m Date:   Tue Oct 1 11:34:56 2024 +0900
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m 
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m     김하늘/241001/modify detail
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [33m|[m   
+[1;33m|[m * [1;31m|[m [33m|[m [33m|[m   [33mcommit e9457e0a708a7e01d48b91db87a8be4ac90b65b9[m
+[1;33m|[m [1;35m|[m[1;33m\[m [1;31m\[m [33m\[m [33m\[m  Merge: 9c3c91f eae9e49
+[1;33m|[m [1;35m|[m[1;33m/[m [1;31m/[m [33m/[m [33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m[1;33m/[m[1;35m|[m [1;31m|[m [33m|[m [33m|[m   Date:   Tue Oct 1 11:25:01 2024 +0900
+[1;33m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m   
+[1;33m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m       김하늘/241001/solve conflict
+[1;33m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m   
+* [1;35m|[m [1;31m|[m [33m|[m [33m|[m   [33mcommit eae9e498803c17e219a7838187ec3f1327f9f4f5[m
+[31m|[m[32m\[m [1;35m\[m [1;31m\[m [33m\[m [33m\[m  Merge: 7709324 9031d36
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m Date:   Tue Oct 1 11:16:07 2024 +0900
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m     Merge pull request #67 from yeseuljung1/develop
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m     
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m     정예슬 /20241001/하트,별,단어장 버튼수정
+[31m|[m [32m|[m [1;35m|[m [1;31m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m * [1;31m|[m [33m|[m [33m|[m [33mcommit 9c3c91ffc340add137fdadf24b38cb1e75e1e482[m
+[31m|[m [32m|[m[31m/[m [1;31m/[m [33m/[m [33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[31m|[m[31m/[m[32m|[m [1;31m|[m [33m|[m [33m|[m   Date:   Tue Oct 1 11:20:19 2024 +0900
+[31m|[m [32m|[m [1;31m|[m [33m|[m [33m|[m   
+[31m|[m [32m|[m [1;31m|[m [33m|[m [33m|[m       김하늘/241001/modify deposit, installment, fund, stock
+[31m|[m [32m|[m [1;31m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m * [33m|[m [33m|[m [33mcommit 6f818537923b4272112c0520034ae2a33d815a29[m
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m Author: Kim Se Jin <hollysj@naver.com>
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m Date:   Tue Oct 1 13:54:05 2024 +0900
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m     김세진/241001/SOLVE MERGE
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m * [33m|[m [33m|[m [33mcommit ea89711162df0050bac891c9588b801746bf9dfe[m
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m Author: Kim Se Jin <hollysj@naver.com>
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m Date:   Tue Oct 1 13:41:08 2024 +0900
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m     김세진/20241001/관심목록주식외환수정
+[31m|[m [32m|[m [32m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m * [33m|[m [33m|[m [33mcommit f3416b3668561b261b9cfff6194daf2a69d4118a[m
+[31m|[m [32m|[m[31m/[m [33m/[m [33m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[31m|[m[31m/[m[32m|[m [33m|[m [33m|[m   Date:   Tue Oct 1 13:36:13 2024 +0900
+[31m|[m [32m|[m [33m|[m [33m|[m   
+[31m|[m [32m|[m [33m|[m [33m|[m       김세진/20241001/관심목록주식외환수정
+[31m|[m [32m|[m [33m|[m [33m|[m 
+[31m|[m [32m|[m * [33m|[m [33mcommit df4daff4e954d9cb9bb64e36d010643ffbf97048[m
+[31m|[m [32m|[m[32m/[m [33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[31m|[m [32m|[m [33m|[m   Date:   Tue Oct 1 14:36:34 2024 +0900
+[31m|[m [32m|[m [33m|[m   
+[31m|[m [32m|[m [33m|[m       정예슬/20241001/검색상세페이지
+[31m|[m [32m|[m [33m|[m 
+[31m|[m * [33m|[m [33mcommit 9031d36deb09a29a40880e45bc7ec3856551c93b[m
+[31m|[m[31m/[m [33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[31m|[m [33m|[m   Date:   Tue Oct 1 11:10:49 2024 +0900
+[31m|[m [33m|[m   
+[31m|[m [33m|[m       정예슬 /20241001/하트버튼수정
+[31m|[m [33m|[m   
+* [33m|[m   [33mcommit 770932496373a6e07faa592d99b18e117a4fc135[m
+[33m|[m[34m\[m [33m\[m  Merge: b023332 bd82d09
+[33m|[m [34m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[33m|[m [34m|[m [33m|[m Date:   Mon Sep 30 23:10:24 2024 +0900
+[33m|[m [34m|[m [33m|[m 
+[33m|[m [34m|[m [33m|[m     Merge pull request #66 from Haneull-Kim/sky
+[33m|[m [34m|[m [33m|[m     
+[33m|[m [34m|[m [33m|[m     김하늘/240930/modify stock
+[33m|[m [34m|[m [33m|[m 
+[33m|[m * [33m|[m [33mcommit bd82d097c0d0ae401bcdc7662e0468482075f007[m
+[33m|[m[33m/[m [33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[33m|[m [33m|[m   Date:   Mon Sep 30 23:09:51 2024 +0900
+[33m|[m [33m|[m   
+[33m|[m [33m|[m       김하늘/240930/modify stock
+[33m|[m [33m|[m   
+* [33m|[m   [33mcommit b023332fda33aaa3915939919b733858f06962f5[m
+[35m|[m[36m\[m [33m\[m  Merge: 22673aa 957bf36
+[35m|[m [36m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[35m|[m [36m|[m [33m|[m Date:   Mon Sep 30 21:31:04 2024 +0900
+[35m|[m [36m|[m [33m|[m 
+[35m|[m [36m|[m [33m|[m     Merge pull request #65 from KIMISM/develop
+[35m|[m [36m|[m [33m|[m     
+[35m|[m [36m|[m [33m|[m     김세진/20240930/관심목록수정
+[35m|[m [36m|[m [33m|[m 
+[35m|[m * [33m|[m [33mcommit 957bf36264a1703135a18adcd87de77c0fb3c49d[m
+[35m|[m[35m/[m [33m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[35m|[m [33m|[m   Date:   Mon Sep 30 17:49:36 2024 +0900
+[35m|[m [33m|[m   
+[35m|[m [33m|[m       김세진/20240930/관심목록수정
+[35m|[m [33m|[m   
+* [33m|[m   [33mcommit 22673aaf0ed31b5831ec7c3f409ba2572fc27adb[m
+[1;31m|[m[1;32m\[m [33m\[m  Merge: 4e79f12 f8b84c3
+[1;31m|[m [1;32m|[m [33m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;31m|[m [1;32m|[m [33m|[m Date:   Mon Sep 30 14:05:31 2024 +0900
+[1;31m|[m [1;32m|[m [33m|[m 
+[1;31m|[m [1;32m|[m [33m|[m     Merge pull request #64 from Haneull-Kim/sky
+[1;31m|[m [1;32m|[m [33m|[m     
+[1;31m|[m [1;32m|[m [33m|[m     김하늘/240930/modify stock
+[1;31m|[m [1;32m|[m [33m|[m 
+[1;31m|[m * [33m|[m [33mcommit f8b84c3d7d0f6a5adc4bd75461735702289a1c2b[m
+[1;31m|[m[1;31m/[m [33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;31m|[m [33m|[m   Date:   Mon Sep 30 14:04:50 2024 +0900
+[1;31m|[m [33m|[m   
+[1;31m|[m [33m|[m       김하늘/240930/modify stock
+[1;31m|[m [33m|[m   
+* [33m|[m   [33mcommit 4e79f122a130160b83acbe2c02803ee135f8d63a[m
+[1;33m|[m[1;34m\[m [33m\[m  Merge: a9ff8d1 babdc49
+[1;33m|[m [1;34m|[m [33m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;33m|[m [1;34m|[m [33m|[m Date:   Sat Sep 28 17:29:51 2024 +0900
+[1;33m|[m [1;34m|[m [33m|[m 
+[1;33m|[m [1;34m|[m [33m|[m     Merge pull request #63 from KIMISM/develop
+[1;33m|[m [1;34m|[m [33m|[m     
+[1;33m|[m [1;34m|[m [33m|[m     김세진/20240928/페키지수정
+[1;33m|[m [1;34m|[m [33m|[m 
+[1;33m|[m * [33m|[m [33mcommit babdc49595811458ae3fd50c0ed052f8611e9bb4[m
+[1;33m|[m[1;33m/[m [33m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;33m|[m [33m|[m   Date:   Sat Sep 28 15:09:38 2024 +0900
+[1;33m|[m [33m|[m   
+[1;33m|[m [33m|[m       김세진/20240928/페키지수정
+[1;33m|[m [33m|[m 
+[1;33m|[m * [33mcommit 3b231426f5399e329c131b5ae8340ffeb88f2257[m
+[1;33m|[m[1;33m/[m  Author: yeseul_jung <jys033022@naver.com>
+[1;33m|[m   Date:   Wed Oct 2 09:17:43 2024 +0900
+[1;33m|[m   
+[1;33m|[m       정예슬/20241001/다시저장
+[1;33m|[m   
+*   [33mcommit a9ff8d18458120dafa1cf122f61eebc056721575[m
+[1;35m|[m[1;36m\[m  Merge: 942973b 3a7afe1
+[1;35m|[m [1;36m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m Date:   Fri Sep 27 23:56:43 2024 +0900
+[1;35m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m     Merge pull request #62 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m     
+[1;35m|[m [1;36m|[m     김하늘/240927/modify auth & exchange
+[1;35m|[m [1;36m|[m 
+[1;35m|[m * [33mcommit 3a7afe1e54ebe2011dd672948f8708e6037b59ed[m
+[1;35m|[m[1;35m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m   Date:   Fri Sep 27 23:56:06 2024 +0900
+[1;35m|[m   
+[1;35m|[m       김하늘/240927/modify auth & exchange
+[1;35m|[m   
+*   [33mcommit 942973bf454bb606c9a4b812a68b10010fe5bbab[m
+[31m|[m[32m\[m  Merge: 56f1243 1f82538
+[31m|[m [32m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[31m|[m [32m|[m Date:   Fri Sep 27 23:49:35 2024 +0900
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     Merge pull request #61 from Haneull-Kim/sky
+[31m|[m [32m|[m     
+[31m|[m [32m|[m     김하늘/240927/modify all
+[31m|[m [32m|[m 
+[31m|[m * [33mcommit 1f82538991c868b2b7b25f2d265a0349febb3ef7[m
+[31m|[m[31m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[31m|[m   Date:   Fri Sep 27 23:48:32 2024 +0900
+[31m|[m   
+[31m|[m       김하늘/240927/modify all
+[31m|[m   
+*   [33mcommit 56f12432cdf320418bb5c3a4e59b5964914d113d[m
+[33m|[m[34m\[m  Merge: 865cf3c fe774b5
+[33m|[m [34m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[33m|[m [34m|[m Date:   Fri Sep 27 17:53:19 2024 +0900
+[33m|[m [34m|[m 
+[33m|[m [34m|[m     Merge pull request #60 from KIMISM/develop
+[33m|[m [34m|[m     
+[33m|[m [34m|[m     김세진/20240927/외환상세페이지수정
+[33m|[m [34m|[m 
+[33m|[m * [33mcommit fe774b59d8b3f92cdb6c97b32ad0d7f3aee98e5a[m
+[33m|[m [34m|[m Author: Kim Se Jin <hollysj@naver.com>
+[33m|[m [34m|[m Date:   Fri Sep 27 17:52:07 2024 +0900
+[33m|[m [34m|[m 
+[33m|[m [34m|[m     김세진/20240927/외환상세페이지수정
+[33m|[m [34m|[m   
+* [34m|[m   [33mcommit 865cf3cd3cd4b7e30a062946601afaf4cc9eb46d[m
+[34m|[m[36m\[m [34m\[m  Merge: 20c41b8 d172094
+[34m|[m [36m|[m[34m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[34m|[m[34m/[m[36m|[m   Date:   Fri Sep 27 17:51:15 2024 +0900
+[34m|[m [36m|[m   
+[34m|[m [36m|[m       Merge pull request #59 from Haneull-Kim/sky
+[34m|[m [36m|[m       
+[34m|[m [36m|[m       김하늘/240927/add Fund Detail
+[34m|[m [36m|[m   
+[34m|[m *   [33mcommit d172094b84a059aa0e2ff6eeb99d8471a6dc9417[m
+[34m|[m [1;31m|[m[34m\[m  Merge: 2cc7a05 20c41b8
+[34m|[m [1;31m|[m[34m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[34m|[m[34m/[m[1;31m|[m   Date:   Fri Sep 27 17:51:07 2024 +0900
+[34m|[m [1;31m|[m   
+[34m|[m [1;31m|[m       Merge branch 'develop' into sky
+[34m|[m [1;31m|[m   
+* [1;31m|[m   [33mcommit 20c41b8defecb12dea29f09e70b351bc78e78234[m
+[1;33m|[m[1;34m\[m [1;31m\[m  Merge: af26420 b98fe5e
+[1;33m|[m [1;34m|[m [1;31m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;33m|[m [1;34m|[m [1;31m|[m Date:   Fri Sep 27 17:40:29 2024 +0900
+[1;33m|[m [1;34m|[m [1;31m|[m 
+[1;33m|[m [1;34m|[m [1;31m|[m     Merge pull request #58 from yeseuljung1/develop
+[1;33m|[m [1;34m|[m [1;31m|[m     
+[1;33m|[m [1;34m|[m [1;31m|[m     정예슬/20240927/주식페이지
+[1;33m|[m [1;34m|[m [1;31m|[m 
+[1;33m|[m * [1;31m|[m [33mcommit b98fe5ea8ea35a68d0c68c7e36b4c3fc122effc4[m
+[1;33m|[m[1;33m/[m [1;31m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;33m|[m [1;31m|[m   Date:   Fri Sep 27 17:37:16 2024 +0900
+[1;33m|[m [1;31m|[m   
+[1;33m|[m [1;31m|[m       정예슬/20240927/주시페이디
+[1;33m|[m [1;31m|[m 
+[1;33m|[m * [33mcommit 2cc7a055c60cd71dc1283a53bd779cb1d7de632a[m
+[1;33m|[m[1;33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m   Date:   Fri Sep 27 17:49:59 2024 +0900
+[1;33m|[m   
+[1;33m|[m       김하늘/240927/add Fund Detail
+[1;33m|[m   
+*   [33mcommit af264202b9effd5c960714ee410928ebb48b55ba[m
+[1;35m|[m[1;36m\[m  Merge: 2266df8 426baeb
+[1;35m|[m [1;36m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m Date:   Fri Sep 27 17:10:50 2024 +0900
+[1;35m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m     Merge pull request #57 from yeseuljung1/develop
+[1;35m|[m [1;36m|[m     
+[1;35m|[m [1;36m|[m     "정예슬/20240927/펀드페이지수정"
+[1;35m|[m [1;36m|[m   
+[1;35m|[m *   [33mcommit 426baeb228373e948787f4e5077707f547bb2acb[m
+[1;35m|[m [31m|[m[1;35m\[m  Merge: 620a414 2266df8
+[1;35m|[m [31m|[m[1;35m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;35m|[m[1;35m/[m[31m|[m   Date:   Fri Sep 27 17:08:57 2024 +0900
+[1;35m|[m [31m|[m   
+[1;35m|[m [31m|[m       정예슬/20240927/펀드페이지수정
+[1;35m|[m [31m|[m   
+* [31m|[m   [33mcommit 2266df8cd9f8741341f429a80b21496e415a6a05[m
+[33m|[m[34m\[m [31m\[m  Merge: f21a629 807333a
+[33m|[m [34m|[m [31m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[33m|[m [34m|[m [31m|[m Date:   Fri Sep 27 15:59:29 2024 +0900
+[33m|[m [34m|[m [31m|[m 
+[33m|[m [34m|[m [31m|[m     Merge pull request #56 from Haneull-Kim/sky
+[33m|[m [34m|[m [31m|[m     
+[33m|[m [34m|[m [31m|[m     김하늘/240927/modify home
+[33m|[m [34m|[m [31m|[m 
+[33m|[m * [31m|[m [33mcommit 807333a0b9b84442be4cadcba66316e08404667e[m
+[33m|[m[33m/[m [31m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[33m|[m [31m|[m   Date:   Fri Sep 27 15:58:54 2024 +0900
+[33m|[m [31m|[m   
+[33m|[m [31m|[m       김하늘/240927/modify home
+[33m|[m [31m|[m   
+* [31m|[m   [33mcommit f21a62977cde8514c1fb7bb2ba1ac15721187218[m
+[35m|[m[36m\[m [31m\[m  Merge: d4b3d38 0b102a2
+[35m|[m [36m|[m [31m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[35m|[m [36m|[m [31m|[m Date:   Fri Sep 27 15:53:06 2024 +0900
+[35m|[m [36m|[m [31m|[m 
+[35m|[m [36m|[m [31m|[m     Merge pull request #55 from Haneull-Kim/sky
+[35m|[m [36m|[m [31m|[m     
+[35m|[m [36m|[m [31m|[m     김하늘/240927/modify 투자설문
+[35m|[m [36m|[m [31m|[m 
+[35m|[m * [31m|[m [33mcommit 0b102a237aa71e04030724c99d784747af47a5d6[m
+[35m|[m [36m|[m [31m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m [36m|[m [31m|[m Date:   Fri Sep 27 15:52:05 2024 +0900
+[35m|[m [36m|[m [31m|[m 
+[35m|[m [36m|[m [31m|[m     김하늘/240927/modify 투자설문
+[35m|[m [36m|[m [31m|[m   
+* [36m|[m [31m|[m   [33mcommit d4b3d380e50a96172e12b6ea1f897cc9bba2bdcd[m
+[36m|[m[1;32m\[m [36m\[m [31m\[m  Merge: 9e32883 3e15bce
+[36m|[m [1;32m|[m[36m/[m [31m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[36m|[m[36m/[m[1;32m|[m [31m|[m   Date:   Fri Sep 27 15:12:07 2024 +0900
+[36m|[m [1;32m|[m [31m|[m   
+[36m|[m [1;32m|[m [31m|[m       Merge pull request #54 from yeseuljung1/develop
+[36m|[m [1;32m|[m [31m|[m       
+[36m|[m [1;32m|[m [31m|[m       정예슬/20240927/예금,적금페이지수정
+[36m|[m [1;32m|[m [31m|[m 
+[36m|[m [1;32m|[m * [33mcommit 620a4143ac24a7eb6434c606b3b6eadd257e7a50[m
+[36m|[m [1;32m|[m [1;32m|[m Author: jungyeseul/git <jys033022@naver.com>
+[36m|[m [1;32m|[m [1;32m|[m Date:   Fri Sep 27 17:06:39 2024 +0900
+[36m|[m [1;32m|[m [1;32m|[m 
+[36m|[m [1;32m|[m [1;32m|[m     정예쓸/20240927/펀드페이지수정
+[36m|[m [1;32m|[m [1;32m|[m 
+[36m|[m [1;32m|[m * [33mcommit 837312cc51b01754ba259d738979810e624974b1[m
+[36m|[m [1;32m|[m[1;32m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[36m|[m [1;32m|[m   Date:   Fri Sep 27 17:04:16 2024 +0900
+[36m|[m [1;32m|[m   
+[36m|[m [1;32m|[m       정예쓸/20240927/펀드페이지수정완료
+[36m|[m [1;32m|[m 
+[36m|[m * [33mcommit 3e15bce662f9704afdf2d5cfef0f992052273792[m
+[36m|[m[36m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[36m|[m   Date:   Fri Sep 27 15:10:35 2024 +0900
+[36m|[m   
+[36m|[m       정예슬/20240927/예금,적금페이지수정
+[36m|[m   
+*   [33mcommit 9e32883a290f779ae4f696de489aad0d9debf828[m
+[1;33m|[m[1;34m\[m  Merge: 64b948b aa187a1
+[1;33m|[m [1;34m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;33m|[m [1;34m|[m Date:   Fri Sep 27 14:28:26 2024 +0900
+[1;33m|[m [1;34m|[m 
+[1;33m|[m [1;34m|[m     Merge pull request #53 from yeseuljung1/develop
+[1;33m|[m [1;34m|[m     
+[1;33m|[m [1;34m|[m     정예슬/20240927/예금페이지수정완료
+[1;33m|[m [1;34m|[m 
+[1;33m|[m * [33mcommit aa187a1eb4d449f4451f4dbc1a5668c65fe61024[m
+[1;33m|[m[1;33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;33m|[m   Date:   Fri Sep 27 14:27:03 2024 +0900
+[1;33m|[m   
+[1;33m|[m       정예슬/20240927/예금페이지수정완료
+[1;33m|[m   
+*   [33mcommit 64b948b9167640826ea43bf899baaf293d1e01e4[m
+[1;35m|[m[1;36m\[m  Merge: 79b3ed7 a8d13b7
+[1;35m|[m [1;36m|[m Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;35m|[m [1;36m|[m Date:   Fri Sep 27 14:02:40 2024 +0900
+[1;35m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m     Merge pull request #52 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m     
+[1;35m|[m [1;36m|[m     김하늘/240927/delete unknown folder
+[1;35m|[m [1;36m|[m 
+[1;35m|[m * [33mcommit a8d13b7fdb0a8357992a9b683ffaeda977bc6fd9[m
+[1;35m|[m [1;36m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m Date:   Fri Sep 27 14:01:55 2024 +0900
+[1;35m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m     김하늘/240927/delete unknown folder
+[1;35m|[m [1;36m|[m 
+* [1;36m|[m [33mcommit 79b3ed7d39807b7ee04750775c28c13cad51e4f5[m
+[31m|[m[1;36m\[m[1;36m|[m Merge: b99598d 1dc62c9
+[31m|[m [1;36m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[31m|[m [1;36m|[m Date:   Fri Sep 27 13:55:37 2024 +0900
+[31m|[m [1;36m|[m 
+[31m|[m [1;36m|[m     Merge pull request #51 from Haneull-Kim/sky
+[31m|[m [1;36m|[m     
+[31m|[m [1;36m|[m     김하늘/240927/modify exchange
+[31m|[m [1;36m|[m 
+[31m|[m * [33mcommit 1dc62c9fc001d3b2ded425bec753e3bce05d5d88[m
+[31m|[m[31m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[31m|[m   Date:   Fri Sep 27 13:53:27 2024 +0900
+[31m|[m   
+[31m|[m       김하늘/240927/modify exchange
+[31m|[m   
+*   [33mcommit b99598d387860bd08b6b85aadea2ffd834de59e5[m
+[33m|[m[34m\[m  Merge: 01885f4 1ebc903
+[33m|[m [34m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[33m|[m [34m|[m Date:   Fri Sep 27 13:05:42 2024 +0900
+[33m|[m [34m|[m 
+[33m|[m [34m|[m     Merge pull request #50 from KIMISM/develop
+[33m|[m [34m|[m     
+[33m|[m [34m|[m     Develop
+[33m|[m [34m|[m   
+[33m|[m *   [33mcommit 1ebc903bc22deefccecfb289f11868fcaf2ded73[m
+[33m|[m [35m|[m[33m\[m  Merge: 219e26d 01885f4
+[33m|[m [35m|[m[33m/[m  Author: 김세진 <ksjhollysj@gmail.com>
+[33m|[m[33m/[m[35m|[m   Date:   Fri Sep 27 13:04:45 2024 +0900
+[33m|[m [35m|[m   
+[33m|[m [35m|[m       Merge branch 'develop' into develop
+[33m|[m [35m|[m   
+* [35m|[m   [33mcommit 01885f450f007ee644c6e7ba9564a6fd3e2fd3c2[m
+[1;31m|[m[1;32m\[m [35m\[m  Merge: 7aba600 be7d58c
+[1;31m|[m [1;32m|[m [35m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;31m|[m [1;32m|[m [35m|[m Date:   Fri Sep 27 11:50:20 2024 +0900
+[1;31m|[m [1;32m|[m [35m|[m 
+[1;31m|[m [1;32m|[m [35m|[m     Merge pull request #49 from yeseuljung1/develop
+[1;31m|[m [1;32m|[m [35m|[m     
+[1;31m|[m [1;32m|[m [35m|[m     정예쓸/20240927/주식페이지수정
+[1;31m|[m [1;32m|[m [35m|[m 
+[1;31m|[m * [35m|[m [33mcommit be7d58cac521f0dca1c2a12dc20572b10f93162c[m
+[1;31m|[m[1;31m/[m [35m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;31m|[m [35m|[m   Date:   Fri Sep 27 11:49:10 2024 +0900
+[1;31m|[m [35m|[m   
+[1;31m|[m [35m|[m       정예쓸/20240927/주식페이지수정
+[1;31m|[m [35m|[m   
+[1;31m|[m *   [33mcommit 219e26db0f1d47c86e59ee52d4c6b1549c5d823e[m
+[1;31m|[m [1;33m|[m[1;31m\[m  Merge: 17acd3e 7aba600
+[1;31m|[m [1;33m|[m[1;31m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;31m|[m[1;31m/[m[1;33m|[m   Date:   Fri Sep 27 11:56:07 2024 +0900
+[1;31m|[m [1;33m|[m   
+[1;31m|[m [1;33m|[m       김세진/20240927/merge
+[1;31m|[m [1;33m|[m   
+* [1;33m|[m   [33mcommit 7aba600d945d62ecbacad49ab056891982dc8b10[m
+[1;35m|[m[1;36m\[m [1;33m\[m  Merge: 2253c56 1758add
+[1;35m|[m [1;36m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;33m|[m Date:   Fri Sep 27 11:35:59 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m     Merge pull request #48 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m [1;33m|[m     
+[1;35m|[m [1;36m|[m [1;33m|[m     김하늘/240927/add 예적금상세 & router연결
+[1;35m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m * [1;33m|[m [33mcommit 1758addbb23f89059e5ff6ef7f841d437bd94492[m
+[1;35m|[m [1;36m|[m [1;33m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m [1;33m|[m Date:   Fri Sep 27 11:35:13 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m     김하늘/240927/add 예적금상세 & router연결
+[1;35m|[m [1;36m|[m [1;33m|[m   
+* [1;36m|[m [1;33m|[m   [33mcommit 2253c56aa10150167e0c465b05fccd20110aee0e[m
+[1;36m|[m[32m\[m [1;36m\[m [1;33m\[m  Merge: 5890eaa 032bb9b
+[1;36m|[m [32m|[m[1;36m/[m [1;33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;36m|[m[1;36m/[m[32m|[m [1;33m|[m   Date:   Fri Sep 27 10:37:31 2024 +0900
+[1;36m|[m [32m|[m [1;33m|[m   
+[1;36m|[m [32m|[m [1;33m|[m       Merge pull request #47 from yeseuljung1/develop
+[1;36m|[m [32m|[m [1;33m|[m       
+[1;36m|[m [32m|[m [1;33m|[m       "정예슬/20240927/펀드페이지수정"
+[1;36m|[m [32m|[m [1;33m|[m   
+[1;36m|[m * [1;33m|[m   [33mcommit 032bb9b80cf5a82ff01065f0a6e2036f13dfcb1f[m
+[1;36m|[m [33m|[m[1;36m\[m [1;33m\[m  Merge: 0672eb9 5890eaa
+[1;36m|[m [33m|[m[1;36m/[m [1;33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;36m|[m[1;36m/[m[33m|[m [1;33m|[m   Date:   Fri Sep 27 10:36:00 2024 +0900
+[1;36m|[m [33m|[m [1;33m|[m   
+[1;36m|[m [33m|[m [1;33m|[m       정예쓸/20240927/펀드페이지수정
+[1;36m|[m [33m|[m [1;33m|[m   
+* [33m|[m [1;33m|[m   [33mcommit 5890eaae8715c135f57763861e3fa4756eb087b4[m
+[35m|[m[36m\[m [33m\[m [1;33m\[m  Merge: ed41eae af43045
+[35m|[m [36m|[m [33m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m [36m|[m [33m|[m [1;33m|[m Date:   Fri Sep 27 10:08:15 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;33m|[m 
+[35m|[m [36m|[m [33m|[m [1;33m|[m     Merge pull request #46 from Haneull-Kim/sky
+[35m|[m [36m|[m [33m|[m [1;33m|[m     
+[35m|[m [36m|[m [33m|[m [1;33m|[m     김하늘/240927/modify dict
+[35m|[m [36m|[m [33m|[m [1;33m|[m 
+[35m|[m * [33m|[m [1;33m|[m [33mcommit af43045d5401a14ad3304d2908435396ffa1dedd[m
+[35m|[m[35m/[m [33m/[m [1;33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m [33m|[m [1;33m|[m   Date:   Fri Sep 27 10:07:07 2024 +0900
+[35m|[m [33m|[m [1;33m|[m   
+[35m|[m [33m|[m [1;33m|[m       김하늘/240927/modify dict
+[35m|[m [33m|[m [1;33m|[m 
+[35m|[m * [1;33m|[m [33mcommit 0672eb974052e3821ec241ea25767a081c868d15[m
+[35m|[m [36m|[m [1;33m|[m Author: jungyeseul/git <jys033022@naver.com>
+[35m|[m [36m|[m [1;33m|[m Date:   Fri Sep 27 10:25:40 2024 +0900
+[35m|[m [36m|[m [1;33m|[m 
+[35m|[m [36m|[m [1;33m|[m     정예쓸/20240927/펀드페이지수정
+[35m|[m [36m|[m [1;33m|[m 
+[35m|[m [36m|[m * [33mcommit 17acd3e0d136deda2e82405e36c9ddc5b05990ea[m
+[35m|[m [36m|[m[35m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[35m|[m[35m/[m[36m|[m   Date:   Fri Sep 27 11:51:11 2024 +0900
+[35m|[m [36m|[m   
+[35m|[m [36m|[m       김세진/20240927/펀드페이지수정,펀드상세페이지및인덱스수정
+[35m|[m [36m|[m   
+* [36m|[m   [33mcommit ed41eae36184e04abb3595e2b1c0527f1255bb69[m
+[1;31m|[m[1;32m\[m [36m\[m  Merge: 2f7748d 1837e41
+[1;31m|[m [1;32m|[m [36m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;31m|[m [1;32m|[m [36m|[m Date:   Thu Sep 26 16:59:31 2024 +0900
+[1;31m|[m [1;32m|[m [36m|[m 
+[1;31m|[m [1;32m|[m [36m|[m     Merge pull request #45 from Haneull-Kim/sky
+[1;31m|[m [1;32m|[m [36m|[m     
+[1;31m|[m [1;32m|[m [36m|[m     김하늘/240926/화면맞춤
+[1;31m|[m [1;32m|[m [36m|[m   
+[1;31m|[m * [36m|[m   [33mcommit 1837e414b15aa87ba6c67075562c34201d3565a4[m
+[1;31m|[m [1;33m|[m[1;31m\[m [36m\[m  Merge: 902ecd3 2f7748d
+[1;31m|[m [1;33m|[m[1;31m/[m [36m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [36m|[m   Date:   Thu Sep 26 16:58:39 2024 +0900
+[1;31m|[m [1;33m|[m [36m|[m   
+[1;31m|[m [1;33m|[m [36m|[m       Merge branch 'develop' into sky
+[1;31m|[m [1;33m|[m [36m|[m   
+* [1;33m|[m [36m|[m   [33mcommit 2f7748d0ee53952d380f4e7b1106ae7a9725e979[m
+[1;35m|[m[1;36m\[m [1;33m\[m [36m\[m  Merge: f9e299f 9783f11
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m Date:   Thu Sep 26 16:38:04 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m     Merge pull request #44 from KIMISM/develop
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m     
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m     김세진/20240926/외환리스트페이지
+[1;35m|[m [1;36m|[m [1;33m|[m [36m|[m 
+[1;35m|[m * [1;33m|[m [36m|[m [33mcommit 9783f11cac61daf96ed0065e6f259eaec1e13e78[m
+[1;35m|[m[1;35m/[m [1;33m/[m [36m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;35m|[m [1;33m|[m [36m|[m   Date:   Thu Sep 26 16:36:11 2024 +0900
+[1;35m|[m [1;33m|[m [36m|[m   
+[1;35m|[m [1;33m|[m [36m|[m       김세진/20240926/외환리스트페이지
+[1;35m|[m [1;33m|[m [36m|[m   
+* [1;33m|[m [36m|[m   [33mcommit f9e299f44feda951f48cf2d03318728977fa0518[m
+[31m|[m[32m\[m [1;33m\[m [36m\[m  Merge: 89d9228 d531b5b
+[31m|[m [32m|[m [1;33m|[m [36m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[31m|[m [32m|[m [1;33m|[m [36m|[m Date:   Thu Sep 26 15:59:58 2024 +0900
+[31m|[m [32m|[m [1;33m|[m [36m|[m 
+[31m|[m [32m|[m [1;33m|[m [36m|[m     Merge pull request #43 from kimjongsoo97/develop
+[31m|[m [32m|[m [1;33m|[m [36m|[m     
+[31m|[m [32m|[m [1;33m|[m [36m|[m     김종수/20240926/주식페이지 차트 구현
+[31m|[m [32m|[m [1;33m|[m [36m|[m 
+[31m|[m * [1;33m|[m [36m|[m [33mcommit d531b5b255f7777fa07569b042cb4c7767dedc7e[m
+[31m|[m [32m|[m [1;33m|[m [36m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[31m|[m [32m|[m [1;33m|[m [36m|[m Date:   Thu Sep 26 15:59:07 2024 +0900
+[31m|[m [32m|[m [1;33m|[m [36m|[m 
+[31m|[m [32m|[m [1;33m|[m [36m|[m     김종수/20240926/주식페이지 차트 구현
+[31m|[m [32m|[m [1;33m|[m [36m|[m   
+* [32m|[m [1;33m|[m [36m|[m   [33mcommit 89d92282b7718c94048ef49faf3ccce3612ee854[m
+[32m|[m[36m\[m [32m\[m [1;33m\[m [36m\[m  Merge: aa35dac 292007e
+[32m|[m [36m|[m[32m/[m [1;33m/[m [36m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[32m|[m[32m/[m[36m|[m [1;33m|[m [36m/[m   Date:   Thu Sep 26 15:49:42 2024 +0900
+[32m|[m [36m|[m [1;33m|[m[36m/[m    
+[32m|[m [36m|[m[36m/[m[1;33m|[m         Merge pull request #42 from yeseuljung1/develop
+[32m|[m [36m|[m [1;33m|[m         
+[32m|[m [36m|[m [1;33m|[m         "정예슬/20240926/적금페이지수정"
+[32m|[m [36m|[m [1;33m|[m   
+[32m|[m * [1;33m|[m   [33mcommit 292007ee9030b56f656cea1053058bec90e9cb3d[m
+[32m|[m [35m|[m[32m\[m [1;33m\[m  Merge: 860b28b aa35dac
+[32m|[m [35m|[m[32m/[m [1;33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[32m|[m[32m/[m[35m|[m [1;33m|[m   Date:   Thu Sep 26 15:47:20 2024 +0900
+[32m|[m [35m|[m [1;33m|[m   
+[32m|[m [35m|[m [1;33m|[m       정예슬/20240926/적금페이지수정
+[32m|[m [35m|[m [1;33m|[m   
+* [35m|[m [1;33m|[m   [33mcommit aa35dac41c01e6b58aaa563d8dfd24ae9a7ec7c5[m
+[1;31m|[m[1;32m\[m [35m\[m [1;33m\[m  Merge: 03a6b30 fddf0ad
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m Date:   Thu Sep 26 15:27:06 2024 +0900
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m 
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m     Merge pull request #41 from kimjongsoo97/develop
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m     
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m     김종수/20240926/주식페이지 구현끝
+[1;31m|[m [1;32m|[m [35m|[m [1;33m|[m   
+[1;31m|[m * [35m|[m [1;33m|[m   [33mcommit fddf0add61904ba9c0327a84c61d78b327659aff[m
+[1;31m|[m [1;33m|[m[1;31m\[m [35m\[m [1;33m\[m  Merge: 9646f65 03a6b30
+[1;31m|[m [1;33m|[m[1;31m/[m [35m/[m [1;33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [35m|[m [1;33m|[m   Date:   Thu Sep 26 15:26:50 2024 +0900
+[1;31m|[m [1;33m|[m [35m|[m [1;33m|[m   
+[1;31m|[m [1;33m|[m [35m|[m [1;33m|[m       Merge branch 'develop' into develop
+[1;31m|[m [1;33m|[m [35m|[m [1;33m|[m   
+* [1;33m|[m [35m|[m [1;33m|[m   [33mcommit 03a6b3026bc0ca975f8fafa796d38252169dc205[m
+[1;35m|[m[1;36m\[m [1;33m\[m [35m\[m [1;33m\[m  Merge: 9d44701 7e8934a
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m Date:   Thu Sep 26 15:15:15 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m     Merge pull request #40 from Haneull-Kim/sky
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m     
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m     김하늘/240926/add MyBoard
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m * [35m|[m [1;33m|[m [33mcommit 9646f6560279d5ed8941181a2b1cf711ab9d5b15[m
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m Date:   Thu Sep 26 15:25:07 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m     김종수/20240926/주식페이지 구현
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m * [35m|[m [1;33m|[m [33mcommit c5d676419794f3091da09fab8a187a66736af328[m
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m Date:   Thu Sep 26 15:22:53 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m     김종수/20240926/주식페이지 구현끝
+[1;35m|[m [1;36m|[m [1;36m|[m [35m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m * [1;33m|[m [33mcommit 860b28b9b8f868c0e7d1f064f21d8a864b2faa69[m
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m Author: jungyeseul/git <jys033022@naver.com>
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m Date:   Thu Sep 26 15:38:40 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m     정예슬 /20240926/적금페이지수정
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m * [1;33m|[m [33mcommit e22f35a1d37189b3af39c16b8a228889766ead31[m
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m Author: jungyeseul/git <jys033022@naver.com>
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m Date:   Thu Sep 26 15:36:50 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m     정예슬/20240926/적금페이지완성
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m * [33mcommit 902ecd321afe6ca4b2c3641da611cc1325db1fc3[m
+[1;35m|[m [1;36m|[m [1;36m|[m[1;36m_[m[1;36m|[m[1;36m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m[1;36m/[m[1;36m|[m [1;36m|[m   Date:   Thu Sep 26 16:56:21 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m   
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m       김하늘/240926/화면맞춤
+[1;35m|[m [1;36m|[m [1;36m|[m [1;36m|[m 
+[1;35m|[m * [1;36m|[m [1;36m|[m [33mcommit 7e8934a4261491f3d89431fbbcf065ef37e43111[m
+[1;35m|[m[1;35m/[m [1;36m/[m [1;36m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;36m|[m [1;36m|[m   Date:   Thu Sep 26 15:14:04 2024 +0900
+[1;35m|[m [1;36m|[m [1;36m|[m   
+[1;35m|[m [1;36m|[m [1;36m|[m       김하늘/240926/add MyBoard
+[1;35m|[m [1;36m|[m [1;36m|[m 
+* [1;36m|[m [1;36m|[m [33mcommit 9d44701062bf475edcbc11c6cf9017f806ba3efc[m
+[31m|[m[1;36m\[m[1;36m|[m [1;36m|[m Merge: 79b2b6b a178b04
+[31m|[m [1;36m|[m [1;36m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[31m|[m [1;36m|[m [1;36m|[m Date:   Thu Sep 26 14:43:38 2024 +0900
+[31m|[m [1;36m|[m [1;36m|[m 
+[31m|[m [1;36m|[m [1;36m|[m     Merge pull request #39 from kimjongsoo97/develop
+[31m|[m [1;36m|[m [1;36m|[m     
+[31m|[m [1;36m|[m [1;36m|[m     김종수/20240926/주식페이지 구현중
+[31m|[m [1;36m|[m [1;36m|[m   
+[31m|[m * [1;36m|[m   [33mcommit a178b04261704b7764e5fa43e20c92e3f0f211ac[m
+[31m|[m [33m|[m[31m\[m [1;36m\[m  Merge: bc6a8cc 79b2b6b
+[31m|[m [33m|[m[31m/[m [1;36m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[31m|[m[31m/[m[33m|[m [1;36m|[m   Date:   Thu Sep 26 14:40:25 2024 +0900
+[31m|[m [33m|[m [1;36m|[m   
+[31m|[m [33m|[m [1;36m|[m       Merge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into developMerge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into develop
+[31m|[m [33m|[m [1;36m|[m       Merge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into develop# Please enter a commit message to explain why this merge is necessary,
+[31m|[m [33m|[m [1;36m|[m   
+* [33m|[m [1;36m|[m   [33mcommit 79b2b6b31fa405e94153cf6e2405f7dc2b4af891[m
+[35m|[m[36m\[m [33m\[m [1;36m\[m  Merge: 2f26aec 5ef7e97
+[35m|[m [36m|[m [33m|[m [1;36m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m [36m|[m [33m|[m [1;36m|[m Date:   Thu Sep 26 14:15:21 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;36m|[m 
+[35m|[m [36m|[m [33m|[m [1;36m|[m     Merge pull request #38 from Haneull-Kim/sky
+[35m|[m [36m|[m [33m|[m [1;36m|[m     
+[35m|[m [36m|[m [33m|[m [1;36m|[m     김하늘/240926/add Installment
+[35m|[m [36m|[m [33m|[m [1;36m|[m 
+[35m|[m * [33m|[m [1;36m|[m [33mcommit 5ef7e97998baf7d5093b4c824f92d6ae698563fb[m
+[35m|[m [36m|[m [33m|[m [1;36m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m [36m|[m [33m|[m [1;36m|[m Date:   Thu Sep 26 14:11:42 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;36m|[m 
+[35m|[m [36m|[m [33m|[m [1;36m|[m     김하늘/240926/add Installment
+[35m|[m [36m|[m [33m|[m [1;36m|[m   
+* [36m|[m [33m|[m [1;36m|[m   [33mcommit 2f26aec30bab6c9f92be1d7c611f54c5fd591720[m
+[1;31m|[m[1;36m\[m [36m\[m [33m\[m [1;36m\[m  Merge: 7b448bf 3331440
+[1;31m|[m [1;36m|[m [36m|[m[1;36m_[m[33m|[m[1;36m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;31m|[m [1;36m|[m[1;36m/[m[36m|[m [33m|[m   Date:   Thu Sep 26 14:14:55 2024 +0900
+[1;31m|[m [1;36m|[m [36m|[m [33m|[m   
+[1;31m|[m [1;36m|[m [36m|[m [33m|[m       Merge pull request #37 from yeseuljung1/develop
+[1;31m|[m [1;36m|[m [36m|[m [33m|[m       
+[1;31m|[m [1;36m|[m [36m|[m [33m|[m       "정예슬/20240926/예금페이지수정"
+[1;31m|[m [1;36m|[m [36m|[m [33m|[m 
+[1;31m|[m * [36m|[m [33m|[m [33mcommit 333144019926d5a315a03413c977183227d3c6b9[m
+[1;31m|[m [1;32m|[m [36m|[m [33m|[m Author: jungyeseul/git <jys033022@naver.com>
+[1;31m|[m [1;32m|[m [36m|[m [33m|[m Date:   Thu Sep 26 13:41:59 2024 +0900
+[1;31m|[m [1;32m|[m [36m|[m [33m|[m 
+[1;31m|[m [1;32m|[m [36m|[m [33m|[m     정예슬/20240926/예금페이지수정
+[1;31m|[m [1;32m|[m [36m|[m [33m|[m   
+[1;31m|[m * [36m|[m [33m|[m   [33mcommit 7dd6d794a14b7e8afebc8de76fd95a59d7db244c[m
+[1;31m|[m [1;33m|[m[1;31m\[m [36m\[m [33m\[m  Merge: a743b2a 7b448bf
+[1;31m|[m [1;33m|[m[1;31m/[m [36m/[m [33m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [36m|[m [33m|[m   Date:   Thu Sep 26 13:40:28 2024 +0900
+[1;31m|[m [1;33m|[m [36m|[m [33m|[m   
+[1;31m|[m [1;33m|[m [36m|[m [33m|[m       정예슬/20240926/예금페이짓수정완료
+[1;31m|[m [1;33m|[m [36m|[m [33m|[m   
+* [1;33m|[m [36m|[m [33m|[m   [33mcommit 7b448bf89878b3fa55cab362581622ebe5ce2925[m
+[1;35m|[m[36m\[m [1;33m\[m [36m\[m [33m\[m  Merge: 9c2ea82 ec580e0
+[1;35m|[m [36m|[m [1;33m|[m[36m/[m [33m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m [36m|[m[36m/[m[1;33m|[m [33m|[m   Date:   Thu Sep 26 13:33:30 2024 +0900
+[1;35m|[m [36m|[m [1;33m|[m [33m|[m   
+[1;35m|[m [36m|[m [1;33m|[m [33m|[m       Merge pull request #36 from Haneull-Kim/sky
+[1;35m|[m [36m|[m [1;33m|[m [33m|[m       
+[1;35m|[m [36m|[m [1;33m|[m [33m|[m       김하늘/240926/add Dict Memo
+[1;35m|[m [36m|[m [1;33m|[m [33m|[m 
+[1;35m|[m * [1;33m|[m [33m|[m [33mcommit ec580e046ee217e4e754a8f26dd1d08b1e6b8693[m
+[1;35m|[m[1;35m/[m [1;33m/[m [33m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;33m|[m [33m|[m   Date:   Thu Sep 26 13:24:20 2024 +0900
+[1;35m|[m [1;33m|[m [33m|[m   
+[1;35m|[m [1;33m|[m [33m|[m       김하늘/240926/add Dict Memo
+[1;35m|[m [1;33m|[m [33m|[m 
+[1;35m|[m * [33m|[m [33mcommit a743b2a0676d7607d38cb1b0af40c9fc7b1d16e1[m
+[1;35m|[m [1;36m|[m [33m|[m Author: jungyeseul/git <jys033022@naver.com>
+[1;35m|[m [1;36m|[m [33m|[m Date:   Thu Sep 26 13:34:10 2024 +0900
+[1;35m|[m [1;36m|[m [33m|[m 
+[1;35m|[m [1;36m|[m [33m|[m     정ㅇ
+[1;35m|[m [1;36m|[m [33m|[m   
+[1;35m|[m [1;36m|[m *   [33mcommit bc6a8cc2ba6d99c1bec4f8fa4e3b323e2319ff9d[m
+[1;35m|[m [1;36m|[m [31m|[m[1;35m\[m  Merge: 81a109b 9c2ea82
+[1;35m|[m [1;36m|[m[1;35m_[m[31m|[m[1;35m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;35m|[m[1;35m/[m[1;36m|[m [31m|[m   Date:   Thu Sep 26 14:39:13 2024 +0900
+[1;35m|[m [1;36m|[m [31m|[m   
+[1;35m|[m [1;36m|[m [31m|[m       Merge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into develop
+[1;35m|[m [1;36m|[m [31m|[m   
+* [1;36m|[m [31m|[m   [33mcommit 9c2ea82885ae804c48efe22d38d44afce3db22ee[m
+[33m|[m[34m\[m [1;36m\[m [31m\[m  Merge: 44560e1 558aa68
+[33m|[m [34m|[m [1;36m|[m [31m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[33m|[m [34m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 11:45:29 2024 +0900
+[33m|[m [34m|[m [1;36m|[m [31m|[m 
+[33m|[m [34m|[m [1;36m|[m [31m|[m     Merge pull request #35 from Haneull-Kim/sky
+[33m|[m [34m|[m [1;36m|[m [31m|[m     
+[33m|[m [34m|[m [1;36m|[m [31m|[m     김하늘/240926/modify Auth
+[33m|[m [34m|[m [1;36m|[m [31m|[m   
+[33m|[m * [1;36m|[m [31m|[m   [33mcommit 558aa6828177eaab5a758ad2585828c32fbee0d7[m
+[33m|[m [35m|[m[33m\[m [1;36m\[m [31m\[m  Merge: 3d6ce6a 44560e1
+[33m|[m [35m|[m[33m/[m [1;36m/[m [31m/[m  Author: 김하늘 <143999813+Haneull-Kim@users.noreply.github.com>
+[33m|[m[33m/[m[35m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 11:44:55 2024 +0900
+[33m|[m [35m|[m [1;36m|[m [31m|[m   
+[33m|[m [35m|[m [1;36m|[m [31m|[m       Merge branch 'develop' into sky
+[33m|[m [35m|[m [1;36m|[m [31m|[m   
+* [35m|[m [1;36m|[m [31m|[m   [33mcommit 44560e1b9b309c78a05c11bee5b97fd2b3054adb[m
+[1;31m|[m[1;32m\[m [35m\[m [1;36m\[m [31m\[m  Merge: 1a041c0 ffdbde7
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 11:40:21 2024 +0900
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m     Merge pull request #34 from jjpterdh/develop
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m     
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m     Develop
+[1;31m|[m [1;32m|[m [35m|[m [1;36m|[m [31m|[m   
+[1;31m|[m * [35m|[m [1;36m|[m [31m|[m   [33mcommit ffdbde7ac84f1cfe626fb029c2eaf926df87cbf1[m
+[1;31m|[m [1;33m|[m[1;31m\[m [35m\[m [1;36m\[m [31m\[m  Merge: a1ccb8d 1a041c0
+[1;31m|[m [1;33m|[m[1;31m/[m [35m/[m [1;36m/[m [31m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [35m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 11:39:31 2024 +0900
+[1;31m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m   
+[1;31m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m       Merge branch 'KB-FinSetProject:develop' into develop
+[1;31m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m   
+* [1;33m|[m [35m|[m [1;36m|[m [31m|[m   [33mcommit 1a041c0b51ca90bdaeb293605f8ce68f96dc6fdf[m
+[1;35m|[m[1;36m\[m [1;33m\[m [35m\[m [1;36m\[m [31m\[m  Merge: 45122d3 2f7ef39
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 11:27:16 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m     Merge pull request #33 from kimjongsoo97/develop
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m     
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m     김종수/20240926/투자성향페이지 완성 및 펀드페이지 일부수정
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m [1;36m|[m [31m|[m   
+[1;35m|[m [1;36m|[m * [35m|[m [1;36m|[m [31m|[m   [33mcommit a1ccb8d9a8080bd6f95c2a57dc1f24774e054d63[m
+[1;35m|[m [1;36m|[m [31m|[m[1;35m\[m [35m\[m [1;36m\[m [31m\[m  Merge: 5f7d0cc 45122d3
+[1;35m|[m [1;36m|[m[1;35m_[m[31m|[m[1;35m/[m [35m/[m [1;36m/[m [31m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m[1;35m/[m[1;36m|[m [31m|[m [35m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 10:52:37 2024 +0900
+[1;35m|[m [1;36m|[m [31m|[m [35m|[m [1;36m|[m [31m|[m   
+[1;35m|[m [1;36m|[m [31m|[m [35m|[m [1;36m|[m [31m|[m       Merge branch 'KB-FinSetProject:develop' into develop
+[1;35m|[m [1;36m|[m [31m|[m [35m|[m [1;36m|[m [31m|[m   
+[1;35m|[m [1;36m|[m * [35m|[m [1;36m|[m [31m|[m   [33mcommit 5f7d0cc4580c1b2f6417f16cfb984f5b0f5ac1a9[m
+[1;35m|[m [1;36m|[m [33m|[m[34m\[m [35m\[m [1;36m\[m [31m\[m  Merge: 928ed30 cde4089
+[1;35m|[m [1;36m|[m [33m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m [1;36m|[m [33m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 10:47:38 2024 +0900
+[1;35m|[m [1;36m|[m [33m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;35m|[m [1;36m|[m [33m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m     Merge branch 'KB-FinSetProject:develop' into develop
+[1;35m|[m [1;36m|[m [33m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;35m|[m [1;36m|[m * [34m|[m [35m|[m [1;36m|[m [31m|[m [33mcommit 928ed306becf45255f43a750f139d897b2ff770e[m
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m Author: danho <danho011185@gmail.com>
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 10:42:57 2024 +0900
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m     정단호/2024-09-25/add DictMemo page
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [35m|[m [1;36m|[m [31m|[m 
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m * [1;36m|[m [31m|[m [33mcommit 3d6ce6afe23abcca6415c49fb64dcff9be0de4fa[m
+[1;35m|[m [1;36m|[m[1;35m_[m[34m|[m[1;35m_[m[34m|[m[1;35m/[m [1;36m/[m [31m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m[1;35m/[m[1;36m|[m [34m|[m [34m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 11:40:54 2024 +0900
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [1;36m|[m [31m|[m   
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [1;36m|[m [31m|[m       김하늘/240926/modify Auth
+[1;35m|[m [1;36m|[m [34m|[m [34m|[m [1;36m|[m [31m|[m   
+* [1;36m|[m [34m|[m [34m|[m [1;36m|[m [31m|[m   [33mcommit 45122d3766e7bd6762adf2a88ed7bfa948177b45[m
+[34m|[m[36m\[m [1;36m\[m [34m\[m [34m\[m [1;36m\[m [31m\[m  Merge: cde4089 459d352
+[34m|[m [36m|[m[34m_[m[1;36m|[m[34m_[m[34m|[m[34m/[m [1;36m/[m [31m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[34m|[m[34m/[m[36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 10:52:24 2024 +0900
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m   
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m       Merge pull request #32 from Haneull-Kim/sky
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m       
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m       김하늘/240926/add wish
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m 
+[34m|[m * [1;36m|[m [34m|[m [1;36m|[m [31m|[m [33mcommit 459d352d8a3acc9903d69fb170a941a158a5c96d[m
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m Date:   Thu Sep 26 10:48:40 2024 +0900
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m 
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m     김하늘/240926/add wish
+[34m|[m [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m   
+* [36m|[m [1;36m|[m [34m|[m [1;36m|[m [31m|[m   [33mcommit cde4089a7b84853af1f6ad56ef4bf4cb0a0b0f33[m
+[34m|[m[1;32m\[m [36m\[m [1;36m\[m [34m\[m [1;36m\[m [31m\[m  Merge: f988fcb 95964a2
+[34m|[m [1;32m|[m[34m_[m[36m|[m[34m_[m[1;36m|[m[34m/[m [1;36m/[m [31m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[34m|[m[34m/[m[1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 10:47:21 2024 +0900
+[34m|[m [1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m   
+[34m|[m [1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m       Merge pull request #31 from KIMISM/develop
+[34m|[m [1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m       
+[34m|[m [1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m       김세진/20240926/단어사전 페이지 수정
+[34m|[m [1;32m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m 
+[34m|[m * [36m|[m [1;36m|[m [1;36m|[m [31m|[m [33mcommit 95964a2e5b18ec5c8ee39118654c47ab0b167f59[m
+[34m|[m[34m/[m [36m/[m [1;36m/[m [1;36m/[m [31m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m   Date:   Thu Sep 26 10:42:01 2024 +0900
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m   
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m       김세진/20240926/단어사전 페이지 수정
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m [31m|[m 
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m * [33mcommit 81a109be20e561a612f5a648020da8265e6eb0d3[m
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m[1;36m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[34m|[m [36m|[m [1;36m|[m[1;36m/[m[1;36m|[m   Date:   Thu Sep 26 14:38:21 2024 +0900
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m   
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m       김종수/20240926/주식페이지 구현중
+[34m|[m [36m|[m [1;36m|[m [1;36m|[m 
+[34m|[m [36m|[m * [1;36m|[m [33mcommit 2f7ef395895c1cbd4de030e1dd0ea0fe7ad46e15[m
+[34m|[m [36m|[m[34m/[m [1;36m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[34m|[m[34m/[m[36m|[m [1;36m|[m   Date:   Thu Sep 26 11:26:18 2024 +0900
+[34m|[m [36m|[m [1;36m|[m   
+[34m|[m [36m|[m [1;36m|[m       김종수/20240926/투자성향페이지 완성 및 펀드페이지 일부수정
+[34m|[m [36m|[m [1;36m|[m   
+* [36m|[m [1;36m|[m   [33mcommit f988fcb3e603c9e1796804fd876208ef063dc151[m
+[36m|[m[1;36m\[m [36m\[m [1;36m\[m  Merge: 8d96213 6ac0b94
+[36m|[m [1;36m|[m[36m/[m [1;36m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[36m|[m[36m/[m[1;36m|[m [1;36m/[m   Date:   Thu Sep 26 10:38:12 2024 +0900
+[36m|[m [1;36m|[m[1;36m/[m    
+[36m|[m [1;36m|[m         Merge pull request #30 from yeseuljung1/develop
+[36m|[m [1;36m|[m         
+[36m|[m [1;36m|[m         정예슬/20240926/펀드페이지링크수정
+[36m|[m [1;36m|[m 
+[36m|[m * [33mcommit 6ac0b94448904dc427bf3c17f30a08d7acf8da1e[m
+[36m|[m[36m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[36m|[m   Date:   Thu Sep 26 10:13:41 2024 +0900
+[36m|[m   
+[36m|[m       정예슬/20240926/펀드페이지링크수정
+[36m|[m   
+*   [33mcommit 8d96213cedb80cff3cc88c3e6fad6efbf3da2732[m
+[1;35m|[m[1;36m\[m  Merge: 46988d1 4677d71
+[1;35m|[m [1;36m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m Date:   Thu Sep 26 09:23:21 2024 +0900
+[1;35m|[m [1;36m|[m 
+[1;35m|[m [1;36m|[m     Merge pull request #29 from KIMISM/develop
+[1;35m|[m [1;36m|[m     
+[1;35m|[m [1;36m|[m     김세진/20240925/단어사전페이지추가
+[1;35m|[m [1;36m|[m 
+[1;35m|[m * [33mcommit 4677d71967f02c8bb7ce616471314781f2b9ce44[m
+[1;35m|[m[1;35m/[m  Author: Kim Se Jin <hollysj@naver.com>
+[1;35m|[m   Date:   Wed Sep 25 17:52:34 2024 +0900
+[1;35m|[m   
+[1;35m|[m       김세진/20240925/단어사전페이지추가
+[1;35m|[m   
+*   [33mcommit 46988d1cacd6d11ebd033060863e5bcbc37d899a[m
+[31m|[m[32m\[m  Merge: d631a79 97ab4ea
+[31m|[m [32m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[31m|[m [32m|[m Date:   Wed Sep 25 17:31:11 2024 +0900
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     Merge pull request #28 from Haneull-Kim/sky
+[31m|[m [32m|[m     
+[31m|[m [32m|[m     김하늘/240925/add SignUp & SignIn , modify Header
+[31m|[m [32m|[m 
+[31m|[m * [33mcommit 97ab4eacff6d8797f8ad3fa20be4de78ead2b143[m
+[31m|[m [32m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[31m|[m [32m|[m Date:   Wed Sep 25 17:30:09 2024 +0900
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     김하늘/240925/add SignUp & SignIn , modify Header
+[31m|[m [32m|[m   
+* [32m|[m   [33mcommit d631a794f4933f4c59c45ab856a245ae1d1dfef8[m
+[32m|[m[34m\[m [32m\[m  Merge: b981e45 3775fa6
+[32m|[m [34m|[m[32m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[32m|[m[32m/[m[34m|[m   Date:   Wed Sep 25 16:18:58 2024 +0900
+[32m|[m [34m|[m   
+[32m|[m [34m|[m       Merge pull request #26 from kimjongsoo97/soo
+[32m|[m [34m|[m       
+[32m|[m [34m|[m       김종수/20240925/마이프로필페이지구현
+[32m|[m [34m|[m 
+[32m|[m * [33mcommit 3775fa646f57b6edff34dd17387ce749b4a0946c[m[33m ([m[1;31morigin/soo[m[33m)[m
+[32m|[m [34m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[32m|[m [34m|[m Date:   Wed Sep 25 16:18:03 2024 +0900
+[32m|[m [34m|[m 
+[32m|[m [34m|[m     김종수/20240925/마이프로필페이지구현
+[32m|[m [34m|[m 
+[32m|[m * [33mcommit e0eb52ad067ddb5add7e7588d2424dd344de8b1b[m
+[32m|[m [34m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[32m|[m [34m|[m Date:   Wed Sep 25 16:14:43 2024 +0900
+[32m|[m [34m|[m 
+[32m|[m [34m|[m     김종수/20240925/마이프로필페이지 구현
+[32m|[m [34m|[m   
+* [34m|[m   [33mcommit b981e4539911983f8393a7e4cfb10a6050e2cd56[m
+[35m|[m[36m\[m [34m\[m  Merge: bf37f2c 4d759fa
+[35m|[m [36m|[m [34m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[35m|[m [36m|[m [34m|[m Date:   Wed Sep 25 16:10:24 2024 +0900
+[35m|[m [36m|[m [34m|[m 
+[35m|[m [36m|[m [34m|[m     Merge pull request #24 from Haneull-Kim/sky
+[35m|[m [36m|[m [34m|[m     
+[35m|[m [36m|[m [34m|[m     김하늘/240925/add home
+[35m|[m [36m|[m [34m|[m 
+[35m|[m * [34m|[m [33mcommit 4d759fad9c9e0186cb276088df9c247b66903d52[m
+[35m|[m [36m|[m [34m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[35m|[m [36m|[m [34m|[m Date:   Wed Sep 25 16:08:48 2024 +0900
+[35m|[m [36m|[m [34m|[m 
+[35m|[m [36m|[m [34m|[m     김하늘/240925/add home
+[35m|[m [36m|[m [34m|[m   
+* [36m|[m [34m|[m   [33mcommit bf37f2c0c684c26ff9fe49addbc32ae044ae0454[m
+[1;31m|[m[1;32m\[m [36m\[m [34m\[m  Merge: 92ad67e 03a9bc9
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m Date:   Wed Sep 25 14:46:18 2024 +0900
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m     Merge pull request #23 from jjpterdh/develop
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m     
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m     Develop
+[1;31m|[m [1;32m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit 03a9bc9024c218acc9657aeb53e4e5565f241166[m
+[1;31m|[m[1;31m/[m[1;34m|[m [36m|[m [34m|[m Merge: 92ad67e eaee877
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: danho <danho011185@gmail.com>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 14:44:37 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     정단호/2024-09-25/add Headers file
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit eaee8775836f0e82c1456e688dfd82f9afff09ff[m
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: danho <danho011185@gmail.com>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 14:22:16 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     정단호/2024-09-25/add Headers file
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit ce0ba41394e2f57af84d4b8f349d3ad677cdbbcb[m
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: jungyeseul/git <jys033022@naver.com>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 10:40:47 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     정예슬/20240925/펀드페이지
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit 967bd128bc05233fb61c0f2725997456af996b9b[m
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 10:47:43 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     김하늘/240925/modify footer & gitignore
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit f0ee8ce84fed790b1907eab07b1766a23374bbce[m
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 10:41:12 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     김하늘/240925/modify footer
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m * [36m|[m [34m|[m [33mcommit 109fad1e1561427a25a61ff37d8711f0c9d97bc6[m
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m Date:   Wed Sep 25 10:33:49 2024 +0900
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m     김하늘/240925/modify footer
+[1;31m|[m [1;34m|[m [36m|[m [34m|[m   
+[1;31m|[m * [36m|[m [34m|[m   [33mcommit bfc7aaec52e8bf7253ec94c9d1339772daa162f6[m
+[1;31m|[m [1;35m|[m[1;36m\[m [36m\[m [34m\[m  Merge: 84693d0 eb59276
+[1;31m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;31m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m Date:   Wed Sep 25 10:47:25 2024 +0900
+[1;31m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m 
+[1;31m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m     Merge branch 'KB-FinSetProject:main' into danho
+[1;31m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   
+* [1;35m|[m [1;36m|[m [36m|[m [34m|[m   [33mcommit 92ad67ede738e5518f00ef5140a6ec683e8037ce[m
+[31m|[m[32m\[m [1;35m\[m [1;36m\[m [36m\[m [34m\[m  Merge: 5284933 4952b6c
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m Date:   Wed Sep 25 14:26:36 2024 +0900
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m 
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m     Merge pull request #22 from yeseuljung1/develop
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m     
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m     "정예슬/20240925/펀드상품페이지"
+[31m|[m [32m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   
+[31m|[m * [1;35m|[m [1;36m|[m [36m|[m [34m|[m   [33mcommit 4952b6c744ac40a710a4be1e1571f13fac399d45[m
+[31m|[m [33m|[m[31m\[m [1;35m\[m [1;36m\[m [36m\[m [34m\[m  Merge: 159f50c 5284933
+[31m|[m [33m|[m[31m/[m [1;35m/[m [1;36m/[m [36m/[m [34m/[m  Author: yeseul_jung <jys033022@naver.com>
+[31m|[m[31m/[m[33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   Date:   Wed Sep 25 14:25:18 2024 +0900
+[31m|[m [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   
+[31m|[m [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m       Merge pull request #2 from KB-FinSetProject/develop
+[31m|[m [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m       
+[31m|[m [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m       "정예슬/20240925/펀드상품페이지"
+[31m|[m [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   
+* [33m|[m [1;35m|[m [1;36m|[m [36m|[m [34m|[m   [33mcommit 5284933b239eb9ad49ebfa97fe78ff0a6f1d1ea8[m
+[33m|[m[36m\[m [33m\[m [1;35m\[m [1;36m\[m [36m\[m [34m\[m  Merge: 159f50c df7f75d
+[33m|[m [36m|[m[33m/[m [1;35m/[m [1;36m/[m [36m/[m [34m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[33m|[m[33m/[m[36m|[m [1;35m|[m [1;36m|[m [36m/[m [34m/[m   Date:   Wed Sep 25 14:17:59 2024 +0900
+[33m|[m [36m|[m [1;35m|[m[36m_[m[1;36m|[m[36m/[m [34m/[m    
+[33m|[m [36m|[m[36m/[m[1;35m|[m [1;36m|[m [34m|[m         Merge pull request #21 from Haneull-Kim/sky
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m         
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m         김하늘/240925/add shop hover
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m 
+[33m|[m * [1;35m|[m [1;36m|[m [34m|[m [33mcommit df7f75d2e32aa91440fa4d2c4c7066deed54da78[m
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m Date:   Wed Sep 25 14:16:31 2024 +0900
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m 
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m     김하늘/240925/add shop hover
+[33m|[m [36m|[m [1;35m|[m [1;36m|[m [34m|[m   
+* [36m|[m [1;35m|[m [1;36m|[m [34m|[m   [33mcommit 159f50cd03b848470fb27cc3be2f954e1f113cf7[m
+[1;31m|[m[34m\[m [36m\[m [1;35m\[m [1;36m\[m [34m\[m  Merge: 63e1bc7 cff5cde
+[1;31m|[m [34m|[m [36m|[m[34m_[m[1;35m|[m[34m_[m[1;36m|[m[34m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;31m|[m [34m|[m[34m/[m[36m|[m [1;35m|[m [1;36m|[m   Date:   Wed Sep 25 13:45:38 2024 +0900
+[1;31m|[m [34m|[m [36m|[m [1;35m|[m [1;36m|[m   
+[1;31m|[m [34m|[m [36m|[m [1;35m|[m [1;36m|[m       Merge pull request #20 from kimjongsoo97/develop
+[1;31m|[m [34m|[m [36m|[m [1;35m|[m [1;36m|[m       
+[1;31m|[m [34m|[m [36m|[m [1;35m|[m [1;36m|[m       김종수/20240925/투자설문페이지 구현, 시작페이지와 디자인남음
+[1;31m|[m [34m|[m [36m|[m [1;35m|[m [1;36m|[m 
+[1;31m|[m * [36m|[m [1;35m|[m [1;36m|[m [33mcommit cff5cde8bda6b3eb0ad332224fad16304519fec5[m
+[1;31m|[m[1;31m/[m [36m/[m [1;35m/[m [1;36m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;31m|[m [36m|[m [1;35m|[m [1;36m|[m   Date:   Wed Sep 25 13:44:28 2024 +0900
+[1;31m|[m [36m|[m [1;35m|[m [1;36m|[m   
+[1;31m|[m [36m|[m [1;35m|[m [1;36m|[m       김종수/20240925/투자설문페이지 구현, 시작페이지와 디자인남음
+[1;31m|[m [36m|[m [1;35m|[m [1;36m|[m 
+* [36m|[m [1;35m|[m [1;36m|[m [33mcommit 63e1bc735f16b7e05ec93768240daa17f4038fc6[m
+[1;33m|[m[36m\[m[36m|[m [1;35m|[m [1;36m|[m Merge: 57bfb0a 68858a1
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m Date:   Wed Sep 25 13:15:57 2024 +0900
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m 
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m     Merge pull request #18 from Haneull-Kim/sky
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m     
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m     김하늘/240925/add shop & modify footer
+[1;33m|[m [36m|[m [1;35m|[m [1;36m|[m 
+[1;33m|[m * [1;35m|[m [1;36m|[m [33mcommit 68858a1335d38a3b1968a7a2d6399bf6f19f453a[m
+[1;33m|[m [1;34m|[m [1;35m|[m [1;36m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;33m|[m [1;34m|[m [1;35m|[m [1;36m|[m Date:   Wed Sep 25 13:13:59 2024 +0900
+[1;33m|[m [1;34m|[m [1;35m|[m [1;36m|[m 
+[1;33m|[m [1;34m|[m [1;35m|[m [1;36m|[m     김하늘/240925/add shop & modify footer
+[1;33m|[m [1;34m|[m [1;35m|[m [1;36m|[m 
+* [1;34m|[m [1;35m|[m [1;36m|[m [33mcommit 57bfb0a56377439dd416769061e9bb3d083c9be9[m
+[1;35m|[m[1;34m\[m[1;34m|[m [1;35m|[m [1;36m|[m Merge: 3ddee2e eec40a2
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m Date:   Wed Sep 25 10:49:51 2024 +0900
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m 
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m     Merge pull request #17 from Haneull-Kim/sky
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m     
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m     Sky
+[1;35m|[m [1;34m|[m [1;35m|[m [1;36m|[m   
+[1;35m|[m * [1;35m|[m [1;36m|[m   [33mcommit eec40a2f94dae303c36777a5817fd0419ac59e66[m
+[1;35m|[m [31m|[m[1;35m\[m [1;35m\[m [1;36m\[m  Merge: 7e28924 3ddee2e
+[1;35m|[m [31m|[m[1;35m/[m [1;35m/[m [1;36m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m[1;35m/[m[31m|[m [1;35m|[m [1;36m|[m   Date:   Wed Sep 25 10:49:30 2024 +0900
+[1;35m|[m [31m|[m [1;35m|[m [1;36m|[m   
+[1;35m|[m [31m|[m [1;35m|[m [1;36m|[m       Merge branch 'develop' into sky
+[1;35m|[m [31m|[m [1;35m|[m [1;36m|[m   
+* [31m|[m [1;35m|[m [1;36m|[m   [33mcommit 3ddee2e209215fbca433c79e4a4ca9ea4dac1de8[m
+[33m|[m[34m\[m [31m\[m [1;35m\[m [1;36m\[m  Merge: 84147fe f494403
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m Date:   Wed Sep 25 10:46:12 2024 +0900
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m 
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m     Merge pull request #16 from yeseuljung1/develop
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m     
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m     정예슬/20240925/펀드페이지
+[33m|[m [34m|[m [31m|[m [1;35m|[m [1;36m|[m   
+[33m|[m * [31m|[m [1;35m|[m [1;36m|[m   [33mcommit f494403f2fb6f096e7d1b565b64edaac4f4bc99f[m
+[33m|[m [35m|[m[1;36m\[m [31m\[m [1;35m\[m [1;36m\[m  Merge: 1a3802b eb59276
+[33m|[m [35m|[m [1;36m|[m [31m|[m[1;36m_[m[1;35m|[m[1;36m/[m  Author: yeseul_jung <jys033022@naver.com>
+[33m|[m [35m|[m [1;36m|[m[1;36m/[m[31m|[m [1;35m|[m   Date:   Wed Sep 25 10:43:21 2024 +0900
+[33m|[m [35m|[m [1;36m|[m [31m|[m [1;35m|[m   
+[33m|[m [35m|[m [1;36m|[m [31m|[m [1;35m|[m       Merge pull request #1 from KB-FinSetProject/main
+[33m|[m [35m|[m [1;36m|[m [31m|[m [1;35m|[m       
+[33m|[m [35m|[m [1;36m|[m [31m|[m [1;35m|[m       정예슬/20240925/펀드페이지
+[33m|[m [35m|[m [1;36m|[m [31m|[m [1;35m|[m   
+[33m|[m [35m|[m * [31m|[m [1;35m|[m   [33mcommit eb592765d24c1a19bf5b41ff795084c01ea389ab[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+[33m|[m [35m|[m [1;31m|[m[1;32m\[m [31m\[m [1;35m\[m  Merge: 63075be effef42
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m Author: yeseul_jung <jys033022@naver.com>
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m Date:   Wed Sep 25 09:34:14 2024 +0900
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m 
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m     Merge pull request #11 from yeseuljung1/develop
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m     
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m     Develop
+[33m|[m [35m|[m [1;31m|[m [1;32m|[m [31m|[m [1;35m|[m   
+[33m|[m [35m|[m * [1;32m|[m [31m|[m [1;35m|[m   [33mcommit 63075bef37016188b163dd8990cf2941bedd02e8[m
+[33m|[m [35m|[m [1;33m|[m[1;34m\[m [1;32m\[m [31m\[m [1;35m\[m  Merge: b349594 6643f84
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m Date:   Tue Sep 24 15:15:54 2024 +0900
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m 
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m     Merge pull request #7 from KB-FinSetProject/develop
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m     
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m     Develop
+[33m|[m [35m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m 
+[33m|[m * [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m [33mcommit 1a3802b30b9335aeaea5f1967aeb05d334cc425f[m
+[33m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m Author: jungyeseul/git <jys033022@naver.com>
+[33m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m Date:   Wed Sep 25 10:40:47 2024 +0900
+[33m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m 
+[33m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m     정예슬/20240925/펀드페이지
+[33m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m   
+* [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [1;35m|[m   [33mcommit 84147fee2d7855297aafbfd420389283743f9d69[m
+[1;35m|[m[1;35m\[m [1;34m\[m [1;33m\[m [1;34m\[m [1;32m\[m [31m\[m [1;35m\[m  Merge: 26e2756 84693d0
+[1;35m|[m [1;35m|[m [1;34m|[m[1;35m_[m[1;33m|[m[1;35m_[m[1;34m|[m[1;35m_[m[1;32m|[m[1;35m_[m[31m|[m[1;35m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;35m|[m [1;35m|[m[1;35m/[m[1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m   Date:   Wed Sep 25 10:42:16 2024 +0900
+[1;35m|[m [1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m   
+[1;35m|[m [1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m       Merge pull request #15 from jjpterdh/danho
+[1;35m|[m [1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m       
+[1;35m|[m [1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m       정단호/2024-09-25/edit vite.config.js outDir
+[1;35m|[m [1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m 
+[1;35m|[m * [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m [33mcommit 84693d08f1e12c0e29384e8b57f2d7f552f29ff9[m
+[1;35m|[m[1;35m/[m [1;34m/[m [1;33m/[m [1;34m/[m [1;32m/[m [31m/[m  Author: danho <danho011185@gmail.com>
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m   Date:   Wed Sep 25 10:41:11 2024 +0900
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m   
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m       정단호/2024-09-25/edit vite.config.js outDir
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [31m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m * [33mcommit 7e289248754aa9e237d8f7f2b6a7a15f1bc113be[m
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m Date:   Wed Sep 25 10:47:43 2024 +0900
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m     김하늘/240925/modify footer & gitignore
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m * [33mcommit e73377913f83755ab06e3199621ea48a8d7cfd72[m
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m Date:   Wed Sep 25 10:41:12 2024 +0900
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m     김하늘/240925/modify footer
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [1;36m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m * [33mcommit b6a3b440f85d1ed120c41168dd278768471a0353[m
+[1;35m|[m [1;34m|[m[1;35m_[m[1;33m|[m[1;35m_[m[1;34m|[m[1;35m_[m[1;32m|[m[1;35m/[m  Author: skiiNlr <khn6450@dgu.ac.kr>
+[1;35m|[m[1;35m/[m[1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m   Date:   Wed Sep 25 10:33:49 2024 +0900
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m   
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m       김하늘/240925/modify footer
+[1;35m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m 
+* [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m [33mcommit 26e2756cf04ef662e768aba59d0c754104d71285[m
+[31m|[m[1;34m\[m[1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m Merge: 37a53a7 118db48
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m Author: yeseul_jung <jys033022@naver.com>
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m Date:   Wed Sep 25 09:44:09 2024 +0900
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m 
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m     Merge pull request #12 from yeseuljung1/develop
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m     
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m     정예슬/20240925/상품검색페이지수정
+[31m|[m [1;34m|[m [1;33m|[m [1;34m|[m [1;32m|[m 
+[31m|[m * [1;33m|[m [1;34m|[m [1;32m|[m [33mcommit 118db48fb1b0a8b8e91416ee258d1c330c9fe266[m
+[31m|[m [1;32m|[m [1;33m|[m[1;32m_[m[1;34m|[m[1;32m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[31m|[m [1;32m|[m[1;32m/[m[1;33m|[m [1;34m|[m   Date:   Wed Sep 25 09:42:40 2024 +0900
+[31m|[m [1;32m|[m [1;33m|[m [1;34m|[m   
+[31m|[m [1;32m|[m [1;33m|[m [1;34m|[m       정예슬/20240925/검색페이지수정
+[31m|[m [1;32m|[m [1;33m|[m [1;34m|[m 
+[31m|[m * [1;33m|[m [1;34m|[m [33mcommit effef4231bffb73f535e5165b6c20d8f8164917f[m
+[31m|[m [32m|[m [1;33m|[m [1;34m|[m Author: jungyeseul/git <jys033022@naver.com>
+[31m|[m [32m|[m [1;33m|[m [1;34m|[m Date:   Wed Sep 25 09:33:19 2024 +0900
+[31m|[m [32m|[m [1;33m|[m [1;34m|[m 
+[31m|[m [32m|[m [1;33m|[m [1;34m|[m     정예슬/20240925/상품검색페이지수정
+[31m|[m [32m|[m [1;33m|[m [1;34m|[m   
+* [32m|[m [1;33m|[m [1;34m|[m   [33mcommit 37a53a7a3929d2b040506b56fa301d236ef92107[m
+[33m|[m[34m\[m [32m\[m [1;33m\[m [1;34m\[m  Merge: 40261b5 4b1fd3b
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m Author: 김세진 <ksjhollysj@gmail.com>
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m Date:   Tue Sep 24 17:48:11 2024 +0900
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m 
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m     Merge pull request #10 from KIMISM/develop
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m     
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m     김세진/20240924/단어사전페이지
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m 
+[33m|[m * [32m|[m [1;33m|[m [1;34m|[m [33mcommit 4b1fd3bf54de1a09d6f63c5e42e1a99057834a41[m
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m Author: Kim Se Jin <hollysj@naver.com>
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m Date:   Tue Sep 24 17:45:54 2024 +0900
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m 
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m     김세진/20240924/단어사전페이지
+[33m|[m [34m|[m [32m|[m [1;33m|[m [1;34m|[m   
+* [34m|[m [32m|[m [1;33m|[m [1;34m|[m   [33mcommit 40261b578e2d2b064210abcbb701577b8cd6d43d[m
+[34m|[m[32m\[m [34m\[m [32m\[m [1;33m\[m [1;34m\[m  Merge: 4f4b14e d00d505
+[34m|[m [32m|[m[34m/[m [32m/[m [1;33m/[m [1;34m/[m  Author: yeseul_jung <jys033022@naver.com>
+[34m|[m[34m/[m[32m|[m [32m/[m [1;33m/[m [1;34m/[m   Date:   Tue Sep 24 17:38:44 2024 +0900
+[34m|[m [32m|[m[32m/[m [1;33m/[m [1;34m/[m    
+[34m|[m [32m|[m [1;33m|[m [1;34m|[m         Merge pull request #9 from yeseuljung1/develop
+[34m|[m [32m|[m [1;33m|[m [1;34m|[m         
+[34m|[m [32m|[m [1;33m|[m [1;34m|[m         정예슬 /20240924/상품검색페이지
+[34m|[m [32m|[m [1;33m|[m [1;34m|[m 
+[34m|[m * [1;33m|[m [1;34m|[m [33mcommit d00d505d8abee8f91e28b3e2b702bd0950788d2c[m
+[34m|[m[34m/[m [1;33m/[m [1;34m/[m  Author: jungyeseul/git <jys033022@naver.com>
+[34m|[m [1;33m|[m [1;34m|[m   Date:   Tue Sep 24 17:37:06 2024 +0900
+[34m|[m [1;33m|[m [1;34m|[m   
+[34m|[m [1;33m|[m [1;34m|[m       정예슬 /20240924/상품검색페이지지
+[34m|[m [1;33m|[m [1;34m|[m   
+* [1;33m|[m [1;34m|[m   [33mcommit 4f4b14e0fb3712ef8660a2bbab216e9e5693ca72[m
+[1;34m|[m[1;32m\[m [1;33m\[m [1;34m\[m  Merge: 6643f84 f692ffe
+[1;34m|[m [1;32m|[m[1;34m_[m[1;33m|[m[1;34m/[m  Author: danho <82808719+jjpterdh@users.noreply.github.com>
+[1;34m|[m[1;34m/[m[1;32m|[m [1;33m|[m   Date:   Tue Sep 24 15:21:51 2024 +0900
+[1;34m|[m [1;32m|[m [1;33m|[m   
+[1;34m|[m [1;32m|[m [1;33m|[m       Merge pull request #8 from jjpterdh/develop
+[1;34m|[m [1;32m|[m [1;33m|[m       
+[1;34m|[m [1;32m|[m [1;33m|[m       정단호/2024-09-24/upload template
+[1;34m|[m [1;32m|[m [1;33m|[m 
+[1;34m|[m * [1;33m|[m [33mcommit f692ffe710688006e325759f4c04ca17d56f53e0[m
+[1;34m|[m[1;34m/[m [1;33m/[m  Author: danho <danho011185@gmail.com>
+[1;34m|[m [1;33m|[m   Date:   Tue Sep 24 15:15:31 2024 +0900
+[1;34m|[m [1;33m|[m   
+[1;34m|[m [1;33m|[m       정단호/2024-09-24/upload template
+[1;34m|[m [1;33m|[m   
+* [1;33m|[m   [33mcommit 6643f84b7521bb6a37f8a19f787f5add7f8de7f3[m
+[1;33m|[m[1;34m\[m [1;33m\[m  Merge: 410aa55 82c4424
+[1;33m|[m [1;34m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;33m|[m [1;34m|[m [1;33m|[m Date:   Tue Sep 24 14:14:56 2024 +0900
+[1;33m|[m [1;34m|[m [1;33m|[m 
+[1;33m|[m [1;34m|[m [1;33m|[m     Merge pull request #6 from kimjongsoo97/develop
+[1;33m|[m [1;34m|[m [1;33m|[m     
+[1;33m|[m [1;34m|[m [1;33m|[m     프로젝트 구성완료
+[1;33m|[m [1;34m|[m [1;33m|[m 
+[1;33m|[m * [1;33m|[m [33mcommit 82c4424480016b55aa37347d963d2f01632b1f9a[m
+[1;33m|[m [1;34m|[m [1;33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[1;33m|[m [1;34m|[m [1;33m|[m Date:   Tue Sep 24 14:14:00 2024 +0900
+[1;33m|[m [1;34m|[m [1;33m|[m 
+[1;33m|[m [1;34m|[m [1;33m|[m     프로젝트 구성완료
+[1;33m|[m [1;34m|[m [1;33m|[m 
+* [1;34m|[m [1;33m|[m [33mcommit 410aa5506aae2bc645e6a2251008dc1bb13857fd[m
+[1;35m|[m[1;34m\[m[1;34m|[m [1;33m|[m Merge: 2f2ee5b 68dd302
+[1;35m|[m [1;34m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;35m|[m [1;34m|[m [1;33m|[m Date:   Tue Sep 24 14:04:08 2024 +0900
+[1;35m|[m [1;34m|[m [1;33m|[m 
+[1;35m|[m [1;34m|[m [1;33m|[m     Merge pull request #5 from kimjongsoo97/develop
+[1;35m|[m [1;34m|[m [1;33m|[m     
+[1;35m|[m [1;34m|[m [1;33m|[m     프로젝트 재구성2
+[1;35m|[m [1;34m|[m [1;33m|[m 
+[1;35m|[m * [1;33m|[m [33mcommit 68dd3022d8c9938f844e7881afcde6ba6cfa4340[m
+[1;35m|[m [1;36m|[m [1;33m|[m Author: kim jong soo <rlwhdtn97@naver.com>
+[1;35m|[m [1;36m|[m [1;33m|[m Date:   Tue Sep 24 14:03:01 2024 +0900
+[1;35m|[m [1;36m|[m [1;33m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m     프로젝트 재구성2
+[1;35m|[m [1;36m|[m [1;33m|[m 
+* [1;36m|[m [1;33m|[m [33mcommit 2f2ee5b8673ccde284f697886e54c7e7a522ba3a[m
+[31m|[m[1;36m\[m[1;36m|[m [1;33m|[m Merge: 73d4048 d03a3da
+[31m|[m [1;36m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[31m|[m [1;36m|[m [1;33m|[m Date:   Tue Sep 24 14:01:33 2024 +0900
+[31m|[m [1;36m|[m [1;33m|[m 
+[31m|[m [1;36m|[m [1;33m|[m     Merge pull request #4 from kimjongsoo97/develop
+[31m|[m [1;36m|[m [1;33m|[m     
+[31m|[m [1;36m|[m [1;33m|[m     프로젝트 파일 재구성
+[31m|[m [1;36m|[m [1;33m|[m   
+[31m|[m * [1;33m|[m   [33mcommit d03a3da2ebb4072fb0c3aca681aa80eb65ccfd35[m
+[31m|[m [33m|[m[31m\[m [1;33m\[m  Merge: a82480f 73d4048
+[31m|[m [33m|[m[31m/[m [1;33m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[31m|[m[31m/[m[33m|[m [1;33m|[m   Date:   Tue Sep 24 13:58:58 2024 +0900
+[31m|[m [33m|[m [1;33m|[m   
+[31m|[m [33m|[m [1;33m|[m       Merge branch 'develop' of https://github.com/kimjongsoo97/FinSet-Front into develop
+[31m|[m [33m|[m [1;33m|[m   
+* [33m|[m [1;33m|[m   [33mcommit 73d4048bc2055c13b4ea8057e603f18fe533edbc[m
+[35m|[m[36m\[m [33m\[m [1;33m\[m  Merge: af4170d 95afb6f
+[35m|[m [36m|[m [33m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m [36m|[m [33m|[m [1;33m|[m Date:   Tue Sep 24 13:27:53 2024 +0900
+[35m|[m [36m|[m [33m|[m [1;33m|[m 
+[35m|[m [36m|[m [33m|[m [1;33m|[m     Merge pull request #3 from kimjongsoo97/develop
+[35m|[m [36m|[m [33m|[m [1;33m|[m     
+[35m|[m [36m|[m [33m|[m [1;33m|[m     프로젝트 재구성
+[35m|[m [36m|[m [33m|[m [1;33m|[m   
+[35m|[m * [33m|[m [1;33m|[m   [33mcommit 95afb6f92bb8bb7635c336f16bc015d20b80d7f8[m
+[35m|[m [1;31m|[m[35m\[m [33m\[m [1;33m\[m  Merge: 1e78fb7 af4170d
+[35m|[m [1;31m|[m[35m/[m [33m/[m [1;33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[35m|[m[35m/[m[1;31m|[m [33m|[m [1;33m|[m   Date:   Tue Sep 24 13:26:25 2024 +0900
+[35m|[m [1;31m|[m [33m|[m [1;33m|[m   
+[35m|[m [1;31m|[m [33m|[m [1;33m|[m       Merge branch 'KB-FinSetProject:develop' into develop
+[35m|[m [1;31m|[m [33m|[m [1;33m|[m   
+* [1;31m|[m [33m|[m [1;33m|[m   [33mcommit af4170d802b4817fcfd707665994f6d975b482a7[m
+[1;33m|[m[1;34m\[m [1;31m\[m [33m\[m [1;33m\[m  Merge: ce574c0 d4ad45d
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m Date:   Tue Sep 24 13:16:20 2024 +0900
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m 
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m     Merge pull request #2 from kimjongsoo97/develop
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m     
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m     프로젝트 폴더 구성
+[1;33m|[m [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m   
+* [1;34m|[m [1;31m|[m [33m|[m [1;33m|[m   [33mcommit ce574c055da45b5ae5ec11ee8c0b7042a74d8eff[m
+[1;33m|[m[1;36m\[m [1;34m\[m [1;31m\[m [33m\[m [1;33m\[m  Merge: b349594 0a49ea4
+[1;33m|[m [1;36m|[m[1;33m_[m[1;34m|[m[1;33m_[m[1;31m|[m[1;33m_[m[33m|[m[1;33m/[m  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+[1;33m|[m[1;33m/[m[1;36m|[m [1;34m|[m [1;31m|[m [33m|[m   Date:   Tue Sep 24 13:13:12 2024 +0900
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m [33m|[m   
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m [33m|[m       Merge pull request #1 from kimjongsoo97/develop
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m [33m|[m       
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m [33m|[m       프로젝트 시작
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m [33m|[m 
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m * [33mcommit a82480fac976db35ab86d4958c1597d1d270ca32[m
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m[1;31m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m   Date:   Tue Sep 24 13:49:07 2024 +0900
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m   
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m       project 시작파일
+[1;33m|[m [1;36m|[m [1;34m|[m [1;31m|[m 
+[1;33m|[m [1;36m|[m [1;34m|[m * [33mcommit 1e78fb79fc06fa46985c56c08133531e4bcf0aad[m
+[1;33m|[m [1;36m|[m [1;34m|[m[1;34m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;33m|[m [1;36m|[m [1;34m|[m   Date:   Tue Sep 24 13:25:41 2024 +0900
+[1;33m|[m [1;36m|[m [1;34m|[m   
+[1;33m|[m [1;36m|[m [1;34m|[m       project재구성
+[1;33m|[m [1;36m|[m [1;34m|[m 
+[1;33m|[m [1;36m|[m * [33mcommit d4ad45df89cf20685fc8465cab0227117816d0b9[m
+[1;33m|[m [1;36m|[m[1;36m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;33m|[m [1;36m|[m   Date:   Tue Sep 24 13:15:56 2024 +0900
+[1;33m|[m [1;36m|[m   
+[1;33m|[m [1;36m|[m       프로젝트 폴더 구성
+[1;33m|[m [1;36m|[m 
+[1;33m|[m * [33mcommit 0a49ea4c10258da608d7b5bb50d820dc6a551c38[m
+[1;33m|[m[1;33m/[m  Author: kim jong soo <rlwhdtn97@naver.com>
+[1;33m|[m   Date:   Tue Sep 24 13:12:45 2024 +0900
+[1;33m|[m   
+[1;33m|[m       프로젝트 시작
+[1;33m|[m 
+* [33mcommit b349594a1c2f7b2fa127e9165389037b8c781d90[m
+  Author: kimjongsoo97 <rlwhdtn97@naver.com>
+  Date:   Tue Sep 24 13:07:42 2024 +0900
+  
+      Initial commit

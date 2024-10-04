@@ -9,20 +9,20 @@
       <router-link to="/stockdrop" class="tab" active-class="active" style="color: #DADADA;">급하락 ▼</router-link>
     </div>
     <br>
-<!--    <table class="table table-striped">-->
-<!--      <tr v-for="stock in stocks" :key="stock.sno">-->
-<!--        <td>{{stock.sno}}</td>-->
-<!--        <td>{{stock.stockPrice}}</td>-->
+    <!--    <table class="table table-striped">-->
+    <!--      <tr v-for="stock in stocks" :key="stock.sno">-->
+    <!--        <td>{{stock.sno}}</td>-->
+    <!--        <td>{{stock.stockPrice}}</td>-->
 
-<!--&lt;!&ndash;        <td>&ndash;&gt;-->
-<!--&lt;!&ndash;          <router-link :to="{name: 'board/detail',params:{no:p=},query:cr.query}">&ndash;&gt;-->
-<!--&lt;!&ndash;            {{article.title}}&ndash;&gt;-->
-<!--&lt;!&ndash;          </router-link>&ndash;&gt;-->
-<!--&lt;!&ndash;        </td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td>{{article.writer}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td>{{moment(article.regDate).format('YYYY-MM-DD') }}</td>&ndash;&gt;-->
-<!--      </tr>-->
-<!--    </table>-->
+    <!--&lt;!&ndash;        <td>&ndash;&gt;-->
+    <!--&lt;!&ndash;          <router-link :to="{name: 'board/detail',params:{no:p=},query:cr.query}">&ndash;&gt;-->
+    <!--&lt;!&ndash;            {{article.title}}&ndash;&gt;-->
+    <!--&lt;!&ndash;          </router-link>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td>{{article.writer}}</td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td>{{moment(article.regDate).format('YYYY-MM-DD') }}</td>&ndash;&gt;-->
+    <!--      </tr>-->
+    <!--    </table>-->
 
     <div class="stock-list">
       <div v-for="(stock,index )  in stocks" :key="stock.sno" class="stock-item">
@@ -34,11 +34,9 @@
             </div>
 
             <div class="stock-detail">
-
-              <router-link :to="{ name: 'stockDetail', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
+              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }}
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
-
               </p>
             </div>
           </div>
@@ -63,7 +61,10 @@ import HeaderNormal from "@/components/common/HeaderNormal.vue";
 const cr=useRoute();
 const router=useRouter();
 
-const stocks = ref([]);
+const stocks=ref({
+
+});
+
 const articles=computed(()=> page.value.list);
 
 
@@ -115,7 +116,7 @@ const toggleFavorite = async (stock) => {
 };
 // 변동률에 따라 색상을 반환하는 메서드
 const getColor = (change) => {
-    // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+  // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
 };
 
 </script>
@@ -239,7 +240,7 @@ const getColor = (change) => {
 }
 
 .stock-icon {
-  font-size: 25px; /* 여기에 크기를 조정 */
+  font-size: 15px;
   color: #888; /* 기본 색상 */
   margin-right: 15px;
   margin-top: 10px;
@@ -247,7 +248,6 @@ const getColor = (change) => {
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
-  font-size: inherit; /* 부모 요소의 font-size를 상속 받도록 설정 */
 }
 
 .mini-bar {
@@ -265,3 +265,6 @@ const getColor = (change) => {
   border-radius: 6px;
 }
 </style>
+
+야그래도안되자난
+
