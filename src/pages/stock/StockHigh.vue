@@ -44,7 +44,7 @@
 </template>
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import api from "@/api/stockApi"; // API 호출을 위한 경로를 추가
+import api from "@/api/stockApi";
 
 export default {
   components: { HeaderNormal },

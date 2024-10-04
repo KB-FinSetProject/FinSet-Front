@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-/* 스타일은 그대로 유지합니다 */
+
 .stock-container {
   padding: 16px;
   max-width: 390px;

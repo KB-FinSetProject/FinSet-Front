@@ -9,20 +9,7 @@
       <router-link to="/stockdrop" class="tab" active-class="active" style="color: #DADADA;">급하락 ▼</router-link>
     </div>
     <br>
-    <!--    <table class="table table-striped">-->
-    <!--      <tr v-for="stock in stocks" :key="stock.sno">-->
-    <!--        <td>{{stock.sno}}</td>-->
-    <!--        <td>{{stock.stockPrice}}</td>-->
 
-    <!--&lt;!&ndash;        <td>&ndash;&gt;-->
-    <!--&lt;!&ndash;          <router-link :to="{name: 'board/detail',params:{no:p=},query:cr.query}">&ndash;&gt;-->
-    <!--&lt;!&ndash;            {{article.title}}&ndash;&gt;-->
-    <!--&lt;!&ndash;          </router-link>&ndash;&gt;-->
-    <!--&lt;!&ndash;        </td>&ndash;&gt;-->
-    <!--&lt;!&ndash;        <td>{{article.writer}}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;        <td>{{moment(article.regDate).format('YYYY-MM-DD') }}</td>&ndash;&gt;-->
-    <!--      </tr>-->
-    <!--    </table>-->
 
     <div class="stock-list">
       <div v-for="(stock,index )  in stocks" :key="stock.sno" class="stock-item">

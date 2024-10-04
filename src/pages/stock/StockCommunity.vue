@@ -45,7 +45,7 @@ import api from "@/api/stockApi";
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const snoFromRoute = ref(route.params.sno); // URL에서 파라미터 가져오기
+const snoFromRoute = ref(route.params.sno);
 const newComment = ref('');
 const communityPosts = ref([]);
 
