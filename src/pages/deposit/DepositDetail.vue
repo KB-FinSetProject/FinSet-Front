@@ -7,11 +7,7 @@
         <h5 class="mb-0">{{ deposit.depositName }}</h5> <!-- 예금 이름 -->
         <p class="mb-0 text-muted">{{ deposit.depositBank }}</p> <!-- 은행 이름 -->
       </div>
-      <img
-        src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMjdfOTIg/MDAxNTcyMTU4OTA2NjU5.hW_OqQAvt2PNI2IFnSWrLGkmD_va9wkMkQ-6_jYK17Mg.vfwxXS7Je9S2-z4MRgMDZIdpG26pwh9o3SJwXvVOn-8g.JPEG.msjin93/IMG_8422.JPG?type=w800"
-        alt="Thumbnail"
-        class="rounded-circle me-3 thumbnail"
-      />
+      <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
     </div>
 
     <div class="join-info d-flex mt-2">
@@ -68,27 +64,37 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import depositApi from '@/api/depositApi'; // 예금 API 가져오기
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 
-// 데이터 정의
-const route = useRoute();
-const deposit = ref({}); // 예금 정보 초기화
-
-// 예금 상세 정보 가져오기
-// DepositDetail.vue
-onMounted(async () => {
-  const dno = route.query.dno; // 쿼리에서 dno 가져오기
-  console.log('dno:', dno); // dno 값을 로그로 출력
-  if (dno) {
-    deposit.value = await depositApi.fetchDepositById(dno); // 예금 정보 가져오기
-  }
-});
-
-
+export default {
+  components: {
+    HeaderNormal,
+  },
+  data() {
+    return {
+      deposit: {}, // 예금 정보 초기화
+    };
+  },
+  mounted() {
+    const route = useRoute();
+    const dno = route.query.dno; // 쿼리에서 dno 가져오기
+    console.log('dno:', dno); // dno 값을 로그로 출력
+    if (dno) {
+      depositApi.fetchDepositById(dno).then((data) => {
+        this.deposit = data; // 예금 정보 가져오기
+      });
+    }
+  },
+  methods: {
+    getImg(imgUrl) {
+      return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+    },
+  },
+};
 </script>
 
 <style scoped>

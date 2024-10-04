@@ -8,7 +8,7 @@
         <div class="deposit-info d-flex align-items-center">
           <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
           <div class="detail">
-            <router-link :to="`/deposit/detail/${deposit.pno}`" class="deposit-name" style="text-decoration: none; color:black">{{ deposit.depositName }}</router-link>
+            <p class="deposit-name" @click="goToDepositDetail(deposit)">{{ deposit.depositName }}</p>
             <p class="deposit-details">{{ deposit.depositBank }}</p>
             <div class="risk-info">
               <span class="deposit-high-rating">{{ deposit.depositCategory }}</span>
@@ -34,7 +34,7 @@
         <div class="installment-info d-flex align-items-center">
           <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
           <div class="detail">
-            <router-link :to="`/installment/detail/${installment.pno}`" class="installment-name" style="text-decoration: none; color:black">{{ installment.installmentName }}</router-link>
+            <p class="installment-name" @click="goToInstallmentDetail(installment)">{{ installment.installmentName }}</p>
             <p class="installment-details">{{ installment.installmentBank }}</p>
             <div class="risk-info">
               <span class="installment-high-rating">{{ installment.installmentCategory }}</span>
@@ -60,7 +60,7 @@
           <div class="fund-info d-flex align-items-center">
             <img :src="getImg(fund.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             <div class="detail">
-              <router-link :to="`/fund/detail/${fund.pno}`" class="fund-name">{{ fund.fundName }}</router-link>
+              <router-link :to="`/fund/detail/${fund.fno}`" class="fund-name">{{ fund.fundName }}</router-link>
               <div class="risk-info">
                 <span class="fund-high-rating">{{ fund.fundLisk }}</span>
                 <span class="fund-type">{{ fund.fundType }}</span>
@@ -86,7 +86,7 @@
             <img :src="getImg(stock.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             
             <div class="stock-detail">
-              <router-link :to="`/stock/chart`" class="stock-name">{{ stock.stockName }}</router-link>
+              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }} 
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
@@ -114,7 +114,9 @@
             <img :src="getImg(forex.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             
             <div class="forex-detail">
-              <router-link :to="`/exchangedetail`" class="exchangedetail">{{ forex.forexName }}</router-link>
+              <router-link :to="{ path: '/exchange/detail', query: { feno: forex.feno } }" class="no-underline" style="text-decoration: none; color:black">
+                {{ forex.forexName }}
+              </router-link>
               <p class="forex-details">{{ forex.forexBasicRate }} </p>
             </div>
           </div>
@@ -409,6 +411,15 @@ export default {
 
     getImg(imgUrl) {
       return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+    },
+
+    goToDepositDetail(deposit) {
+    // 클릭한 예금의 dno를 저장하고 상세 페이지로 이동
+    this.$router.push({ path: '/deposit/detail', query: { dno: deposit.dno } });
+    },
+
+    goToInstallmentDetail(installment) {
+      this.$router.push({ path: `/installment/detail`, query: { ino: installment.ino } });
     },
   }
 };

@@ -14,9 +14,7 @@
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="deposit-item">
         <div class="deposit-header">
           <div class="deposit-info d-flex align-items-center">
-            <div class="bank-logo" :style="{ backgroundColor: deposit.logoColor }">
-              <span class="bank-icon">{{ deposit.logo }}</span>
-            </div>
+            <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
             <div>
               <p class="deposit-name" @click="goToDetail(deposit)">{{ deposit.depositName }}</p>
               <p class="deposit-details">{{ deposit.depositBank }}</p>
@@ -76,6 +74,9 @@ export default {
     goToDetail(deposit) {
       // 클릭한 예금의 dno를 저장하고 상세 페이지로 이동
       this.$router.push({ path: '/deposit/detail', query: { dno: deposit.dno } });
+    },
+    getImg(imgUrl) {
+      return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
     },
   },
   mounted() {
