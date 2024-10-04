@@ -6,7 +6,7 @@
       <span class="high-risk">높은 위험</span>
       <span class="foreign-stock">해외주식형</span>
     </div>
-    <h4 class="fund-name">{{ fund.name }}</h4>
+    <h4 class="fund-name">{{ fund.fundName }}</h4>
     <span class="commission">수수료미징구-온라인</span>
 
     <div class="rate-display">
@@ -72,16 +72,16 @@
 </template>
 
 <script setup>
-import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import { onMounted, ref, watch } from 'vue';
-import api from '@/api'; // API 모듈 가져오기
+import { useRoute } from 'vue-router'; // useRoute 가져오기
+import api from '@/api/FundApi'; // API 모듈 가져오기
 import { Chart, registerables } from 'chart.js';
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
 Chart.register(...registerables);
 
 const fund = ref(null); // 펀드 정보를 저장할 ref 변수
-
-// 펀드 ID (예: URL 파라미터 등으로 가져올 수 있음)
-const fundId = '123'; // 예시 ID
+const route = useRoute(); // 현재 라우트 정보 가져오기
+const fundId = route.params.fno; // URL 파라미터에서 펀드 ID 가져오기
 
 // 펀드 상세 정보 가져오기
 async function fetchFundDetail() {
@@ -156,6 +156,8 @@ function createChart() {
 
 // 컴포넌트가 마운트될 때 API 호출
 onMounted(() => {
+  console.log("펀드 ID:", fundId); // fno 값 출력
+
   fetchFundDetail().then(() => {
     createChart(); // 펀드 정보가 로드된 후 차트 생성
   });
@@ -168,6 +170,7 @@ watch(fund, (newValue) => {
   }
 });
 </script>
+
 
 <style scoped>
 .container {
