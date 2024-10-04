@@ -98,7 +98,7 @@ const router = createRouter({
         { path: '/exchange', name: "Exchange", component: Exchange },
         { path: '/exchange/detail', name: "ExchangeDetail", component: ExchangeDetail },
         { path: '/fund', name: "Fund", component: Fund },
-        { path: '/fund/detail/:id', name: "FundDetail", component: FundDetail }, // 상세 페이지 경로
+        { path: '/fund/detail/:fno', name: "FundDetail", component: FundDetail }, // 상세 페이지 경로
         { path: '/fundsales', name: "FundSales", component: FundSales },
         { path: '/fundsavings', name: "FundSavings", component: FundSavings },
         { path: '/installment', name: "InstallmentAll", component: InstallmentAll },
