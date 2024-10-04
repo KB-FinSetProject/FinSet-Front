@@ -50,7 +50,11 @@
     <div v-for="(news, index) in newsItems" :key="index" class="news-item">
       <div class="news-content">
         <h3>{{ news.title }}</h3>
-        <p>{{ news.content }} · {{ news.link }}</p>
+        <p>{{ news.content }} ·
+          <a :href="news.link" target="_blank" rel="noopener noreferrer">
+          {{ news.link }}
+        </a>
+        </p>
       </div>
     </div>
   </div>
@@ -163,8 +167,9 @@ const getChart = async (query) => {
   }
 };
 const getStockImg = (imgUrl) => {
-  return imgUrl ? `@/src${imgUrl}` : ''; // 절대 URL로 수정
+  return imgUrl ? require(`@/src${imgUrl}`) : ''; // 이미지 파일 경로에 맞게 수정
 };
+
 
 </script>
 
