@@ -41,7 +41,7 @@
       <button class="withdrawButton">탈퇴하기</button>
       <button class="logoutButton">로그아웃</button>
     </div>
-    
+
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
   mounted() {
     // localStorage에서 저장된 auth 정보 가져오기
     const storedAuth = localStorage.getItem('auth');
-    
+
     if (storedAuth) {
       const authData = JSON.parse(storedAuth);
 
@@ -137,7 +137,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 .withdrawButton{
   width: 48%;
   padding: 0.75rem;
-  border-color: #816843; 
+  border-color: #816843;
   background-color: white;
   color: #816843;
   border-radius: 5px;

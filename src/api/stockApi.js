@@ -8,6 +8,24 @@ export default {
         console.log('BOARD GET LIST :',data);
         return data;
     },
+    async getHigh(params) {
+        try {
+            const { data } = await api.get(`${BASE_URL}?sort=ascending`, { params });
+            console.log('High stocks:', data);
+            return data;
+        } catch (error) {
+            console.error('Error getting high stocks:', error);
+        }
+    },
+    async getDrop(params) {
+        try {
+            const { data } = await api.get(`${BASE_URL}?sort=descending`, { params });
+            console.log('High stocks:', data);
+            return data;
+        } catch (error) {
+            console.error('Error getting high stocks:', error);
+        }
+    },
     // async create(stock){
     //     const formData=new FormData();
     //     formData.append('sno',stock.sno);

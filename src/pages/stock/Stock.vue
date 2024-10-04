@@ -32,7 +32,7 @@
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
               <span>{{ stock.stockSymbol }}</span>
             </div>
-
+            <img src="" alt="">
             <div class="stock-detail">
               <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }}

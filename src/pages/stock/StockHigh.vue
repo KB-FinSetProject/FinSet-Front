@@ -17,18 +17,18 @@
     <br>
 
     <div class="stock-list">
-      <div v-for="(stock, index) in filteredStocks" :key="stock.id" class="stock-item">
+      <div v-for="(stock,index )  in stocks" :key="stock.sno" class="stock-item">
         <div class="stock-header">
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-              <span>{{ stock.logo }}</span>
+              <span>{{ stock.stockSymbol }}</span>
             </div>
-            
+
             <div class="stock-detail">
-              <router-link :to="`/stock/chart`" class="stock-name">{{ stock.name }}</router-link>
-              <p class="stock-details">{{ stock.price }} 
-                <span class="change" :style="{ color: getColor(stock.change) }">{{ stock.change }}</span>
+              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
+              <p class="stock-details">{{ stock.stockPrice }}
+                <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
             </div>
           </div>
@@ -42,76 +42,43 @@
     </div>
   </div>
 </template>
-
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
+import api from "@/api/stockApi"; // API 호출을 위한 경로를 추가
 
 export default {
   components: { HeaderNormal },
   data() {
     return {
       activeTab: 'all',
-      stocks: [
-        {
-          id: 1,
-          name: '삼성전자',
-          price: '67,500원',
-          change: '+2.0%',
-          favorite: true,
-          logo: '삼성',
-          logoColor: '#005EB8',
-        },
-        {
-          id: 2,
-          name: 'DXVXX',
-          price: '3,155원',
-          change: '+25.6%',
-          favorite: false,
-          logo: 'DX',
-          logoColor: '#A2D7E0',
-        },
-        {
-          id: 3,
-          name: '유한양행',
-          price: '119,900원',
-          change: '+4.5%',
-          favorite: true,
-          logo: '유한',
-          logoColor: '#005EB8',
-        },
-        {
-          id: 4,
-          name: '셀루메드',
-          price: '3,285원',
-          change: '+1.0%',
-          favorite: false,
-          logo: '셀',
-          logoColor: '#A2D7E0',
-        },
-        // 추가 주식 데이터...
-      ],
+      stocks: [], // 초기 주식 데이터는 비어있음
     };
   },
   computed: {
     filteredStocks() {
-      if (this.activeTab === 'gain') {
-        return this.stocks.filter(stock => stock.change.includes('+'));
-      } else if (this.activeTab === 'drop') {
-        return this.stocks.filter(stock => stock.change.includes('-'));
-      }
       return this.stocks; // 전체 주식을 보여줌
     },
   },
   methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
+    async getHigh() {
+      try {
+        const data = await api.getHigh(); // API 호출
+        this.stocks = data; // 가져온 데이터를 stocks에 저장
+        this.activeTab = 'gain'; // 급상승 탭으로 활성화
+        console.log('High stocks:', data);
+      } catch (error) {
+        console.error('Error getting high stocks:', error);
+      }
     },
     toggleFavorite(stock) {
       stock.favorite = !stock.favorite; // favorite 상태 토글
     },
     getColor(change) {
-      return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+      // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
     },
+  },
+  async mounted() {
+    await this.getHigh(); // 컴포넌트가 마운트될 때 getHigh 호출
   },
 };
 </script>

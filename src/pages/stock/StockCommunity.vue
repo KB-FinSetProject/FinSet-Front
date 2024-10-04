@@ -10,7 +10,7 @@
     <div class="card-container">
       <div v-for="(post, index) in communityPosts" :key="post.bno" class="card">
         <div class="card-header">
-          <span class="name">{{ post.author }}</span>
+          <span class="name">{{ post.sno }}</span>
           <span class="like-container">
             <div class="like-box">
               <i class="fa-regular fa-thumbs-up like" @click="incrementLikeCount(post)"></i>
@@ -36,23 +36,32 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import api from "@/api/stockApi.js";
+import api from "@/api/stockApi";
 import { useRoute } from 'vue-router';
+import {useLoginStore} from "@/stores/login.js";
 
 const route = useRoute();
 const snoFromRoute = route.params.sno; // 경로에서 sno 가져오기
 const newComment = ref('');
 const communityPosts = ref([]);
+const auth=useLoginStore();
 
-const getCommunity = async (sno) => {
+const getCommunity = async () => {
   try {
-    const { data } = await api.getCommunity(sno); // 인자로 받은 sno를 사용
-    communityPosts.value = data; // 데이터를 communityPosts에 저장
-    console.log('GET COMMUNITY', communityPosts.value);
+    const { data } = await api.getCommunity(snoFromRoute); // API 호출
+    console.log('GET COMMUNITY', data);
+
+    // 데이터가 배열인지 확인 후 설정
+    if (data && Array.isArray(data)) {
+      communityItems.value = data; // 커뮤니티 데이터 설정
+    } else {
+      console.error('Unexpected community data format:', data);
+    }
   } catch (error) {
     console.error('Error fetching community data:', error);
   }
 };
+
 
 const submitComment = async () => {
   if (newComment.value) {
