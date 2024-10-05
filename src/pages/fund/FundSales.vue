@@ -17,23 +17,23 @@
 
     <br>
     <div class="fund-list">
-      <div v-for="deposit in filteredDeposits" :key="deposit.fno" class="fund-item">
+      <div v-for="fund in filteredFunds" :key="fund.fno" class="fund-item">
         <div class="fund-header">
           <div class="fund-info d-flex align-items-center">
-            <div class="deposit-icon" @click="toggleFavorite(deposit)">
-              <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
+            <div class="fund-icon" @click="toggleFavorite(fund)">
+              <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
             </div>
             <div class="detail">
-              <router-link :to="`/fund/detail/${deposit.fno}`" class="fund-name">{{ deposit.fundName }}</router-link>
+              <router-link :to="`/fund/detail/${fund.fno}`" class="fund-name">{{ fund.fundName }}</router-link>
               <div class="risk-info">
-                <span class="high-rating">{{ deposit.fundLisk }}</span>
-                <span class="fund-type">{{ deposit.fundType }}</span>
+                <span class="high-rating">{{ fund.fundLisk }}</span>
+                <span class="fund-type">{{ fund.fundType }}</span>
               </div>
             </div>
           </div>
-          <div class="deposit-yield">
-            <span style="color: #7E7E7E; font-weight:bold; margin-right:25px">3개월</span>
-            <span class="max">{{ deposit.fundEarningRatio }}%</span>
+          <div class="fund-yield">
+            <span style="color: #7E7E7E; font-weight: bold; margin-right: 25px">3개월</span>
+            <span class="max">{{ fund.fundEarningRatio }}%</span>
           </div>
         </div>
       </div>
@@ -45,31 +45,70 @@
 import { ref, computed, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 import fundsApi from "@/api/FundApi"; // API 모듈 가져오기
+import wishApi from "@/api/wishApi"; // wishApi import
 
-const deposits = ref([]);
+const funds = ref([]);
+const wishes = ref([]);
+const uno = ref(null);
 
-const filteredDeposits = computed(() => {
-  return deposits.value; // 전체 예금을 보여줌
+const filteredFunds = computed(() => {
+  return funds.value; // 전체 펀드를 보여줌
 });
 
-const fetchDeposits = async () => {
+const fetchFunds = async () => {
   try {
-    const params = {}; // 필요한 파라미터를 설정
-    deposits.value = await fundsApi.getSalesList(params); // 판매액 Best API 호출
-    console.log('Fetched deposits:', deposits.value); // 데이터 확인용 로그
+    const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+    uno.value = authData.uno; // uno 값 가져오기
+
+    // 모든 펀드 상품을 먼저 불러오기
+    const params = {};
+    funds.value = await fundsApi.getSalesList(params); // API 호출
+
+    // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
+    try {
+      const fetchedWishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+      wishes.value = fetchedWishes || []; // null일 경우 빈 배열로 처리
+    } catch (error) {
+      console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
+      wishes.value = []; // 관심 목록이 없으면 빈 배열로 처리
+    }
+
+    // 관심 목록에서 tno가 3인 상품의 pno를 사용해 favorite 설정
+    const favoritePnos = wishes.value
+      .filter(wish => wish.tno === 3)
+      .map(wish => wish.pno);
+
+    funds.value.forEach(fund => {
+      fund.favorite = favoritePnos.includes(fund.fno);
+    });
+
   } catch (error) {
-    console.error('Failed to fetch deposits:', error);
+    console.error("Error fetching funds:", error); // 오류 처리
   }
 };
 
-const toggleFavorite = (deposit) => {
-  deposit.favorite = !deposit.favorite; // favorite 상태 토글
+// 즐겨찾기 토글 함수
+const toggleFavorite = async (fund) => { // 매개변수 이름 수정
+  try {
+    fund.favorite = !fund.favorite; // favorite 상태 토글
+
+    // API 호출하여 즐겨찾기 추가/삭제 처리
+    if (fund.favorite) {
+      await wishApi.addWish({ tno: 3, uno: uno.value, pno: fund.fno }); // tno와 pno 추가
+    } else {
+      await wishApi.deleteWish({ tno: 3, uno: uno.value, pno: fund.fno }); // tno와 pno 삭제
+    }
+  } catch (error) {
+    console.error("Error toggling favorite:", error);
+    fund.favorite = !fund.favorite; // 원래 상태로 복구
+  }
 };
 
 onMounted(() => {
-  fetchDeposits(); // 컴포넌트가 마운트될 때 데이터 가져오기
+  fetchFunds(); // 컴포넌트가 마운트될 때 데이터 가져오기
 });
 </script>
+
 
 
 <style scoped>
@@ -172,7 +211,7 @@ onMounted(() => {
   margin: 0;
 }
 
-.deposit-yield { /* 클래스명 변경 */
+.fund-yield { /* 클래스명 변경 */
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -181,13 +220,13 @@ onMounted(() => {
   right: 10px;
 }
 
-.deposit-icon { /* 클래스명 변경 */
+.fund-icon { /* 클래스명 변경 */
   font-size: 24px;
   color: #888; /* 기본 색상 */
   margin-left: 30px;
 }
 
-.deposit-icon .fas {
+.fund-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
 

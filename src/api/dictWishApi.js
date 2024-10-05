@@ -18,32 +18,15 @@ export default {
         return response.data;
     },
 
-    // 사전 단어장 항목 업데이트
-    async updateWish(dwno, wish) {
+    // 사전 단어장 메모 업데이트
+    async updateMemo(dwno, wish) {
         const response = await api.put(`${BASE_URL}/update/${dwno}`, wish, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('DICT WISH UPDATE:', response.data);
+        console.log('DICT MEMO UPDATE:', response.data);
         return response.data;
     },
 
-    // 사전 단어장 항목 추가
-    async createWish(wish) {
-        const response = await api.post(BASE_URL, wish, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        console.log('DICT WISH CREATE:', response.data);
-        return response.data;
-    },
-
-    // 사전 단어장 항목 삭제
-    async deleteWish(dwno) {
-        const response = await api.delete(`${BASE_URL}/${dwno}`);
-        console.log('DICT WISH DELETE:', response.data);
-        return response.data;
-    }
 }

@@ -40,6 +40,7 @@
 <script>
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 import installmentApi from "@/api/installmentApi"; // installmentApi를 가져옴
+import wishApi from "@/api/wishApi"; // wishApi import
 
 export default {
   components: { HeaderNormal },
@@ -55,27 +56,52 @@ export default {
     },
   },
   methods: {
-    async fetchInstallments(type) {
-      this.activeTab = type;
+    async fetchInstallments() {
       try {
-        let data;
-        if (type === 'simple') {
-          data = await installmentApi.fetchSimpleInstallments();
-        } else if (type === 'compound') {
-          data = await installmentApi.fetchCompoundInstallments(); // 복리 상품만 가져오기
-        } else {
-          data = await installmentApi.fetchAllInstallments();
+        const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+        this.uno = authData.uno; // uno 값 가져오기
+
+        // 모든 예금 상품을 먼저 불러오기
+        this.installments = await installmentApi.fetchCompoundInstallments(); // API 호출
+
+        // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
+        try {
+          this.wishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+        } catch (error) {
+          console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
+          this.wishes = []; // 관심 목록이 없으면 빈 배열로 처리
         }
-        this.installments = data;
+
+        // 관심 목록에서 tno가 1인 상품의 pno를 사용해 deposit.favorite 설정
+        const favoritePnos = this.wishes
+          .filter(wish => wish.tno === 2)
+          .map(wish => wish.pno);
+
+        this.installments.forEach(installment => {
+          installment.favorite = favoritePnos.includes(installment.ino);
+        });
+
       } catch (error) {
-        console.error("Error fetching installments:", error);
+        console.error("Error fetching installments:", error); // 오류 처리
+      }
+    },
+    async toggleFavorite(installment) {
+      try {
+        installment.favorite = !installment.favorite; // favorite 상태 토글
+
+        // API 호출하여 즐겨찾기 추가/삭제 처리
+        if (installment.favorite) {
+          await wishApi.addWish({ tno: 2, uno: this.uno, pno: installment.ino }); // tno와 pno 추가
+        } else {
+          await wishApi.deleteWish({ tno: 2, uno: this.uno, pno: installment.ino }); // tno와 pno 삭제
+        }
+      } catch (error) {
+        console.error("Error toggling favorite:", error);
+        installment.favorite = !installment.favorite; // 원래 상태로 복구
       }
     },
     goToDetail(installment) {
       this.$router.push({ path: `/installment/detail`, query: { ino: installment.ino } });
-    },
-    toggleFavorite(installment) {
-      installment.favorite = !installment.favorite; // favorite 상태 토글
     },
     getImg(imgUrl) {
       return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정

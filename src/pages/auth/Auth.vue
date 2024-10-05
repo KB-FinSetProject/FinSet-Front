@@ -6,7 +6,7 @@
       <div>
         <h1 style="margin-top: 25px;">
           {{ userName }}
-          <RouterLink to="/signup">
+          <RouterLink to="/change/auth">
             <i class="fa-solid fa-pen" style="font-size:25px; margin-left:10px; color:white"></i>
           </RouterLink>
         </h1>

@@ -57,7 +57,7 @@
     </div>
 
     <div class="chart-container">
-      <canvas ref="lineChart" class="chart"></canvas>
+      <canvas ref="chartCanvas" class="chart"></canvas> 
     </div>
 
     <div class="notice-display">
@@ -81,6 +81,7 @@ Chart.register(...registerables);
 
 const fund = ref(null); 
 const chartData = ref(null);
+const chartCanvas = ref(null); // canvas 요소에 대한 ref 추가
 const route = useRoute(); 
 const fundId = route.params.fno; 
 
@@ -93,15 +94,19 @@ async function fetchFundDetail() {
     console.error('펀드 상세 정보 가져오기 실패:', error);
   }
 }
-
 function createChart() {
-  if (chartData.value) {
+  if (chartData.value && chartCanvas.value) {
     const labels = chartData.value.map(data => data.fundDatetime); // 날짜를 라벨로 사용
     const fundValues = chartData.value.map(data => data.fundVal); // 펀드 값
     const benchmarkValues = chartData.value.map(data => data.benVal); // 벤치마크 값
     const typeValues = chartData.value.map(data => data.typeVal); // 유형 평균 값
 
-    new Chart(document.querySelector("canvas"), {
+    // 최소값과 최대값 계산
+    const allValues = [...fundValues, ...benchmarkValues, ...typeValues];
+    const minValue = Math.min(...allValues);
+    const maxValue = Math.max(...allValues);
+
+    new Chart(chartCanvas.value, {
       type: 'line',
       data: {
         labels: labels,
@@ -138,12 +143,15 @@ function createChart() {
       options: {
         scales: {
           y: {
-            beginAtZero: true,
+            beginAtZero: false, // 최솟값이 0이 아닐 수 있으므로 false로 설정
+            min: minValue - 3, // y축의 최소값 설정
+            max: maxValue + 3, // y축의 최대값 설정
             grid: {
               display: false
             }
           },
           x: {
+            display: false, // x축 숨기기
             grid: {
               display: false
             }
@@ -158,6 +166,7 @@ function createChart() {
     });
   }
 }
+
 
 onMounted(() => {
   fetchFundDetail().then(() => {
