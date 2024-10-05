@@ -40,6 +40,7 @@ import SignIn from "@/pages/login/SignIn.vue";
 import SignUp from "@/pages/login/SignUp.vue";
 import loginRoutes from './login'
 import stockRoutes from './stock'
+import ChangeAuth from '@/pages/auth/ChangeAuth.vue';
 
 const routes = [
     { path: '/', name: "Home", component: Home },
@@ -81,6 +82,7 @@ const routes = [
     { path: '/myboard', name: "MyBoard", component: MyBoard },
     { path: '/signin', name: "SignIn", component: SignIn },
     { path: '/signup', name: "SignUp", component: SignUp },
+    { path: '/change/auth', name: "ChangeAuth", component: ChangeAuth },
     ...stockRoutes,
 ];
 
@@ -125,6 +127,7 @@ const router = createRouter({
         { path: '/myboard', name: "MyBoard", component: MyBoard },
         { path: '/signin', name: "SignIn", component: SignIn },
         { path: '/signup', name: "SignUp", component: SignUp },
+        { path: '/change/auth', name: "ChangeAuth", component: ChangeAuth },
         ...stockRoutes,
     ],
 });

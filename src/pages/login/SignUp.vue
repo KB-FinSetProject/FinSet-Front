@@ -7,16 +7,17 @@
         <br>
         <br>
         <div class="col-12">
-            <label for="id" class="form-label">*이메일</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" v-model="member.id">
-                <button class="btn btn-custom" type="button" @click="checkId">인증하기</button>
-              <span :class="disableSubmit.value ? 'text-primary':'text-danger'">{{checkError}}</span>
-            </div>
-            <div class="invalid-feedback">
-                이메일을 입력해주세요.
-            </div>
-        </div>
+          <label for="id" class="form-label">*이메일</label>
+          <div class="input-group">
+              <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" v-model="member.id">
+              <button class="btn btn-custom" type="button" @click="checkId">인증하기</button>
+          </div>
+          <span :class="disableSubmit.value ? 'text-primary' : 'text-danger'" style="margin-top: 10px; display: block;">{{ checkError }}</span>
+          <div class="invalid-feedback">
+              이메일을 입력해주세요.
+          </div>
+      </div>
+      
 
         <br>
 
@@ -48,10 +49,10 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="name" placeholder="키키핑" v-model="member.name" required>
                 <button class="btn btn-custom" type="button" @click="checkName">중복 확인</button>
-              <span :class="disableSubmitName.value ? 'text-primary':'text-danger'">{{checkErrorName}}</span>
-
-
+                <br>
+      
             </div>
+            <span :class="disableSubmitName.value ? 'text-primary':'text-danger'">{{checkErrorName}}</span>
             <div class="invalid-feedback">
                 닉네임을 입력해주세요.
             </div>

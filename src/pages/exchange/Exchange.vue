@@ -15,10 +15,8 @@
             <h7>{{ currency.forexName }}</h7>
           </router-link>
         </div>
-        <div class="favorite" @click="toggleFavorite(currency)" style="margin-bottom: 20px;">
-          <span>
-            <i :class="['fa-solid', 'fa-heart', 'icon', { 'favorite-active': currency.isFavorite }]"></i>
-          </span>
+        <div class="icon" @click="toggleFavorite(currency)"> <!-- 변경: deposit -> currency -->
+          <i :class="currency.favorite ? 'fas fa-heart' : 'far fa-heart'" :style="{ color: currency.favorite ? '#FAB809' : '#888' }"></i>
         </div>
       </div>
       <div class="currency-rates">
@@ -43,16 +41,58 @@
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import { ref, computed, onMounted } from 'vue';
 import forexApi from '@/api/forexApi'; // Axios API 인스턴스 가져오기
+import wishApi from '@/api/wishApi'; // wish API 가져오기
 
 const searchQuery = ref('');
-const currencies = ref([]); // 외환 정보를 저장할 배열
+const forexes = ref([]); // 외환 정보를 저장할 배열
+const wishes = ref([]);
+const uno = ref(null);
 
 // 외환 정보 가져오기
-const fetchCurrencies = async () => {
+const fetchForexes = async () => {
   try {
-    currencies.value = await forexApi.fetchAllForex(); // 외환 정보 API 호출
+    const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+    uno.value = authData.uno; // uno 값 설정
+
+    // 모든 예금 상품을 먼저 불러오기
+    forexes.value = await forexApi.fetchAllForex();
+
+    // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
+    try {
+      wishes.value = await wishApi.fetchAllWishes();
+    } catch (error) {
+      console.warn("No wishes found or error fetching wishes:", error);
+      wishes.value = [];
+    }
+
+    // 관심 목록에서 tno가 1인 상품의 pno를 사용해 deposit.favorite 설정
+    const favoritePnos = wishes.value
+      .filter(wish => wish.tno === 5)
+      .map(wish => wish.pno);
+
+      forexes.value.forEach(forex => {
+        forex.favorite = favoritePnos.includes(forex.feno);
+    });
+
   } catch (error) {
-    console.error("Failed to fetch currencies:", error);
+    console.error("Error fetching forexes:", error);
+  }
+};
+
+// 즐겨찾기 토글 함수
+const toggleFavorite = async (forex) => {
+  try {
+    forex.favorite = !forex.favorite; // favorite 상태 토글
+
+    // API 호출하여 즐겨찾기 추가/삭제 처리
+    if (forex.favorite) {
+      await wishApi.addWish({ tno: 5, uno: uno.value, pno: forex.feno });
+    } else {
+      await wishApi.deleteWish({ tno: 5, uno: uno.value, pno: forex.feno });
+    }
+  } catch (error) {
+    console.error("Error toggling favorite:", error);
+    forex.favorite = !forex.favorite; // 오류 시 원래 상태로 복구
   }
 };
 
@@ -76,18 +116,14 @@ const getFlagUrl = (forexName) => {
 
 // 컴포넌트가 마운트될 때 외환 정보 가져오기
 onMounted(() => {
-  fetchCurrencies();
+  fetchForexes();
 });
 
-// 즐겨찾기 토글 함수
-const toggleFavorite = (currency) => {
-  currency.isFavorite = !currency.isFavorite;
-};
 
 // 검색 필터링된 통화 목록
 const filteredCurrencies = computed(() => {
-  return currencies.value.filter((currency) =>
-    currency.forexName.includes(searchQuery.value)
+  return forexes.value.filter((forex) =>
+    forex.forexName.includes(searchQuery.value)
   );
 });
 </script>
@@ -166,7 +202,7 @@ body {
 .icon {
   color: gray;
   position: absolute;
-  transform: translateX(-170%);
+  transform: translateX(1230%);
   cursor: pointer;
   font-size: 23px;
 }

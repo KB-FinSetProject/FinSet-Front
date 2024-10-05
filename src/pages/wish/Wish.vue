@@ -1,137 +1,138 @@
 <template>
   <div class="wish">
     <div class="container">
-      <h3 style="width:300px">예금</h3>
-      <hr>
-
-      <div v-for="(deposit, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="deposit-header">
-        <div class="deposit-info d-flex align-items-center">
-          <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
-          <div class="detail">
-            <p class="deposit-name" @click="goToDepositDetail(deposit)">{{ deposit.depositName }}</p>
-            <p class="deposit-details">{{ deposit.depositBank }}</p>
-            <div class="risk-info">
-              <span class="deposit-high-rating">{{ deposit.depositCategory }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="icon" @click="deleteDeposit(deposit)" style="margin-left: 40px;">
-          <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
-             :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <i @click="toggleVisibility('deposit')" class="fa-solid" :class="isMoreItemsVisible.deposit ? 'fa-caret-up' : 'fa-caret-down'"></i>
-      </div>
-
-      <h3 style="width:300px">적금</h3>
-      <hr>
 
 
-      <div v-for="(installment, index) in installmentItems.slice(0, visibleItemsCount.installment)" :key="index" class="installment-header">
-        <div class="installment-info d-flex align-items-center">
-          <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
-          <div class="detail">
-            <p class="installment-name" @click="goToInstallmentDetail(installment)">{{ installment.installmentName }}</p>
-            <p class="installment-details">{{ installment.installmentBank }}</p>
-            <div class="risk-info">
-              <span class="installment-high-rating">{{ installment.installmentCategory }}</span>
-            </div>
-          </div>
-        </div>
-      
-        <div class="icon" @click="deleteInstallment(installment)" style="margin-left: 40px;">
-          <i :class="installment.favorite ? 'fas fa-heart' : 'far fa-heart'"
-             :style="{ color: installment.favorite ? '#FAB809' : '#888' }"></i>
-        </div>
-      </div>
-      
-      <div class="text-center">
-        <i @click="toggleVisibility('installment')" class="fa-solid" :class="isMoreItemsVisible.installment ? 'fa-caret-up' : 'fa-caret-down'"></i>
-      </div>
+        <h3 style="width:300px">예금</h3>
+        <hr>
 
-      <h3 style="width:300px">펀드</h3>
-      <hr>
-
-      <div v-for="(fund, index) in fundItems.slice(0, visibleItemsCount.fund)" :key="index" class="wish-item d-flex align-items-center mt-2">
-        <div class="fund-header">
-          <div class="fund-info d-flex align-items-center">
-            <img :src="getImg(fund.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+        <div v-for="(deposit, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="deposit-header">
+          <div class="deposit-info d-flex align-items-center">
+            <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             <div class="detail">
-              <router-link :to="`/fund/detail/${fund.fno}`" class="fund-name">{{ fund.fundName }}</router-link>
+              <p class="deposit-name" @click="goToDepositDetail(deposit)">{{ deposit.depositName }}</p>
+              <p class="deposit-details">{{ deposit.depositBank }}</p>
               <div class="risk-info">
-                <span class="fund-high-rating">{{ fund.fundLisk }}</span>
-                <span class="fund-type">{{ fund.fundType }}</span>
+                <span class="deposit-high-rating">{{ deposit.depositCategory }}</span>
               </div>
             </div>
           </div>
-          <div class="icon" @click="deleteFund(fund)">
-            <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'"
-               :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
+
+          <div class="icon" @click="deleteDeposit(deposit)" style="margin-left: 40px;">
+            <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
+              :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
-      </div>
-      
-      <div class="text-center">
-        <i @click="toggleVisibility('fund')" class="fa-solid" :class="isMoreItemsVisible.fund ? 'fa-caret-up' : 'fa-caret-down'"></i>
-      </div>
 
-      <h2>주식</h2>
-      <hr>
-      <div v-for="(stock, index) in stockItems.slice(0, visibleItemsCount.stock)" :key="index" class="wish-item d-flex align-items-center mt-2">
-        <div class="stock-header">
-          <div class="stock-info d-flex align-items-center">
-            <img :src="getImg(stock.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
-            
-            <div class="stock-detail">
-              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
-              <p class="stock-details">{{ stock.stockPrice }} 
-                <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
-              </p>
+        <div class="text-center">
+          <i @click="toggleVisibility('deposit')" class="fa-solid" :class="isMoreItemsVisible.deposit ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </div>
+
+        <h3 style="width:300px">적금</h3>
+        <hr>
+
+
+        <div v-for="(installment, index) in installmentItems.slice(0, visibleItemsCount.installment)" :key="index" class="installment-header">
+          <div class="installment-info d-flex align-items-center">
+            <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+            <div class="detail">
+              <p class="installment-name" @click="goToInstallmentDetail(installment)">{{ installment.installmentName }}</p>
+              <p class="installment-details">{{ installment.installmentBank }}</p>
+              <div class="risk-info">
+                <span class="installment-high-rating">{{ installment.installmentCategory }}</span>
+              </div>
             </div>
           </div>
-
-          <div class="stock-icon" @click="deleteStock(stock)">
-            <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
-              :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
+        
+          <div class="icon" @click="deleteInstallment(installment)" style="margin-left: 40px;">
+            <i :class="installment.favorite ? 'fas fa-heart' : 'far fa-heart'"
+              :style="{ color: installment.favorite ? '#FAB809' : '#888' }"></i>
           </div>
         </div>
-      </div>
+        
+        <div class="text-center">
+          <i @click="toggleVisibility('installment')" class="fa-solid" :class="isMoreItemsVisible.installment ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </div>
 
-      <div class="text-center">
-        <i @click="toggleVisibility('stock')" class="fa-solid" :class="isMoreItemsVisible.stock ? 'fa-caret-up' : 'fa-caret-down'"></i>
-      </div>
+        <h3 style="width:300px">펀드</h3>
+        <hr>
 
-      
-
-      <h2>외환</h2>
-      <hr>
-      <div v-for="(forex, index) in forexItems.slice(0, visibleItemsCount.forex)" :key="index" class="wish-item d-flex align-items-center mt-2">
-        <div class="forex-header">
-          <div class="forex-info d-flex align-items-center">
-            <img :src="getImg(forex.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
-            
-            <div class="forex-detail">
-              <router-link :to="{ path: '/exchange/detail', query: { feno: forex.feno } }" class="no-underline" style="text-decoration: none; color:black">
-                {{ forex.forexName }}
-              </router-link>
-              <p class="forex-details">{{ forex.forexBasicRate }} </p>
+        <div v-for="(fund, index) in fundItems.slice(0, visibleItemsCount.fund)" :key="index" class="wish-item d-flex align-items-center mt-2">
+          <div class="fund-header">
+            <div class="fund-info d-flex align-items-center">
+              <img :src="getImg(fund.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              <div class="detail">
+                <router-link :to="`/fund/detail/${fund.fno}`" class="fund-name">{{ fund.fundName }}</router-link>
+                <div class="risk-info">
+                  <span class="fund-high-rating">{{ fund.fundLisk }}</span>
+                  <span class="fund-type">{{ fund.fundType }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="icon" @click="deleteFund(fund)">
+              <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'"
+                :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
             </div>
           </div>
+        </div>
+        
+        <div class="text-center">
+          <i @click="toggleVisibility('fund')" class="fa-solid" :class="isMoreItemsVisible.fund ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </div>
 
-          <div class="forex-icon" @click="deleteForex(forex)">
-            <i :class="forex.favorite ? 'fas fa-heart' : 'far fa-heart'"
-              :style="{ color: forex.favorite ? '#FAB809' : '#888' }"></i>
+        <h2>주식</h2>
+        <hr>
+        <div v-for="(stock, index) in stockItems.slice(0, visibleItemsCount.stock)" :key="index" class="wish-item d-flex align-items-center mt-2">
+          <div class="stock-header">
+            <div class="stock-info d-flex align-items-center">
+              <img :src="getImg(stock.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              
+              <div class="stock-detail">
+                <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
+                <p class="stock-details">{{ stock.stockPrice }} 
+                  <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stock-icon" @click="deleteStock(stock)">
+              <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
+                :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="text-center">
-        <i @click="toggleVisibility('forex')" class="fa-solid" :class="isMoreItemsVisible.forex ? 'fa-caret-up' : 'fa-caret-down'"></i>
-      </div>
+        <div class="text-center">
+          <i @click="toggleVisibility('stock')" class="fa-solid" :class="isMoreItemsVisible.stock ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </div>
 
+        
+
+        <h2>외환</h2>
+        <hr>
+        <div v-for="(forex, index) in forexItems.slice(0, visibleItemsCount.forex)" :key="index" class="wish-item d-flex align-items-center mt-2">
+          <div class="forex-header">
+            <div class="forex-info d-flex align-items-center">
+              <img :src="getImg(forex.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              
+              <div class="forex-detail">
+                <router-link :to="{ path: '/exchange/detail', query: { feno: forex.feno } }" class="no-underline" style="text-decoration: none; color:black">
+                  {{ forex.forexName }}
+                </router-link>
+                <p class="forex-details">{{ forex.forexBasicRate }} </p>
+              </div>
+            </div>
+
+            <div class="forex-icon" @click="deleteForex(forex)">
+              <i :class="forex.favorite ? 'fas fa-heart' : 'far fa-heart'"
+                :style="{ color: forex.favorite ? '#FAB809' : '#888' }"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <i @click="toggleVisibility('forex')" class="fa-solid" :class="isMoreItemsVisible.forex ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </div>
 
       
 
@@ -271,8 +272,31 @@ export default {
 
     toggleVisibility(category) {
       this.isMoreItemsVisible[category] = !this.isMoreItemsVisible[category];
-      this.visibleItemsCount[category] = this.isMoreItemsVisible[category] ? this.depositItems.length : 3; // 모든 항목을 표시
-    },
+      
+      // 각 카테고리에 따라 적절한 항목 수를 가져옵니다.
+      let itemCount;
+      switch (category) {
+          case 'deposit':
+                itemCount = this.depositItems.length; // 적금 항목 개수
+                break;
+          case 'installment':
+              itemCount = this.installmentItems.length; // 적금 항목 개수
+              break;
+          case 'fund':
+              itemCount = this.fundItems.length; // 펀드 항목 개수
+              break;
+          case 'stock':
+              itemCount = this.stockItems.length; // 주식 항목 개수
+              break;
+          case 'forex':
+              itemCount = this.forexItems.length; // 외환 항목 개수
+              break;
+          default:
+              itemCount = 0; // 기본값
+      }
+
+      this.visibleItemsCount[category] = this.isMoreItemsVisible[category] ? itemCount : 3; // 선택된 카테고리의 항목 개수 적용
+  },
 
     async deleteDeposit(item) {
       console.log("Deleting deposit:", item.dno);

@@ -120,10 +120,16 @@ export default {
       const item = this.items[index];
       item.isEditing = true; // 수정 모드 활성화
     },
-    saveItem(index) {
+    async saveItem(index) {
       const item = this.items[index];
       item.isEditing = false; // 수정 모드 비활성화
-      this.showEditCompleteDialog = true; // 수정 완료 다이얼로그 표시
+      
+      try {
+        await dictWishApi.updateMemo(item.dwno, { memo: item.memo }); // API 호출로 메모 업데이트
+        this.showEditCompleteDialog = true; // 수정 완료 다이얼로그 표시
+      } catch (error) {
+        console.error('Error updating memo:', error); // 오류 로그
+      }
     },
     closeEditCompleteDialog() {
       this.showEditCompleteDialog = false; // 수정 완료 다이얼로그 닫기
@@ -131,6 +137,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .container {

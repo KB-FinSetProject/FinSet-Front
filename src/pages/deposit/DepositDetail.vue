@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import depositApi from '@/api/depositApi'; // 예금 API 가져오기
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
@@ -77,6 +76,7 @@ export default {
   data() {
     return {
       deposit: {}, // 예금 정보 초기화
+      imgUrl: '', // 이미지 URL 초기화
     };
   },
   mounted() {
@@ -86,14 +86,19 @@ export default {
     if (dno) {
       depositApi.fetchDepositById(dno).then((data) => {
         this.deposit = data; // 예금 정보 가져오기
+        // imgUrl을 require로 설정하여 웹팩이 파일을 인식하게 함
+        this.imgUrl = data.imgUrl;
+        console.log(this.imgUrl); // 로그로 출력
       });
     }
   },
+
   methods: {
     getImg(imgUrl) {
       return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
     },
   },
+
 };
 </script>
 
