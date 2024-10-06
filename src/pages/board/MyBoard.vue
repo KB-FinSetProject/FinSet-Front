@@ -3,9 +3,9 @@
 
   <div class="container">
     <div class="card-container">
-      <div v-for="(item, index) in items" :key="item.name + item.date" class="card">
+      <div v-for="(item, index) in items" :key="item.bno" class="card">
         <div class="card-header">
-          <span class="name">{{ item.name }}</span>
+          <span class="name">{{ item.stockName }}</span>
           <div class="buttons">
             <button v-if="!item.isEditing" @click="editItem(index)" class="edit-btn">
               <i class="fa-solid fa-gear"></i> 수정
@@ -17,7 +17,7 @@
               <i class="fa-solid fa-trash"></i> 삭제
             </button>
           </div>
-          <span class="date">{{ item.date }}</span>
+          <span class="date">{{ formatDate(item.updatedAt) }}</span>
         </div>
 
         <div v-if="item.isEditing">
@@ -48,41 +48,66 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import stockCommunityApi from '@/api/stockCommunityApi'; // API 파일을 import
 
-// 데이터 설정
-const items = ref([
-  {
-    name: '키키핑',
-    date: '24.09.13',
-    content: '오바티비',
-    editContent: '',
-    isEditing: false,
-  },
-  {
-    name: '키키핑',
-    date: '24.09.13',
-    content: '오바티비',
-    editContent: '',
-    isEditing: false,
-  },
-  {
-    name: '키키핑',
-    date: '24.09.13',
-    content: '오바티비',
-    editContent: '',
-    isEditing: false,
-  },
-]);
-
+const items = ref([]); // 게시글 목록 저장
 const showConfirmDialog = ref(false); // 삭제 확인 다이얼로그 표시 여부
 const showEditCompleteDialog = ref(false); // 수정 완료 다이얼로그 표시 여부
 const postToDelete = ref(null); // 삭제할 게시물의 인덱스
+const name = ref(null); // 현재 사용자 uno 저장
+
+// 로컬 스토리지에서 uno 값 가져오기
+const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+name.value = authData.name; // uno 값 가져오기
+console.log('name:', name.value); // uno 값 확인
+
+// 모든 sno에 대해 게시글 목록 불러오기
+const loadAllCommunities = async () => {
+  for (let sno = 1; sno <= 30; sno++) {
+    try {
+      const response = await stockCommunityApi.getCommunities(sno); // API 호출
+
+      console.log(response);
+      
+      // 데이터가 없을 경우 예외 처리
+      if (!response.data || response.data.length === 0) {
+        console.log(`sno: ${sno}에 게시글이 없습니다.`);
+        continue; // 다음 sno로 넘어가기
+      }
+
+      // 현재 사용자와 uno가 같은 항목만 필터링
+      const userPosts = response.data.filter(item => item.name === (name.value));
+
+      // 필터링된 항목이 있는 경우 items에 추가
+      if (userPosts.length > 0) {
+        for (let post of userPosts) {
+          const stockResponse = await stockCommunityApi.getStock(post.sno); // 주식 정보 가져오기
+          post.stockName = stockResponse.data.stockName; // stockName 추가
+        }
+
+        items.value.push(...userPosts); // 필터링된 항목을 items에 추가
+      } else {
+        console.log(`sno: ${sno}에 해당하는 사용자의 게시글이 없습니다.`);
+      }
+
+    } catch (error) {
+      console.error(`게시글을 불러오는 중 오류 발생 (sno: ${sno}):`, error);
+    }
+  }
+  
+  // 게시글 목록을 콘솔에 출력
+  console.log("리스트 : ", items.value); // items 배열 출력
+};
+
+// 페이지 로드시 호출
+onMounted(() => {
+  loadAllCommunities(); // 모든 게시글 목록 불러오기
+});
 
 // 항목 수정 함수
 const editItem = (index) => {
@@ -92,13 +117,29 @@ const editItem = (index) => {
 };
 
 // 항목 저장 함수
-const saveItem = (index) => {
+const saveItem = async (index) => {
   const item = items.value[index];
-  item.content = item.editContent; // editContent에 입력된 내용을 저장
-  item.isEditing = false;
+  const communityDTO = {
+    content: item.editContent, // 사용자가 수정한 내용
+    uno: item.uno, // 사용자 ID (필요시)
+    sno: item.sno, // 주식 ID
+    bno: item.bno  // 게시글 ID
+  };
 
-  // 수정 완료 다이얼로그 표시
-  showEditCompleteDialog.value = true;
+  try {
+    // 서버로 수정된 데이터를 보내는 API 호출
+    const response = await stockCommunityApi.updateCommunity(item.sno, item.bno, communityDTO);
+    if (response.data === 'update success') {
+      // 수정 성공 시, 표시된 데이터를 업데이트하고 수정 모드를 종료
+      item.content = item.editContent;
+      item.isEditing = false;
+      showEditCompleteDialog.value = true;
+    } else {
+      console.error('수정 실패:', response.data);
+    }
+  } catch (error) {
+    console.error('수정 요청 중 오류 발생:', error);
+  }
 };
 
 // 수정 완료 다이얼로그 닫기 함수
@@ -108,17 +149,38 @@ const closeEditCompleteDialog = () => {
 
 // 삭제 다이얼로그 표시 함수
 const showDeleteConfirm = (index) => {
-  postToDelete.value = index;
-  showConfirmDialog.value = true;
+  postToDelete.value = items.value[index]; // 삭제할 게시글 데이터를 저장
+  showConfirmDialog.value = true; // 삭제 확인 다이얼로그를 표시
+};
+
+const deletePost = async () => {
+  const item = postToDelete.value; // 삭제할 게시글 데이터
+
+  try {
+    // API를 통해 삭제 요청을 보냅니다.
+    const response = await stockCommunityApi.deleteCommunity(item.sno, item.bno);
+
+    // 응답 데이터가 'delete success'인 경우
+    if (response.data === 'delete success') {
+      // 해당 항목을 목록에서 제거합니다.
+      items.value = items.value.filter(i => i.bno !== item.bno);
+      showConfirmDialog.value = false; // 다이얼로그 닫기
+      postToDelete.value = null; // 삭제할 게시글 초기화
+    } else {
+      console.error('삭제 실패:', response.data);
+      alert('삭제 실패: ' + response.data); // 실패 메시지
+    }
+  } catch (error) {
+    console.error('삭제 요청 중 오류 발생:', error);
+    alert('삭제 요청 중 오류 발생: ' + error.message); // 오류 메시지
+  }
 };
 
 // 삭제 확인 버튼 클릭 시 호출
 const confirmDelete = () => {
   if (postToDelete.value !== null) {
-    items.value.splice(postToDelete.value, 1);
+    deletePost(); // 삭제 요청을 수행
   }
-  showConfirmDialog.value = false;
-  postToDelete.value = null;
 };
 
 // 삭제 취소 버튼 클릭 시 호출
@@ -126,7 +188,21 @@ const cancelDelete = () => {
   showConfirmDialog.value = false;
   postToDelete.value = null;
 };
+
+// 날짜 포맷팅 함수
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  // YYYY-MM-DD 형식으로 반환
+  return `${year}-${month}-${day}`;
+};
+
 </script>
+
+
 
 
 <style scoped>

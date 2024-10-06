@@ -74,7 +74,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import api from '@/api/FundApi'; 
+import api from '@/api/fundApi'; 
 import { Chart, registerables } from 'chart.js';
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
 Chart.register(...registerables);
