@@ -38,14 +38,16 @@
 
     <br><br>
     <div class="bottomButtons">
-      <button class="withdrawButton">탈퇴하기</button>
-      <button class="logoutButton">로그아웃</button>
+      <button class="withdrawButton" @click="withdraw">탈퇴하기</button> <!-- @click 이벤트 추가 -->
+      <button class="logoutButton" @click="logout">로그아웃</button> <!-- @click 이벤트 추가 -->
     </div>
 
   </div>
 </template>
 
 <script>
+import authApi from '@/api/authApi'; // authApi 임포트
+
 export default {
   data() {
     return {
@@ -71,13 +73,36 @@ export default {
       console.error("localStorage에 저장된 auth 정보가 없습니다.");
     }
   },
+  methods: {
+    // 로그아웃 메서드
+    logout() {
+      localStorage.removeItem('auth');  // localStorage에서 auth 정보 삭제
+      this.isLoggedIn = false;          // 로그인 상태를 false로 변경
+      this.$router.push('/signin');     // 로그아웃 후 로그인 페이지로 이동
+    },
+
+    // 회원 탈퇴 메서드
+    async withdraw() {
+      try {
+        const confirmed = confirm("정말로 탈퇴하시겠습니까?");
+        if (confirmed) {
+          const response = await authApi.withdraw(this.userId);  // authApi.withdraw 호출
+          alert("탈퇴가 완료되었습니다.");
+          this.logout(); // 탈퇴 후 로그아웃 처리
+        }
+      } catch (error) {
+        console.error("회원 탈퇴 중 오류가 발생했습니다.", error);
+        alert("회원 탈퇴 중 문제가 발생했습니다.");
+      }
+    },
+  }
 };
 </script>
-
 
 <script setup>
 import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 </script>
+
 
 <style scoped>
 .container {

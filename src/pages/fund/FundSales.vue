@@ -44,7 +44,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-import fundsApi from "@/api/FundApi"; // API 모듈 가져오기
+import fundsApi from "@/api/fundApi"; // API 모듈 가져오기
 import wishApi from "@/api/wishApi"; // wishApi import
 
 const funds = ref([]);
