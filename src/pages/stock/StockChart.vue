@@ -26,7 +26,7 @@
       <canvas ref="stockChart"></canvas>
       <div class="chart-info">
         <span class="chart-high" style="color: red;">최고 {{ highestPrice }}원</span>
-        <span class="chart-low" style="color: green;">최저 {{ lowestPrice }}원</span>
+        <span class="chart-low" style="color: blue;">최저 {{ lowestPrice }}원</span>
       </div>
     </div>
     <br><br>
@@ -348,7 +348,7 @@ const formatNumber = (value) => {
   color: white;
 }
 .news-section {
-  margin-top: 30px;
+  margin-top: 20px;
   width: 360px;
   
 }
@@ -407,6 +407,7 @@ const formatNumber = (value) => {
   background-color: #E9E7E5; /* 기본 배경색 */
   padding: 10px 15px;
   margin-top: 30px;
+  border-radius: 7px;
 }
 
 .sort-include {
@@ -418,7 +419,7 @@ const formatNumber = (value) => {
 .sort-option {
   flex: 1; /* 각 옵션이 동일한 너비를 가지도록 설정 */
   text-align: center; /* 텍스트 중앙 정렬 */
-  padding: 8px; /* 여백 추가 */
+  padding: 7px; /* 여백 추가 */
   cursor: pointer; /* 마우스 커서를 포인터로 변경 */
   background-color: transparent; /* 기본 배경색은 투명 */
   margin: 0 5px; /* 양쪽 간격 */
@@ -443,11 +444,13 @@ const formatNumber = (value) => {
 }
 
 .timeframe-container {
-  margin-top: 20px; /* 상단 여백 */
+  margin-top: 10px; /* 상단 여백 */
 }
 
 .timeframe-info {
-  font-size: 18px; /* 글씨 크기 조정 */
+  font-size: 16px; /* 글씨 크기 조정 */
+  position: relative;
+  top: 5px;
 }
 
 .value-display {
@@ -455,5 +458,6 @@ const formatNumber = (value) => {
   font-size: 24px; /* 값 크기 조정 */
   font-weight: bold; /* 값 두껍게 */
 }
+
 
 </style>

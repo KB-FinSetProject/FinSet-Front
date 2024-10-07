@@ -295,6 +295,7 @@ onMounted(() => {
 .stock-info-grid {
   display: flex;
   justify-content: space-between; /* 이름과 값을 양쪽으로 배치 */
+  border-radius: 13px;
 }
 
 .stock-info-item {
@@ -313,7 +314,7 @@ onMounted(() => {
   padding: 10px; /* 각 항목의 내부 여백 */
   text-align: center; /* 텍스트를 중앙 정렬 */
   margin: 0px 10px; /* 좌우 간격 추가 */
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: rgba(110, 96, 83, 0.5);
 }
 
@@ -405,4 +406,8 @@ h5{
   height: 0; /* 썸 크기 0으로 설정하여 보이지 않게 함 */
 }
 
+h3{
+  position: relative;
+  bottom:15px;
+}
 </style>

@@ -159,6 +159,7 @@ const deletePost = async () => {
   try {
     // API를 통해 삭제 요청을 보냅니다.
     const response = await stockCommunityApi.deleteCommunity(item.sno, item.bno);
+    console.log(item.sno, item.bno);
 
     // 응답 데이터가 'delete success'인 경우
     if (response.data === 'delete success') {

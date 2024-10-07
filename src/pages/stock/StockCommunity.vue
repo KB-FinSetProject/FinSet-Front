@@ -131,7 +131,7 @@ const submitComment = async () => {
 const getStockDetails = async (query) => {
   try {
     stock.value = await api.get(query);
-    console.log(stock.value);
+    console.log('stock value', stock.value);
   } catch (error) {
     console.error(`error`, error);
   }
@@ -209,12 +209,15 @@ const loadWishes = async () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .stock-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  left: 10px;
 }
 
 .stock-price {
@@ -264,6 +267,7 @@ const loadWishes = async () => {
   padding: 10px;
   padding-top: 25px;
   margin-top: -41px;
+  margin-bottom: 140px;
 }
 
 .card {
