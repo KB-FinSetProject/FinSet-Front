@@ -8,7 +8,7 @@ export default {
         console.log('BOARD GET LIST :',data);
         return data;
     },
-    async getHigh(params) {
+    async getDrop(params) {
         try {
             const { data } = await api.get(`${BASE_URL}?sort=ascending`, { params });
             console.log('High stocks:', data);
@@ -17,7 +17,7 @@ export default {
             console.error('Error getting high stocks:', error);
         }
     },
-    async getDrop(params) {
+    async getHigh(params) {
         try {
             const { data } = await api.get(`${BASE_URL}?sort=descending`, { params });
             console.log('High stocks:', data);
@@ -82,7 +82,6 @@ export default {
         const{data}= await api.get(`${BASE_URL}/${sno}/community`);
         console.log('GET COMMUNITY',data);
         return data;
-
     },
     async submitComment(sno, commentData) {
         const { data } = await api.post(`${BASE_URL}/${sno}/community`, commentData);

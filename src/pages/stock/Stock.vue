@@ -2,7 +2,6 @@
   <HeaderNormal navbarTitle="주식 상품" />
 
   <div class="stock-container">
-
     <div class="tabs-container">
       <router-link to="/stock" class="tab" active-class="active">전체</router-link>
       <router-link to="/stockhigh" class="tab" active-class="active" style="color: #DADADA;">급상승 ▲</router-link>
@@ -10,19 +9,20 @@
     </div>
     <br>
 
-
     <div class="stock-list">
-      <div v-for="(stock,index )  in stocks" :key="stock.sno" class="stock-item">
+      <div v-for="(stock, index) in stocks" :key="stock.sno" class="stock-item">
         <div class="stock-header">
           <div class="stock-info d-flex align-items-center">
             <span class="stock-rank">{{ index + 1 }}</span>
 
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
-                <span>  <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;"/></span>
+              <span>
+                <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;" />
+              </span>
             </div>
 
             <div class="stock-detail">
-              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
+              <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }" class="stock-name">{{ stock.stockName }}</router-link>
               <p class="stock-details">{{ stock.stockPrice }}
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
@@ -31,7 +31,7 @@
 
           <div class="stock-icon" @click="toggleFavorite(stock)">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
-               :style="{ color: stock.favorite ? '#FAB809' : '#888' }"></i>
+             :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
           </div>
         </div>
       </div>
@@ -40,35 +40,31 @@
 </template>
 
 <script setup>
-import api from '@/api/stockApi'
-import {ref,reactive,computed,onMounted} from "vue";
-import moment from 'moment';
-import {useRouter,useRoute} from "vue-router";
-import {VueAwesomePaginate} from "vue-awesome-paginate";
+import api from '@/api/stockApi';
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
-const cr=useRoute();
-const router=useRouter();
+import wishApi from '@/api/wishApi';
 
-const stocks=ref([]);
+const cr = useRoute();
+const router = useRouter();
+const stocks = ref([]);
 
-const articles=computed(()=> page.value.list);
-
-
-// const addWish=async ()=>{
-//
-//
-// };
-const addWish = async(stock)=>{
-  stocks.value=await api.addWish(stock);
+// 즐겨찾기 추가 메서드
+const addWish = async (stock) => {
+  stocks.value = await api.addWish(stock);
   console.log(stocks.value);
 };
-const removeWish=async (stock)=>{
-  stocks.value=await api.removeWish(stock);
+
+// 즐겨찾기 삭제 메서드
+const removeWish = async (stock) => {
+  stocks.value = await api.removeWish(stock);
   console.log(stock.value);
-}
+};
+
+// API에서 주식 리스트를 가져오는 함수
 const load = async (query) => {
   try {
-    // API에서 주식 리스트를 가져오는 함수
     stocks.value = await api.getList(query);
     console.log(stocks.value);
   } catch (error) {
@@ -76,39 +72,65 @@ const load = async (query) => {
   }
 };
 
-onMounted(() => {
-  load();
+onMounted(async () => {
+  await load(); // 주식 리스트 로드
+  await loadWishes(); // 위시리스트 로드
 });
-console.log("Route Params:", cr.params);
-console.log("Stocks:", stocks.value);
+
 // 즐겨찾기 토글 메서드
 const toggleFavorite = async (stock) => {
   try {
     stock.favorite = !stock.favorite; // favorite 상태 토글
 
-    // 주식이 favorite에 추가되었으면 addWish 호출
+    // API 호출하여 즐겨찾기 추가/삭제 처리
     if (stock.favorite) {
-      await addWish(stock); // 즐겨찾기 추가
-      console.log('WISH POST', stock);
-      // 페이지 리다이렉트
-      router.push({ path: '/stock' }); // 예: '/stock' 또는 원하는 경로로 변경
+      await wishApi.addWish({ tno: 4, uno: uno.value, pno: stock.sno }); // tno와 pno 추가
     } else {
-      const data = await removeWish(stock); // 즐겨찾기에서 삭제
-      console.log('WISH DELETE', data);
+      await wishApi.deleteWish({ tno: 4, uno: uno.value, pno: stock.sno }); // tno와 pno 삭제
     }
   } catch (error) {
-    console.error('Error in toggleFavorite:', error);
+    console.error("Error toggling favorite:", error);
+    stock.favorite = !stock.favorite; // 원래 상태로 복구
   }
 };
-// 변동률에 따라 색상을 반환하는 메서드
-const getColor = (change) => {
-  // return change.includes('+') ? '#FF6767' : '#547BC1'; // 양수는 빨간색, 음수는 파란색
+
+// 데이터 로드 함수
+const loadWishes = async () => {
+  try {
+    const wishes = await wishApi.fetchAllWishes(uno.value); // wishes 데이터를 가져옵니다.
+    console.log("wish : ", wishes);
+
+    // 관심 목록에서 tno가 4인 상품의 pno를 사용해 stock.favorite 설정
+    const favoritePnos = wishes
+      .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
+      .map(wish => wish.pno); // pno 추출
+
+    // 각 주식의 favorite 상태 설정
+    stocks.value.forEach(stock => {
+      stock.favorite = favoritePnos.includes(stock.sno); // 현재 주식이 즐겨찾기인지 확인
+    });
+  } catch (error) {
+    console.error("Error loading wishes:", error);
+  }
 };
 
+// 변동률에 따라 색상을 반환하는 메서드
+const getColor = (change) => {
+  const changeRate = parseFloat(change); // 문자열을 숫자로 변환
+  return changeRate < 0 ? '#547BC1' : '#FF6767'; // 음수는 파란색, 양수는 빨간색
+};
+
+// 이미지 URL을 반환하는 메서드
 const getStockImg = (imgUrl) => {
   return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
 };
-console.log("stock.value"+stocks);
+
+const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+const uno = ref(authData ? authData.uno : null); // uno 값을 가져오기
+console.log("uno : ", uno.value);
+
+console.log("Route Params:", cr.params);
+console.log("Stocks:", stocks.value);
 </script>
 
 
@@ -118,7 +140,6 @@ console.log("stock.value"+stocks);
   padding: 16px;
   max-width: 390px;
   position: relative;
-  margin-top: -370px;
 }
 
 .tabs-container {
@@ -255,6 +276,5 @@ console.log("stock.value"+stocks);
   border-radius: 6px;
 }
 </style>
-
 
 
