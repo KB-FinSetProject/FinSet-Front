@@ -19,7 +19,7 @@
 
             <div class="stock-logo" :style="{ backgroundColor: stock.logoColor }">
               <span>
-                <img :src="getStockImg(stock.imgUrl)" alt="Stock logo" v-if="stock.imgUrl" style="width: 50px; height: 50px; object-fit: cover;" />
+                <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover; margin-left:20px">
               </span>
             </div>
 
@@ -142,6 +142,7 @@ console.log("Stocks:", stocks.value);
   padding: 16px;
   max-width: 390px;
   position: relative;
+  margin-bottom: 100px;
 }
 
 .tabs-container {
@@ -187,6 +188,7 @@ console.log("Stocks:", stocks.value);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: -20px;
 }
 
 .stock-item {

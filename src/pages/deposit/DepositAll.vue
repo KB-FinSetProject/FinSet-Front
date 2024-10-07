@@ -15,7 +15,7 @@
       <div v-for="deposit in filteredDeposits" :key="deposit.id" class="deposit-item">
         <div class="deposit-header">
           <div class="deposit-info d-flex align-items-center">
-            <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
+            <img :src="deposit.imgUrl" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
             <div>
               <p class="deposit-name" @click="goToDetail(deposit)">{{ deposit.depositName }}</p> <!-- 클릭 이벤트 추가 -->
               <p class="deposit-details">{{ deposit.depositBank }}</p>

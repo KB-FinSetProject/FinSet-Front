@@ -31,7 +31,7 @@
               <p class="card-text">{{ news.title }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl(news.link)">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl(news.link)" style="margin-top: -20px;">View</button>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
             <div v-for="(wish, index) in wishList.slice(0, 2)" :key="index" class="wish-item d-flex justify-content-between align-items-center">
               <div class="wish-header d-flex align-items-center">
                 <div class="wish-info d-flex align-items-center">
-                  <img :src="getImg(wish.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 30px; height: 30px; object-fit: cover;">
+                  <img :src="wish.imgUrl" alt="Thumbnail" class="rounded-circle me-3" style="width: 30px; height: 30px; object-fit: cover;">
                   <div>
                     <router-link :to="`/wish`" class="wish-name" style="text-decoration: none; color: black;">
                       <h6>{{ wish.name }}</h6>
