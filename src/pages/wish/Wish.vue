@@ -1,4 +1,7 @@
 <template>
+
+  <HeaderNormal navbarTitle="관심목록" />
+
   <div class="wish">
     <div class="container">
 
@@ -140,6 +143,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
+</script>
 
 <script>
 // wishApi.js를 가져옵니다.
