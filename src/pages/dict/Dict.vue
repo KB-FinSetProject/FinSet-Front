@@ -37,6 +37,7 @@
       </div>
 
       <button v-if="!showAll" @click="showAllItems" class="load-more-button">+</button>
+      <button v-if="showAll" @click="hideAllItems" class="load-more-button">-</button> <!-- 접기 버튼 추가 -->
 
       <hr>
 
@@ -158,6 +159,11 @@ onMounted(() => {
 const showAllItems = () => {
   showAll.value = true;
 };
+// 접기 버튼 클릭 시 항목 숨기기
+const hideAllItems = () => {
+  showAll.value = false;
+};
+
 
 // 특정 인덱스가 아코디언 활성화 상태인지 확인
 const isActive = (index) => activeIndices.value.includes(index);
@@ -264,7 +270,8 @@ const displayedItems = computed(() => (showAll.value ? items.value : items.value
   flex-direction: column;
   gap: 10px; /* 카드 간 간격 조정 */
   color: black; /* 기본 글씨 색상 */
-  margin-top: 50px;
+  bottom: -31px;
+    position: relative;
 }
 
 .card {
@@ -306,7 +313,6 @@ const displayedItems = computed(() => (showAll.value ? items.value : items.value
   font-size: 20px;
 }
 
-
 .arrow {
   margin-left: 10px;
   position: absolute;
@@ -329,12 +335,16 @@ const displayedItems = computed(() => (showAll.value ? items.value : items.value
   display: flex;
   align-items: center;
   width: 350px;
-
+  background-color: white; /* 흰색 배경 추가 */
+  z-index: 999; /* 검색바가 다른 요소 위에 위치하도록 설정 */
 }
 
 .input-container {
   position: relative;
+bottom:40px;
   width: 100%;
+  background-color: rgb(255, 255, 255);
+  height:60px;
 }
 
 input[type="text"] {
@@ -342,12 +352,14 @@ input[type="text"] {
   padding: 10px 40px 10px 10px; /* 아이콘을 위한 오른쪽 패딩 */
   border: 1px solid black;
   border-radius: 10px;
+  position: relative;
+  top:30px;
 }
 
 .search-icon {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 53px;
   transform: translateY(-50%);
   color: black;
 }
@@ -381,7 +393,6 @@ input[type="text"] {
   line-height: 40px; /* 텍스트를 세로 중앙에 위치시킴 (높이와 같게 설정) */
   text-align: center; /* 텍스트를 수평 중앙에 위치시킴 */
 }
-
 
 .icon-title-container {
   display: flex; /* Flexbox 사용 */
@@ -433,5 +444,10 @@ input[type="text"] {
 
 .icon2.active {
   color: #ffbf0a; /* 활성화된 별 색상 - 노란색 */
+}
+
+h6{
+  position: relative;
+    bottom: -3px;
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <footer class="footer fixed-bottom">
-
       <hr style="margin-top: 0%;">
       <ul class="nav justify-content-between">
         <li class="nav-item">
@@ -41,7 +39,6 @@
 </template>
 
 <style scoped>
-
 .footer {
   width: 100vw; 
   background-color: #f8f9fa; 
@@ -60,5 +57,11 @@
 
 .icon-large {
   font-size: 1.5rem;
+  transition: color 0.3s; /* 색 변화에 부드러운 전환 추가 */
+}
+
+/* hover 효과 추가 */
+.nav-link:hover .icon-large {
+  color: #FFBB00; /* 노란색으로 변경 */
 }
 </style>
