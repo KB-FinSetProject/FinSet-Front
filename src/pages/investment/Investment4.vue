@@ -69,7 +69,7 @@ const goToNext = () => {
 .survey-container {
   width: 300px;
   font-family: Arial, sans-serif;
-  margin-top: -30px;
+  margin-top: 86px;
 }
 
 .back-button {
@@ -153,12 +153,17 @@ const goToNext = () => {
   display: flex;
   justify-content: space-between;
   margin-top: 10px; /* 버튼들과 '1/7' 사이 간격 추가 */
+  position: relative;
+  bottom:70px;
+  margin-bottom:15px;
 }
 
 .text-md-center{
   font-size:15px;
   margin-top:130px;
   text-align: center;
+  position: relative;
+  bottom:70px;
 }
 
 

@@ -149,12 +149,16 @@ const goToNext = () => {
   display: flex;
   justify-content: space-between;
   margin-top: 10px; /* 버튼들과 '1/7' 사이 간격 추가 */
+  position: relative;
+  bottom:70px;
 }
 
 .text-md-center{
   font-size:15px;
   margin-top:185px;
   text-align: center;
+  position: relative;
+  bottom:70px;
 }
 
 
@@ -164,6 +168,6 @@ const goToNext = () => {
     #FFCC00 85.68%, /* 첫 번째 구간 */
     #9B9B9B 85.68%); /* 일곱 번째 구간 */
   margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 81px;
 }
 </style>
