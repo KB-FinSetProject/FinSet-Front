@@ -1,36 +1,55 @@
 <template>
   <HeaderNormal navbarTitle="주식 상세" />
 
-  <div class="stock-detail">
-    <div class="stock-header">
-      <div class="stock-info">
-        <h1 class="stock-name">{{ stocks.stockName }}</h1>
-        <span class="stock-price">{{ stocks .stockPrice }}</span>
+  <div class="container">
+    <div class="stock-detail">
+      <div class="stock-header">
+        <div class="stock-info">
+          <h1 class="stock-name">{{ stock.stockName }}</h1>
+          <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
+        </div>
+        <div class="stock-icon" @click="toggleFavorite">
+          <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
+             :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
+        </div>
       </div>
-<!--      <div class="stock-icon" @click="toggleFavorite">-->
-<!--        <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"-->
-<!--           :style="{ color: stock.favorite ? '#FFBB00' : '#888', borderColor: stock.favorite ? '#FFBB00' : 'transparent' }"></i>-->
-<!--      </div>-->
     </div>
 
     <div class="tabs-container">
-      <router-link :to="{ name: 'stockChart', params: { sno: snoFromRoute } }" class="tab" active-class="active" style="color: #DADADA;">차트</router-link>
-      <router-link to="/stock/detail" class="tab" active-class="active">종목정보</router-link>
-      <router-link :to="{ name: 'stockCommunity', params: { sno: snoFromRoute } }" class="tab" active-class="active" style="color: #DADADA;">커뮤니티</router-link>
+      <router-link 
+        :to="{ name: 'stockChart', params: { sno: snoFromRoute } }" 
+        class="tab" 
+        active-class="active" 
+        style="color: #DADADA;">
+        차트
+      </router-link>
+      <router-link 
+        :to="{ name: 'stockDetail', params: { sno: stock.sno } }" 
+        class="tab" 
+        active-class="active">
+        종목정보
+      </router-link>
+      <router-link 
+        :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" 
+        class="tab" 
+        active-class="active" 
+        style="color: #DADADA;">
+        커뮤니티
+      </router-link>
     </div>
     <br>
 
     <div class="stock-details">
       <h3 style="font-weight: bold;">시세</h3>
       <div class="price-range">
-        <input type="range" v-model="currentPrice" :min="minPrice" :max="maxPrice" disabled class="range-slider">
+        <input type="range" v-model="currentPrice" :min="minValue" :max="maxValue" disabled class="range-slider">
         <div class="price-labels">
           <span class="min-price">1일 최저가</span>
           <span class="max-price">1일 최고가</span>
         </div>
         <div class="price-info">
-          <span class="min-price-value">{{ stock.openPrice }}원</span>
-          <span class="max-price-value">{{ stock.endPrice }}원</span>
+          <span class="min-price-value">{{ formatNumber(stock.minValue) }} 원</span>
+          <span class="max-price-value">{{ formatNumber(stock.maxValue) }} 원</span>
         </div>
       </div>
 
@@ -38,17 +57,17 @@
       <div class="stock-info-grid">
         <div class="stock-info-item">
           <span>시가</span>
-          <span style="font-weight: bold; color:#555555">{{ openPrice }}원</span>
+          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.openPrice) }} 원</span>
         </div>
         <hr style="margin: 0 15px; border-color:orange; width:300px">
         <div class="stock-info-item">
           <span>종가</span>
-          <span style="font-weight: bold; color:#555555">{{ closePrice }}원</span>
+          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.closePrice) }} 원</span>
         </div>
         <hr style="margin: 0 15px; border-color:orange; width:300px">
         <div class="stock-info-item">
           <span>거래대금</span>
-          <span style="font-weight: bold; color:#555555">{{ tradingVolume }}주</span>
+          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.tradingVol) }} 주</span>
         </div>
       </div>
       <br>
@@ -56,15 +75,15 @@
       <div class="additional-info">
         <div class="info-item">
           <h5 style="margin-top: 5px;">매출</h5>
-          <h5 style="margin-bottom: 5px;">{{ revenue }}조원</h5>
+          <h5 style="margin-bottom: 5px;">{{ stock.sales }}</h5>
         </div>
         <div class="info-item">
           <h5 style="margin-top: 5px;">영업이익</h5>
-          <h5 style="margin-bottom: 5px;">{{ operatingProfit }}조원</h5>
+          <h5 style="margin-bottom: 5px;">{{ stock.profit }}</h5>
         </div>
         <div class="info-item">
           <h5 style="margin-top: 5px;">순수익</h5>
-          <h5 style="margin-bottom: 5px;">{{ netProfit }}조원</h5>
+          <h5 style="margin-bottom: 5px;">{{ stock.income }}</h5>
         </div>
       </div>
     </div>
@@ -76,71 +95,141 @@ import { ref, onMounted } from 'vue';
 import HeaderNormal from "@/components/common/HeaderNormal.vue";
 import { useRoute } from "vue-router";
 import api from "@/api/stockApi.js";
+import wishApi from "@/api/wishApi"; // wishApi import
+
 const route = useRoute();
 const snoFromRoute = route.params.sno;
-// const minPrice = ref(); // 1일 최저가
-// const maxPrice = ref(); // 1일 최고가
-// const currentPrice = ref(); // 현재 가격
-// const openPrice = ref(); // 시가
-// const closePrice = ref(); // 종가
-// const tradingVolume = ref(); // 거래 대금 (주)
-// const revenue = ref(); // 매출 (조원)
-// const operatingProfit = ref(); // 영업이익 (조원)
-// const netProfit = ref(); // 순수익 (조원)
-// const sno = ref('');
-const stock = ref( ''// 주식 정보
 
-);
+const stock = ref({
+  minValue: 0,
+  maxValue: 0,
+  openPrice: 0,
+  closePrice: 0,
+  tradingVol: 0,
+  sales: 0,
+  profit: 0,
+  income: 0,
+  favorite: false, // 초기값 설정
+});
 
-const stocks=ref('');
+const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+const uno = ref(authData ? authData.uno : null); // uno 값을 가져오기
+console.log("uno : ", uno.value);
+
+const wishes = ref([]); // wishes 상태 변수 추가
 
 // 즐겨찾기 토글 함수
-const toggleFavorite = () => {
-  // stock.value.favorite = !stock.value.favorite; // favorite 상태 토글
+const toggleFavorite = async () => {
+  try {
+    stock.value.favorite = !stock.value.favorite; // favorite 상태 토글
+
+    // API 호출하여 즐겨찾기 추가/삭제 처리
+    if (stock.value.favorite) {
+      await wishApi.addWish({ tno: 4, uno: uno.value, pno: stock.value.sno }); // tno와 pno 추가
+    } else {
+      await wishApi.deleteWish({ tno: 4, uno: uno.value, pno: stock.value.sno }); // tno와 pno 삭제
+    }
+  } catch (error) {
+    console.error("Error toggling favorite:", error);
+    stock.value.favorite = !stock.value.favorite; // 원래 상태로 복구
+  }
 };
 
 // 주식 정보 로딩 함수
-const load = async () => {
+const loadStockDetails = async () => {
   try {
-    stocks.value = await api.get(snoFromRoute.value); // 주식 정보 로딩
-    console.log('DETAIL', stock.value);
+    stock.value = await api.get(snoFromRoute); // 주식 정보 로딩
+    console.log('주식 상세 정보:', stock.value);
+
+    // wishApi를 사용해 wishes 로딩
+    wishes.value = await wishApi.fetchAllWishes(uno.value); // wishes 데이터를 가져옵니다.
+    console.log("wish : ", wishes.value);
+
+    // 관심 목록에서 tno가 4인 상품의 pno를 사용해 stock.favorite 설정
+    const favoritePnos = wishes.value
+      .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
+      .map(wish => wish.pno); // pno 추출
+
+    stock.value.favorite = favoritePnos.includes(stock.value.sno); // 현재 주식이 즐겨찾기인지 확인
   } catch (error) {
     console.error('Error loading stock details:', error);
   }
 };
-const getSymbol = async (snoFromRoute) => {
+
+const loadStockSymbol = async () => {
   try {
-    // API에서 주식 리스트를 가져오는 함수
-    stock.value = await api.getSymbol(snoFromRoute);
-    console.log(stocks.value);
+    const symbolData = await api.getSymbol(snoFromRoute);
+    stock.value = {
+      ...stock.value,
+      openPrice: symbolData.openPrice,
+      closePrice: symbolData.closePrice,
+      tradingVol: symbolData.tradingVol,
+      sales: symbolData.sales,
+      profit: symbolData.profit,
+      income: symbolData.income,
+      minValue: symbolData.minValue,
+      maxValue: symbolData.maxValue,
+    };
+    console.log('심볼 상세 정보:', symbolData);
   } catch (error) {
-    console.error("Error loading stocks:", error);
+    console.error('Error loading stock symbol details:', error);
   }
 };
 
+const formatNumber = (value) => {
+  if (value != null) {
+    return value.toLocaleString('ko-KR');
+  }
+  return value;
+};
 
+function getImg(imgUrl) {
+  return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
+}
 
 // 컴포넌트 마운트 시 데이터 로딩
 onMounted(() => {
-  load(snoFromRoute);
-  getSymbol(snoFromRoute);
+  loadStockDetails();
+  loadStockSymbol();
 });
 </script>
 
+
+
 <style scoped>
+.container{
+  margin-bottom: 100px;
+  margin-top: -100px;
+}
+
 .stock-detail {
   font-family: Arial, sans-serif;
-  width: 390px;
+  max-width: 390px;
   padding: 20px;
-  margin-top: 28px;
   margin-bottom: 100px;
 }
 
 .stock-header {
   display: flex;
-  justify-content: space-between; /* Space between stock info and icon */
-  align-items: center; /* Center align items vertically */
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: -5px;
+}
+
+.stock-price {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.stock-icon {
+  font-size: 30px;
 }
 
 .stock-info {
@@ -155,6 +244,7 @@ onMounted(() => {
   background-color: rgba(250, 176, 9, 0.16);
   padding: 5px 10px;
   border-radius: 20px;
+  width: 360px;
 }
 
 .stock-info-item {
@@ -177,15 +267,13 @@ onMounted(() => {
   align-items: center;
 }
 
-.stock-icon{
-  font-size: 30px;
-}
 
 .tabs-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
+  margin-top: -130px;
 }
 
 .tab {
@@ -193,8 +281,8 @@ onMounted(() => {
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  color: black; /* 텍스트 색상을 검정색으로 설정 */
-  text-decoration: none; /* 밑줄 제거 */
+  color: black;
+  text-decoration: none;
   font-size: 20px;
 }
 

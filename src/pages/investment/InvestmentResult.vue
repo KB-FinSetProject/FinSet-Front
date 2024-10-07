@@ -2,7 +2,7 @@
   <HeaderNormal navbarTitle="투자성향 결과" />
 
   <div class="result-container">
-    <h5>홍길동 님의 투자 성향 점수: <span class="score">{{ totalScore }}</span> 점</h5>
+    <h5>홍길동 님의 투자 성향 점수: <span class="score">{{ totalScore.toFixed(1) }}</span> 점</h5>
     <br>
     <div class="investment-levels">
       <div
@@ -36,170 +36,106 @@
   </div>
 </template>
 
-<!--<script setup>-->
-<!--import { ref, computed, onMounted } from 'vue';-->
-<!--import axios from 'axios';-->
-<!--import { useRouter, useRoute } from 'vue-router';-->
-<!--import HeaderNormal from '@/components/common/HeaderNormal.vue';-->
-<!--import { useLoginStore } from "@/stores/login.js";-->
-
-<!--// require로 jwt-decode를 동적으로 가져오기-->
-<!--const jwt_decode = require('jwt-decode');-->
-
-<!--const router = useRouter();-->
-<!--const route = useRoute();-->
-<!--const uno = route.params.uno;  // 라우터 파라미터에서 유저 ID를 가져옴-->
-
-<!--// 로그인 스토어에서 토큰 정보 가져오기-->
-<!--const token = useLoginStore().token;-->
-
-<!--// token이 있는 경우, jwt-decode를 사용하여 토큰 디코딩-->
-<!--let decodedToken = {};-->
-<!--let userId = uno;  // 초기값을 라우트 파라미터의 유저 ID로 설정-->
-
-<!--if (token) {-->
-<!--  try {-->
-<!--    // jwt-decode를 사용하여 토큰 디코딩-->
-<!--    decodedToken = jwt_decode(token);-->
-<!--    userId = decodedToken.id;  // 디코딩된 토큰에서 id 값을 추출-->
-<!--  } catch (error) {-->
-<!--    console.error("토큰 디코딩 실패:", error);-->
-<!--  }-->
-<!--}-->
-
-<!--// 유저 ID가 설정되었는지 확인하고 로그 출력-->
-<!--console.log("Decoded token:", decodedToken);-->
-<!--console.log("userId (from token):", userId);-->
-
-<!--// 점수 계산-->
-<!--const page1Score = parseFloat(localStorage.getItem('page1Score')) || 0;-->
-<!--const page2Score = parseFloat(localStorage.getItem('page2Score')) || 0;-->
-<!--const page3Score = parseFloat(localStorage.getItem('page3Score')) || 0;-->
-<!--const page4Score = parseFloat(localStorage.getItem('page4Score')) || 0;-->
-<!--const page5Score = parseFloat(localStorage.getItem('page5Score')) || 0;-->
-<!--const page6Score = parseFloat(localStorage.getItem('page6Score')) || 0;-->
-<!--const page7Score = parseFloat(localStorage.getItem('page7Score')) || 0;-->
-
-<!--const totalScore = computed(() => {-->
-<!--  return page1Score + page2Score + page3Score + page4Score + page5Score + page6Score + page7Score;-->
-<!--});-->
-
-<!--// 만약 총점이 0점일 경우 투자 성향 테스트 첫 페이지로 리다이렉트-->
-<!--onMounted(() => {-->
-<!--  if (totalScore.value === 0) {-->
-<!--    router.push('/investment1');-->
-<!--  }-->
-<!--});-->
-
-<!--// 투자 성향 항목 정의-->
-<!--const investmentLevels = [-->
-<!--  { level: 'Level 1. 안정형', maxScore: 20 },-->
-<!--  { level: 'Level 2. 안정추구형', maxScore: 40 },-->
-<!--  { level: 'Level 3. 위험 중립형', maxScore: 60 },-->
-<!--  { level: 'Level 4. 적극 투자형', maxScore: 80 },-->
-<!--  { level: 'Level 5. 공격투자형', maxScore: Infinity }-->
-<!--];-->
-
-<!--// 투자 성향을 서버로 전송하는 함수-->
-<!--const submitScore = () => {-->
-<!--  // 현재 투자 성향 수준 찾기-->
-<!--  const currentLevel = investmentLevels.find(level => totalScore.value <= level.maxScore);-->
-
-<!--  // 서버에 전송할 투자 성향 데이터-->
-<!--  const payload = { utName: currentLevel.level };-->
-
-<!--  // userId 값이 유효하지 않을 경우 경고 메시지 출력-->
-<!--  if (!userId || userId === 'undefined' || userId === null) {-->
-<!--    alert('유효하지 않은 유저 ID입니다. 다시 로그인해 주세요.');-->
-<!--    return;-->
-<!--  }-->
-
-<!--  // API 요청 URL 및 전송 데이터 확인-->
-<!--  console.log('Request URL:', `/api/member/${userId}/type`);-->
-<!--  console.log('전송할 투자 성향 데이터:', payload);-->
-
-<!--  // 서버에 투자 성향 데이터를 전송하는 API 요청-->
-<!--  axios.patch(`/api/member/${userId}/type`, payload)-->
-<!--      .then(response => {-->
-<!--        console.log('DB 저장 성공:', response.data);-->
-<!--        alert('투자 성향이 저장되었습니다.');-->
-<!--        router.push('/profile');  // 성공 시 프로필 페이지로 리다이렉트-->
-<!--      })-->
-<!--      .catch(error => {-->
-<!--        console.error('DB 저장 실패:', error);-->
-<!--        alert('저장에 실패했습니다. 다시 시도해 주세요.');-->
-<!--      });-->
-<!--};-->
-
-<!--// Confirmation Dialog-->
-<!--const showConfirmDialog = ref(false);-->
-
-<!--const confirmRedirect = () => {-->
-<!--  showConfirmDialog.value = false; // 다이얼로그 닫기-->
-<!--  router.push('/investment1'); // investment1 페이지로 이동-->
-<!--};-->
-
-<!--const cancelSubmit = () => {-->
-<!--  showConfirmDialog.value = true; // 다이얼로그 열기-->
-<!--};-->
-<!--</script>-->
-<script setup>
+<script>
 import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
-const router = useRouter();
-// 점수 계산
-const page1Score = parseFloat(localStorage.getItem('page1Score')) || 0;
-const page2Score = parseFloat(localStorage.getItem('page2Score')) || 0;
-const page3Score = parseFloat(localStorage.getItem('page3Score')) || 0;
-const page4Score = parseFloat(localStorage.getItem('page4Score')) || 0;
-const page5Score = parseFloat(localStorage.getItem('page5Score')) || 0;
-const page6Score = parseFloat(localStorage.getItem('page6Score')) || 0;
-const page7Score = parseFloat(localStorage.getItem('page7Score')) || 0;
-const totalScore = computed(() => {
-  return page1Score + page2Score + page3Score + page4Score + page5Score + page6Score + page7Score;
-});
-// Redirect if total score is 0
-onMounted(() => {
-  if (totalScore.value === 0) {
-    router.push('/investment1');
-  }
-});
-// 투자 성향 항목 정의
-const investmentLevels = [
-  { level: 'Level 1. 안정형', maxScore: 20 },
-  { level: 'Level 2. 안정추구형', maxScore: 40 },
-  { level: 'Level 3. 위험 중립형', maxScore: 60 },
-  { level: 'Level 4. 적극 투자형', maxScore: 80 },
-  { level: 'Level 5. 공격투자형', maxScore: Infinity }
-];
-// 투자 성향을 서버로 전송하는 함수
-const submitScore = () => {
-  const currentLevel = investmentLevels.find(level => totalScore.value <= level.maxScore);
-  const payload = { investmentLevel: currentLevel.level };
-  console.log('투자 성향:', payload);
-  axios.post('/members/{uno}/type', payload)
-      .then(response => {
-        console.log('DB 저장 성공:', response.data);
-        alert('투자 성향이 저장되었습니다.');
-      })
-      .catch(error => {
+import authApi from '@/api/authApi'; // authApi를 가져오기
+
+export default {
+  components: {
+    HeaderNormal,
+  },
+  setup() {
+    const router = useRouter();
+    const userData = ref({
+      id: null,
+      name: null,
+      password: null,
+    });
+
+    // 점수 계산
+    const page1Score = parseFloat(localStorage.getItem('page1Score')) || 0;
+    const page2Score = parseFloat(localStorage.getItem('page2Score')) || 0;
+    const page3Score = parseFloat(localStorage.getItem('page3Score')) || 0;
+    const page4Score = parseFloat(localStorage.getItem('page4Score')) || 0;
+    const page5Score = parseFloat(localStorage.getItem('page5Score')) || 0;
+    const page6Score = parseFloat(localStorage.getItem('page6Score')) || 0;
+    const page7Score = parseFloat(localStorage.getItem('page7Score')) || 0;
+
+    const totalScore = computed(() => {
+      return page1Score + page2Score + page3Score + page4Score + page5Score + page6Score + page7Score;
+    });
+
+    // Redirect if total score is 0
+    onMounted(() => {
+      if (totalScore.value === 0) {
+        router.push('/investment1');
+      }
+    });
+
+    // 투자 성향 항목 정의
+    const investmentLevels = [
+      { level: 'Level 1. 안정형', maxScore: 20 },
+      { level: 'Level 2. 안정추구형', maxScore: 40 },
+      { level: 'Level 3. 위험 중립형', maxScore: 60 },
+      { level: 'Level 4. 적극 투자형', maxScore: 80 },
+      { level: 'Level 5. 공격투자형', maxScore: Infinity }
+    ];
+
+    // 투자 성향을 서버로 전송하는 함수
+    const submitScore = async () => {
+      try {
+        const currentLevel = investmentLevels.find(level => totalScore.value <= level.maxScore);
+        const typeValue = investmentLevels.indexOf(currentLevel) + 1; // 현재 투자 성향에 해당하는 type 값 설정
+
+        const authData = JSON.parse(localStorage.getItem('auth'));
+        if (authData) {
+          const payload = {
+            id: authData.id,              // 이메일 값 (id)
+            name: authData.name,          // 사용자 이름
+            password: authData.password,  // 비밀번호
+            type: typeValue               // 투자 성향 type 값
+          };
+
+          // 서버로 요청 전송
+          const response = await authApi.updateType(authData.id, payload);
+          console.log('DB 저장 성공:', response.data);
+          alert('투자 성향이 저장되었습니다.');
+          router.push('/auth');
+        } else {
+          console.error('Auth data not found in localStorage');
+          alert('로그인이 필요합니다.');
+          router.push('/login');
+        }
+      } catch (error) {
         console.error('DB 저장 실패:', error);
         alert('저장에 실패했습니다.');
-      });
-  router.push('/profile');
-};
-// Confirmation Dialog
-const showConfirmDialog = ref(false);
-const confirmRedirect = () => {
-  showConfirmDialog.value = false; // Close the dialog
-  router.push('/investment1'); // Redirect to investment page
-};
-const cancelSubmit = () => {
-  showConfirmDialog.value = true; // Show confirmation dialog
+      }
+    };
+
+    // Confirmation Dialog
+    const showConfirmDialog = ref(false);
+    const confirmRedirect = () => {
+      showConfirmDialog.value = false; // Close the dialog
+      router.push('/investment1'); // Redirect to investment page
+    };
+    const cancelSubmit = () => {
+      showConfirmDialog.value = true; // Show confirmation dialog
+    };
+
+    return {
+      totalScore,
+      investmentLevels,
+      submitScore,
+      showConfirmDialog,
+      confirmRedirect,
+      cancelSubmit,
+    };
+  },
 };
 </script>
+
 
 
 <style scoped>
