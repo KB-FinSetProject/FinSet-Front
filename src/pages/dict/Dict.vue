@@ -179,40 +179,27 @@ const toggleDescription = (index) => {
 
 // 전체 별 아이콘 클릭 시 상태 토글
 const toggleStar = async () => {
-  isStarActive.value = !isStarActive.value; // 별의 활성화 상태를 토글
+  isStarActive.value = !isStarActive.value;
 
-  // searchResult의 존재 여부를 확인
   if (searchResult.value) {
-    const title = searchResult.value.title; // searchResult에서 title 값을 가져오기
-    console.log('Current title:', title); // 현재 title 로그 출력
+    const title = searchResult.value.title;
 
     try {
-      // 단어를 검색하여 해당 단어의 데이터를 가져옴
-      const searchData = await dictApi.search(title); // 검색 함수 호출
-      console.log('Search result for title:', searchData); // 찾은 데이터 로그 출력
+      const searchData = await dictApi.search(title);
 
-      // dino 값을 searchData에서 가져오는 방법은, searchData의 구조에 따라 다릅니다.
-      // 아래 예시는 searchData가 배열 형태일 경우를 가정합니다.
       if (searchData && searchData.length > 0) {
-        const dino = searchData[0].dino; // 찾은 데이터에서 dino 가져오기
-        console.log('dino : ', dino);
+        const dino = searchData[0].dino;
 
-        // 새로운 상태에 따라 dict 객체 생성
         const dict = { ...searchResult.value, status: isStarActive.value ? 0 : 1 };
-        console.log('dict : ', dict);
 
-        try {
-          // 별을 활성화 할 경우
-          await dictApi.updateStatus(dino, dict); // API 호출하여 상태 업데이트
-          console.log(`${isStarActive.value ? 'Activated' : 'Deactivated'} star for item with dino: ${dino}`);
-        } catch (error) {
-          console.error('Error updating wish item:', error);
-        }
+        // API 호출 최적화
+        await dictApi.updateStatus(dino, dict);
+        console.log(`${isStarActive.value ? 'Activated' : 'Deactivated'} star for item with dino: ${dino}`);
       } else {
         console.error('No data found for the searched title.');
       }
     } catch (error) {
-      console.error('Error searching for title:', error);
+      console.error('Error searching for title or updating wish item:', error);
     }
   } else {
     console.error('No search result found.');

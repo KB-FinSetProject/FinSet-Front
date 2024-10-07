@@ -10,7 +10,7 @@
     <div v-for="currency in filteredCurrencies" :key="currency.feno" class="currency-card">
       <div class="currency-header">
         <div class="currency-info">
-          <img :src="getFlagUrl(currency.forexName)" :alt="currency.forexName" />
+          <img :src="currency.imgUrl" :alt="currency.forexName" />
           <router-link :to="{ path: '/exchange/detail', query: { feno: currency.feno } }" class="no-underline">
             <h7>{{ currency.forexName }}</h7>
           </router-link>
@@ -93,23 +93,6 @@ const toggleFavorite = async (forex) => {
   } catch (error) {
     console.error("Error toggling favorite:", error);
     forex.favorite = !forex.favorite; // 오류 시 원래 상태로 복구
-  }
-};
-
-// 플래그 URL 반환 함수
-const getFlagUrl = (forexName) => {
-  if (forexName.includes('CNH')) {
-    return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png';
-  } else if (forexName.includes('EUR')) {
-    return 'https://i.namu.wiki/i/-aDCVSLRt5Gn7KGaXNZyjNVxjRey1gnfmg_16JrK7bqY1ihROnM1YVkzE1Da-FZWCp6JORbIBfVSSUIRjq0XfA.svg';
-  } else if (forexName.includes('GBP')) {
-    return 'https://i.namu.wiki/i/WNw8JiSr4x94S6McVTaDj70J_VmBtOPAV6NzP5FBOyRXD7E7nalYplrZeyGtsKq8KyAezsTqtS3Uec3jchRRUw.svg';
-  } else if (forexName.includes('JPY')) {
-    return 'https://i.namu.wiki/i/uPDCkQv1zGpaEdmeqmEDRIM3nMyRD2BslQUouPpxpI5M-PkGdmxPwxFJvu9RCUUVYg2XOH4rfedfkxhnDqfumw.svg';
-  } else if (forexName.includes('USD')) {
-    return 'https://i.namu.wiki/i/fFkDY65WFfapNpAB8Np7V7kVd3rWE_cAgEZMGS2vdPJGJAfM463_PzmVHD_TJbg8_XGoCPrAmL84JrqjfTSIyA.svg';
-  } else {
-    return ''; // 기본값은 빈 문자열
   }
 };
 

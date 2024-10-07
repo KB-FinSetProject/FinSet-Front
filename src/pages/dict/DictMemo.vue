@@ -60,6 +60,8 @@ export default {
       starStates: [], // 각 리스트 항목별로 false로 초기화
       showEditCompleteDialog: false, // 수정 완료 다이얼로그 표시 여부
       uno: null, // uno 값을 초기화합니다.
+      listStarStates: [], // 별 상태를 저장할 배열
+      wishItems: [], // 위시 아이템 목록
     };
   },
   mounted() {
@@ -110,9 +112,28 @@ export default {
         this.activeIndices.push(index); // active 상태 추가
       }
     },
-    toggleStar(index) {
-      this.starStates[index] = !this.starStates[index]; // 해당 인덱스의 별 상태 토글
+    async toggleStar(index) {
+      const currentState = this.starStates[index];
+      this.starStates[index] = !currentState; // 해당 인덱스의 별 상태 토글
+
+      console.log(this.items[index]);
+
+      const dino = this.items[index].dino; // 현재 아이템의 dino 값 가져오기
+      console.log('dino:', dino);
+
+      // 새로운 상태에 따라 dict 객체 생성
+      const dict = { ...this.wishItems[index], status: this.starStates[index] ? 0 : 1 };
+      console.log('dict:', dict);
+
+      try {
+        // API 호출하여 상태 업데이트
+        await dictApi.updateStatus(dino, dict);
+        console.log(`${this.starStates[index] ? 'Activated' : 'Deactivated'} star for item with dino: ${dino}`);
+      } catch (error) {
+        console.error('Error updating wish item:', error);
+      }
     },
+
     isStarActive(index) {
       return this.starStates[index]; // 해당 인덱스의 별이 활성화된 상태인지 확인
     },

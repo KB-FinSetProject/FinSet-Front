@@ -11,7 +11,7 @@
 
         <div v-for="(deposit, index) in depositItems.slice(0, visibleItemsCount.deposit)" :key="index" class="deposit-header">
           <div class="deposit-info d-flex align-items-center">
-            <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+            <img :src="(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             <div class="detail">
               <p class="deposit-name" @click="goToDepositDetail(deposit)">{{ deposit.depositName }}</p>
               <p class="deposit-details">{{ deposit.depositBank }}</p>
@@ -37,7 +37,7 @@
 
         <div v-for="(installment, index) in installmentItems.slice(0, visibleItemsCount.installment)" :key="index" class="installment-header">
           <div class="installment-info d-flex align-items-center">
-            <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+            <img :src="(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
             <div class="detail">
               <p class="installment-name" @click="goToInstallmentDetail(installment)">{{ installment.installmentName }}</p>
               <p class="installment-details">{{ installment.installmentBank }}</p>
@@ -63,7 +63,7 @@
         <div v-for="(fund, index) in fundItems.slice(0, visibleItemsCount.fund)" :key="index" class="wish-item d-flex align-items-center mt-2">
           <div class="fund-header">
             <div class="fund-info d-flex align-items-center">
-              <img :src="getImg(fund.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              <img :src="(fund.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
               <div class="detail">
                 <router-link :to="`/fund/detail/${fund.fno}`" class="fund-name">{{ fund.fundName }}</router-link>
                 <div class="risk-info">
@@ -88,7 +88,7 @@
         <div v-for="(stock, index) in stockItems.slice(0, visibleItemsCount.stock)" :key="index" class="wish-item d-flex align-items-center mt-2">
           <div class="stock-header">
             <div class="stock-info d-flex align-items-center">
-              <img :src="getImg(stock.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              <img :src="(stock.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
               
               <div class="stock-detail">
                 <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }"  class="stock-name">{{ stock.stockName }}</router-link>
@@ -116,7 +116,7 @@
         <div v-for="(forex, index) in forexItems.slice(0, visibleItemsCount.forex)" :key="index" class="wish-item d-flex align-items-center mt-2">
           <div class="forex-header">
             <div class="forex-info d-flex align-items-center">
-              <img :src="getImg(forex.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
+              <img :src="(forex.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover;">
               
               <div class="forex-detail">
                 <router-link :to="{ path: '/exchange/detail', query: { feno: forex.feno } }" class="no-underline" style="text-decoration: none; color:black">

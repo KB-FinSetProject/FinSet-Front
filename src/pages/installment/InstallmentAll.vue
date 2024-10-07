@@ -13,7 +13,7 @@
       <div v-for="installment in filteredInstallments" :key="installment.ino" class="installment-item">
         <div class="installment-header">
           <div class="installment-info d-flex align-items-center">
-            <img :src="getImg(installment.imgUrl)" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
+            <img :src="installment.imgUrl" alt="Thumbnail" class="rounded-circle me-3" style="width: 36px; height: 36px; object-fit: cover; margin-left:20px">
             <div>
               <p class="installment-name" @click="goToDetail(installment)">{{ installment.installmentName }}</p>
               <p class="installment-details">{{ installment.installmentBank }}</p>

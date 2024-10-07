@@ -117,7 +117,7 @@ onMounted(() => {
   max-width: 390px;
   position: relative;
   bottom: 110px;
-  margin-top: 130px;
+  margin-top: 150px;
 }
 
 .tabs-container {
@@ -278,13 +278,13 @@ onMounted(() => {
   background-color: #FAB809; /* 노란색 배경 */
   padding: 10px;
   border-radius: 0; /* 테두리 반경 없앰 */
-  margin-bottom: 10px;
   text-align: center;
   height: 110px;
   position: relative;
   bottom: 8px;
   width: 390px;
   margin-left: -16px;
+  margin-top: -10px;
 }
 
 .info-box h4 {

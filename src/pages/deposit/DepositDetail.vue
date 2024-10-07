@@ -7,7 +7,7 @@
         <h5 class="mb-0">{{ deposit.depositName }}</h5> <!-- 예금 이름 -->
         <p class="mb-0 text-muted">{{ deposit.depositBank }}</p> <!-- 은행 이름 -->
       </div>
-      <img :src="getImg(deposit.imgUrl)" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
+      <img :src="deposit.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
     </div>
 
     <div class="join-info d-flex mt-2">
