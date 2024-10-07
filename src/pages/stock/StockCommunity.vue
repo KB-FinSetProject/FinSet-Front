@@ -209,12 +209,16 @@ const loadWishes = async () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
+  bottom: 225px;
 }
 
 .stock-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  left: 10px;
 }
 
 .stock-price {

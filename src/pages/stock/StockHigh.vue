@@ -185,6 +185,8 @@ console.log("Stocks:", stocks.value);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+  bottom: 25px;
 }
 
 .stock-item {
@@ -210,7 +212,7 @@ console.log("Stocks:", stocks.value);
 }
 
 .stock-rank {
-  font-size: 16px;
+  font-size: 20px; /* 기존 16px에서 18px로 증가 */
   font-weight: bold;
   margin-right: 10px;
 }
@@ -230,7 +232,7 @@ console.log("Stocks:", stocks.value);
 }
 
 .stock-name {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   margin-bottom: 4px;
   text-decoration: none;
@@ -251,11 +253,12 @@ console.log("Stocks:", stocks.value);
 }
 
 .stock-icon {
-  font-size: 15px;
+  font-size: 24px; /* 폰트 크기를 24px로 변경 */
   color: #888; /* 기본 색상 */
   margin-right: 15px;
   margin-top: 10px;
 }
+
 
 .stock-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
