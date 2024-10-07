@@ -270,7 +270,7 @@ const displayedItems = computed(() => (showAll.value ? items.value : items.value
   flex-direction: column;
   gap: 10px; /* 카드 간 간격 조정 */
   color: black; /* 기본 글씨 색상 */
-  bottom: -31px;
+  bottom: -59px;
     position: relative;
 }
 
