@@ -109,6 +109,7 @@ const router = createRouter({
         { path: '/installmentcompound', name: "InstallmentCompound", component: InstallmentCompound },
         { path: '/installment/detail', name: "InstallmentDetail", component: InstallmentDetail },
         { path: '/search', name: "Search", component: Search },
+        { path: '/search/results', name: "SearchResults", component: SearchResults },
         { path: '/wish', name: "Wish", component: Wish },
         { path: '/investment1', name: "Investment1", component: Investment1 },
         { path: '/investment2', name: "Investment2", component: Investment2 },
