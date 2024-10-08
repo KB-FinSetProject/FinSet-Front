@@ -15,10 +15,10 @@
 
         <br>
 
-        <div class="col-12">
+        <!-- <div class="col-12">
             <label for="password" class="form-label">*비밀번호</label>
             <span class="form-control" style="width: 285px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ authData.password }}</span>
-        </div>
+        </div> -->
 
         <br>
         <br>
