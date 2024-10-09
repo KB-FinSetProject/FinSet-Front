@@ -239,10 +239,11 @@ const loadWishes = async () => {
 .tabs-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
-  margin-top: -130px;
+  margin-top: -160px;
   position: relative;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .tab {
@@ -267,10 +268,11 @@ const loadWishes = async () => {
   gap: 10px; /* 카드 간 간격 조정 */
   background-color: rgba(110, 96, 83, 0.11);
   width: 390px;
-  height: 400px; /* 고정 높이 설정 */
   overflow-y: auto; /* 세로 스크롤 가능 */
   position: relative;
-  bottom: 40px;
+  padding-top: 20px;
+  margin-top: -20px;
+  height: 400px;
 }
 
 .card {

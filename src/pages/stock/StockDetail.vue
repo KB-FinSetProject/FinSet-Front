@@ -199,7 +199,7 @@ onMounted(() => {
 <style scoped>
 .container{
   margin-bottom: 100px;
-  margin-top: -100px;
+  margin-top: -130px;
 }
 
 .stock-detail {
@@ -274,6 +274,7 @@ onMounted(() => {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   margin-top: -130px;
+
 }
 
 .tab {
