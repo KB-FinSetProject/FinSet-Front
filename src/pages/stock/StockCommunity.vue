@@ -192,9 +192,9 @@ const loadWishes = async () => {
 
 
 <style scoped>
-.container{
-  margin-bottom: 100px;
-  margin-top: -40px;
+.container {
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .stock-detail {
@@ -209,7 +209,13 @@ const loadWishes = async () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  position: relative;
+  position: fixed; /* 고정 */
+  top: 80px; /* 화면 최상단에 위치 */
+  left: 0;
+  width: 100%; /* 화면 너비만큼 확장 */
+  background-color: white; /* 배경 색상을 줘서 스크롤 시 내용이 겹치지 않도록 */
+  z-index: 10; /* 다른 요소 위에 표시 */
+  padding: 10px 15px;
 }
 
 .stock-info {
@@ -236,8 +242,7 @@ const loadWishes = async () => {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   margin-top: -130px;
-  width: 360px;
-  margin-left: 15px;
+  position: relative;
 }
 
 .tab {
@@ -255,7 +260,6 @@ const loadWishes = async () => {
   font-weight: bold;
 }
 
-
 /* 카드 관련 스타일 통합 */
 .card-container {
   display: flex;
@@ -263,11 +267,10 @@ const loadWishes = async () => {
   gap: 10px; /* 카드 간 간격 조정 */
   background-color: rgba(110, 96, 83, 0.11);
   width: 390px;
-  margin-left: -0px;
-  padding: 10px;
-  padding-top: 25px;
-  margin-top: -41px;
-  margin-bottom: 140px;
+  height: 400px; /* 고정 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤 가능 */
+  position: relative;
+  bottom: 40px;
 }
 
 .card {
@@ -323,7 +326,6 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.6rem; /* 글씨 크기 작게 */
-
 }
 
 .edit-btn {
@@ -348,17 +350,18 @@ button {
   display: flex;
   background-color: #f7f7f7f7;
   padding: 15px;
-  width: 390px;
-  margin-left: 11px;
-  position: fixed;
-  bottom: 80px;
+  width: 100%; /* 전체 너비로 설정 */
+  position: fixed; /* 고정 위치 설정 */
+  bottom: 80px; /* 화면 하단에서 푸터 위로 위치 */
+  left: 0; /* 왼쪽 끝에 위치 */
+  z-index: 10; /* 다른 요소 위에 표시 */
 }
 
 .comment-input input {
   flex: 1;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #ccc; 
   border-radius: 10px;
 }
 
@@ -376,11 +379,11 @@ button {
   cursor: not-allowed;
 }
 
-.like{
-  margin-right:7px;
+.like {
+  margin-right: 7px;
 }
 
-.like-count{
+.like-count {
   margin-right: 13px;
 }
 
@@ -398,6 +401,4 @@ button {
   width: 45px;
   color: #6E6053;
 }
-
-
 </style>
