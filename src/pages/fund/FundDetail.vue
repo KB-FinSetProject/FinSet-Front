@@ -66,7 +66,7 @@
     </div>
 
     <div class="button-container">
-      <a href="당신이연결할링크" class="join-button">보러가기</a>
+      <a :href="fund.fundLink" target="_blank" rel="noopener noreferrer" class="join-button">보러가기</a>
     </div>
   </div>
 </template>
