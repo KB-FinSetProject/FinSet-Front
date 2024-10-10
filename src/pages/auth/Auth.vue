@@ -34,6 +34,10 @@
       <router-link to="/dictmemo" class="list-item">
         <i class="fa-solid fa-book icon"></i><span>단어장</span>
       </router-link>
+      <hr><br>
+      <router-link to="/search" class="list-item">
+        <i class="fas fa-magnifying-glass icon"></i><span>상품검색</span>
+      </router-link>
     </div>
 
     <br><br>
@@ -143,7 +147,7 @@ import HeaderMyPage from '@/components/common/HeaderMyPage.vue';
 .bottomButtons {
   display: flex;
   justify-content: space-between;
-  margin-top: 130px;
+  margin-top: 50px;
   margin-left: 10px;
   margin-right: 10px;
 }

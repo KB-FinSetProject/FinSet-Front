@@ -5,7 +5,7 @@
       <input
           v-model="searchQuery"
           type="text"
-          placeholder="5000원 자리 재테크 추천"
+          :placeholder="placeholderText"
           class="search-input w-full p-3 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFA500] bg-white"
       />
       <Search class="search-icon" size="20" />
@@ -28,29 +28,42 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<<script setup>
+import { ref, onMounted } from 'vue'
 import { Search } from 'lucide-vue-next'
+import HeaderNormal from '@/components/common/HeaderNormal.vue';
 
 const searchQuery = ref('')
+const placeholderText = ref('');
 
+// 섹션 데이터
 const sections = [
   { title: '예금', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
   { title: '펀드', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
   { title: '채권', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
   { title: '주식', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
   { title: '외환', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-]
+];
+
+// URL에서 쿼리 파라미터를 가져오는 로직
+onMounted(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const term = urlParams.get('term');
+
+  // 쿼리 파라미터 'term'이 있으면 placeholderText에 설정
+  if (term) {
+    placeholderText.value = term; // ref의 값에 접근할 때는 .value를 사용
+  }
+});
 </script>
 
 <style scoped>
 .container {
   width: 390px;
-  margin: 0 auto;
   background-color: white;
-  min-height: 844px;
   position: relative;
-  top:50px;
+  margin-top: 50px;
+  margin-bottom: 60px;
 }
 
 .search-input {
