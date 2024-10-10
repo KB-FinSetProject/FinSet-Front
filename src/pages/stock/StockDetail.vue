@@ -229,7 +229,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  left: -77px; /* 기존 10px에서 20px로 변경 */
+  left: -77px; 
 }
 
 .stock-price {
