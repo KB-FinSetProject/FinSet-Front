@@ -270,24 +270,21 @@ const loadWishes = async () => {
 
 /* 카드 관련 스타일 통합 */
 .card-container {
-<<<<<<< HEAD
+
   height: auto; /* 고정된 높이 대신 자동으로 조정되도록 설정 */
   max-height: 400px; /* 최대 높이를 설정해 스크롤 가능 */
   overflow-y: auto;
   position: relative;
   bottom: 0; /* 하단에서 위치 고정 */
-=======
   display: flex;
   flex-direction: column;
   gap: 10px; /* 카드 간 간격 조정 */
-  background-color: rgba(110, 96, 83, 0.11);
   width: 390px;
   overflow-y: auto; /* 세로 스크롤 가능 */
   position: relative;
   padding-top: 20px;
   margin-top: -20px;
   height: 400px;
->>>>>>> 16908161647bb51890f2ae4cffe46907d474588a
 }
 
 
