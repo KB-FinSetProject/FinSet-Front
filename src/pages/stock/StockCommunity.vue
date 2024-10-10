@@ -4,6 +4,7 @@
   <div class="container">
     <div class="stock-detail">
       <div class="stock-header">
+        <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail" style="width:36px; height: 36;">
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
           <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
@@ -12,7 +13,7 @@
           <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
              :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
         </div>
-      </div>
+      </div>  
     </div>
 
     <div class="tabs-container">
@@ -38,7 +39,7 @@
       </router-link>
     </div>
     <br>
-
+    <div class="aaaa">
     <div class="card-container">
       <div v-for="(post, index) in communityPosts" :key="post.bno" class="card">
         <div class="card-header">
@@ -58,7 +59,8 @@
     <input type="text" placeholder="의견을 입력하세요" v-model="newComment" />
     <button @click="submitComment" :disabled="!newComment">등록</button>
   </div>
-</template>
+</div>
+</template> 
 
 <script setup>
 import { onMounted, ref } from 'vue';
@@ -197,6 +199,7 @@ const loadWishes = async () => {
   margin-top: 0px;
 }
 
+.aaaa{margin:2px;}
 .stock-detail {
   font-family: Arial, sans-serif;
   max-width: 390px;
@@ -218,12 +221,16 @@ const loadWishes = async () => {
   padding: 10px 15px;
 }
 
+.stock-name{
+  margin:0;
+}
+
 .stock-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  left: 10px;
+  left: -77px; /* 기존 10px에서 20px로 변경 */
 }
 
 .stock-price {
@@ -263,6 +270,13 @@ const loadWishes = async () => {
 
 /* 카드 관련 스타일 통합 */
 .card-container {
+<<<<<<< HEAD
+  height: auto; /* 고정된 높이 대신 자동으로 조정되도록 설정 */
+  max-height: 400px; /* 최대 높이를 설정해 스크롤 가능 */
+  overflow-y: auto;
+  position: relative;
+  bottom: 0; /* 하단에서 위치 고정 */
+=======
   display: flex;
   flex-direction: column;
   gap: 10px; /* 카드 간 간격 조정 */
@@ -273,21 +287,24 @@ const loadWishes = async () => {
   padding-top: 20px;
   margin-top: -20px;
   height: 400px;
+>>>>>>> 16908161647bb51890f2ae4cffe46907d474588a
 }
 
+
 .card {
-  border: 1px solid #ccc;
+  border: 1px solid #dadada;
   border-radius: 8px;
   margin-bottom: 10px;
   padding: 15px;
   color: black; /* 카드 내부 텍스트 색상 */
+  background-color: #fff8e67e;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: #fff8e67e;
   padding-top: 0%;
 }
 

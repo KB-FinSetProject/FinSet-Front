@@ -4,6 +4,8 @@
   <div class="container">
     <div class="stock-detail">
       <div class="stock-header">
+        <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail" style="width:36px; height: 36px; margin-left: -15px;">
+
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
           <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
@@ -197,9 +199,15 @@ onMounted(() => {
 
 
 <style scoped>
+
+
 .container{
   margin-bottom: 100px;
+<<<<<<< HEAD
+  margin-top: -120px;
+=======
   margin-top: -130px;
+>>>>>>> 16908161647bb51890f2ae4cffe46907d474588a
 }
 
 .stock-detail {
@@ -216,11 +224,16 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
+.stock-name{
+  margin:0;
+}
+
 .stock-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: -5px;
+  position: relative;
+  left: -77px; 
 }
 
 .stock-price {
@@ -411,4 +424,6 @@ h3{
   position: relative;
   bottom:15px;
 }
+.me-3 {
+  margin-right: 3rem !important;}
 </style>
