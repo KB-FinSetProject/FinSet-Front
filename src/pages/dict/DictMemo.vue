@@ -2,7 +2,14 @@
   <HeaderNormal navbarTitle="단어장" />
 
   <div class="container">
-    <div class="card-container">
+    <!-- <div class="card-container"> -->
+      <draggable
+        v-if="items.length > 0" 
+        group="items"
+        @end="onEnd"
+        class="card-container"
+      >
+  
       <div v-for="(item, index) in items" :key="item.dwno" class="card">
         <div class="card-header">
           <i 
@@ -31,7 +38,10 @@
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
+    </draggable>
+    
+
     <div v-if="showEditCompleteDialog" class="confirm-overlay">
       <div class="confirm-dialog">
         <span>수정이 완료되었습니다.</span>
@@ -48,10 +58,13 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 import dictWishApi from '@/api/dictWishApi'; // API 호출 파일
 import dictApi from '@/api/dictApi'; // 추가된 API 호출 파일
 import { ref } from 'vue';
+import { VueDraggableNext } from 'vue-draggable-next'
+
 
 export default {
   components: {
     HeaderNormal,
+    draggable: VueDraggableNext,
   },
   data() {
     return {
@@ -65,12 +78,12 @@ export default {
     };
   },
   mounted() {
-    const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+    const authData = JSON.parse(localStorage.getItem('auth'));
     this.uno = authData.uno; // uno 값 가져오기
     console.log('UNO:', this.uno); // uno 값 확인
-
-    this.fetchItems(); // 컴포넌트가 생성될 때 데이터 로드
+    this.fetchItems() 
   },
+
   methods: {
     async fetchItems() {
       try {
@@ -155,6 +168,39 @@ export default {
     closeEditCompleteDialog() {
       this.showEditCompleteDialog = false; // 수정 완료 다이얼로그 닫기
     },
+    
+    onEnd(event) {
+      if (event && event.newIndex !== event.oldIndex) {
+        // 드래그된 아이템의 새 인덱스와 기존 인덱스 확인
+        const movedItem = this.items[event.oldIndex]; // 드래그된 아이템
+        this.items.splice(event.oldIndex, 1); // 기존 인덱스에서 아이템 제거
+        this.items.splice(event.newIndex, 0, movedItem); // 새 인덱스에 아이템 추가
+
+        // dwno 값을 업데이트
+        this.updateDwnoValues();
+      } else {
+        console.error('드래그 이벤트에 문제가 있습니다.');
+      }
+    },
+
+    async updateDwnoValues() {
+      try {
+        const updatedItems = this.items.map((item, index) => ({
+          dwno: item.dwno, // 기존 dwno 유지
+          newDwno: index + 1 // 새 dwno 값 설정 (1부터 시작)
+        }));
+
+        console.log('Updated Items:', updatedItems);
+
+        // API 호출로 dwno 값 업데이트
+        // await dictWishApi.updateDwno(updatedItems); // 이 부분은 API 엔드포인트에 따라 조정 필요
+        // console.log('dwno values updated successfully');
+      } catch (error) {
+        console.error('Error updating dwno values:', error);
+      }
+    },
+
+
   },
 };
 </script>
