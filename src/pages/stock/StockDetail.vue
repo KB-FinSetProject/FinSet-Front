@@ -203,11 +203,8 @@ onMounted(() => {
 
 .container{
   margin-bottom: 100px;
-<<<<<<< HEAD
   margin-top: -120px;
-=======
   margin-top: -130px;
->>>>>>> 16908161647bb51890f2ae4cffe46907d474588a
 }
 
 .stock-detail {
