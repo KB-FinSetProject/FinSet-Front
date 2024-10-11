@@ -22,6 +22,17 @@
       <button @click="cancelSubmit" class="next-button">다시하기</button>
     </div>
 
+    <!-- Success Dialog Overlay -->
+    <div v-if="showSuccessDialog" class="confirm-overlay">
+      <div class="confirm-dialog">
+        <br>
+        <p>투자 성향이 <br>저장되었습니다.</p>
+        <div class="dialog-button-group">
+          <button @click="navigateToAuth" class="cancel-button">확인</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Confirmation Dialog Overlay -->
     <div v-if="showConfirmDialog" class="confirm-overlay">
       <div class="confirm-dialog">
@@ -83,6 +94,9 @@ export default {
       { level: 'Level 5. 공격투자형', maxScore: Infinity }
     ];
 
+    // Success Dialog Visibility
+    const showSuccessDialog = ref(false);
+
     // 투자 성향을 서버로 전송하는 함수
     const submitScore = async () => {
       try {
@@ -101,8 +115,7 @@ export default {
           // 서버로 요청 전송
           const response = await authApi.updateType(authData.id, payload);
           console.log('DB 저장 성공:', response.data);
-          alert('투자 성향이 저장되었습니다.');
-          router.push('/auth');
+          showSuccessDialog.value = true;
         } else {
           console.error('Auth data not found in localStorage');
           alert('로그인이 필요합니다.');
@@ -112,6 +125,11 @@ export default {
         console.error('DB 저장 실패:', error);
         alert('저장에 실패했습니다.');
       }
+    };
+
+    const navigateToAuth = () => {
+      showSuccessDialog.value = false; // 성공 다이얼로그 닫기
+      router.push('/auth'); // auth 페이지로 리다이렉트
     };
 
     // Confirmation Dialog
@@ -131,6 +149,8 @@ export default {
       showConfirmDialog,
       confirmRedirect,
       cancelSubmit,
+      navigateToAuth,
+      showSuccessDialog,
     };
   },
 };
