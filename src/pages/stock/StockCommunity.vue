@@ -38,7 +38,13 @@
         커뮤니티
       </router-link>
     </div>
-    <br>
+
+
+    <div class="sort">
+      <p :class="{ active: sortType === 'latest' }" @click="setSort('latest')">최신순</p>
+      <p :class="{ active: sortType === 'like' }" @click="setSort('like')">좋아요순</p>
+    </div>
+    
     <div class="aaaa">
     <div class="card-container">
       <div v-for="(post, index) in communityPosts" :key="post.bno" class="card">
@@ -75,14 +81,23 @@ const snoFromRoute = ref(route.params.sno);
 const newComment = ref('');
 const communityPosts = ref([]);
 const stock = ref([]);
+const sortType = ref('latest'); 
 
 const getCommunity = async () => {
   try {
-    const data = await api.getCommunity(snoFromRoute.value); // API 호출
-    communityPosts.value = data.map(post => ({ 
-      ...post, 
-      liked: post.isLiked === 1, // isLiked가 1일 경우 liked를 true로 설정
-    })); 
+    const response = await communityApi.getCommunities(snoFromRoute.value, sortType.value);
+    const data = response.data;
+    console.log("API 응답 데이터:", data);
+
+    if (Array.isArray(data)) {
+      communityPosts.value = data.map(post => ({
+        ...post,
+        liked: post.isLiked === 1, // isLiked가 1일 경우 liked를 true로 설정
+      }));
+    } else {
+      console.error("API 응답이 배열이 아닙니다:", data);
+    }
+
     console.log("GET COMMUNITY", data);
 
     loadWishes();
@@ -90,6 +105,11 @@ const getCommunity = async () => {
   } catch (error) {
     console.error("Error loading COMMUNITY:", error);
   }
+};
+
+const setSort = (type) => {
+  sortType.value = type;
+  getCommunity(); // 정렬 변경 시 커뮤니티 데이터 다시 가져오기
 };
 
 const formatDate = (dateString) => {
@@ -417,4 +437,25 @@ button {
   width: 45px;
   color: #6E6053;
 }
+
+.sort {
+  display: flex;
+  gap: 5px; /* 두 항목 간의 간격 조절 */
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sort p {
+  cursor: pointer;
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sort p.active {
+  color: #FAB809;
+}
+
 </style>

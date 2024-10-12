@@ -193,8 +193,8 @@ export default {
         console.log('Updated Items:', updatedItems);
 
         // API 호출로 dwno 값 업데이트
-        // await dictWishApi.updateDwno(updatedItems); // 이 부분은 API 엔드포인트에 따라 조정 필요
-        // console.log('dwno values updated successfully');
+        await dictWishApi.updateOrder({ dictWishOrders: updatedItems }); // 이 부분은 API 엔드포인트에 따라 조정 필요
+        console.log('dwno values updated successfully');
       } catch (error) {
         console.error('Error updating dwno values:', error);
       }

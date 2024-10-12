@@ -29,4 +29,15 @@ export default {
         return response.data;
     },
 
+    // 사전 단어장 순서 업데이트
+    async updateOrder(orderData) {
+        const response = await api.patch(`${BASE_URL}/order`, orderData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log('DICT WISH ORDER UPDATE:', response.data);
+        return response.data;
+    },
+
 }
