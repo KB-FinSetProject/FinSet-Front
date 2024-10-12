@@ -59,17 +59,17 @@
       <div class="stock-info-grid">
         <div class="stock-info-item">
           <span>시가</span>
-          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.openPrice) }} 원</span>
+          <span style="font-weight: bold; color:#555555">{{ (stock?.openPrice ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 원</span>
         </div>
         <hr style="margin: 0 15px; border-color:orange; width:300px">
         <div class="stock-info-item">
           <span>종가</span>
-          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.closePrice) }} 원</span>
+          <span style="font-weight: bold; color:#555555">{{ (stock?.closePrice ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 원</span>
         </div>
         <hr style="margin: 0 15px; border-color:orange; width:300px">
         <div class="stock-info-item">
-          <span>거래대금</span>
-          <span style="font-weight: bold; color:#555555">{{ formatNumber(stock.tradingVol) }} 주</span>
+          <span>거래량</span>
+          <span style="font-weight: bold; color:#555555">{{ (stock?.tradingVol ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 주</span>
         </div>
       </div>
       <br>

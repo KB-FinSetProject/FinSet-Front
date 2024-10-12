@@ -25,7 +25,7 @@
 
             <div class="stock-detail">
               <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }" class="stock-name">{{ stock.stockName }}</router-link>
-              <p class="stock-details">{{ stock.stockPrice }}
+              <p class="stock-details">{{ formatNumber(stock.stockPrice) }}
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
             </div>
@@ -73,7 +73,12 @@ const load = async () => {
     console.error("Error loading stocks:", error);
   }
 };
-
+const formatNumber = (value) => {
+  if (value != null) {
+    return value.toLocaleString('ko-KR');
+  }
+  return value;
+};
 onMounted(async () => {
   await load(); // 주식 리스트 로드
   await loadWishes(); // 위시리스트 로드
