@@ -23,7 +23,7 @@
 
             <div class="stock-detail">
               <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }" class="stock-name">{{ stock.stockName }}</router-link>
-              <p class="stock-details">{{ stock.stockPrice }}
+              <p class="stock-details">{{ formatNumber(stock.stockPrice) }}
                 <span class="change" :style="{ color: getColor(stock.priceChangeRate) }">{{ stock.priceChangeRate }}</span>
               </p>
             </div>
@@ -61,7 +61,12 @@ const removeWish = async (stock) => {
   stocks.value = await api.removeWish(stock);
   console.log(stock.value);
 };
-
+const formatNumber = (value) => {
+  if (value != null) {
+    return value.toLocaleString('ko-KR');
+  }
+  return value;
+};
 // API에서 주식 리스트를 가져오는 함수
 const load = async (query) => {
   try {

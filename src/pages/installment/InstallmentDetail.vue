@@ -59,7 +59,7 @@
     </div>
 
     <div class="button-container">
-      <a :href="installment.installmentLink" class="join-button">지금 바로 가입하기</a> <!-- 가입 링크 -->
+      <a :href="installment.installmentLink" target="_blank" rel="noopener noreferrer" class="join-button">지금 바로 가입하기</a> <!-- 가입 링크 -->
     </div>
   </div>
 </template>

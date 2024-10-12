@@ -59,7 +59,7 @@
     </div>
 
     <div class="button-container">
-      <a :href="deposit.depositLink" class="join-button">지금 바로 가입하기</a> <!-- 가입 링크 -->
+      <a :href="deposit.depositLink" target="_blank" rel="noopener noreferrer" class="join-button">지금 바로 가입하기</a> <!-- 가입 링크 -->
     </div>
   </div>
 </template>
