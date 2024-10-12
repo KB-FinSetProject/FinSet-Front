@@ -24,8 +24,12 @@ const stockCommunityApi = {
     },
 
     // 특정 주식 커뮤니티 게시글 목록 가져오기
-    getCommunities(sno) {
-        return api.get(`${BASE_URL}/${sno}/community`);
+    getCommunities(sno, sort = 'latest') {
+        return api.get(`${BASE_URL}/${sno}/community`, {
+            params: {
+                sort: sort
+            }
+        });
     },
 
     // 커뮤니티 게시글 작성

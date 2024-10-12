@@ -9,13 +9,18 @@
         class="search-input"
       />
       <!-- 검색 아이콘 클릭 시 /search/results로 이동 -->
-      <router-link
+      <!-- <router-link
         :to="{ path: '/search/results', query: { term: searchTerm } }"
       >
         <template v-slot="{ navigate }">
           <i class="fas fa-magnifying-glass search-icon" @click="navigate"></i>
         </template>
-      </router-link>
+      </router-link> -->
+      <i
+      class="fas fa-magnifying-glass search-icon"
+      @click="searchAndExecute"
+    ></i>
+
     </div>
     <p class="example-text">ex) 500000원에 맞는 주식을 찾아줘</p>
     <p class="example-text">ex) 3000000, 3년, 펀드</p>
@@ -55,6 +60,8 @@
 </template>
 
 <script>
+import searchApi from '@/api/searchApi';
+
 export default {
   data() {
     return {
@@ -65,6 +72,19 @@ export default {
     };
   },
   methods: {
+    async searchAndExecute() {
+      if (this.searchTerm.trim() === '') {
+        alert('검색어를 입력하세요.');
+        return;
+      }
+
+      try {
+        const results = await searchApi.executePythonCode(this.searchTerm); 
+        this.searchResults = results; // 결과를 검색 결과에 저장
+      } catch (error) {
+        console.error('검색 실패:', error);
+      }
+    },
     removeKeyword(keyword) {
       // 클릭한 키워드를 recentKeywords에서 제거
       this.recentKeywords = this.recentKeywords.filter(k => k !== keyword);
