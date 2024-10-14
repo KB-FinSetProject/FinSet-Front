@@ -31,7 +31,7 @@
 
           <div class="stock-icon" @click="toggleFavorite(stock)">
             <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
-             :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
+               :style="{ color: stock.favorite ? '#FFBB00' : '#888' }"></i>
           </div>
         </div>
       </div>
@@ -111,8 +111,8 @@ const loadWishes = async () => {
 
     // 관심 목록에서 tno가 4인 상품의 pno를 사용해 stock.favorite 설정
     const favoritePnos = wishes
-      .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
-      .map(wish => wish.pno); // pno 추출
+        .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
+        .map(wish => wish.pno); // pno 추출
 
     // 각 주식의 favorite 상태 설정
     stocks.value.forEach(stock => {

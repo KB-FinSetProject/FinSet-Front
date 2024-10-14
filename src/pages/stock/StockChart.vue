@@ -7,7 +7,7 @@
         <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail" style="width:36px; height: 36px; margin-left: -15px;">
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
-          <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
+          <span class="stock-price">{{(stock?.closePrice ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 원</span>
         </div>
         <div class="stock-icon" @click="toggleFavorite">
           <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
@@ -17,7 +17,7 @@
     </div>
 
     <div class="tabs-container">
-      <router-link :to="{ name: 'stockChart', params: { sno: snoFromRoute } }" class="tab" active-class="active">차트</router-link>
+      <router-link :to="{ name: 'stockChart', params: { sno: stock.sno } }" class="tab" active-class="active">차트</router-link>
       <router-link :to="{ name: 'stockDetail', params: { sno: stock.sno } }" class="tab" active-class="active" style="color: #DADADA;">종목정보</router-link>
       <router-link :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" class="tab" active-class="active" style="color: #DADADA;">커뮤니티</router-link>
     </div>
@@ -25,6 +25,9 @@
 
     <div class="chart-container">
       <canvas ref="stockChart"></canvas>
+      <div id="tooltip" class="tooltip" v-if="tooltipVisible" :style="{ left: tooltipPosition.x + 'px', top: tooltipPosition.y + 'px' }">
+        {{ tooltipDate }}: {{ tooltipPrice }} 원
+      </div>
       <div class="chart-info">
         <span class="chart-high" style="color: red;">최고 {{ highestPrice }}원</span>
         <span class="chart-low" style="color: blue;">최저 {{ lowestPrice }}원</span>
@@ -33,20 +36,20 @@
     <br><br>
     <div class="sort">
       <div class="sort-include d-flex justify-content-between">
-        <div class="sort-option" 
-             :class="{ 'active': selectedTimeframe === '1일' }" 
+        <div class="sort-option"
+             :class="{ 'active': selectedTimeframe === '1일' }"
              @click="selectTimeframe('1일')">1일</div>
-        <div class="sort-option" 
-             :class="{ 'active': selectedTimeframe === '1주' }" 
+        <div class="sort-option"
+             :class="{ 'active': selectedTimeframe === '1주' }"
              @click="selectTimeframe('1주')">1주</div>
-        <div class="sort-option" 
-             :class="{ 'active': selectedTimeframe === '1달' }" 
+        <div class="sort-option"
+             :class="{ 'active': selectedTimeframe === '1달' }"
              @click="selectTimeframe('1달')">1달</div>
       </div>
     </div>
 
     <br>
-  
+
     <div class="timeframe-container d-flex align-items-start">
       <i class="fa-solid fa-chart-line icon"></i>
       <div>
@@ -58,10 +61,9 @@
         </div>
       </div>
     </div>
-    
+
     <hr>
     <h3 style="text-align: center;">News</h3>
-
 
     <div class="news-section">
       <div v-for="(news, index) in newsItems" :key="index" class="news-item">
@@ -102,18 +104,35 @@ const timePeriods = ['1일', '1주', '1달'];
 const timeframeText = ref('1일'); // 초기 텍스트 설정
 const displayValue = ref(0); // 계산된 수익 값을 저장
 const selectedTimeframe = ref('1일'); // 초기 선택된 시간 프레임
-
-const stock = ref({});
+const stock = ref({
+  minValue: 0,
+  maxValue: 0,
+  openPrice: 0,
+  closePrice: 0,
+  tradingVol: 0,
+  sales: 0,
+  profit: 0,
+  income: 0,
+  favorite: false, // 초기값 설정
+});
 const pastValues = ref({
   daily: null,
   weekly: null,
   monthly: null,
 });
 
+const tooltipVisible = ref(false);
+const tooltipPosition = ref({ x: 0, y: 0 });
+const tooltipDate = ref('');
+const tooltipPrice = ref('');
+
 const renderChart = () => {
   if (stockChart.value) {
     const ctx = stockChart.value.getContext('2d');
-    new Chart(ctx, {
+    const currentPrice = chartData.value[0]?.stockPrice;
+    const currentDate = chartData.value[0]?.stockDatetime;
+
+    const chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: chartData.value.map(data => data.stockDatetime),
@@ -130,23 +149,48 @@ const renderChart = () => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false }, // 범례 제거
-          tooltip: { enabled: false }, // 툴팁 제거
+          legend: { display: false },
+          tooltip: { enabled: false },
         },
         scales: {
           x: {
-            display: false, // x축 범주 숨기기
+            display: false,
           },
           y: {
-            display: false, // y축 범주 숨기기
+            display: true,
+            ticks: {
+              callback: (value) => {
+                return value.toLocaleString('ko-KR');
+              },
+            },
           },
         },
         elements: {
           line: {
-            tension: 0, // 선의 곡률을 없애고 직선으로 만들기
+            tension: 0,
           }
         },
       },
+    });
+
+    // 차트에 마우스 이벤트 추가
+    stockChart.value.addEventListener('mousemove', (event) => {
+      const rect = stockChart.value.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const index = Math.floor((x / rect.width) * chartData.value.length);
+
+      if (index >= 0 && index < chartData.value.length) {
+        tooltipVisible.value = true;
+        tooltipPosition.value = { x: event.clientX, y: event.clientY - 30 }; // 툴팁 위치 조정
+        tooltipDate.value = chartData.value[index].stockDatetime;
+        tooltipPrice.value = chartData.value[index].stockPrice;
+      } else {
+        tooltipVisible.value = false; // 범위 밖으로 나가면 툴팁 숨김
+      }
+    });
+
+    stockChart.value.addEventListener('mouseleave', () => {
+      tooltipVisible.value = false; // 마우스가 차트를 떠나면 툴팁 숨김
     });
   }
 };
@@ -163,8 +207,6 @@ const calculateDisplayValue = () => {
   }
 
   const currentRate = chartData.value[0].stockPrice; // 가장 최근 가격
-  console.log(currentRate);
-  
   let pastRate;
   if (selectedTimeframe.value === '1일') {
     pastRate = chartData.value[1] ? chartData.value[1].stockPrice : currentRate;
@@ -173,14 +215,13 @@ const calculateDisplayValue = () => {
   } else if (selectedTimeframe.value === '1달') {
     pastRate = chartData.value[19] ? chartData.value[19].stockPrice : currentRate; // 1달 전 (22일 전)
   }
-  
+
   // 수익 계산 (현재 값에서 과거 값을 뺀 결과)
   displayValue.value = (currentRate - pastRate).toFixed(2); // 소수점 2자리까지
 };
 
 const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
 const uno = ref(authData ? authData.uno : null); // uno 값을 가져오기
-console.log("uno : ", uno.value);
 
 // 즐겨찾기 토글 함수
 const toggleFavorite = async () => {
@@ -189,26 +230,41 @@ const toggleFavorite = async () => {
 
     // API 호출하여 즐겨찾기 추가/삭제 처리
     if (stock.value.favorite) {
-      await wishApi.addWish({ tno: 4, uno: uno.value, pno: stock.value.sno }); // tno와 pno 추가
+      await wishApi.addWish({tno: 4, uno: uno.value, pno: stock.value.sno}); // tno와 pno 추가
     } else {
-      await wishApi.deleteWish({ tno: 4, uno: uno.value, pno: stock.value.sno }); // tno와 pno 삭제
+      await wishApi.deleteWish({tno: 4, uno: uno.value, pno: stock.value.sno}); // tno와 pno 삭제
     }
   } catch (error) {
     console.error("Error toggling favorite:", error);
     stock.value.favorite = !stock.value.favorite; // 원래 상태로 복구
   }
 };
-
+const loadStockSymbol = async (sno) => {
+  try {
+    const symbolData = await api.getSymbol(sno);
+    stock.value = {
+      ...stock.value,
+      openPrice: symbolData.openPrice,
+      closePrice: symbolData.closePrice,
+      tradingVol: symbolData.tradingVol,
+      sales: symbolData.sales,
+      profit: symbolData.profit,
+      income: symbolData.income,
+      minValue: symbolData.minValue,
+      maxValue: symbolData.maxValue,
+    };
+    console.log('심볼 상세 정보:', symbolData);
+  } catch (error) {
+    console.error('Error loading stock symbol details:', error);
+  }
+};
 // 데이터 로드 함수
 const loadWishes = async () => {
   try {
     const wishes = await wishApi.fetchAllWishes(uno.value); // wishes 데이터를 가져옵니다.
-    console.log("wish : ", wishes);
-
-    // 관심 목록에서 tno가 4인 상품의 pno를 사용해 stock.favorite 설정
     const favoritePnos = wishes
-      .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
-      .map(wish => wish.pno); // pno 추출
+        .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
+        .map(wish => wish.pno); // pno 추출
 
     stock.value.favorite = favoritePnos.includes(stock.value.sno); // 현재 주식이 즐겨찾기인지 확인
   } catch (error) {
@@ -216,36 +272,43 @@ const loadWishes = async () => {
   }
 };
 
-onMounted(() => {
-  getChart(sno); // sno로 차트 데이터를 가져옵니다.
-  getStockDetails(sno); // sno로 주식 상세 데이터를 가져옵니다.
-  getNews(sno); // sno로 뉴스 데이터를 가져옵니다.
+onMounted(async () => {
+  if (sno) {
+    await getStockDetails(sno);
+    await getChart(sno);
+    await getNews(sno);
+    await loadStockSymbol(sno);
+  } else {
+    console.error('sno is undefined');
+  }
 });
-  
+
 const getStockDetails = async (query) => {
   try {
     stock.value = await api.get(query);
-    console.log(stock.value);
   } catch (error) {
     console.error(`error`, error);
   }
 };
-
 const getNews = async (query) => {
   try {
     newsItems.value = await api.getNews(query);
-    console.log(newsItems.value);
   } catch (error) {
     console.error('error', error);
   }
 };
-
 const getChart = async (query) => {
   try {
+    // 차트 데이터 가져오기
     chartData.value = await api.getChart(query);
+
+    // 데이터 순서 반전 (가장 오래된 것이 먼저 나왔으므로 최신순으로)
+    chartData.value.reverse();
+
+    // 차트 렌더링
     renderChart();
-    calculateDisplayValue(); // 차트 데이터가 업데이트 된 후 displayValue 계산
-    loadWishes(); // wishes 로드하여 즐겨찾기 상태 설정
+    calculateDisplayValue(); // displayValue 계산
+    loadWishes(); // 즐겨찾기 상태 로드
   } catch (error) {
     console.error('error', error);
   }
@@ -259,10 +322,8 @@ const formatNumber = (value) => {
 };
 </script>
 
-
-
 <style scoped>
-.container{
+.container {
   margin-bottom: 100px;
   margin-top: -40px;
 }
@@ -281,14 +342,8 @@ const formatNumber = (value) => {
   margin-bottom: 20px;
 }
 
-.stock-name{
-  margin:0;
-}
-
-.stock-name{
-  margin:0;
-  position: relative;
-  top:4px;
+.stock-name {
+  margin: 0;
 }
 
 .stock-info {
@@ -331,38 +386,27 @@ const formatNumber = (value) => {
   font-weight: bold;
 }
 
-
 .chart-info {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   color: #888;
   margin-top: 30px;
-
 }
 
-.time-buttons {
-  display: flex;
-  justify-content: space-between;
-
-}
-
-.time-button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.time-button.active {
-  background-color: #FAB809;
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
+  padding: 5px;
+  border-radius: 5px;
+  pointer-events: none; /* 툴팁이 클릭 이벤트를 방지 */
+  z-index: 10; /* 차트 위에 표시되도록 설정 */
 }
+
 .news-section {
   margin-top: 20px;
   width: 360px;
-  
 }
 
 .news-item {
@@ -406,7 +450,6 @@ const formatNumber = (value) => {
   margin-left: 10px; /* 내용과 이미지 간의 간격 */
 }
 
-
 .chart-container {
   max-width: 390px; /* 원하는 최대 너비 */
   width: 90%; /* 반응형을 위해 100% 설정 */
@@ -414,8 +457,7 @@ const formatNumber = (value) => {
   margin-left: 20px;
 }
 
-
-.sort{
+.sort {
   background-color: #E9E7E5; /* 기본 배경색 */
   padding: 10px 15px;
   margin-top: 30px;
@@ -448,11 +490,11 @@ const formatNumber = (value) => {
   background-color: white; /* 선택된 옵션은 흰색 */
 }
 
-.icon{
-  margin : 15px; 
+.icon {
+  margin: 15px;
   align-self: center;
   font-size: 30px;
-  color : #547BC1;
+  color: #547BC1;
 }
 
 .timeframe-container {
@@ -470,6 +512,4 @@ const formatNumber = (value) => {
   font-size: 24px; /* 값 크기 조정 */
   font-weight: bold; /* 값 두껍게 */
 }
-
-
 </style>
