@@ -6,7 +6,7 @@
       <h2><i class="fa-solid fa-magnifying-glass-chart icon"></i>TODAY KOSPI</h2>
       <h2 style="margin-top: 10px;">{{ kospiData[0]?.kospiVal?.toLocaleString() }}원</h2> <!-- KOSPI 가격 표시 -->
 
-      
+
       <h6 :style="{ color: (kospiData[0]?.kospiVal - (kospiData[1]?.kospiVal || 0)) > 0 ? '#FF6767' : '#547BC1' }">
         <span style="color: gray;">전일대비 </span>{{ (kospiData[0]?.kospiVal - (kospiData[1]?.kospiVal || 0)).toFixed(2) }}원 {{ (kospiData[0]?.kospiVal - (kospiData[1]?.kospiVal || 0)) > 0 ? '▲' : '▼' }}
       </h6>
@@ -31,7 +31,7 @@
               <p class="card-text">{{ news.title }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl(news.link)" style="margin-top: -20px;">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" @click="goToUrl(news.link)" style="margin-top: -20px;"> 이동</button>
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@
 
       <br>
 
-      <div class="d-flex justify-content-center mt-1"> 
+      <div class="d-flex justify-content-center mt-1">
         <button class="circle-button" v-for="(news, index) in newsList.slice(0, 3)" :key="index" @click="goToSlide(index)"></button>
       </div>
     </div>
@@ -82,8 +82,8 @@
           </template>
         </div>
       </div>
-      
-      
+
+
     </div>
   </div>
 </template>
@@ -188,56 +188,59 @@ export default {
         console.error("관심 목록을 가져오는 도중 오류가 발생했습니다:", error);
       }
     },
-
     createChart() {
       if (this.lineChartRef) {
         const ctx = this.lineChartRef.getContext('2d'); // ref를 사용하여 컨텍스트 가져오기
 
         if (!ctx) {
-          console.error('Chart context is null'); // 디버깅을 위한 로그 추가
+          console.error('Chart context is null');
           return;
         }
 
-        // KOSPI 데이터에서 날짜와 값 추출
-        const labels = this.kospiData.map(data => data.kospiDate); // 날짜를 X축 레이블로 사용
-        const dataValues = this.kospiData.map(data => data.kospiVal); // KOSPI 값을 Y축 데이터로 사용
+        // KOSPI 데이터에서 날짜와 값 추출 (월/일 형식으로 변환)
+        const labels = this.kospiData.map(data =>
+            new Date(data.kospiDate).toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })
+        );
+        const dataValues = this.kospiData.map(data => data.kospiVal);
 
         new Chart(ctx, {
           type: 'line',
           data: {
-            labels: labels, // X축 레이블
+            labels: labels, // X축 레이블 (월/일)
             datasets: [{
               label: 'KOSPI',
-              data: dataValues, // KOSPI 데이터
-              backgroundColor: 'rgba(253, 235, 234, 0.5)', // 배경색
-              borderColor: 'rgba(255, 103, 103, 1)', // 선 색상
-              borderWidth: 2, // 선 두께
-              fill: true, // 영역 채우기
-              tension: 0.4, // 라인을 부드럽게 곡선으로
-              pointRadius: 0, // 점 없애기
-              pointHoverRadius: 0, // 마우스 오버 시 점 없애기
-              display: false // 범례(legend) 없애기
+              data: dataValues,
+              backgroundColor: 'rgba(253, 235, 234, 0.5)',
+              borderColor: 'rgba(255, 103, 103, 1)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 0,
+              pointHoverRadius: 0,
             }]
           },
           options: {
             responsive: true,
             plugins: {
               legend: {
-                display: false // 범례 표시 안함
+                display: false, // 범례 표시 안함
               }
             },
             scales: {
               x: {
-                display: true, // x축 숨기기
+                ticks: {
+                  maxRotation: 0, // X축 텍스트를 가로로 표시
+                  minRotation: 0,
+                },
                 grid: {
-                  display: false // X축 점선 없애기
+                  display: false,
                 }
               },
               y: {
-                min: 2400, // y축 최소값 설정
-                max: 2800, // y축 최대값 설정
+                min: 2400,
+                max: 2800,
                 grid: {
-                  display: false // Y축 점선 없애기
+                  display: false,
                 }
               }
             }
@@ -263,7 +266,7 @@ export default {
 <style scoped>
 .container {
   width: 70%;
-  margin-top:-30px;
+  margin-top: -30px;
   margin-bottom: 100px;
 }
 
@@ -335,13 +338,15 @@ export default {
   height: 105px; /* 원하는 높이로 조정 */
   object-fit: cover;
 }
-.news{
+
+.news {
   position: relative;
   bottom: 20px;
   width: 100%;
   height: 350px; /* 차트 높이를 설정 */
 }
-.wish{
+
+.wish {
   position: relative;
   bottom: 20px;
 }
