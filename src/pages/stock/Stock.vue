@@ -67,6 +67,10 @@ const formatNumber = (value) => {
   }
   return value;
 };
+const getIcon = (change) => {
+  const changeRate = parseFloat(change); // 문자열을 숫자로 변환
+  return changeRate < 0 ? '▲' : '▼'; // 음수는 파란색, 양수는 빨간색
+};
 // API에서 주식 리스트를 가져오는 함수
 const load = async (query) => {
   try {

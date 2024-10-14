@@ -3,7 +3,10 @@
 
   <div class="container">
     <div style="margin-left: 15px;">
-      <h5>통화 환율</h5>
+
+      <h5>통화 환율(금일 00시 기준 업데이트)</h5>
+
+
       <p style="color: #9B9B9B;">원하는 통화를 선택하면 상세페이지로 이동됩니다.</p>
     </div>
 
@@ -177,7 +180,9 @@ body {
   color: #595959;
   margin-left: 10px;
 }
-
+.fo{
+  font-size: 10px;
+}
 .rate{
   margin-right: 10px;
 }
