@@ -284,4 +284,10 @@ export default {
   margin-top: 10px;
   margin-bottom: -10px;
 }
+
+.deposit-details{
+    width: 110px;
+}
+
+
 </style>
