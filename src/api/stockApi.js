@@ -87,5 +87,6 @@ export default {
         const { data } = await api.post(`${BASE_URL}/${sno}/community`, commentData);
         console.log('POST comment', data);
         return data;
-    }
+    },
+
 }

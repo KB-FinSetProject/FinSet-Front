@@ -18,24 +18,24 @@
     </div>
 
     <div class="tabs-container">
-      <router-link 
-        :to="{ name: 'stockChart', params: { sno: snoFromRoute } }" 
-        class="tab" 
-        active-class="active" 
-        style="color: #DADADA;">
+      <router-link
+          :to="{ name: 'stockChart', params: { sno: snoFromRoute } }"
+          class="tab"
+          active-class="active"
+          style="color: #DADADA;">
         차트
       </router-link>
-      <router-link 
-        :to="{ name: 'stockDetail', params: { sno: stock.sno } }" 
-        class="tab" 
-        active-class="active">
+      <router-link
+          :to="{ name: 'stockDetail', params: { sno: stock.sno } }"
+          class="tab"
+          active-class="active">
         종목정보
       </router-link>
-      <router-link 
-        :to="{ name: 'stockCommunity', params: { sno: stock.sno } }" 
-        class="tab" 
-        active-class="active" 
-        style="color: #DADADA;">
+      <router-link
+          :to="{ name: 'stockCommunity', params: { sno: stock.sno } }"
+          class="tab"
+          active-class="active"
+          style="color: #DADADA;">
         커뮤니티
       </router-link>
     </div>
@@ -149,8 +149,8 @@ const loadStockDetails = async () => {
 
     // 관심 목록에서 tno가 4인 상품의 pno를 사용해 stock.favorite 설정
     const favoritePnos = wishes.value
-      .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
-      .map(wish => wish.pno); // pno 추출
+        .filter(wish => wish.tno === 4) // tno가 4인 항목 필터링
+        .map(wish => wish.pno); // pno 추출
 
     stock.value.favorite = favoritePnos.includes(stock.value.sno); // 현재 주식이 즐겨찾기인지 확인
   } catch (error) {
@@ -230,7 +230,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  left: -77px; 
+  left: -77px;
 }
 
 .stock-price {
@@ -317,7 +317,7 @@ onMounted(() => {
 }
 
 .additional-info {
-  display: flex; /* Flexbox를 사용하여 가로 배치 */ 
+  display: flex; /* Flexbox를 사용하여 가로 배치 */
 }
 
 .info-item {
@@ -359,22 +359,22 @@ h5{
 
 .min-price {
   text-align: left; /* 왼쪽 정렬 */
-  color: #FF6767; 
+  color: #FF6767;
   font-weight:bold;
 }
 
 .max-price {
   text-align: right; /* 오른쪽 정렬 */
-  color: #547BC1; 
+  color: #547BC1;
   font-weight:bold;
 }
 
 .min-price-value{
-  color: #9B9B9B; 
+  color: #9B9B9B;
 }
 
 .max-price-value{
-  color: #9B9B9B; 
+  color: #9B9B9B;
 }
 
 .price-info {
