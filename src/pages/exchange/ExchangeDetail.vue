@@ -4,7 +4,7 @@
   <div class="container">
     <br><br>
     <h3 style="margin-left: 10px;">환전정보</h3>
-    <span style="margin-left: 10px; color:gray">2024/10/01 09:00 기준 </span>
+    <span style="margin-left: 10px; color:gray">2024/10/16 09:00 기준 </span>
     <br><br>
 
     <div class="exchange-header d-flex align-items-center justify-content-between" v-if="item">
@@ -174,7 +174,7 @@ export default {
     calculateChange() {
       if (this.chartData && this.chartData.length > 1) {
         // 인덱스 0과 인덱스 1의 forexBasicRate 차이를 계산
-        this.change = (this.chartData[0].forexBasicRate - this.chartData[1].forexBasicRate).toFixed(2);
+        this.change = (this.chartData[this.chartData.length - 1].forexBasicRate - this.chartData[this.chartData.length - 2].forexBasicRate).toFixed(2);
       } else {
         this.change = 0; // 데이터가 부족할 경우 0으로 설정
       }
@@ -184,15 +184,18 @@ export default {
         return; // 차트 데이터가 없으면 계산할 수 없으므로 리턴
       }
 
-      const currentRate = this.chartData[0].forexBasicRate; // 가장 최근 가격
+      const currentRate = this.chartData[this.chartData.length - 1].forexBasicRate; // 가장 최근 가격
       
       let pastRate;
       if (this.selectedTimeframe === '1일') {
-        pastRate = this.chartData[1] ? this.chartData[1].forexBasicRate : currentRate;
+        pastRate = this.chartData[this.chartData.length - 2] ? this.chartData[this.chartData.length - 2].forexBasicRate : currentRate;
+        console.log(pastRate);
       } else if (this.selectedTimeframe === '1주') {
-        pastRate = this.chartData[5] ? this.chartData[5].forexBasicRate : currentRate; // 1주 전 (5일 전)
+        pastRate = this.chartData[this.chartData.length / 4] ? this.chartData[this.chartData.length / 4].forexBasicRate : currentRate; // 1주 전 (5일 전)
+        console.log(pastRate);
       } else if (this.selectedTimeframe === '1달') {
-        pastRate = this.chartData[19] ? this.chartData[19].forexBasicRate : currentRate; // 1달 전 (22일 전)
+        pastRate = this.chartData[0] ? this.chartData[0].forexBasicRate : currentRate; // 1달 전 (22일 전)
+        console.log(pastRate);
       }
       
       // 수익 계산 (현재 값에서 과거 값을 뺀 결과)

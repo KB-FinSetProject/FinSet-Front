@@ -86,6 +86,7 @@ const chartData = ref(null);
 const chartCanvas = ref(null);
 const route = useRoute();
 const fundId = route.params.fno;
+const wishes = ref(null);
 
 async function fetchFundDetail() {
   try {

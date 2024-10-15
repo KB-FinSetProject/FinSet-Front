@@ -206,14 +206,17 @@ const calculateDisplayValue = () => {
     return; // 차트 데이터가 없으면 계산할 수 없으므로 리턴
   }
 
-  const currentRate = chartData.value[0].stockPrice; // 가장 최근 가격
+  const currentRate = chartData.value[chartData.value.length - 1].stockPrice; // 가장 최근 가격
   let pastRate;
   if (selectedTimeframe.value === '1일') {
-    pastRate = chartData.value[1] ? chartData.value[1].stockPrice : currentRate;
+    pastRate = chartData.value[chartData.value.length - 2] ? chartData.value[chartData.value.length - 2].stockPrice : currentRate;
+    console.log(pastRate);
   } else if (selectedTimeframe.value === '1주') {
-    pastRate = chartData.value[5] ? chartData.value[5].stockPrice : currentRate; // 1주 전 (5일 전)
+    pastRate = chartData.value[(chartData.value.length) / 4] ? chartData.value[(chartData.value.length) / 4].stockPrice : currentRate; // 1주 전 (5일 전)
+    console.log(pastRate);
   } else if (selectedTimeframe.value === '1달') {
-    pastRate = chartData.value[19] ? chartData.value[19].stockPrice : currentRate; // 1달 전 (22일 전)
+    pastRate = chartData.value[0] ? chartData.value[0].stockPrice : currentRate; // 1달 전 (22일 전)
+    console.log(pastRate);
   }
 
   // 수익 계산 (현재 값에서 과거 값을 뺀 결과)

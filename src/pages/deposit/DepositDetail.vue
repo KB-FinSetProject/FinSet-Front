@@ -84,20 +84,25 @@ export default {
     return {
       deposit: {}, // 예금 정보 초기화
       imgUrl: '', // 이미지 URL 초기화
+      deposits: [], // 예금 목록 데이터 초기화
+      wishes: [], // 사용자 관심 목록 데이터 초기화
+      uno: null,
     };
   },
   mounted() {
     const route = useRoute();
     const dno = route.query.dno; // 쿼리에서 dno 가져오기
     console.log('dno:', dno); // dno 값을 로그로 출력
+
     if (dno) {
       depositApi.fetchDepositById(dno).then((data) => {
         this.deposit = data; // 예금 정보 가져오기
-        // imgUrl을 require로 설정하여 웹팩이 파일을 인식하게 함
         this.imgUrl = data.imgUrl;
-        console.log(this.imgUrl); // 로그로 출력
+        console.log(this.deposit); // 로그로 출력
       });
     }
+    this.fetchDeposits();
+
   },
 
   methods: {
@@ -106,12 +111,10 @@ export default {
         const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
         this.uno = authData.uno; // uno 값 가져오기
 
-        // 모든 예금 상품을 먼저 불러오기
-        this.deposits = await depositApi.fetchDeposits(); // API 호출
-
         // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
         try {
           this.wishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+          console.log("Wishes:", this.wishes); // 관심 목록 로그 출력
         } catch (error) {
           console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
           this.wishes = []; // 관심 목록이 없으면 빈 배열로 처리
@@ -119,12 +122,11 @@ export default {
 
         // 관심 목록에서 tno가 1인 상품의 pno를 사용해 deposit.favorite 설정
         const favoritePnos = this.wishes
-            .filter(wish => wish.tno === 1)
-            .map(wish => wish.pno);
+          .filter(wish => wish.tno === 1)
+          .map(wish => wish.pno);
 
-        this.deposits.forEach(deposit => {
-          deposit.favorite = favoritePnos.includes(deposit.dno);
-        });
+        this.deposit.favorite = favoritePnos.includes(this.deposit.dno);
+
 
       } catch (error) {
         console.error("Error fetching deposits:", error); // 오류 처리
@@ -153,6 +155,7 @@ export default {
 
 };
 </script>
+
 
 <style scoped>
 .container{

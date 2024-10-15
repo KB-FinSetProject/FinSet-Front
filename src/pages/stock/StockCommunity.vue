@@ -129,8 +129,6 @@ const getCommunity = async () => {
     }
 
     console.log("GET COMMUNITY", data);
-
-    loadWishes();
     
   } catch (error) {
     console.error("Error loading COMMUNITY:", error);
@@ -195,6 +193,7 @@ onMounted(() => {
   getCommunity(); // sno로 커뮤니티 데이터를 가져옵니다.
   console.log("Received sno:", snoFromRoute.value); // sno 확인
   loadStockSymbol(snoFromRoute.value); // sno를 인자로 전달
+  loadWishes();
 });
 
 const formatNumber = (value) => {
