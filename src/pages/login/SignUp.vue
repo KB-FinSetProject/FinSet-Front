@@ -1,4 +1,5 @@
 <template>
+
   <HeaderSignUp />
 
   <div class="container">
@@ -73,6 +74,7 @@
       <br>
 
       <button class="btn btn-signup" type="button" @click="join">회원가입</button>
+
   </div>
 </template>
 

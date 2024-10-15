@@ -39,4 +39,9 @@ export default {
     //     console.log('AUTH PUT: ',data);
     //     return data;
     // },
+    async getKakaoInfo(code) {
+        const { data } = await api.get(`${BASE_URL}/signup/kakaoInfo/${code}`);
+        console.log('AUTH GET', data);
+        return data;
+    },
 }
