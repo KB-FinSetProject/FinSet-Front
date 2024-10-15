@@ -23,9 +23,11 @@
         <i class="fa-solid fa-heart icon"></i> <span>관심리스트</span>
       </router-link>
       <hr><br>
-      <router-link to="/investment/result" class="list-item">
+
+      <div @click="handleInvestmentClick" class="list-item">
         <i class="fa-solid fa-file-contract icon"></i><span>투자성향설문</span>
-      </router-link>
+      </div>
+
       <hr><br>
       <router-link to="/myboard" class="list-item">
         <i class="fa-solid fa-pen-to-square icon"></i><span>내가쓴글</span>
@@ -56,20 +58,30 @@ export default {
   data() {
     return {
       userName: '',
-      userId: ''
+      userId: '',
+      userType: null
     };
   },
-  mounted() {
+  async mounted() {
     // localStorage에서 저장된 auth 정보 가져오기
     const storedAuth = localStorage.getItem('auth');
 
     if (storedAuth) {
       const authData = JSON.parse(storedAuth);
+      console.log(authData);
 
       // authData에서 user 정보를 추출해 data에 할당
       if (authData) {
         this.userName = authData.name;
         this.userId = authData.id;
+        this.userType = authData.type;
+
+        // try {
+        //   const response = await authApi.getMemberType(this.userId);
+        //   this.userType = response.data.userType; // 받아온 userType 값을 설정
+        // } catch (error) {
+        //   console.error("userType 정보를 가져오는 중 오류가 발생했습니다.", error);
+        // }
       } else {
         console.error("User 정보가 존재하지 않습니다.");
       }
@@ -97,6 +109,14 @@ export default {
       } catch (error) {
         console.error("회원 탈퇴 중 오류가 발생했습니다.", error);
         alert("회원 탈퇴 중 문제가 발생했습니다.");
+      }
+    },
+
+    handleInvestmentClick() {
+      if (this.userType != 0) {
+        this.$router.push('/investment/result');
+      } else {
+        this.$router.push('/investment1');
       }
     },
   }

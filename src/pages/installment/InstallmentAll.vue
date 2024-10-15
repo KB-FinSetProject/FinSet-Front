@@ -69,6 +69,7 @@ export default {
         // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
         try {
           this.wishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+          console.log("Fetched wishes:", this.wishes);
         } catch (error) {
           console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
           this.wishes = []; // 관심 목록이 없으면 빈 배열로 처리
