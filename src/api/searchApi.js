@@ -21,7 +21,8 @@ const searchApi = {
     // 검색 키워드 저장
     async createKeyword(keyword, memberId) {
         try {
-            const response = await api.post(`${BASE_URL}`, keyword, {
+            // keyword 객체에 uno 필드를 추가하여 API에 전달
+            const response = await api.post(`${BASE_URL}`, { keyword: keyword, uno: memberId }, {
                 headers: {
                     'Authorization': `Bearer ${memberId}` // 인증 토큰이 필요하다면 여기에 추가
                 }
@@ -32,6 +33,7 @@ const searchApi = {
             throw error; // 에러를 다시 던져 호출자에게 알림
         }
     },
+
 
     // 검색 키워드 삭제
     async deleteKeyword(keno) {
@@ -44,16 +46,6 @@ const searchApi = {
         }
     },
 
-    // 키워드를 Python 코드에 전송하여 실행
-    async executePythonCode(word) {
-        try {
-            const response = await api.post(`${BASE_URL}/${word}`);
-            return response.data; // Python 스크립트 결과 반환
-        } catch (error) {
-            console.error("Python 코드 실행 실패:", error);
-            throw error; // 에러를 다시 던져 호출자에게 알림
-        }
-    }
 };
 
 export default searchApi;
