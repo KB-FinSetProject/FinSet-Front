@@ -4,10 +4,16 @@
   <div class="container">
     <div class="wish-item d-flex align-items-center mt-2">
       <div style="width: 300px;">
+
+        <img :src="deposit.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
         <h5 class="mb-0">{{ deposit.depositName }}</h5> <!-- 예금 이름 -->
         <p class="mb-0 text-muted">{{ deposit.depositBank }}</p> <!-- 은행 이름 -->
       </div>
-      <img :src="deposit.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
+      <div class="deposit-icon" @click="toggleFavorite(deposit)"> <!-- 클래스명 변경 -->
+        <i :class="deposit.favorite ? 'fas fa-heart' : 'far fa-heart'"
+           :style="{ color: deposit.favorite ? '#FAB809' : '#888' }"></i>
+      </div>
+
     </div>
 
     <div class="join-info d-flex mt-2">
@@ -68,6 +74,7 @@
 import { useRoute } from 'vue-router';
 import depositApi from '@/api/depositApi'; // 예금 API 가져오기
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import wishApi from "@/api/wishApi.js";
 
 export default {
   components: {
@@ -94,6 +101,51 @@ export default {
   },
 
   methods: {
+    async fetchDeposits() {
+      try {
+        const authData = JSON.parse(localStorage.getItem('auth')); // 로컬 스토리지에서 auth 데이터 가져오기
+        this.uno = authData.uno; // uno 값 가져오기
+
+        // 모든 예금 상품을 먼저 불러오기
+        this.deposits = await depositApi.fetchDeposits(); // API 호출
+
+        // 사용자 관심 목록 불러오기 (try-catch로 감싸서 오류 방지)
+        try {
+          this.wishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+        } catch (error) {
+          console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
+          this.wishes = []; // 관심 목록이 없으면 빈 배열로 처리
+        }
+
+        // 관심 목록에서 tno가 1인 상품의 pno를 사용해 deposit.favorite 설정
+        const favoritePnos = this.wishes
+            .filter(wish => wish.tno === 1)
+            .map(wish => wish.pno);
+
+        this.deposits.forEach(deposit => {
+          deposit.favorite = favoritePnos.includes(deposit.dno);
+        });
+
+      } catch (error) {
+        console.error("Error fetching deposits:", error); // 오류 처리
+      }
+    },
+
+    async toggleFavorite(deposit) {
+      try {
+        deposit.favorite = !deposit.favorite; // favorite 상태 토글
+
+        // API 호출하여 즐겨찾기 추가/삭제 처리
+        if (deposit.favorite) {
+          await wishApi.addWish({ tno: 1, uno: this.uno, pno: deposit.dno }); // tno와 pno 추가
+        } else {
+          await wishApi.deleteWish({ tno: 1, uno: this.uno, pno: deposit.dno }); // tno와 pno 삭제
+        }
+      } catch (error) {
+        console.error("Error toggling favorite:", error);
+        deposit.favorite = !deposit.favorite; // 원래 상태로 복구
+      }
+    },
     getImg(imgUrl) {
       return imgUrl ? `src${imgUrl}` : ''; // 절대 URL로 수정
     },
@@ -217,7 +269,15 @@ h7{
   position: relative;
   top:150px;
 }
+.deposit-icon { /* 클래스명 변경 */
+  font-size: 24px;
+  color: #888; /* 기본 색상 */
+  margin-top: 80px;
+}
 
+.deposit-icon .fas {
+  color: #FAB809; /* 하트 아이콘 노란색 */
+}
 hr{
   width:100%;
 }

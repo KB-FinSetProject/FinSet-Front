@@ -259,14 +259,15 @@ export default {
           return;
         }
 
-        // KOSPI 데이터에서 날짜와 값 추출 (월/일 형식으로 변환)
-        const labels = this.kospiData.map((data) =>
-          new Date(data.kospiDate).toLocaleDateString('ko-KR', {
-            month: '2-digit',
-            day: '2-digit',
-          })
+        // KOSPI 데이터에서 날짜와 값 추출 및 역순 정렬
+        const sortedKospiData = this.kospiData.slice().reverse(); // 원본 데이터를 수정하지 않기 위해 복사 후 역순
+        const labels = sortedKospiData.map((data) =>
+            new Date(data.kospiDate).toLocaleDateString('ko-KR', {
+              month: '2-digit',
+              day: '2-digit',
+            })
         );
-        const dataValues = this.kospiData.map((data) => data.kospiVal);
+        const dataValues = sortedKospiData.map((data) => data.kospiVal);
 
         new Chart(ctx, {
           type: 'line',

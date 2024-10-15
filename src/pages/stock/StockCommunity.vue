@@ -7,7 +7,7 @@
         <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail" style="width:36px; height: 36;">
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
-          <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
+          <span class="stock-price">{{ formatNumber(stock.openPrice) }} 원</span>
         </div>
         <div class="stock-icon" @click="toggleFavorite">
           <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
@@ -80,9 +80,39 @@ const route = useRoute();
 const snoFromRoute = ref(route.params.sno);
 const newComment = ref('');
 const communityPosts = ref([]);
-const stock = ref([]);
-const sortType = ref('latest'); 
+const stock = ref({
+  minValue: 0,
+  maxValue: 0,
+  openPrice: 0,
+  closePrice: 0,
+  tradingVol: 0,
+  sales: 0,
+  profit: 0,
+  income: 0,
+  favorite: false, // 초기값 설정
+});
+const sortType = ref('latest');
 
+
+const loadStockSymbol = async (sno) => {
+  try {
+    const symbolData = await api.getSymbol(sno); // sno 사용
+    stock.value = {
+      ...stock.value,
+      openPrice: symbolData.openPrice,
+      closePrice: symbolData.closePrice,
+      tradingVol: symbolData.tradingVol,
+      sales: symbolData.sales,
+      profit: symbolData.profit,
+      income: symbolData.income,
+      minValue: symbolData.minValue,
+      maxValue: symbolData.maxValue,
+    };
+    console.log('심볼 상세 정보:', symbolData);
+  } catch (error) {
+    console.error('Error loading stock symbol details:', error);
+  }
+};
 const getCommunity = async () => {
   try {
     const response = await communityApi.getCommunities(snoFromRoute.value, sortType.value);
@@ -163,6 +193,8 @@ const getStockDetails = async (query) => {
 onMounted(() => {
   getStockDetails(snoFromRoute.value);
   getCommunity(); // sno로 커뮤니티 데이터를 가져옵니다.
+  console.log("Received sno:", snoFromRoute.value); // sno 확인
+  loadStockSymbol(snoFromRoute.value); // sno를 인자로 전달
 });
 
 const formatNumber = (value) => {

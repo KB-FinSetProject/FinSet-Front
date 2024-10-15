@@ -7,7 +7,7 @@
         <img :src="stock.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail" style="width:36px; height: 36px; margin-left: -15px;">
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
-          <span class="stock-price">{{(stock?.closePrice ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 원</span>
+          <span class="stock-price">{{(stock?.openPrice ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 원</span>
         </div>
         <div class="stock-icon" @click="toggleFavorite">
           <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
