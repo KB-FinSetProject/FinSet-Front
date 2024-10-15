@@ -88,7 +88,7 @@ const routes = [
     { path: '/signin', name: "SignIn", component: SignIn },
     { path: '/signup', name: "SignUp", component: SignUp },
     { path: '/change/auth', name: "ChangeAuth", component: ChangeAuth },
-o   {
+   {
       path: '/auth/kakaojoin',
       name: 'SignUpForKakao',
       component: SignUpForKakao,
