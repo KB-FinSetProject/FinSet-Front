@@ -51,7 +51,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 .brown-button, .yellow-button {
   color: #ffffff; /* 기본 글씨 색상 */
   background-color: #816843; /* 갈색 배경색 */
-  border-radius: 50%; /* 둥글게 만들기 */
+  border-radius: 50%; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
   font-size: 18px; /* 글씨 크기 조정 */
   position: absolute; /* 위치를 절대값으로 설정 */
   text-decoration: none; /* 링크 스타일 제거 */
-  outline: none; /* 기본 테두리 제거 */
+  outline: none; 
 }
 
 .brown-button:hover,
