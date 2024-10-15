@@ -175,7 +175,7 @@ const navigateToDetail = (category, item) => {
 .search-icon {
   position: absolute;
   right: 15px; /* 아이콘 위치 조정 */
-  top:4.5%;
+  top: 40px;
   right:10%;
   color: #000000;
 }
