@@ -1,16 +1,20 @@
-import {defineProps} from "vue";
-import {isAuthenticated} from "@/util/guard.js";
+import { isAuthenticated } from "@/util/guard.js";
 
 export default [
     {
-        path:'/signin',
-        name:'login',
-        component:()=> import('../pages/login/signIn.vue'),
+        path: '/signin',
+        name: 'login',
+        component: () => import('../pages/login/SignIn.vue'),
     },
     {
-        path:'/signup',
-        name:'join',
-        component:()=> import('../pages/login/signUp.vue'),
+        path: '/signup',
+        name: 'join',
+        component: () => import('../pages/login/SignUp.vue'),
+    },
+    {
+        path: '/signup/complete',
+        name: 'SignUpComplete',
+        component: () => import('../pages/login/SignUpComplete.vue'), // SignUpComplete.vue의 경로
     },
     // {
     //     path:'/auth/profile',
@@ -24,6 +28,4 @@ export default [
     //     component:()=> import('../pages/auth/ChangePasswordPage.vue'),
     //     beforeEnter: isAuthenticated,
     // },
-
-
 ];

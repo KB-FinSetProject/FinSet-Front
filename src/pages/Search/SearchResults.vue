@@ -3,58 +3,149 @@
   <div class="container mx-auto p-4 bg-white" style="min-height: 844px;">
     <div class="relative mb-4">
       <input
-          v-model="searchQuery"
-          type="text"
-          :placeholder="placeholderText"
-          class="search-input w-full p-3 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFA500] bg-white"
+        v-model="searchQuery"
+        type="text"
+        :placeholder="placeholderText"
+        class="search-input w-full p-3 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FFA500] bg-white"
       />
-      <Search class="search-icon" size="20" />
+      <Search 
+        class="search-icon absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" 
+        size="20" 
+      />
     </div>
 
-    <div v-for="section in sections" :key="section.title" class="section mb-2 overflow-hidden shadow-sm">
-      <div class="section-header border-b border-gray-200 flex justify-between items-center"> <!-- 패딩 제거 -->
-        <span class="section-title font-bold text-gray-800">{{ section.title }}</span>
-        <span class="section-icon text-gray-400 text-xl">+</span>
-      </div>
-      <div class="section-content p-3">
-        <h3 class="product-title font-bold text-gray-800">{{ section.product }}</h3>
-        <p class="product-description text-sm text-gray-600">{{ section.description }}</p>
-        <p class="product-details text-sm mt-1">
-          <span class="product-term font-medium text-gray-700">{{ section.term }}, </span>
-          <span class="product-rate text-[#FFA500] font-medium">{{ section.rate }}</span>
-        </p>
+    <div v-for="section in sections" :key="section.category" class="section mb-2 overflow-hidden">
+      <div v-if="section.items.length > 0">
+        <div class="section-header border-b border-gray-200 flex justify-between items-center">
+          <span class="section-title font-bold text-gray-800">{{ section.category }}</span>
+          <span class="section-icon text-gray-400 text-xl">+</span>
+        </div>
+        <div class="section-content p-3">
+          <div v-if="section.items.length > 0">
+            <div
+              v-for="item in section.items"
+              :key="item.no"
+              class="card mb-2 p-3 border rounded cursor-pointer"
+              @click="navigateToDetail(section.category, item)"
+            >
+              <p class="product-title font-bold text-gray-800">{{ item.name }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<<script setup>
-import { ref, onMounted } from 'vue'
-import { Search } from 'lucide-vue-next'
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { Search } from 'lucide-vue-next';
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import { useRouter } from 'vue-router';
+import searchApi from '@/api/searchApi';
 
-const searchQuery = ref('')
+const router = useRouter();
+const searchQuery = ref('');
 const placeholderText = ref('');
+const isLoaded = ref(false);
 
-// 섹션 데이터
-const sections = [
-  { title: '예금', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-  { title: '펀드', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-  { title: '채권', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-  { title: '주식', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-  { title: '외환', product: 'KB STAR 국민', description: 'Digital KB의 대표 정기예금', rate: '연 2.7% ~ 3.4%', term: '1~36개월' },
-];
+const sections = ref([
+  { category: '예금', items: [] },
+  { category: '적금', items: [] },
+  { category: '펀드', items: [] },
+  { category: '주식', items: [] },
+  { category: '외환', items: [] },
+]);
+
+const categoryMap = {
+  dno: { category: '예금', name: 'deposit_name' },     // 예금
+  ino: { category: '적금', name: 'installment_name' },  // 적금
+  fno: { category: '펀드', name: 'fund_name' },          // 펀드
+  sno: { category: '주식', name: 'stock_name' },         // 주식
+  feno: { category: '외환', name: 'forex_name' },        // 외환
+};
+
 
 // URL에서 쿼리 파라미터를 가져오는 로직
-onMounted(() => {
+onMounted(async () => {
+  if (isLoaded.value) return;
+
   const urlParams = new URLSearchParams(window.location.search);
   const term = urlParams.get('term');
+
+  const storedAuth = JSON.parse(localStorage.getItem('auth'));
+  const memberId = storedAuth?.uno;
 
   // 쿼리 파라미터 'term'이 있으면 placeholderText에 설정
   if (term) {
     placeholderText.value = term; // ref의 값에 접근할 때는 .value를 사용
+    console.log('검색어:', term); // 로그에 찍기
+
+    // Flask 서버로 POST 요청 보내기
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/execute', { query: term });
+      console.log('서버 응답:', response.data); // 서버의 응답을 콘솔에 출력
+
+      const result = response.data.result;
+      console.log("result ::::::::::: ", result);
+
+      result.forEach(innerArray => {
+        innerArray.forEach(item => {  // 각 내부 배열의 항목에 대해 반복
+          for (const [key, value] of Object.entries(categoryMap)) {
+            if (item[key] !== undefined) { // 해당 키가 존재할 경우
+              sections.value.find(section => section.category === value.category).items.push({
+                no: item[key],                // 고유 번호
+                name: item[value.name] || '정보 없음' // 이름, 없을 경우 기본값
+              });
+            }
+          }
+        });
+      });
+
+      const keyword = response.data.keyword;
+      console.log(keyword);
+
+      if (keyword && memberId) {
+        try {
+          console.log("key word & member id : ", keyword, memberId)
+          await searchApi.createKeyword(keyword, memberId);
+          console.log('키워드 저장 성공:', keyword);
+        } catch (error) {
+          console.error('키워드 저장 실패:', error);
+        }
+      }
+
+      console.log('최종 sections:', sections.value)
+      isLoaded.value = true;
+
+    } catch (error) {
+      console.error('오류 발생:', error);
+    }
   }
 });
+
+const navigateToDetail = (category, item) => {
+  switch (category) {
+    case '예금':
+      router.push({ path: `/deposit/detail`, query: { dno: item.no } });
+      break;
+    case '적금':
+      router.push({ path: `/installment/detail`, query: { ino: item.no } });
+      break;
+    case '외환':
+      router.push({ path: `/forex/detail`, query: { feno: item.no } });
+      break;
+    case '펀드':
+      router.push({ path: `/fund/detail/${item.no}` });
+      break;
+    case '주식':
+      router.push({ path: `/stock/chart/${item.no}` });
+      break;
+    default:
+      console.error('알 수 없는 카테고리:', category);
+  }
+};
 </script>
 
 <style scoped>
@@ -84,7 +175,7 @@ onMounted(() => {
 .search-icon {
   position: absolute;
   right: 15px; /* 아이콘 위치 조정 */
-  top:4%;
+  top:4.5%;
   right:10%;
   color: #000000;
 }

@@ -8,33 +8,19 @@
         placeholder="검색어를 입력하세요"
         class="search-input"
       />
-      <!-- 검색 아이콘 클릭 시 /search/results로 이동 -->
-      <!-- <router-link
+      <!-- 검색 아이콘 클릭 시 /search/detail로 이동 -->
+      <router-link
         :to="{ path: '/search/results', query: { term: searchTerm } }"
+        class="search-icon"
       >
-        <template v-slot="{ navigate }">
-          <i class="fas fa-magnifying-glass search-icon" @click="navigate"></i>
-        </template>
-      </router-link> -->
-      <i
-      class="fas fa-magnifying-glass search-icon"
-      @click="searchAndExecute"
-    ></i>
+        <i class="fas fa-magnifying-glass"></i>
+      </router-link>
 
     </div>
     <p class="example-text">ex) 500000원에 맞는 주식을 찾아줘</p>
     <p class="example-text">ex) 3000000, 3년, 펀드</p>
 
     <hr class="divider" />
-
-    <div v-if="searchResults.length > 0">
-      <h2 class="section-title">검색 결과</h2>
-      <div class="results-container">
-        <div class="result-item" v-for="result in searchResults" :key="result.id">
-          {{ result.name }}
-        </div>
-      </div>
-    </div>
 
     <h2 class="section-title">상품 바로가기</h2>
     <div class="quick-links">
@@ -50,9 +36,16 @@
     <h2 class="section-title">최근 키워드</h2>
     <div class="recent-keywords">
       <div class="keyword-container">
-        <button v-for="keyword in recentKeywords" :key="keyword" class="keyword-button">
-          {{ keyword }}
-          <i class="fa-solid fa-xmark icon" @click="removeKeyword(keyword)"></i>
+        <button 
+          v-for="keyword in recentKeywords" 
+          :key="keyword.keno" 
+          class="keyword-button"
+        >
+          {{ keyword.keyword }}
+          <i 
+            class="fa-solid fa-xmark icon" 
+            @click="removeKeyword(keyword.keno)"
+          ></i>
         </button>
       </div>
     </div>
@@ -61,36 +54,51 @@
 
 <script>
 import searchApi from '@/api/searchApi';
+import { onMounted } from 'vue';
 
 export default {
   data() {
     return {
       searchTerm: '',
       quickLinks: ['예적금', '주식', '펀드', '외환'],
-      recentKeywords: ['A', 'B', 'C'],
-      searchResults: [], // 검색 결과 저장
+      recentKeywords: [],
     };
   },
   methods: {
-    async searchAndExecute() {
-      if (this.searchTerm.trim() === '') {
-        alert('검색어를 입력하세요.');
-        return;
-      }
-
+    async fetchRecentKeywords() {
       try {
-        const results = await searchApi.executePythonCode(this.searchTerm); 
-        this.searchResults = results; // 결과를 검색 결과에 저장
+        // 로컬 스토리지에서 uno 가져오기 (사용자 ID)
+        const authData = JSON.parse(localStorage.getItem('auth'));
+        const memberId = authData ? authData.uno : null;
+
+        if (memberId) {
+          // API 호출
+          const keywords = await searchApi.getKeywords(memberId);
+          this.recentKeywords = keywords;
+        } else {
+          console.error('멤버 ID를 찾을 수 없습니다.');
+        }
       } catch (error) {
-        console.error('검색 실패:', error);
+        console.error('키워드를 불러오는 중 오류 발생:', error);
       }
     },
-    removeKeyword(keyword) {
-      // 클릭한 키워드를 recentKeywords에서 제거
-      this.recentKeywords = this.recentKeywords.filter(k => k !== keyword);
+    async removeKeyword(keno) {
+      try {
+        // API를 통해 키워드 삭제
+        await searchApi.deleteKeyword(keno);
+
+        // 삭제된 키워드를 recentKeywords에서 제거
+        this.recentKeywords = this.recentKeywords.filter(k => k.keno !== keno);
+      } catch (error) {
+        console.error("키워드 삭제 실패:", error);
+      }
     }
+  },
+  mounted() {
+    this.fetchRecentKeywords(); // 컴포넌트가 마운트될 때 키워드 가져오기
   }
 };
+
 </script>
 
 <script setup>
@@ -100,6 +108,7 @@ import HeaderSearch from '@/components/common/HeaderSearch.vue';
 <style scoped>
 .stock-container {
   padding: 16px;
+  width: 380px;
 }
 
 .search-container {
@@ -125,7 +134,7 @@ import HeaderSearch from '@/components/common/HeaderSearch.vue';
 .search-icon {
   position: absolute; /* 아이콘 위치를 절대적으로 설정 */
   right: 10px; /* 오른쪽 여백 */
-  top: 50%; /* 세로 중앙 정렬 */
+  top: 60%; /* 세로 중앙 정렬 */
   transform: translateY(-92%); /* 세로 중앙 정렬 */
   color: #000000; /* 아이콘 색상 */
   font-size: 21px; /* 아이콘 크기 조정 */

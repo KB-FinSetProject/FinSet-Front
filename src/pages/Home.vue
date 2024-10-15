@@ -3,6 +3,7 @@
 
   <div class="container">
     <div class="chart-container">
+
       <h2>
         <i class="fa-solid fa-magnifying-glass-chart icon"></i>TODAY KOSPI
       </h2>
@@ -269,11 +270,12 @@ export default {
         );
         const dataValues = sortedKospiData.map((data) => data.kospiVal);
 
+
         new Chart(ctx, {
           type: 'line',
           data: {
             labels: labels, // X축 레이블 (월/일)
-            datasets: [
+           datasets: [
               {
                 label: 'KOSPI',
                 data: dataValues,
@@ -292,6 +294,7 @@ export default {
             plugins: {
               legend: {
                 display: false, // 범례 표시 안함
+
               },
             },
             scales: {
@@ -302,6 +305,7 @@ export default {
                 },
                 grid: {
                   display: false,
+
                 },
               },
               y: {
@@ -309,6 +313,7 @@ export default {
                 max: 2800,
                 grid: {
                   display: false,
+
                 },
               },
             },
@@ -333,7 +338,9 @@ export default {
 
 <style scoped>
 .container {
+
   width: 85%;
+
   margin-top: -30px;
   margin-bottom: 100px;
 }
