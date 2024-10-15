@@ -93,7 +93,8 @@ const member = reactive({
   id: '',
   password: '',
   password2: '',
-  name: ''
+  name: '',
+  kakaoId:'',
 });
 
 const disableSubmit = ref(true);

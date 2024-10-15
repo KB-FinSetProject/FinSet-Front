@@ -48,7 +48,7 @@
 
       <div class="mt-3 text-center">
         <router-link to="/signup" class="text-muted">회원가입</router-link> |
-        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c192c8db03d09e6ae5d22e5a2bc70de9&redirect_uri=http://localhost:5173/auth/kakaologin">
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c192c8db03d09e6ae5d22e5a2bc70de9&redirect_uri=http://localhost:5173/auth/kakaojoin">
           <img src="/images/kakao_login_medium_narrow.png" class="kakao-signup" />
         </a>
       </div>
