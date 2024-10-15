@@ -3,6 +3,10 @@
 
   <div class="container">
     <div class="wish-item d-flex align-items-center mt-2">
+      <div class="thumbnail-container">
+        <img :src="installment.imgUrl" alt="Thumbnail" class="rounded-circle thumbnail"> <!-- 이미지 위치 변경 -->
+      </div>
+
       <div style="width: 300px;">
         <h5 class="mb-0">{{ installment.installmentName }}</h5> <!-- 예금 이름 -->
         <p class="mb-0 text-muted">{{ installment.installmentBank }}</p> <!-- 은행 이름 -->
@@ -12,9 +16,6 @@
            :style="{ color: installment.favorite ? '#FAB809' : '#888' }"></i>
       </div>
     </div>
-      <img :src="installment.imgUrl" alt="Thumbnail" class="rounded-circle me-3 thumbnail">
-
-
 
     <div class="join-info d-flex mt-2">
       <p class="join-text join-bg">방문없이 가입</p>
@@ -137,27 +138,36 @@ async function toggleFavorite(installment) {
   margin-top: 20px;
 }
 
+.thumbnail-container {
+  position: relative; /* 부모 요소에 relative 추가 */
+  margin-right: 15px; /* 이미지와 텍스트 간의 간격 */
+}
+
 .thumbnail {
   width: 50px;
   height: 50px;
   object-fit: cover;
-  position: absolute;
-  transform: translateX(450%);
+  position: relative; /* 이미지를 relative로 변경 */
+  left: 8px;
 }
 
 .join-info {
   display: flex;
   margin-top: 10px;
+  position: relative;
+    left: 47px;
 }
+
+
 .installment-icon { /* 클래스명 변경 */
   font-size: 24px;
-  color: #888;
-  padding-left: -50px;/* 기본 색상 */
+  color: #888; /* 기본 색상 */
 }
 
 .installment-icon .fas {
   color: #FAB809; /* 하트 아이콘 노란색 */
 }
+
 .join-text {
   color: #9E9E9E;
   padding: 1px 4px;
@@ -172,11 +182,11 @@ async function toggleFavorite(installment) {
 
 .rate-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* 왼쪽 정렬 */
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* 간격 조정 */
   position: relative;
-  right: 18px;
+  left: 27px;
 }
 
 .rate-highlight {
@@ -189,7 +199,7 @@ async function toggleFavorite(installment) {
   width: 1px;
   background-color: #838687;
   height: 40px;
-  margin: 0 15px;
+  margin: 0 40px; /* 간격 조정: 5px에서 8px로 변경 */
 }
 
 .small-text {
@@ -209,7 +219,8 @@ async function toggleFavorite(installment) {
   flex-direction: column;
   margin-top: 20px;
   position: relative;
-  top: 50px;
+  top: 40px;
+  left: 31px;
 }
 
 .info-item {
@@ -239,6 +250,8 @@ async function toggleFavorite(installment) {
   cursor: pointer;
   transition: background-color 0.3s;
   text-decoration: none;
+  position: relative;
+    top: 191px;
 }
 
 .join-button:hover {
@@ -247,13 +260,13 @@ async function toggleFavorite(installment) {
 
 h5, p {
   position: relative;
-  right: 20px;
+  right: 8px;
   font-weight: bold;
   padding: 5px;
 }
-
-img {
-  position: relative;
-  left: 50px;
+.fa-heart:before {
+    position: relative;
+    right: 23px;
+    font-size: 28px;
 }
 </style>
