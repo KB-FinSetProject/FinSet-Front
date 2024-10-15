@@ -3,11 +3,11 @@
 
   <div class="container">
     <div class="button-grid">
-      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 7%; left: -23%;">
+      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 5%; left: -28%;">
         <span class="button-text">주식</span>
       </router-link>
 
-      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 3%; right: -23%;">
+      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 5%; right: -30%;">
         <span class="button-text">펀드</span>
       </router-link>
 
@@ -15,7 +15,7 @@
         <span class="button-text">적금</span>
       </router-link>
 
-      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 60%; left: -23%;">
+      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 56%; left: -30%;">
         <span class="button-text">예금</span>
       </router-link>
 
@@ -45,7 +45,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
   position: relative;
   height: 367px; /* 버튼 그리드 높이 조정 */
   width: 100%; /* 그리드 너비 설정 */
-  bottom: 24px;
+  bottom: 18px;
 }
 
 .brown-button, .yellow-button {
@@ -74,8 +74,8 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 
 /* 각 버튼의 크기 설정 */
 .large-button {
-  height: 145px; /* 주식 버튼 크기 */
-  width: 145px; /* 주식 버튼 크기 */
+  height: 140px; /* 주식 버튼 크기 */
+  width: 140px; /* 주식 버튼 크기 */
 }
 
 .medium-button {
@@ -85,22 +85,22 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 }
 
 .larger-button {
-  height: 140px; /* 적금 버튼 크기 */
-  width: 140px; /* 적금 버튼 크기 */
+  height: 125px; /* 적금 버튼 크기 */
+  width: 125px; /* 적금 버튼 크기 */
 }
 
 .small-button {
-  height: 130px; /* 예금 버튼 크기 */
-  width: 130px; /* 예금 버튼 크기 */
+  height: 125px; /* 예금 버튼 크기 */
+  width: 125px; /* 예금 버튼 크기 */
 }
 
 .xsmall-button {
-  height: 110px; /* 외환 버튼 크기 */
-  width: 110px; /* 외환 버튼 크기 */
+  height: 90px; /* 외환 버튼 크기 */
+  width: 90px; /* 외환 버튼 크기 */
 }
 
 .character-image {
-  width: 192px; /* 이미지 크기 조정 */
+  width: 150px; /* 이미지 크기 조정 */
   margin-top: -68px; /* 이미지와 버튼 간격 조정 */
   bottom: 13px;
 }
