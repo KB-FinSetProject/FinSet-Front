@@ -3,11 +3,11 @@
 
   <div class="container">
     <div class="button-grid">
-      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 10%; left: -20%;">
+      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 7%; left: -23%;">
         <span class="button-text">주식</span>
       </router-link>
 
-      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 5%; right: -20%;">
+      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 3%; right: -23%;">
         <span class="button-text">펀드</span>
       </router-link>
 
@@ -15,11 +15,11 @@
         <span class="button-text">적금</span>
       </router-link>
 
-      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 55%; left: -20%;">
+      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 60%; left: -23%;">
         <span class="button-text">예금</span>
       </router-link>
 
-      <router-link to="/exchange" class="btn brown-button xsmall-button" type="button" style="top: 65%; right: -20%;">
+      <router-link to="/exchange" class="btn brown-button xsmall-button" type="button" style="top: 68%; right: -24%;">
         <span class="button-text">외환</span>
       </router-link>
     </div>
@@ -81,6 +81,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 .medium-button {
   height: 120px; /* 펀드 버튼 크기 */
   width: 120px; /* 펀드 버튼 크기 */
+  
 }
 
 .larger-button {
@@ -115,4 +116,5 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
   font-weight: bold;
   font-size: 33px;
 }
+
 </style>
