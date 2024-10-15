@@ -1,69 +1,82 @@
 <template>
-    <HeaderSignUp/>
+  <HeaderSignUp/>
 
-    <div class="container">
-        <h1> 반갑습니다!</h1>
+  <div class="container">
+    <h1> 반갑습니다!</h1>
 
-        <br>
-        <br>
-        <div class="col-12">
-          <label for="id" class="form-label">*이메일</label>
-          <div class="input-group">
-              <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" v-model="member.id">
-              <button class="btn btn-custom" type="button" @click="checkId">인증하기</button>
-          </div>
-          <span :class="disableSubmit.value ? 'text-primary' : 'text-danger'" style="margin-top: 10px; display: block;">{{ checkError }}</span>
-          <div class="invalid-feedback">
-              이메일을 입력해주세요.
-          </div>
+    <br>
+    <br>
+    <div class="col-12">
+      <label for="id" class="form-label">*이메일</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="id" placeholder="hongildong@kb.com" v-model="member.id">
+        <button class="btn btn-custom" type="button" @click="checkId">인증하기</button>
       </div>
-      
-
-        <br>
-
-        <div class="col-12">
-            <label for="password" class="form-label">*비밀번호</label>
-            <input type="text" class="form-control" id="password" placeholder="1234" v-model="member.password" required>
-            <div class="invalid-feedback">
-                비밀번호를 입력해주세요.
-            </div>
-        </div>
-
-        <br>
-
-        <div class="col-12">
-            <label for="password2" class="form-label">*비밀번호 확인</label>
-            <span v-if="passwordMismatch" class="text-danger ms-2">비밀번호가 일치하지 않습니다.</span>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="password2" placeholder="1234" v-model="member.password2" required>
-            </div>
-            <div class="invalid-feedback">
-                비밀번호를 확인해주세요.
-            </div>
-        </div>
-
-        <br>
-
-        <div class="col-12">
-            <label for="name" class="form-label">*닉네임</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="name" placeholder="키키핑" v-model="member.name" required>
-                <button class="btn btn-custom" type="button" @click="checkName">중복 확인</button>
-                <br>
-      
-            </div>
-            <span :class="disableSubmitName.value ? 'text-primary':'text-danger'">{{checkErrorName}}</span>
-            <div class="invalid-feedback">
-                닉네임을 입력해주세요.
-            </div>
-        </div>
-
-        <br>
-        <br>
-
-        <button class="btn btn-signup" type="submit" @click="join">회원가입</button>
-
+      <span :class="disableSubmit.value ? 'text-primary' : 'text-danger'" style="margin-top: 10px; display: block;">{{ checkError }}</span>
+      <div class="invalid-feedback">
+        이메일을 입력해주세요.
+      </div>
     </div>
+
+
+    <br>
+    <div class="col-12">
+      <label for="password" class="form-label">*비밀번호</label>
+      <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="비밀번호 입력"
+          v-model="member.password"
+          required
+      >
+      <div class="invalid-feedback">
+        비밀번호를 입력해주세요.
+      </div>
+    </div>
+
+    <br>
+
+    <div class="col-12">
+      <label for="password2" class="form-label">*비밀번호 확인</label>
+      <span v-if="passwordMismatch" class="text-danger ms-2">비밀번호가 일치하지 않습니다.</span>
+      <div class="d-flex align-items-center">
+        <input
+            type="password"
+            class="form-control"
+            id="password2"
+            placeholder="비밀번호 재입력"
+            v-model="member.password2"
+            required
+        >
+      </div>
+      <div class="invalid-feedback">
+        비밀번호를 확인해주세요.
+      </div>
+    </div>
+
+    <br>
+
+    <div class="col-12">
+      <label for="name" class="form-label">*닉네임</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="name" placeholder="키키핑" v-model="member.name" required>
+        <button class="btn btn-custom" type="button" @click="checkName">중복 확인</button>
+        <br>
+
+      </div>
+      <span :class="disableSubmitName.value ? 'text-primary':'text-danger'">{{checkErrorName}}</span>
+      <div class="invalid-feedback">
+        닉네임을 입력해주세요.
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <button class="btn btn-signup" type="submit" @click="join">회원가입</button>
+
+  </div>
 </template>
 
 <script setup>
@@ -141,43 +154,43 @@ const checkName=async ()=>{
 
 <style scoped>
 .container {
-    margin-top: -70px;
+  margin-top: -70px;
 }
 
 .btn-custom {
-    background-color: #FFBF0A; /* 버튼 배경색 */
-    color: white; /* 버튼 글씨색 */
-    border: none; /* 테두리 없음 */
-    border-radius: 5px; /* 모서리 둥글게 */
+  background-color: #FFBF0A; /* 버튼 배경색 */
+  color: white; /* 버튼 글씨색 */
+  border: none; /* 테두리 없음 */
+  border-radius: 5px; /* 모서리 둥글게 */
 }
 
 .btn-signup {
-    background-color: #FFBF0A; /* 버튼 배경색 */
-    color: white; /* 버튼 글씨색 */
-    border: none; /* 테두리 없음 */
-    border-radius: 30px; /* 모서리 둥글게 */
-    width: 100%; /* 버튼 너비를 100%로 설정 */
-    padding: 10px; /* 패딩 추가 */
-    margin-top: 20px; /* 위쪽 여백 추가 */
+  background-color: #FFBF0A; /* 버튼 배경색 */
+  color: white; /* 버튼 글씨색 */
+  border: none; /* 테두리 없음 */
+  border-radius: 30px; /* 모서리 둥글게 */
+  width: 100%; /* 버튼 너비를 100%로 설정 */
+  padding: 10px; /* 패딩 추가 */
+  margin-top: 20px; /* 위쪽 여백 추가 */
 }
 
 .input-group {
-    display: flex; /* 입력 필드와 버튼을 수평으로 정렬 */
+  display: flex; /* 입력 필드와 버튼을 수평으로 정렬 */
 }
 
 .input-group .form-control {
-    border-right: none; /* 입력 필드와 버튼 사이의 테두리 제거 */
+  border-right: none; /* 입력 필드와 버튼 사이의 테두리 제거 */
 }
 
 .input-group .btn {
-    border-left: none; /* 입력 필드와 버튼 사이의 테두리 제거 */
+  border-left: none; /* 입력 필드와 버튼 사이의 테두리 제거 */
 }
 
 .text-danger {
-    color: red; /* 오류 메시지 색상 */
+  color: red; /* 오류 메시지 색상 */
 }
 
 .form-label {
-    color: gray; /* 라벨 색상을 회색으로 변경 */
+  color: gray; /* 라벨 색상을 회색으로 변경 */
 }
 </style>

@@ -41,7 +41,8 @@ import SignUp from "@/pages/login/SignUp.vue";
 import loginRoutes from './login'
 import stockRoutes from './stock'
 import ChangeAuth from '@/pages/auth/ChangeAuth.vue';
-
+import SignInForKakao from '@/pages/login/SignInForKakao.vue';
+import SignUpForKakao from '@/pages/login/SignUpForKakao.vue';
 const routes = [
     { path: '/', name: "Home", component: Home },
     { path: '/shop', name: "Shop", component: Shop },
@@ -83,6 +84,16 @@ const routes = [
     { path: '/signin', name: "SignIn", component: SignIn },
     { path: '/signup', name: "SignUp", component: SignUp },
     { path: '/change/auth', name: "ChangeAuth", component: ChangeAuth },
+    {
+      path: '/auth/kakaojoin',
+      name: 'SignUpForKakao',
+      component: SignUpForKakao,
+    },
+    {
+      path: '/auth/kakaologin',
+      name: 'SignInForKakao',
+      component: SignInForKakao,
+    },
     ...stockRoutes,
 ];
 
@@ -130,6 +141,16 @@ const router = createRouter({
         { path: '/signup', name: "SignUp", component: SignUp },
         { path: '/change/auth', name: "ChangeAuth", component: ChangeAuth },
         ...stockRoutes,
+        {
+          path: '/auth/kakaojoin',
+          name: 'SignUpForKakao',
+          component: SignUpForKakao,
+        },
+        {
+          path: '/auth/kakaologin',
+          name: 'SignInForKakao',
+          component: SignInForKakao,
+        },
     ],
 });
 
