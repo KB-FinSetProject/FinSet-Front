@@ -3,11 +3,11 @@
 
   <div class="container">
     <div class="button-grid">
-      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 10%; left: -20%;">
+      <router-link to="/stock" class="btn brown-button large-button" type="button" style="top: 7%; left: -23%;">
         <span class="button-text">주식</span>
       </router-link>
 
-      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 5%; right: -20%;">
+      <router-link to="/fund" class="btn brown-button medium-button" type="button" style="top: 3%; right: -23%;">
         <span class="button-text">펀드</span>
       </router-link>
 
@@ -15,11 +15,11 @@
         <span class="button-text">적금</span>
       </router-link>
 
-      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 55%; left: -20%;">
+      <router-link to="/deposit" class="btn brown-button small-button" type="button" style="top: 60%; left: -23%;">
         <span class="button-text">예금</span>
       </router-link>
 
-      <router-link to="/exchange" class="btn brown-button xsmall-button" type="button" style="top: 65%; right: -20%;">
+      <router-link to="/exchange" class="btn brown-button xsmall-button" type="button" style="top: 68%; right: -24%;">
         <span class="button-text">외환</span>
       </router-link>
     </div>
@@ -51,7 +51,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 .brown-button, .yellow-button {
   color: #ffffff; /* 기본 글씨 색상 */
   background-color: #816843; /* 갈색 배경색 */
-  border-radius: 50%; /* 둥글게 만들기 */
+  border-radius: 50%; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
   font-size: 18px; /* 글씨 크기 조정 */
   position: absolute; /* 위치를 절대값으로 설정 */
   text-decoration: none; /* 링크 스타일 제거 */
-  outline: none; /* 기본 테두리 제거 */
+  outline: none; 
 }
 
 .brown-button:hover,
@@ -81,6 +81,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 .medium-button {
   height: 120px; /* 펀드 버튼 크기 */
   width: 120px; /* 펀드 버튼 크기 */
+  
 }
 
 .larger-button {
@@ -115,4 +116,5 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
   font-weight: bold;
   font-size: 33px;
 }
+
 </style>
