@@ -163,20 +163,25 @@ export default {
 
 .details {
   margin-top: 20px;
+  
 }
 
 .thumbnail {
+  position: absolute;
+  left: -11px; /* 왼쪽에 배치 */
   width: 50px;
   height: 50px;
   object-fit: cover;
-  position: absolute;
-  transform: translateX(450%);
+  transform: none; /* 기존의 translateX 제거 */
+  top: 34px;
 }
-
 
 .join-info {
   display: flex; /* Flexbox 사용 */
   margin-top: 10px; /* 상단 여백 추가 */
+  position: relative;
+    left: -15px;
+    bottom: 24px;
 }
 
 .join-text {
@@ -199,8 +204,10 @@ export default {
   width: 100%; /* 전체 너비 사용 */
   margin-bottom: 10px; /* 하단 여백 추가 */
   position: relative;
-  right: 18px;
+  right: 5px;
+    bottom: 27px;
 }
+
 
 .rate-highlight {
   font-size: 20px; /* 글씨 크기 설정 */
@@ -226,17 +233,16 @@ h7{
 
 .centered-info {
   text-align: center; /* 중앙 정렬 */
-  margin-top: 20px; /* 위쪽 여백 추가 */
-  position: relative;
-  top:35px;
+  margin-top: 10px; /* 위쪽 여백 추가 */
 }
+
 
 .fixed-info {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   position: relative;
-  top:50px;
+  top:6px;
 }
 
 .info-item {
@@ -286,7 +292,7 @@ hr{
 }
 h5, p{
   position: relative;
-  right: 20px;
+  right: -23px;
   font-weight: bold;
   padding: 5px;
 }
@@ -294,5 +300,19 @@ img{
   position: relative;
   left: 50px;
 }
+.fa-heart:before {
+    position: relative;
+    bottom: 39px;
+    font-size: 27px;
+}
+.centered-info{
+  position: relative;
+  right: 20px;
+}
 
+hr[data-v-f8110eed] {
+    width: 100%;
+    position: relative;
+    left: 20px;
+}
 </style>
