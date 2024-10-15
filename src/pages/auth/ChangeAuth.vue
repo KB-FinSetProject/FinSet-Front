@@ -26,7 +26,7 @@
         <div class="col-12">
             <label for="name" class="form-label">*닉네임</label>
             <div class="input-group">
-                <input type="text" class="form-control" v-model="member.name" placeholder="{{ authData.name }}"/>            
+                <input type="text" class="form-control" v-model="member.name" />
                 <button class="btn btn-custom" type="button" @click="checkName">중복 확인</button>
             </div>
             <span :class="disableSubmitName.value ? 'text-primary' : 'text-danger'" style="margin-top: 10px; display: block; margin-left:5px">{{ checkErrorName }}</span>

@@ -1,6 +1,6 @@
 <template>
   <HeaderNormal navbarTitle="펀드 상세" />
-  
+
   <div class="container" v-if="fund">
     <div class="risk-info">
       <span class="high-rating">{{ fund?.fundLisk }}</span>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="chart-container">
-      <canvas ref="chartCanvas" class="chart"></canvas> 
+      <canvas ref="chartCanvas" class="chart"></canvas>
     </div>
 
     <div class="notice-display">
@@ -74,34 +74,64 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import api from '@/api/fundApi'; 
+import api from '@/api/fundApi';
 import { Chart, registerables } from 'chart.js';
 import HeaderNormal from '@/components/common/HeaderNormal.vue';
+import wishApi from "@/api/wishApi.js";
+
 Chart.register(...registerables);
 
-const fund = ref(null); 
+const fund = ref(null);
 const chartData = ref(null);
-const chartCanvas = ref(null); // canvas 요소에 대한 ref 추가
-const route = useRoute(); 
-const fundId = route.params.fno; 
+const chartCanvas = ref(null);
+const route = useRoute();
+const fundId = route.params.fno;
 
 async function fetchFundDetail() {
   try {
-    const response = await api.getFundDetail(fundId); // fundId로 API 호출
-    fund.value = response.fund; // 펀드 정보 저장
-    chartData.value = response.chartData; // 차트 데이터 저장
+    const response = await api.getFundDetail(fundId);
+    fund.value = response.fund;
+    chartData.value = response.chartData;
   } catch (error) {
-    console.error('펀드 상세 정보 가져오기 실패:', error);
+    console.error('Failed to fetch fund details:', error);
+    // Optionally, set a user-visible error state
+  }
+
+  await fetchWishes();
+}
+
+async function fetchWishes() {
+  try {
+    const fetchedWishes = await wishApi.fetchAllWishes();
+    wishes.value = fetchedWishes || [];
+  } catch (error) {
+    console.warn("No wishes found or error fetching wishes:", error);
+    wishes.value = [];
   }
 }
+
+// Favorite toggle function
+const toggleFavorite = async (fund) => {
+  fund.favorite = !fund.favorite;
+  try {
+    if (fund.favorite) {
+      await wishApi.addWish({ tno: 3, uno: uno.value, pno: fund.fno });
+    } else {
+      await wishApi.deleteWish({ tno: 3, uno: uno.value, pno: fund.fno });
+    }
+  } catch (error) {
+    console.error("Error toggling favorite:", error);
+    fund.favorite = !fund.favorite; // Restore original state on error
+  }
+};
+
 function createChart() {
   if (chartData.value && chartCanvas.value) {
-    const labels = chartData.value.map(data => data.fundDatetime); // 날짜를 라벨로 사용
-    const fundValues = chartData.value.map(data => data.fundVal); // 펀드 값
-    const benchmarkValues = chartData.value.map(data => data.benVal); // 벤치마크 값
-    const typeValues = chartData.value.map(data => data.typeVal); // 유형 평균 값
+    const labels = chartData.value.map(data => data.fundDatetime).reverse();
+    const fundValues = chartData.value.map(data => data.fundVal).reverse();
+    const benchmarkValues = chartData.value.map(data => data.benVal).reverse();
+    const typeValues = chartData.value.map(data => data.typeVal).reverse();
 
-    // 최소값과 최대값 계산
     const allValues = [...fundValues, ...benchmarkValues, ...typeValues];
     const minValue = Math.min(...allValues);
     const maxValue = Math.max(...allValues);
@@ -109,12 +139,11 @@ function createChart() {
     new Chart(chartCanvas.value, {
       type: 'line',
       data: {
-        labels: labels,
+        labels,
         datasets: [
           {
             label: '펀드',
             data: fundValues,
-            backgroundColor: 'rgba(255, 0, 0, 0)',
             borderColor: '#FF6767',
             borderWidth: 2,
             fill: false,
@@ -123,7 +152,6 @@ function createChart() {
           {
             label: '벤치마크',
             data: benchmarkValues,
-            backgroundColor: 'rgba(0, 255, 0, 0)',
             borderColor: '#00953C',
             borderWidth: 2,
             fill: false,
@@ -132,7 +160,6 @@ function createChart() {
           {
             label: '유형평균',
             data: typeValues,
-            backgroundColor: 'rgba(0, 0, 255, 0)',
             borderColor: '#547BC1',
             borderWidth: 2,
             fill: false,
@@ -141,43 +168,35 @@ function createChart() {
         ]
       },
       options: {
+        responsive: true,
         scales: {
           y: {
-            beginAtZero: false, // 최솟값이 0이 아닐 수 있으므로 false로 설정
-            min: minValue - 3, // y축의 최소값 설정
-            max: maxValue + 3, // y축의 최대값 설정
-            grid: {
-              display: false
-            }
+            beginAtZero: false,
+            min: minValue - 3,
+            max: maxValue + 3,
+            grid: { display: false },
           },
           x: {
-            display: false, // x축 숨기기
-            grid: {
-              display: false
-            }
+            type: 'category',
+            grid: { display: false },
           }
         },
         plugins: {
-          legend: {
-            position: 'bottom',
-          }
-        }
+          legend: { position: 'bottom' },
+          tooltip: { mode: 'index', intersect: false },
+        },
+        interaction: { mode: 'nearest', axis: 'x', intersect: false },
       }
     });
   }
 }
 
-
 onMounted(() => {
-  fetchFundDetail().then(() => {
-    createChart(); // 차트 생성
-  });
+  fetchFundDetail().then(createChart);
 });
 
 watch(fund, (newValue) => {
-  if (newValue) {
-    createChart();
-  }
+  if (newValue) createChart();
 });
 </script>
 

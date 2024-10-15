@@ -8,7 +8,7 @@
 
         <div class="stock-info">
           <h1 class="stock-name">{{ stock.stockName }}</h1>
-          <span class="stock-price">{{ formatNumber(stock.stockPrice) }} 원</span>
+          <span class="stock-price">{{ formatNumber(stock.openPrice) }} 원</span>
         </div>
         <div class="stock-icon" @click="toggleFavorite">
           <i :class="stock.favorite ? 'fas fa-heart' : 'far fa-heart'"
