@@ -150,7 +150,10 @@ const toggleFavorite = async (fund) => {
 
 function createChart() {
   if (chartData.value && chartCanvas.value) {
-    const labels = chartData.value.map(data => data.fundDatetime).reverse();
+    const labels = chartData.value.map(data =>
+        data.fundDatetime.slice(5) // 'YYYY-MM-DD' 포맷에서 'MM-DD'만 추출
+    ).reverse();
+
     const fundValues = chartData.value.map(data => data.fundVal).reverse();
     const benchmarkValues = chartData.value.map(data => data.benVal).reverse();
     const typeValues = chartData.value.map(data => data.typeVal).reverse();
@@ -200,8 +203,7 @@ function createChart() {
             grid: { display: false },
           },
           x: {
-            type: 'category',
-            grid: { display: false },
+            display: false, // X축 숨기기
           }
         },
         plugins: {
