@@ -15,6 +15,10 @@
             <h6 class="exchange-name">{{ item.forexName }}</h6>
             <p class="exchange-details">적용환율: {{ item.forexBasicRate.toLocaleString() }}원</p>
           </div>
+          <div class="exchange-icon" @click="toggleFavorite(item)"> <!-- 클래스명 변경 -->
+            <i :class="item.favorite ? 'fas fa-heart' : 'far fa-heart'"
+               :style="{ color: item.favorite ? '#FAB809' : '#888' }"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -75,6 +79,7 @@ import HeaderNormal from '@/components/common/HeaderNormal.vue';
 
 <script>
 import forexApi from "@/api/forexApi"; // 외환 정보를 가져오는 API 모듈
+import wishApi from '@/api/wishApi';
 import { Chart, registerables } from 'chart.js'; // Chart.js 가져오기
 Chart.register(...registerables);
 
@@ -102,10 +107,28 @@ export default {
     async fetchExchangeDetails(feno) {
       try {
         this.item = await forexApi.fetchForexById(feno);
+
+        try {
+          this.wishes = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+          console.log("Wishes:", this.wishes); // 관심 목록 로그 출력
+        } catch (error) {
+          console.warn("No wishes found or error fetching wishes:", error); // 관심 목록이 없을 경우 로그 출력
+          this.wishes = []; // 관심 목록이 없으면 빈 배열로 처리
+        }
+
+        // 관심 목록에서 tno가 1인 상품의 pno를 사용해 item.favorite 설정
+        const favoritePnos = this.wishes
+          .filter(wish => wish.tno === 5)
+          .map(wish => wish.pno);
+
+        // favorite 속성을 item 객체에 추가
+        this.item.favorite = favoritePnos.includes(this.item.feno);
+
       } catch (error) {
         console.error("Error fetching exchange details:", error);
       }
     },
+
     async fetchForexChartById(feno) {
       try {
         this.chartData = await forexApi.fetchForexChartById(feno);
@@ -121,6 +144,21 @@ export default {
         this.renderChart(); // 차트 렌더링
       } catch (error) {
         console.error("Error fetching forex chart by ID:", error);
+      }
+    },
+    async toggleFavorite(forex) {
+      try {
+        forex.favorite = !forex.favorite; // favorite 상태 토글
+
+        // API 호출하여 즐겨찾기 추가/삭제 처리
+        if (forex.favorite) {
+          await wishApi.addWish({ tno: 5, uno: this.uno, pno: forex.feno }); // tno와 pno 추가
+        } else {
+          await wishApi.deleteWish({ tno: 5, uno: this.uno, pno: forex.feno }); // tno와 pno 삭제
+        }
+      } catch (error) {
+        console.error("Error toggling favorite:", error);
+        forex.favorite = !forex.favorite; // 원래 상태로 복구
       }
     },
     renderChart() {
@@ -354,5 +392,15 @@ export default {
   margin-top: 5px; /* 값과 텍스트 간 간격 조정 */
   font-size: 24px; /* 값 크기 조정 */
   font-weight: bold; /* 값 두껍게 */
+}
+
+.exchange-icon { /* 클래스명 변경 */
+  font-size: 24px;
+  color: #888; /* 기본 색상 */
+  margin-left: 110px;
+}
+
+.exchange-icon .fas {
+  color: #FAB809; /* 하트 아이콘 노란색 */
 }
 </style>

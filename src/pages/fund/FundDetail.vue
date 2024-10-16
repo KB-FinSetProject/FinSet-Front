@@ -2,10 +2,17 @@
   <HeaderNormal navbarTitle="펀드 상세" />
 
   <div class="container" v-if="fund">
+    
     <div class="risk-info">
       <span class="high-rating">{{ fund?.fundLisk }}</span>
       <span class="fund-type">{{ fund?.fundType }}</span>
-    </div>
+      <span class="fund-icon" @click="toggleFavorite(fund)">
+        <i :class="fund.favorite ? 'fas fa-heart' : 'far fa-heart'"
+           :style="{ color: fund.favorite ? '#FAB809' : '#888' }"></i>
+      </span>
+    
+    </div>    
+    
     <h4 class="fund-name">{{ fund.fundName }}</h4>
     <span class="commission">수수료미징구-온라인</span>
 
@@ -86,7 +93,7 @@ const chartData = ref(null);
 const chartCanvas = ref(null);
 const route = useRoute();
 const fundId = route.params.fno;
-const wishes = ref(null);
+const wishes = ref([]);
 
 async function fetchFundDetail() {
   try {
@@ -95,7 +102,6 @@ async function fetchFundDetail() {
     chartData.value = response.chartData;
   } catch (error) {
     console.error('Failed to fetch fund details:', error);
-    // Optionally, set a user-visible error state
   }
 
   await fetchWishes();
@@ -103,16 +109,32 @@ async function fetchFundDetail() {
 
 async function fetchWishes() {
   try {
-    const fetchedWishes = await wishApi.fetchAllWishes();
-    wishes.value = fetchedWishes || [];
+    const response = await wishApi.fetchAllWishes(); // 관심 목록 전체 조회
+    wishes.value = response; // 관심 목록 저장
+    console.log("Wishes:", wishes.value); // 관심 목록 로그 출력
   } catch (error) {
     console.warn("No wishes found or error fetching wishes:", error);
-    wishes.value = [];
+    wishes.value = []; // 관심 목록이 없으면 빈 배열로 처리
   }
+
+  // 관심 목록에서 tno가 3인 상품의 pno를 사용해 fund.favorite 설정
+  const favoritePnos = wishes.value
+    .filter(wish => wish.tno === 3)
+    .map(wish => wish.pno);
+
+  fund.value.favorite = favoritePnos.includes(fund.value.fno);
 }
 
 // Favorite toggle function
 const toggleFavorite = async (fund) => {
+  const authData = JSON.parse(localStorage.getItem('auth'));
+  const uno = authData ? authData.uno : null;
+
+  if (!uno) {
+    console.error("User not authenticated.");
+    return;
+  }
+  
   fund.favorite = !fund.favorite;
   try {
     if (fund.favorite) {
@@ -230,6 +252,7 @@ body {
   width: 70px;
   height: 25px;
   font-size: 11px;
+  text-align: center;
 }
 
 .fund-type {
@@ -237,9 +260,10 @@ body {
   color: #547BC1; /* 작은 박스 배경색 */
   padding: 5px 6px; /* 크기 줄이기 */
   border-radius: 3px;
-  width: 70px;
+  width: 55px;
   height: 25px;
   font-size: 11px;
+  text-align: center;
 }
 
 .fund-name {
@@ -331,5 +355,23 @@ body {
   display: inline-block;
   text-align: center;
   text-decoration: none; /* 밑줄 제거 */
+}
+
+.risk-info {
+  display: flex;
+  align-items: center;
+  position: relative; /* 부모 요소를 기준으로 아이콘 위치 설정 */
+}
+
+.fund-icon {
+  position: absolute;
+  right: 10px; /* 컨테이너의 오른쪽 끝에 아이콘을 고정 */
+  font-size: 30px;
+  color: #888; /* 기본 색상 */
+  cursor: pointer; /* 아이콘에 마우스 포인터 표시 */
+}
+
+.fund-icon .fas {
+  color: #FAB809; /* 하트 아이콘 노란색 */
 }
 </style>
